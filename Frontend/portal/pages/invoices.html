@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Invoices – TechNova Client Portal</title>
+<link rel="stylesheet" href="../css/portal.css">
+<style>
+.inv-summary { display:grid; grid-template-columns:repeat(4,1fr); gap:1.2rem; margin-bottom:2rem; }
+.inv-sum-card { background:var(--card); border:1px solid var(--border); border-radius:var(--r); padding:1.2rem 1.4rem; }
+.inv-sum-label { font-size:.75rem; color:var(--gray); margin-bottom:6px; }
+.inv-sum-value { font-family:var(--font-h); font-size:1.5rem; font-weight:800; color:var(--white); }
+.inv-sum-value.red { color:var(--red); } .inv-sum-value.green { color:var(--green); }
+.pay-methods { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+.pay-card { background:var(--navy2); border:2px solid var(--border); border-radius:var(--r); padding:1.2rem; cursor:pointer; transition:var(--trans); text-align:center; }
+.pay-card:hover, .pay-card.selected { border-color:var(--cyan); background:rgba(0,212,255,0.05); }
+.pay-icon { font-size:1.8rem; margin-bottom:.5rem; }
+.pay-name { font-family:var(--font-h); font-size:.85rem; font-weight:700; color:var(--white); }
+.pay-sub  { font-size:.72rem; color:var(--gray); margin-top:3px; }
+@media(max-width:700px){ .inv-summary { grid-template-columns:1fr 1fr; } .pay-methods { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="portal-shell">
+  <div class="sidebar-overlay" onclick="closeSidebar()"></div>
+  <aside class="sidebar">
+    <a href="../index.html" class="sb-logo"><img src="../assets/logo-transparent.png" alt="TechNova Ltd"></a>
+    <div class="sb-client-badge"><div class="sb-avatar">JD</div><div><div class="sb-client-name">John Davidson</div><div class="sb-client-role">RetailMax Ltd</div></div></div>
+    <nav class="sb-group">
+      <div class="sb-group-label">Main</div>
+      <a href="dashboard.html" class="sb-link"><span class="sb-icon">🏠</span>Dashboard</a>
+      <a href="projects.html" class="sb-link"><span class="sb-icon">📋</span>Projects<span class="sb-badge">3</span></a>
+      <a href="messages.html" class="sb-link"><span class="sb-icon">💬</span>Messages<span class="sb-badge red">4</span></a>
+      <div class="sb-group-label" style="margin-top:1.2rem">Finance</div>
+      <a href="invoices.html" class="sb-link active"><span class="sb-icon">🧾</span>Invoices &amp; Payments</a>
+      <div class="sb-group-label" style="margin-top:1.2rem">Support</div>
+      <a href="tickets.html" class="sb-link"><span class="sb-icon">🎫</span>Support Tickets<span class="sb-badge yellow">2</span></a>
+      <a href="documents.html" class="sb-link"><span class="sb-icon">📁</span>Documents</a>
+      <div class="sb-group-label" style="margin-top:1.2rem">Account</div>
+      <a href="settings.html" class="sb-link"><span class="sb-icon">⚙️</span>Settings &amp; Profile</a>
+      <a href="admin-settings.html" class="sb-link" data-admin-only style="color:var(--yellow)"><span class="sb-icon">🛡</span>Admin Panel</a>
+    </nav>
+    <div class="sb-bottom"><button class="sb-logout" onclick="signOut()"><span>🚪</span> Sign Out</button></div>
+  </aside>
+  <div class="portal-main">
+    <header class="portal-header">
+      <div class="ph-left"><button class="hamburger-portal" onclick="toggleSidebar()"><span></span><span></span><span></span></button><div><div class="ph-title">Invoices &amp; Payments</div><div class="ph-crumb"><a href="dashboard.html">Dashboard</a> › Invoices</div></div></div>
+      <div class="ph-right"><div class="ph-search"><span>🔍</span><input type="text" placeholder="Search invoices…"></div><div class="notif-wrapper"><div class="notif-badge-btn" id="notif-btn" onclick="toggleNotifPanel()">🔔<span id="notif-count"></span></div><div id="notif-panel"><div class="notif-panel-head"><h4>📧 Email Notifications</h4><button class="notif-panel-clear" onclick="document.getElementById('notif-list').innerHTML='<p style=color:var(--gray);font-size:.84rem;padding:1rem>Cleared.</p>';document.getElementById('notif-count').style.display='none'">Clear</button></div><div id="notif-list"><p style="color:var(--gray);font-size:.84rem;padding:1rem 1.2rem">No notifications yet.</p></div></div></div><a href="settings.html" class="ph-user"><div class="ph-user-avatar">JD</div><div class="ph-user-name">John D.</div></a></div>
+    </header>
+    <main class="portal-body">
+      <div class="page-title-row">
+        <div><h1>Invoices &amp; <span>Payments</span></h1><p>View, download, and pay invoices for all TechNova services.</p></div>
+        <div class="page-actions"><button class="btn btn-ghost btn-sm" onclick="showToast('Downloading statement…','info')">⬇ Statement</button><button class="btn btn-primary btn-sm" onclick="openModal('modal-pay')">Pay Outstanding →</button></div>
+      </div>
+
+      <!-- Summary -->
+      <div class="inv-summary">
+        <div class="inv-sum-card"><div class="inv-sum-label">Total Invoiced (2026)</div><div class="inv-sum-value">£22,650</div></div>
+        <div class="inv-sum-card"><div class="inv-sum-label">Total Paid</div><div class="inv-sum-value green">£18,450</div></div>
+        <div class="inv-sum-card"><div class="inv-sum-label">Outstanding Balance</div><div class="inv-sum-value red">£4,200</div></div>
+        <div class="inv-sum-card"><div class="inv-sum-label">Next Due Date</div><div class="inv-sum-value" style="font-size:1.1rem">28 Feb 2026</div></div>
+      </div>
+
+      <!-- Filter + Table -->
+      <div class="filter-bar">
+        <select class="filter-select"><option>All Invoices</option><option>Unpaid</option><option>Paid</option><option>Overdue</option></select>
+        <select class="filter-select"><option>All Projects</option><option>E-Commerce Redesign</option><option>Salesforce CRM</option><option>Mobile App</option></select>
+        <input type="text" class="filter-input" placeholder="Search invoice number…">
+      </div>
+
+      <div class="panel">
+        <div class="panel-head"><h3>🧾 Invoice History</h3><span style="font-size:.8rem;color:var(--gray)">5 invoices</span></div>
+        <div class="panel-body no-pad">
+          <table class="data-table">
+            <thead><tr><th>Invoice No.</th><th>Project</th><th>Description</th><th>Issued</th><th>Due</th><th>Amount</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody>
+              <tr>
+                <td class="td-bold">INV-2026-005</td>
+                <td>E-Commerce Redesign</td>
+                <td>Sprint 4 — Checkout &amp; catalogue</td>
+                <td>15 Feb</td>
+                <td style="color:var(--red);font-weight:600">28 Feb 2026</td>
+                <td class="td-bold" style="color:var(--white)">£4,200.00</td>
+                <td><span class="badge unpaid">Unpaid</span></td>
+                <td><div style="display:flex;gap:6px"><button class="btn btn-sm btn-primary" onclick="openModal('modal-pay')">Pay Now</button><button class="btn btn-sm btn-ghost" onclick="showToast('Downloading INV-2026-005.pdf…','info')">⬇</button></div></td>
+              </tr>
+              <tr>
+                <td class="td-bold">INV-2026-004</td>
+                <td>Salesforce CRM</td>
+                <td>Sprint 5 — Data migration &amp; reporting</td>
+                <td>31 Jan</td>
+                <td>14 Feb 2026</td>
+                <td class="td-bold" style="color:var(--white)">£8,750.00</td>
+                <td><span class="badge paid">Paid</span></td>
+                <td><div style="display:flex;gap:6px"><span style="font-size:.78rem;color:var(--green)">✓ 10 Feb</span><button class="btn btn-sm btn-ghost" onclick="showToast('Downloading INV-2026-004.pdf…','info')">⬇</button></div></td>
+              </tr>
+              <tr>
+                <td class="td-bold">INV-2026-003</td>
+                <td>E-Commerce Redesign</td>
+                <td>Sprint 2 &amp; 3 — Design system</td>
+                <td>15 Jan</td>
+                <td>29 Jan 2026</td>
+                <td class="td-bold" style="color:var(--white)">£6,500.00</td>
+                <td><span class="badge paid">Paid</span></td>
+                <td><div style="display:flex;gap:6px"><span style="font-size:.78rem;color:var(--green)">✓ 22 Jan</span><button class="btn btn-sm btn-ghost" onclick="showToast('Downloading…','info')">⬇</button></div></td>
+              </tr>
+              <tr>
+                <td class="td-bold">INV-2026-002</td>
+                <td>Salesforce CRM</td>
+                <td>Sprint 3 &amp; 4 — Apex development</td>
+                <td>31 Dec</td>
+                <td>14 Jan 2026</td>
+                <td class="td-bold" style="color:var(--white)">£3,200.00</td>
+                <td><span class="badge paid">Paid</span></td>
+                <td><div style="display:flex;gap:6px"><span style="font-size:.78rem;color:var(--green)">✓ 8 Jan</span><button class="btn btn-sm btn-ghost" onclick="showToast('Downloading…','info')">⬇</button></div></td>
+              </tr>
+              <tr>
+                <td class="td-bold">INV-2026-001</td>
+                <td>E-Commerce Redesign</td>
+                <td>Sprint 1 — Discovery &amp; wireframes</td>
+                <td>10 Jan</td>
+                <td>24 Jan 2026</td>
+                <td class="td-bold" style="color:var(--white)">£0.00</td>
+                <td><span class="badge paid">Deposit</span></td>
+                <td><button class="btn btn-sm btn-ghost" onclick="showToast('Downloading…','info')">⬇</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- PAY MODAL -->
+<div class="modal-overlay" id="modal-pay">
+  <div class="modal">
+    <div class="modal-head"><h3>💳 Pay Invoice INV-2026-005</h3><button class="modal-close" onclick="closeModal('modal-pay')">✕</button></div>
+    <div class="modal-body">
+      <div style="background:rgba(248,113,113,0.06);border:1px solid rgba(248,113,113,0.2);border-radius:var(--r2);padding:1rem 1.2rem;margin-bottom:1.4rem">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div><div style="font-family:var(--font-h);font-weight:700;color:var(--white)">INV-2026-005</div><div style="font-size:.8rem;color:var(--gray)">E-Commerce — Sprint 4</div></div>
+          <div style="font-family:var(--font-h);font-size:1.6rem;font-weight:800;color:var(--white)">£4,200.00</div>
+        </div>
+        <div style="font-size:.78rem;color:var(--red);margin-top:.5rem">⚠ Due: 28 February 2026</div>
+      </div>
+      <p style="font-size:.84rem;color:var(--gray);margin-bottom:1.2rem">Select your payment method:</p>
+      <div class="pay-methods" style="margin-bottom:1.4rem">
+        <div class="pay-card selected" onclick="selectPayment(this)"><div class="pay-icon">🏦</div><div class="pay-name">Bank Transfer</div><div class="pay-sub">BACS — 1–2 days</div></div>
+        <div class="pay-card" onclick="selectPayment(this)"><div class="pay-icon">💳</div><div class="pay-name">Credit / Debit Card</div><div class="pay-sub">Stripe — Instant</div></div>
+        <div class="pay-card" onclick="selectPayment(this)"><div class="pay-icon">🅿️</div><div class="pay-name">PayPal</div><div class="pay-sub">Instant</div></div>
+      </div>
+      <div style="background:var(--navy2);border:1px solid var(--border);border-radius:var(--r2);padding:1rem 1.2rem;font-size:.83rem;color:var(--gray)">
+        <strong style="color:var(--white)">Bank Transfer Details:</strong><br>
+        Account Name: TechNova Ltd &nbsp;·&nbsp; Sort Code: 20-35-89 &nbsp;·&nbsp; Account No: 12345678<br>
+        Reference: <strong style="color:var(--cyan)">INV-2026-005 / RETAILMAX</strong>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-ghost" onclick="closeModal('modal-pay')">Cancel</button>
+      <button class="btn btn-primary" onclick="handlePayment()">Confirm Payment →</button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/portal.js"></script>
+<script>
+function selectPayment(el) {
+  document.querySelectorAll('.pay-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+function handlePayment() {
+  closeModal('modal-pay');
+  showToast('Payment of £4,200.00 initiated. You will receive a confirmation email shortly.', 'success', 5000);
+}
+</script>
+</body>
+</html>

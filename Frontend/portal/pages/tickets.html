@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Support Tickets – TechNova Client Portal</title>
+<link rel="stylesheet" href="../css/portal.css">
+<style>
+.ticket-card {
+  background:var(--card); border:1px solid var(--border); border-radius:var(--r);
+  padding:1.4rem 1.6rem; margin-bottom:1rem; transition:var(--trans);
+  border-left:4px solid var(--border); cursor:pointer;
+}
+.ticket-card:hover { border-color:rgba(0,212,255,0.3); transform:translateX(3px); }
+.ticket-card.priority-high   { border-left-color:var(--red);    }
+.ticket-card.priority-medium { border-left-color:var(--yellow);  }
+.ticket-card.priority-low    { border-left-color:var(--green);   }
+.ticket-top  { display:flex; align-items:flex-start; gap:1rem; margin-bottom:.8rem; }
+.ticket-id   { font-family:var(--font-h); font-size:.75rem; font-weight:700; color:var(--gray); }
+.ticket-title { font-family:var(--font-h); font-size:.98rem; font-weight:700; color:var(--white); flex:1; }
+.ticket-body  { font-size:.85rem; color:var(--gray); line-height:1.65; margin-bottom:.9rem; }
+.ticket-meta  { display:flex; align-items:center; gap:.75rem; flex-wrap:wrap; font-size:.76rem; color:var(--gray); }
+.ticket-meta span { display:flex; align-items:center; gap:4px; }
+
+/* Reply thread */
+.reply-thread { display:flex; flex-direction:column; gap:1rem; margin-bottom:1.4rem; }
+.reply-item { display:flex; gap:12px; }
+.reply-item.own { flex-direction:row-reverse; }
+.reply-av { width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.8rem; font-weight:700; flex-shrink:0; background:var(--navy2); border:1.5px solid var(--border); }
+.reply-item.own .reply-av { background:linear-gradient(135deg,var(--cyan2),var(--cyan)); color:var(--navy); }
+.reply-bubble { max-width:75%; padding:10px 14px; border-radius:12px; font-size:.86rem; line-height:1.6; background:var(--navy2); color:var(--text); }
+.reply-item.own .reply-bubble { background:rgba(0,212,255,0.1); color:var(--white); }
+.reply-time { font-size:.68rem; color:var(--gray); margin-top:4px; }
+.reply-item.own .reply-time { text-align:right; }
+</style>
+</head>
+<body>
+<div class="portal-shell">
+  <div class="sidebar-overlay" onclick="closeSidebar()"></div>
+  <aside class="sidebar">
+    <a href="../index.html" class="sb-logo"><img src="../assets/logo-transparent.png" alt="TechNova Ltd"></a>
+    <div class="sb-client-badge"><div class="sb-avatar">JD</div><div><div class="sb-client-name">John Davidson</div><div class="sb-client-role">RetailMax Ltd</div></div></div>
+    <nav class="sb-group">
+      <div class="sb-group-label">Main</div>
+      <a href="dashboard.html" class="sb-link"><span class="sb-icon">🏠</span>Dashboard</a>
+      <a href="projects.html" class="sb-link"><span class="sb-icon">📋</span>Projects<span class="sb-badge">3</span></a>
+      <a href="messages.html" class="sb-link"><span class="sb-icon">💬</span>Messages<span class="sb-badge red">4</span></a>
+      <div class="sb-group-label" style="margin-top:1.2rem">Finance</div>
+      <a href="invoices.html" class="sb-link"><span class="sb-icon">🧾</span>Invoices &amp; Payments</a>
+      <div class="sb-group-label" style="margin-top:1.2rem">Support</div>
+      <a href="tickets.html" class="sb-link active"><span class="sb-icon">🎫</span>Support Tickets<span class="sb-badge yellow">2</span></a>
+      <a href="documents.html" class="sb-link"><span class="sb-icon">📁</span>Documents</a>
+      <div class="sb-group-label" style="margin-top:1.2rem">Account</div>
+      <a href="settings.html" class="sb-link"><span class="sb-icon">⚙️</span>Settings &amp; Profile</a>
+      <a href="admin-settings.html" class="sb-link" data-admin-only style="color:var(--yellow)"><span class="sb-icon">🛡</span>Admin Panel</a>
+    </nav>
+    <div class="sb-bottom"><button class="sb-logout" onclick="signOut()"><span>🚪</span> Sign Out</button></div>
+  </aside>
+
+  <div class="portal-main">
+    <header class="portal-header">
+      <div class="ph-left"><button class="hamburger-portal" onclick="toggleSidebar()"><span></span><span></span><span></span></button><div><div class="ph-title">Support Tickets</div><div class="ph-crumb"><a href="dashboard.html">Dashboard</a> › Support Tickets</div></div></div>
+      <div class="ph-right"><div class="ph-search"><span>🔍</span><input type="text" placeholder="Search tickets…"></div><div class="notif-wrapper"><div class="notif-badge-btn" id="notif-btn" onclick="toggleNotifPanel()">🔔<span id="notif-count"></span></div><div id="notif-panel"><div class="notif-panel-head"><h4>📧 Email Notifications</h4><button class="notif-panel-clear" onclick="document.getElementById('notif-list').innerHTML='<p style=color:var(--gray);font-size:.84rem;padding:1rem>Cleared.</p>';document.getElementById('notif-count').style.display='none'">Clear</button></div><div id="notif-list"><p style="color:var(--gray);font-size:.84rem;padding:1rem 1.2rem">No notifications yet.</p></div></div></div><a href="settings.html" class="ph-user"><div class="ph-user-avatar">JD</div><div class="ph-user-name">John D.</div></a></div>
+    </header>
+
+    <main class="portal-body">
+      <div class="page-title-row">
+        <div><h1>Support <span>Tickets</span></h1><p>Raise issues, request changes, and track resolutions with your TechNova team.</p></div>
+        <div class="page-actions"><button class="btn btn-primary" onclick="openModal('modal-new-ticket')">+ New Ticket</button></div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stat-grid" style="margin-bottom:1.8rem">
+        <div class="stat-card"><div class="stat-top"><div class="stat-icon red">🔴</div><span class="stat-change down">2 open</span></div><div class="stat-value">2</div><div class="stat-label">Open Tickets</div></div>
+        <div class="stat-card yellow"><div class="stat-top"><div class="stat-icon yellow">🟡</div></div><div class="stat-value">1</div><div class="stat-label">In Progress</div></div>
+        <div class="stat-card green"><div class="stat-top"><div class="stat-icon green">✅</div><span class="stat-change up">↑ 3 this month</span></div><div class="stat-value">8</div><div class="stat-label">Resolved</div></div>
+        <div class="stat-card"><div class="stat-top"><div class="stat-icon cyan">⏱</div></div><div class="stat-value">4.2<em style="font-size:1rem">h</em></div><div class="stat-label">Avg Response Time</div></div>
+      </div>
+
+      <!-- Filter -->
+      <div class="filter-bar">
+        <select class="filter-select" onchange="filterTickets(this.value)"><option value="all">All Status</option><option value="open">Open</option><option value="inprogress">In Progress</option><option value="resolved">Resolved</option><option value="closed">Closed</option></select>
+        <select class="filter-select"><option>All Projects</option><option>E-Commerce Redesign</option><option>Salesforce CRM</option><option>Mobile App</option></select>
+        <select class="filter-select"><option>All Priority</option><option>High</option><option>Medium</option><option>Low</option></select>
+      </div>
+
+      <!-- Ticket list -->
+      <div id="ticket-list">
+
+        <div class="ticket-card priority-high" onclick="openModal('modal-tkt1')">
+          <div class="ticket-top">
+            <div>
+              <div class="ticket-id">#TKT-089</div>
+              <div class="ticket-title">Checkout page throws 500 error on mobile Safari</div>
+            </div>
+            <span class="badge high">High</span>
+            <span class="badge inprogress">In Progress</span>
+          </div>
+          <p class="ticket-body">When customers attempt to complete checkout on iPhone (Safari 17), the page throws a 500 server error after entering payment details. Reproducing consistently on iOS 17.2+. Affecting approximately 23% of mobile sessions.</p>
+          <div class="ticket-meta">
+            <span>📋 E-Commerce Redesign</span>
+            <span>👤 Assigned: Tom Richards</span>
+            <span>🕐 Opened: 26 Feb 2026</span>
+            <span>💬 3 replies</span>
+          </div>
+        </div>
+
+        <div class="ticket-card priority-medium" onclick="openModal('modal-tkt2')">
+          <div class="ticket-top">
+            <div>
+              <div class="ticket-id">#TKT-088</div>
+              <div class="ticket-title">Salesforce dashboard — lead conversion metric incorrect</div>
+            </div>
+            <span class="badge medium">Medium</span>
+            <span class="badge pending">Open</span>
+          </div>
+          <p class="ticket-body">The lead conversion rate metric on the Salesforce Sales Dashboard is showing 34% when manual calculation shows it should be 41%. Appears to be a SOQL query filter issue — possibly excluding leads created via API.</p>
+          <div class="ticket-meta">
+            <span>📋 Salesforce CRM</span>
+            <span>👤 Assigned: Sunita Kapoor</span>
+            <span>🕐 Opened: 25 Feb 2026</span>
+            <span>💬 1 reply</span>
+          </div>
+        </div>
+
+        <div class="ticket-card priority-low" style="opacity:0.7" onclick="openModal('modal-tkt3')">
+          <div class="ticket-top">
+            <div>
+              <div class="ticket-id">#TKT-087</div>
+              <div class="ticket-title">Request: Add export to CSV on orders report</div>
+            </div>
+            <span class="badge low">Low</span>
+            <span class="badge closed">Resolved</span>
+          </div>
+          <p class="ticket-body">Please add a CSV export button to the orders report on the Salesforce dashboard so the finance team can export data without needing a Salesforce licence.</p>
+          <div class="ticket-meta">
+            <span>📋 Salesforce CRM</span>
+            <span>👤 Resolved by: Sunita Kapoor</span>
+            <span>🕐 Resolved: 20 Feb 2026</span>
+            <span>💬 4 replies</span>
+          </div>
+        </div>
+
+        <div class="ticket-card priority-medium" style="opacity:0.7" onclick="showToast('Ticket closed — no action required','info')">
+          <div class="ticket-top">
+            <div>
+              <div class="ticket-id">#TKT-086</div>
+              <div class="ticket-title">Product image not displaying on category pages</div>
+            </div>
+            <span class="badge medium">Medium</span>
+            <span class="badge closed">Closed</span>
+          </div>
+          <p class="ticket-body">Images from the Contentful CMS were not rendering on category pages after the sprint 3 deployment. Root cause: Cloudinary transform URL changed. Fixed in hotfix v1.2.1.</p>
+          <div class="ticket-meta">
+            <span>📋 E-Commerce Redesign</span>
+            <span>🕐 Resolved: 18 Feb 2026</span>
+            <span>💬 6 replies</span>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- NEW TICKET MODAL -->
+<div class="modal-overlay" id="modal-new-ticket">
+  <div class="modal">
+    <div class="modal-head"><h3>🎫 Raise New Support Ticket</h3><button class="modal-close" onclick="closeModal('modal-new-ticket')">✕</button></div>
+    <div class="modal-body">
+      <form onsubmit="submitTicket(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Related Project<span class="req">*</span></label>
+            <select class="form-select" required><option value="">Select project…</option><option>E-Commerce Redesign</option><option>Salesforce CRM</option><option>Mobile App — Phase 2</option><option>General / Not project-specific</option></select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Priority<span class="req">*</span></label>
+            <select class="form-select" required><option value="">Select priority…</option><option>🔴 High — Blocking</option><option>🟡 Medium — Affecting work</option><option>🟢 Low — Enhancement</option></select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Ticket Title<span class="req">*</span></label>
+          <input type="text" class="form-input" placeholder="Brief, clear description of the issue" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Full Description<span class="req">*</span></label>
+          <textarea class="form-textarea" placeholder="Please describe the issue in detail — steps to reproduce, expected vs actual behaviour, browser/device info, any error messages…" required></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Attachments</label>
+          <input type="file" class="form-input" multiple accept="image/*,.pdf,.doc,.docx,.png,.jpg">
+          <div class="form-hint">Screenshots, error logs, or relevant files. Max 10MB each.</div>
+        </div>
+        <div class="modal-foot" style="padding:0;border:none;margin-top:0.5rem">
+          <button type="button" class="btn btn-ghost" onclick="closeModal('modal-new-ticket')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Submit Ticket →</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- TICKET DETAIL MODAL 1 -->
+<div class="modal-overlay" id="modal-tkt1">
+  <div class="modal" style="max-width:680px">
+    <div class="modal-head">
+      <div><h3>#TKT-089 — Checkout 500 Error (Safari)</h3><div style="display:flex;gap:6px;margin-top:6px"><span class="badge high">High</span><span class="badge inprogress">In Progress</span></div></div>
+      <button class="modal-close" onclick="closeModal('modal-tkt1')">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:.86rem;color:var(--gray);line-height:1.7;margin-bottom:1.4rem">When customers attempt to complete checkout on iPhone (Safari 17), the page throws a 500 server error after entering payment details. Reproducing consistently on iOS 17.2+. Affecting approximately 23% of mobile sessions.</p>
+      <div class="reply-thread">
+        <div class="reply-item">
+          <div class="reply-av">JD</div>
+          <div><div class="reply-bubble">Confirmed — our team tested on iPhone 14 Pro (iOS 17.2) and can reproduce every time. It happens at step 3 of checkout immediately after entering card details.</div><div class="reply-time">26 Feb, 09:14</div></div>
+        </div>
+        <div class="reply-item own">
+          <div class="reply-av">TR</div>
+          <div><div class="reply-bubble">Thanks John — I've isolated it to a Safari Content-Security-Policy header issue with the Stripe JS embed. I've pushed a fix to staging — can you test at retailmax-staging.co.uk?</div><div class="reply-time">26 Feb, 11:30</div></div>
+        </div>
+        <div class="reply-item">
+          <div class="reply-av">JD</div>
+          <div><div class="reply-bubble">Tested on staging — checkout works on Safari now! What's the ETA for production deployment?</div><div class="reply-time">26 Feb, 14:05</div></div>
+        </div>
+        <div class="reply-item own">
+          <div class="reply-av">TR</div>
+          <div><div class="reply-bubble">Targeting deployment tonight at 23:00 UTC during low traffic. I'll confirm when it's live and send a test report. Estimated resolution: 27 Feb 00:00.</div><div class="reply-time">26 Feb, 15:22</div></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:0.75rem">
+        <textarea class="form-textarea" id="tkt1-reply" placeholder="Add a reply…" style="min-height:80px;flex:1"></textarea>
+        <button class="btn btn-primary" style="align-self:flex-end" onclick="addTicketReply('tkt1-reply','modal-tkt1')">Send →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TICKET DETAIL MODAL 2 -->
+<div class="modal-overlay" id="modal-tkt2">
+  <div class="modal" style="max-width:640px">
+    <div class="modal-head"><div><h3>#TKT-088 — Salesforce metric incorrect</h3><div style="display:flex;gap:6px;margin-top:6px"><span class="badge medium">Medium</span><span class="badge pending">Open</span></div></div><button class="modal-close" onclick="closeModal('modal-tkt2')">✕</button></div>
+    <div class="modal-body">
+      <p style="font-size:.86rem;color:var(--gray);line-height:1.7;margin-bottom:1.4rem">Lead conversion rate showing 34% instead of expected 41%. Possibly a SOQL query filter excluding API-created leads.</p>
+      <div class="reply-thread">
+        <div class="reply-item"><div class="reply-av">JD</div><div><div class="reply-bubble">Hi — the lead conversion metric on the main dashboard is wrong. Manual spreadsheet shows 41%, but Salesforce shows 34%. Something's off with the SOQL filter.</div><div class="reply-time">25 Feb, 10:00</div></div></div>
+        <div class="reply-item own"><div class="reply-av">SK</div><div><div class="reply-bubble">Thanks for flagging. I've had a look — you're right. The report is filtering out LeadSource = 'API' which is excluding your HubSpot leads. Working on a fix now.</div><div class="reply-time">25 Feb, 14:30</div></div></div>
+      </div>
+      <div style="display:flex;gap:0.75rem">
+        <textarea class="form-textarea" id="tkt2-reply" placeholder="Add a reply…" style="min-height:80px;flex:1"></textarea>
+        <button class="btn btn-primary" style="align-self:flex-end" onclick="addTicketReply('tkt2-reply','modal-tkt2')">Send →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TICKET RESOLVED MODAL -->
+<div class="modal-overlay" id="modal-tkt3">
+  <div class="modal"><div class="modal-head"><h3>#TKT-087 — CSV Export Request (Resolved)</h3><button class="modal-close" onclick="closeModal('modal-tkt3')">✕</button></div>
+  <div class="modal-body"><p style="font-size:.86rem;color:var(--gray);line-height:1.7">Request completed on 20 Feb 2026. CSV export button added to Orders Report and Revenue Summary reports. Available under Reports → More Actions → Export as CSV.</p><div style="margin-top:1.2rem;padding:1rem;background:rgba(74,222,128,0.06);border:1px solid rgba(74,222,128,0.2);border-radius:var(--r2)"><p style="color:var(--green);font-size:.85rem">✓ Resolved by Sunita Kapoor on 20 February 2026</p></div></div>
+  <div class="modal-foot"><button class="btn btn-ghost" onclick="closeModal('modal-tkt3')">Close</button></div></div>
+</div>
+
+<script src="../js/portal.js"></script>
+<script>
+function submitTicket(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button[type="submit"]');
+  btn.textContent = 'Submitting…'; btn.disabled = true;
+  setTimeout(() => {
+    closeModal('modal-new-ticket');
+    showToast('Ticket #TKT-090 created! You\'ll receive a response within 4 business hours.', 'success', 5000);
+    btn.textContent = 'Submit Ticket →'; btn.disabled = false;
+    e.target.reset();
+  }, 1200);
+}
+function addTicketReply(inputId, modalId) {
+  const inp = document.getElementById(inputId);
+  const text = inp.value.trim();
+  if(!text) return;
+  inp.value = '';
+  showToast('Reply sent to TechNova team.', 'success');
+}
+function filterTickets(val) { showToast('Filter: ' + val, 'info'); }
+</script>
+</body>
+</html>

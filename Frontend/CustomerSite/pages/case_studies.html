@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Case Studies – TechNova Ltd</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.filter-bar { display:flex; gap:0.75rem; flex-wrap:wrap; margin-bottom:2.5rem; }
+.filter-btn {
+  padding:8px 20px; border-radius:50px; font-size:0.85rem; font-weight:600;
+  border:1.5px solid var(--border); background:transparent; color:var(--gray); cursor:pointer; transition:all 0.2s;
+}
+.filter-btn.active,.filter-btn:hover { background:var(--cyan); color:var(--navy); border-color:var(--cyan); }
+.case-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:1.5rem; }
+.cs-card {
+  background:var(--card); border:1px solid var(--border); border-radius:var(--r);
+  overflow:hidden; transition:all 0.35s;
+}
+.cs-card:hover { transform:translateY(-6px); border-color:rgba(0,212,255,0.25); box-shadow:0 20px 40px rgba(0,0,0,0.28); }
+.cs-thumb {
+  height:200px; display:flex; align-items:center; justify-content:center;
+  font-size:3.5rem; position:relative; overflow:hidden;
+}
+.cs-thumb::after { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(0,212,255,0.1),transparent); }
+.cs-tag { position:absolute; top:14px; left:14px; z-index:1; }
+.cs-body { padding:1.5rem; }
+.cs-name { font-family:var(--font-h); font-size:1.05rem; font-weight:700; color:var(--white); margin-bottom:0.5rem; }
+.cs-result {
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(0,212,255,0.1); border:1px solid rgba(0,212,255,0.22);
+  color:var(--cyan); font-size:0.78rem; font-weight:700; padding:4px 12px; border-radius:50px; margin-bottom:0.9rem;
+}
+.cs-desc { font-size:0.87rem; color:var(--gray); line-height:1.68; margin-bottom:1.2rem; }
+.cs-footer { display:flex; justify-content:space-between; align-items:center; padding-top:1rem; border-top:1px solid var(--border); }
+.cs-tech { display:flex; gap:0.4rem; flex-wrap:wrap; }
+.cs-link { color:var(--cyan); font-size:0.85rem; font-weight:600; transition:transform 0.2s; display:inline-flex; align-items:center; gap:4px; }
+.cs-link:hover { transform:translateX(4px); }
+</style>
+</head>
+<body>
+
+  <!-- ── NAVBAR ─────────────────────────── -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <img src="../assets/logo-transparent.png" alt="TechNova Ltd" class="logo-img" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li class="nav-dd">
+        <a href="services.html">Services ▾</a>
+        <div class="dd-menu">
+          <a href="services.html#web"><span>🌐</span>Web Development</a>
+          <a href="services.html#enterprise"><span>🏢</span>Enterprise Software</a>
+          <a href="services.html#mobile"><span>📱</span>Mobile Apps</a>
+          <a href="services.html#salesforce"><span>☁️</span>Salesforce CRM</a>
+          <a href="services.html#cloud"><span>🔧</span>Cloud & DevOps</a>
+          <a href="services.html#uiux"><span>🎨</span>UI/UX Design</a>
+          <a href="services.html#ecom"><span>🛒</span>E-Commerce</a>
+          <a href="services.html#cyber"><span>🔐</span>Cybersecurity</a>
+        </div>
+      </li>
+      <li><a href="industries.html">Industries</a></li>
+      <li><a href="case_studies.html" class="active">Case Studies</a></li>
+      <li><a href="careers.html">Careers</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="contact.html" class="btn btn-primary">Get a Consultation</a>
+    </div>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div id="mob-menu">
+  <a href="../index.html" class="mob-link">Home</a>
+  <a href="about.html" class="mob-link">About</a>
+  <a href="services.html" class="mob-link">Services</a>
+  <a href="industries.html" class="mob-link">Industries</a>
+  <a href="case_studies.html" class="mob-link">Case Studies</a>
+  <a href="careers.html" class="mob-link">Careers</a>
+  <a href="contact.html" class="mob-link">Contact</a>
+  <a href="contact.html" class="btn btn-primary">Get a Consultation</a>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-bg"></div><div class="page-hero-grid"></div>
+  <div class="container page-hero-content">
+    <div class="breadcrumb"><a href="../index.html">Home</a><span>›</span><span>Case Studies</span></div>
+    <div class="label">Our Work</div>
+    <h1>Proven Results Across<br/><span>Every Industry</span></h1>
+    <p class="lead">Explore how TechNova has delivered measurable impact for clients across retail, FinTech, healthcare, logistics, and beyond.</p>
+    <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-top:2rem">
+      <div><div style="font-family:var(--font-h);font-size:2.2rem;font-weight:800;color:var(--white)">20<span style="color:var(--cyan)">+</span></div><div style="font-size:0.82rem;color:var(--gray)">Published Case Studies</div></div>
+      <div><div style="font-family:var(--font-h);font-size:2.2rem;font-weight:800;color:var(--white)">12<span style="color:var(--cyan)">+</span></div><div style="font-size:0.82rem;color:var(--gray)">Industries Represented</div></div>
+      <div><div style="font-family:var(--font-h);font-size:2.2rem;font-weight:800;color:var(--white)">98<span style="color:var(--cyan)">%</span></div><div style="font-size:0.82rem;color:var(--gray)">Client Satisfaction Rate</div></div>
+    </div>
+  </div>
+</div>
+
+<section class="section" style="background:var(--navy3)">
+  <div class="container">
+    <div class="filter-bar" id="cs-filters">
+      <button class="filter-btn active" onclick="filterCards(this,'all','#cs-filters','#cs-grid .cs-card')">All</button>
+      <button class="filter-btn" onclick="filterCards(this,'retail','#cs-filters','#cs-grid .cs-card')">Retail</button>
+      <button class="filter-btn" onclick="filterCards(this,'fintech','#cs-filters','#cs-grid .cs-card')">FinTech</button>
+      <button class="filter-btn" onclick="filterCards(this,'healthcare','#cs-filters','#cs-grid .cs-card')">Healthcare</button>
+      <button class="filter-btn" onclick="filterCards(this,'cloud','#cs-filters','#cs-grid .cs-card')">Cloud</button>
+      <button class="filter-btn" onclick="filterCards(this,'crm','#cs-filters','#cs-grid .cs-card')">CRM</button>
+      <button class="filter-btn" onclick="filterCards(this,'ai','#cs-filters','#cs-grid .cs-card')">AI & Data</button>
+      <button class="filter-btn" onclick="filterCards(this,'mobile','#cs-filters','#cs-grid .cs-card')">Mobile</button>
+    </div>
+    <div class="case-grid" id="cs-grid">
+
+      <div class="cs-card reveal" data-cat="retail"><div class="cs-thumb" style="background:linear-gradient(135deg,#0A1F44,#1A4080)"><span style="z-index:1;position:relative">🛍️</span><div class="cs-tag"><span class="tag tag-cyan">RETAIL</span></div></div><div class="cs-body"><div class="cs-name">Retail E-Commerce Platform Transformation</div><div class="cs-result">⬆ 45% Revenue Growth in 8 Months</div><div class="cs-desc">Rebuilt a legacy retail platform with cloud-native architecture, delivering faster page loads, improved UX, and a 45% revenue lift within 8 months of launch.</div><div class="cs-footer"><div class="cs-tech"><span class="tag tag-cyan" style="font-size:0.68rem">React</span><span class="tag tag-cyan" style="font-size:0.68rem">AWS</span></div></div></div></div>
+
+      <div class="cs-card reveal d1" data-cat="fintech crm"><div class="cs-thumb" style="background:linear-gradient(135deg,#071530,#0D3060)"><span style="z-index:1;position:relative">💳</span><div class="cs-tag"><span class="tag tag-cyan">FINTECH</span></div></div><div class="cs-body"><div class="cs-name">Financial Services CRM Automation</div><div class="cs-result">⬆ 35% Faster Client Response Time</div><div class="cs-desc">Salesforce CRM implementation for a UK financial services firm, reducing manual processes and dramatically improving response SLAs and pipeline visibility.</div><div class="cs-footer"><div class="cs-tech"><span class="tag tag-cyan" style="font-size:0.68rem">Salesforce</span><span class="tag tag-cyan" style="font-size:0.68rem">Apex</span></div></div></div></div>
+
+      <div class="cs-card reveal d2" data-cat="healthcare"><div class="cs-thumb" style="background:linear-gradient(135deg,#051222,#0A2B4A)"><span style="z-index:1;position:relative">🏥</span><div class="cs-tag"><span class="tag tag-cyan">HEALTHCARE</span></div></div><div class="cs-body"><div class="cs-name">Healthcare Management Portal</div><div class="cs-result">⬇ 30% Admin Workload Reduction</div><div class="cs-desc">HIPAA-compliant digital portal streamlining patient records, appointment scheduling, and cross-team communication for a UK NHS-affiliated organisation.</div><div class="cs-footer"><div class="cs-tech"><span class="tag tag-cyan" style="font-size:0.68rem">.NET</span><span class="tag tag-cyan" style="font-size:0.68rem">Azure</span></div></div></div></div>
+
+      <div class="cs-card reveal" data-cat="cloud"><div class="cs-thumb" style="background:linear-gradient(135deg,#0A1F44,#002244)"><span style="z-index:1;position:relative">☁️</span><div class="cs-tag"><span class="tag tag-cyan">CLOUD</span></div></div><div class="cs-body"><div class="cs-name">Cloud Migration Initiative</div><div class="cs-result">⬇ 28% Infrastructure Cost Savings</div><div class="cs-desc">Full AWS migration of an enterprise application suite with zero downtime, achieving 28% infrastructure cost reduction and improving uptime to 99.9%.</div><div class="cs-footer"><div class="cs-tech"><span class="tag tag-cyan" style="font-size:0.68rem">AWS</span><span class="tag tag-cyan" style="font-size:0.68rem">Terraform</span></div></div></div></div>
+
+      <div class="cs-card reveal d1" data-cat="fintech mobile"><div class="cs-thumb" style="background:linear-gradient(135deg,#071224,#0A1F44)"><span style="z-index:1;position:relative">📱</span><div class="cs-tag"><span class="tag tag-cyan">FINTECH</span></div></div><div class="cs-body"><div class="cs-name">FinTech Mobile App Launch</div><div class="cs-result">⬆ 70% User Adoption in First Quarter</div><div class="cs-desc">Cross-platform payment app built with React Native, achieving 70% user adoption in the first quarter post-launch with 4.9-star App Store rating.</div><div class="cs-footer"><div class="cs-tech"><span class="tag tag-cyan" style="font-size:0.68rem">React Native</span><span class="tag tag-cyan" style="font-size:0.68rem">Node.js</span></div></div></div></div>
+
+      <div class="cs-card reveal d2" data-cat="ai retail"><div class="cs-thumb" style="background:linear-gradient(135deg,#071530,#0E2A50)"><span style="z-index:1;position:relative">🤖</span><div class="cs-tag"><span class="tag tag-cyan">AI</span></div></div><div class="cs-body"><div class="cs-name">AI Support Chatbot Deployment</div><div class="cs-result">⬇ 55% Support Workload Reduced</div><div class="cs-desc">Intelligent support chatbot integrated into a major e-commerce platform, automating 55% of inbound support queries and reducing resolution time by 40%.</div><div class="cs-footer"><div class="cs-tech"><span class="tag tag-cyan" style="font-size:0.68rem">Python</span><span class="tag tag-cyan" style="font-size:0.68rem">NLP</span></div></div></div></div>
+
+      <div class="cs-card reveal" data-cat="crm retail"><div class="cs-thumb" style="background:linear-gradient(135deg,#0A1F44,#1A3A5C)"><span style="z-index:1;position:relative">🏠</span><div class="cs-tag"><span class="tag tag-cyan">REAL ESTATE</span></div></div><div class="cs-body"><div class="cs-name">Real Estate CRM Automation</div><div class="cs-result">⬆ 38% Faster Sales Cycle</div><div class="cs-desc">End-to-end CRM automation for a UK property firm, integrating lead capture, pipeline management and automated follow-ups to accelerate the sales cycle.</div><div class="cs-footer"><div class="cs-tech"><span class="tag tag-cyan" style="font-size:0.68rem">Salesforce</span><span class="tag tag-cyan" style="font-size:0.68rem">React</span></div></div></div></div>
+
+      <div class="cs-card reveal d1" data-cat="fintech ai"><div class="cs-thumb" style="background:linear-gradient(135deg,#051222,#0A2040)"><span style="z-index:1;position:relative">📊</span><div class="cs-tag"><span class="tag tag-cyan">FINTECH</span></div></div><div class="cs-body"><div class="cs-name">Banking Compliance Dashboard</div><div class="cs-result">100% Automated Regulatory Reporting</div><div class="cs-desc">Real-time compliance dashboard for a UK bank, automating regulatory reporting and audit trails, eliminating weeks of manual reporting per quarter.</div><div class="cs-footer"><div class="cs-tech"><span class="tag tag-cyan" style="font-size:0.68rem">.NET</span><span class="tag tag-cyan" style="font-size:0.68rem">Azure</span></div></div></div></div>
+
+      <div class="cs-card reveal d2" data-cat="healthcare mobile"><div class="cs-thumb" style="background:linear-gradient(135deg,#071530,#0A2B4A)"><span style="z-index:1;position:relative">💊</span><div class="cs-tag"><span class="tag tag-cyan">HEALTHCARE</span></div></div><div class="cs-body"><div class="cs-name">Insurance Claims Automation</div><div class="cs-result">⬆ 25% Quicker Claims Processing</div><div class="cs-desc">Digital claims management platform reducing processing time by 25% through intelligent workflow automation and integrated document management.</div><div class="cs-footer"><div class="cs-tech"><span class="tag tag-cyan" style="font-size:0.68rem">Python</span><span class="tag tag-cyan" style="font-size:0.68rem">AWS</span></div></div></div></div>
+
+      <div class="cs-card reveal" data-cat="retail mobile"><div class="cs-thumb" style="background:linear-gradient(135deg,#0A1F44,#1A5050)"><span style="z-index:1;position:relative">🏨</span><div class="cs-tag"><span class="tag tag-cyan">HOSPITALITY</span></div></div><div class="cs-body"><div class="cs-name">Hospitality Booking Engine</div><div class="cs-result">⬆ 42% Increase in Direct Bookings</div><div class="cs-desc">Custom booking engine with real-time availability, loyalty integration, and multi-channel marketing increasing direct bookings by 42% in the first year.</div><div class="cs-footer"><div class="cs-tech"><span class="tag tag-cyan" style="font-size:0.68rem">Next.js</span><span class="tag tag-cyan" style="font-size:0.68rem">Node.js</span></div></div></div></div>
+
+      <div class="cs-card reveal d1" data-cat="cloud ai"><div class="cs-thumb" style="background:linear-gradient(135deg,#0A2040,#0A1F44)"><span style="z-index:1;position:relative">🏭</span><div class="cs-tag"><span class="tag tag-cyan">MANUFACTURING</span></div></div><div class="cs-body"><div class="cs-name">Manufacturing ERP Integration</div><div class="cs-result">⬆ 32% Productivity Growth</div><div class="cs-desc">ERP integration connecting production, inventory, and HR systems, providing real-time visibility and driving 32% productivity improvement across the factory floor.</div><div class="cs-footer"><div class="cs-tech"><span class="tag tag-cyan" style="font-size:0.68rem">.NET</span><span class="tag tag-cyan" style="font-size:0.68rem">Azure</span></div></div></div></div>
+
+      <div class="cs-card reveal d2" data-cat="ai"><div class="cs-thumb" style="background:linear-gradient(135deg,#0A1F44,#0A3050)"><span style="z-index:1;position:relative">📈</span><div class="cs-tag"><span class="tag tag-cyan">BI / ANALYTICS</span></div></div><div class="cs-body"><div class="cs-name">Business Intelligence Dashboard</div><div class="cs-result">Real-Time Executive Reporting</div><div class="cs-desc">Enterprise BI dashboard providing C-suite with real-time visibility across sales, operations, and customer metrics, replacing 5 disparate manual reports.</div><div class="cs-footer"><div class="cs-tech"><span class="tag tag-cyan" style="font-size:0.68rem">Power BI</span><span class="tag tag-cyan" style="font-size:0.68rem">Python</span></div></div></div></div>
+
+    </div>
+  </div>
+</section>
+
+<section class="cta-section"><div class="container"><p style="color:var(--cyan);font-weight:600;margin-bottom:1rem">Ready to be our next success story?</p><h2 class="h2" style="margin-bottom:1.2rem">Let's Build <span>Something Great</span></h2><p class="lead" style="margin:0 auto 2.5rem;text-align:center">Partner with TechNova to create measurable digital impact for your business.</p><div class="cta-btns"><a href="contact.html" class="btn btn-primary btn-lg">Start Your Project →</a></div></div></section>
+
+<!-- FOOTER ───────────────────────────────────────────────── -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="../index.html" class="nav-logo" style="display:inline-flex;margin-bottom:0.8rem">
+          <img src="../assets/logo-transparent.png" alt="TechNova Ltd" class="footer-logo-img">
+        </a>
+        <p class="footer-tagline">Engineering the Future of Digital Excellence. London-based digital transformation delivering enterprise-grade solutions globally.</p>
+        <div class="footer-socials"><a href="#" class="soc">in</a><a href="#" class="soc">𝕏</a><a href="#" class="soc">⌥</a><a href="#" class="soc">▶</a></div>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#web">Web Development</a></li>
+          <li><a href="#enterprise">Enterprise Software</a></li>
+          <li><a href="#mobile">Mobile Apps</a></li>
+          <li><a href="#salesforce">Salesforce CRM</a></li>
+          <li><a href="#cloud">Cloud & DevOps</a></li>
+          <li><a href="#uiux">UI/UX Design</a></li>
+          <li><a href="#ecom">E-Commerce</a></li>
+          <li><a href="#cyber">Cybersecurity</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="case_studies.html">Case Studies</a></li>
+          <li><a href="industries.html">Industries</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <div class="fc-row"><span class="ico">📍</span><span>London, United Kingdom</span></div>
+        <div class="fc-row"><span class="ico">✉</span><span>info@technova.com</span></div>
+        <div class="fc-row"><span class="ico">📞</span><span>+44 12 3456 7890</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 TechNova Ltd. All rights reserved. Registered in England & Wales No. 14873291</div>
+      <div class="footer-legal"><a href="privacy_policy.html">Privacy Policy</a><a href="terms&conditions.html">Terms &amp; Conditions</a><a href="cookie_policy.html">Cookie Policy</a></div>
+    </div>
+  </div>
+</footer>
+
+<button id= "scroll-top" >↑ </button >
+<script src="../js/main.js"></script>
+</body></html>

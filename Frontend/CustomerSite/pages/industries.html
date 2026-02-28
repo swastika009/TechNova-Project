@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Industries – TechNova Ltd</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.ind-full { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:1.5rem; margin-top:3.5rem; }
+.ind-card {
+  background:var(--card); border:1px solid var(--border); border-radius:var(--r);
+  padding:2rem; transition:all 0.35s; position:relative; overflow:hidden;
+}
+.ind-card::before { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--cyan2),var(--cyan)); transform:scaleX(0); transition:transform 0.35s; }
+.ind-card:hover { transform:translateY(-6px); border-color:rgba(0,212,255,0.25); box-shadow:0 20px 40px rgba(0,0,0,0.25); }
+.ind-card:hover::before { transform:scaleX(1); }
+.ind-emoji { font-size:2.8rem; margin-bottom:1.2rem; }
+.ind-name  { font-family:var(--font-h); font-size:1.1rem; font-weight:700; color:var(--white); margin-bottom:0.7rem; }
+.ind-desc  { font-size:0.88rem; color:var(--gray); line-height:1.72; margin-bottom:1.2rem; }
+.ind-tags  { display:flex; flex-wrap:wrap; gap:0.5rem; }
+</style>
+</head>
+<body>
+
+<!-- ── NAVBAR ─────────────────────────── -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <img src="../assets/logo-transparent.png" alt="TechNova Ltd" class="logo-img" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li class="nav-dd">
+        <a href="services.html">Services ▾</a>
+        <div class="dd-menu">
+          <a href="services.html#web"><span>🌐</span>Web Development</a>
+          <a href="services.html#enterprise"><span>🏢</span>Enterprise Software</a>
+          <a href="services.html#mobile"><span>📱</span>Mobile Apps</a>
+          <a href="services.html#salesforce"><span>☁️</span>Salesforce CRM</a>
+          <a href="services.html#cloud"><span>🔧</span>Cloud & DevOps</a>
+          <a href="services.html#uiux"><span>🎨</span>UI/UX Design</a>
+          <a href="services.html#ecom"><span>🛒</span>E-Commerce</a>
+          <a href="services.html#cyber"><span>🔐</span>Cybersecurity</a>
+        </div>
+      </li>
+      <li><a href="industries.html" class="active">Industries</a></li>
+      <li><a href="case_studies.html">Case Studies</a></li>
+      <li><a href="careers.html">Careers</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="contact.html" class="btn btn-primary">Get a Consultation</a>
+    </div>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div id="mob-menu">
+  <a href="../index.html" class="mob-link">Home</a>
+  <a href="about.html" class="mob-link">About</a>
+  <a href="services.html" class="mob-link">Services</a>
+  <a href="industries.html" class="mob-link">Industries</a>
+  <a href="case_studies.html" class="mob-link">Case Studies</a>
+  <a href="careers.html" class="mob-link">Careers</a>
+  <a href="contact.html" class="mob-link">Contact</a>
+  <a href="contact.html" class="btn btn-primary">Get a Consultation</a>
+</div>
+
+
+<div class="page-hero">
+  <div class="page-hero-bg"></div><div class="page-hero-grid"></div>
+  <div class="container page-hero-content">
+    <div class="breadcrumb"><a href="../index.html">Home</a><span>›</span><span>Industries</span></div>
+    <div class="label">Sectors We Serve</div>
+    <h1>Delivering Sector-Specific<br/><span>Digital Excellence</span></h1>
+    <p class="lead">We've successfully delivered transformative technology solutions across 12+ industries, bringing deep domain expertise and technical precision to every engagement.</p>
+    <a href="contact.html" class="btn btn-primary btn-lg">Discuss Your Industry →</a>
+  </div>
+</div>
+
+<!-- INDUSTRIES GRID -->
+<section class="section" style="background:var(--navy3)">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:0" class="reveal">
+      <div class="label" style="justify-content:center">12+ Industries</div>
+      <h2 class="h2">Every Sector, <span>Every Challenge</span></h2>
+      <p class="lead" style="margin:1rem auto 0">No matter your sector, TechNova brings the right blend of domain knowledge and engineering excellence.</p>
+    </div>
+    <div class="ind-full">
+      <div class="ind-card reveal"><div class="ind-emoji">💳</div><div class="ind-name">FinTech & Financial Services</div><div class="ind-desc">Digital payment platforms, trading systems, compliance dashboards, CRM automation, and regulatory reporting solutions for banks, insurers, and FinTech startups.</div><div class="ind-tags"><span class="tag tag-cyan">Payments</span><span class="tag tag-cyan">Compliance</span><span class="tag tag-cyan">CRM</span></div></div>
+      <div class="ind-card reveal d1"><div class="ind-emoji">🏥</div><div class="ind-name">Healthcare & HealthTech</div><div class="ind-desc">HIPAA-compliant patient portals, electronic health records, appointment systems, and healthcare analytics platforms that reduce admin workload and improve outcomes.</div><div class="ind-tags"><span class="tag tag-cyan">HIPAA</span><span class="tag tag-cyan">EHR</span><span class="tag tag-cyan">Telehealth</span></div></div>
+      <div class="ind-card reveal d2"><div class="ind-emoji">🛍️</div><div class="ind-name">Retail & E-Commerce</div><div class="ind-desc">High-performance storefronts, inventory management, omnichannel platforms, and AI-powered recommendation engines driving measurable revenue growth.</div><div class="ind-tags"><span class="tag tag-cyan">Shopify</span><span class="tag tag-cyan">Omnichannel</span><span class="tag tag-cyan">AI</span></div></div>
+      <div class="ind-card reveal"><div class="ind-emoji">🎓</div><div class="ind-name">Education & EdTech</div><div class="ind-desc">Learning management systems, student portals, virtual classroom platforms, and assessment tools that improve engagement and educational outcomes at scale.</div><div class="ind-tags"><span class="tag tag-cyan">LMS</span><span class="tag tag-cyan">E-Learning</span><span class="tag tag-cyan">Analytics</span></div></div>
+      <div class="ind-card reveal d1"><div class="ind-emoji">🚚</div><div class="ind-name">Logistics & Supply Chain</div><div class="ind-desc">Real-time tracking systems, route optimisation, warehouse management platforms, and IoT integrations increasing operational efficiency across the supply chain.</div><div class="ind-tags"><span class="tag tag-cyan">Tracking</span><span class="tag tag-cyan">IoT</span><span class="tag tag-cyan">WMS</span></div></div>
+      <div class="ind-card reveal d2"><div class="ind-emoji">🚀</div><div class="ind-name">SaaS & Technology</div><div class="ind-desc">Multi-tenant SaaS platforms, developer tools, API ecosystems, and scalable subscription-based software built for rapid growth and enterprise compliance.</div><div class="ind-tags"><span class="tag tag-cyan">Multi-tenant</span><span class="tag tag-cyan">API-first</span><span class="tag tag-cyan">Scalable</span></div></div>
+      <div class="ind-card reveal"><div class="ind-emoji">🏭</div><div class="ind-name">Manufacturing & Industry</div><div class="ind-desc">ERP integrations, production scheduling systems, quality management platforms, and predictive maintenance tools driving productivity and cost efficiency.</div><div class="ind-tags"><span class="tag tag-cyan">ERP</span><span class="tag tag-cyan">IoT</span><span class="tag tag-cyan">Automation</span></div></div>
+      <div class="ind-card reveal d1"><div class="ind-emoji">🏦</div><div class="ind-name">Banking & Insurance</div><div class="ind-desc">Core banking integrations, insurance claims automation, KYC/AML compliance systems, and digital onboarding platforms improving customer experience.</div><div class="ind-tags"><span class="tag tag-cyan">KYC/AML</span><span class="tag tag-cyan">Claims</span><span class="tag tag-cyan">Open Banking</span></div></div>
+      <div class="ind-card reveal d2"><div class="ind-emoji">🏨</div><div class="ind-name">Hospitality & Travel</div><div class="ind-desc">Booking engines, property management systems, loyalty programme platforms, and guest experience applications increasing direct bookings and customer satisfaction.</div><div class="ind-tags"><span class="tag tag-cyan">PMS</span><span class="tag tag-cyan">Booking</span><span class="tag tag-cyan">Loyalty</span></div></div>
+      <div class="ind-card reveal"><div class="ind-emoji">🏢</div><div class="ind-name">Professional Services</div><div class="ind-desc">CRM solutions, client portals, document management systems, and time-tracking platforms for law firms, consultancies, and accounting practices.</div><div class="ind-tags"><span class="tag tag-cyan">CRM</span><span class="tag tag-cyan">DMS</span><span class="tag tag-cyan">Portals</span></div></div>
+      <div class="ind-card reveal d1"><div class="ind-emoji">🏠</div><div class="ind-name">Real Estate</div><div class="ind-desc">CRM automation, property listing platforms, virtual tour integrations, and sales pipeline tools that accelerate the sales cycle and improve agent productivity.</div><div class="ind-tags"><span class="tag tag-cyan">PropTech</span><span class="tag tag-cyan">CRM</span><span class="tag tag-cyan">Virtual Tours</span></div></div>
+      <div class="ind-card reveal d2"><div class="ind-emoji">🤖</div><div class="ind-name">AI & Automation</div><div class="ind-desc">AI-powered chatbots, business intelligence dashboards, predictive analytics, and intelligent process automation reducing workload and delivering real-time insights.</div><div class="ind-tags"><span class="tag tag-cyan">ML/AI</span><span class="tag tag-cyan">BI</span><span class="tag tag-cyan">RPA</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="section-sm" style="background:var(--navy)">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center" class="grid-4">
+      <div class="reveal"><div style="font-family:var(--font-h);font-size:3rem;font-weight:800;color:var(--white)"><span data-target="12">0</span><span style="color:var(--cyan)">+</span></div><div style="font-size:0.85rem;color:var(--gray);margin-top:5px">Industries Served</div></div>
+      <div class="reveal d1"><div style="font-family:var(--font-h);font-size:3rem;font-weight:800;color:var(--white)"><span data-target="100">0</span><span style="color:var(--cyan)">+</span></div><div style="font-size:0.85rem;color:var(--gray);margin-top:5px">Projects Delivered</div></div>
+      <div class="reveal d2"><div style="font-family:var(--font-h);font-size:3rem;font-weight:800;color:var(--white)"><span data-target="80">0</span><span style="color:var(--cyan)">+</span></div><div style="font-size:0.85rem;color:var(--gray);margin-top:5px">Global Clients</div></div>
+      <div class="reveal d3"><div style="font-family:var(--font-h);font-size:3rem;font-weight:800;color:var(--white)"><span data-target="98">0</span><span style="color:var(--cyan)">%</span></div><div style="font-size:0.85rem;color:var(--gray);margin-top:5px">Client Satisfaction</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section"><div class="container"><p style="color:var(--cyan);font-weight:600;margin-bottom:1rem">Your Industry, Our Expertise</p><h2 class="h2" style="margin-bottom:1.2rem">Let's Build <span>Something Transformative</span></h2><p class="lead" style="margin:0 auto 2.5rem;text-align:center">Whatever your sector, TechNova has the team, the tools, and the track record to deliver.</p><div class="cta-btns"><a href="contact.html" class="btn btn-primary btn-lg">Start a Conversation →</a><a href="case_studies.html" class="btn btn-ghost btn-lg">See Our Case Studies</a></div></div></section>
+
+<!-- FOOTER ───────────────────────────────────────────────── -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="../index.html" class="nav-logo" style="display:inline-flex;margin-bottom:0.8rem">
+          <img src="../assets/logo-transparent.png" alt="TechNova Ltd" class="footer-logo-img">
+        </a>
+        <p class="footer-tagline">Engineering the Future of Digital Excellence. London-based digital transformation delivering enterprise-grade solutions globally.</p>
+        <div class="footer-socials"><a href="#" class="soc">in</a><a href="#" class="soc">𝕏</a><a href="#" class="soc">⌥</a><a href="#" class="soc">▶</a></div>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#web">Web Development</a></li>
+          <li><a href="#enterprise">Enterprise Software</a></li>
+          <li><a href="#mobile">Mobile Apps</a></li>
+          <li><a href="#salesforce">Salesforce CRM</a></li>
+          <li><a href="#cloud">Cloud & DevOps</a></li>
+          <li><a href="#uiux">UI/UX Design</a></li>
+          <li><a href="#ecom">E-Commerce</a></li>
+          <li><a href="#cyber">Cybersecurity</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="case_studies.html">Case Studies</a></li>
+          <li><a href="industries.html">Industries</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <div class="fc-row"><span class="ico">📍</span><span>London, United Kingdom</span></div>
+        <div class="fc-row"><span class="ico">✉</span><span>info@technova.com</span></div>
+        <div class="fc-row"><span class="ico">📞</span><span>+44 12 3456 7890</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 TechNova Ltd. All rights reserved. Registered in England & Wales No. 14873291</div>
+      <div class="footer-legal"><a href="privacy_policy.html">Privacy Policy</a><a href="terms&conditions.html">Terms &amp; Conditions</a><a href="cookie_policy.html">Cookie Policy</a></div>
+    </div>
+  </div>
+</footer>
+<script src="../js/main.js"></script>
+</body>
+</html>

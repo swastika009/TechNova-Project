@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Projects – TechNova Client Portal</title>
+<link rel="stylesheet" href="../css/portal.css">
+<style>
+.project-cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(360px,1fr)); gap:1.4rem; }
+.proj-card { background:var(--card); border:1px solid var(--border); border-radius:var(--r); overflow:hidden; transition:var(--trans); }
+.proj-card:hover { border-color:rgba(0,212,255,0.28); transform:translateY(-3px); }
+.proj-card-top { padding:1.4rem 1.5rem; border-bottom:1px solid var(--border); position:relative; }
+.proj-card-top::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; }
+.proj-card-top.cyan-bar::before   { background:linear-gradient(90deg,var(--cyan2),var(--cyan)); }
+.proj-card-top.green-bar::before  { background:linear-gradient(90deg,#22c55e,var(--green)); }
+.proj-card-top.purple-bar::before { background:linear-gradient(90deg,#7c3aed,var(--purple)); }
+.proj-header { display:flex; align-items:flex-start; gap:12px; margin-bottom:1rem; }
+.proj-emoji  { width:44px; height:44px; border-radius:11px; display:flex; align-items:center; justify-content:center; font-size:1.3rem; flex-shrink:0; }
+.proj-title  { font-family:var(--font-h); font-size:1rem; font-weight:700; color:var(--white); line-height:1.2; }
+.proj-client { font-size:0.77rem; color:var(--gray); margin-top:3px; }
+.proj-desc   { font-size:0.84rem; color:var(--gray); line-height:1.65; margin-bottom:1rem; }
+.proj-stats-row { display:grid; grid-template-columns:repeat(3,1fr); gap:0.75rem; margin-bottom:1rem; }
+.proj-stat { background:var(--navy3); border-radius:8px; padding:0.75rem; text-align:center; }
+.proj-stat-val { font-family:var(--font-h); font-size:1.1rem; font-weight:800; color:var(--white); }
+.proj-stat-lbl { font-size:0.68rem; color:var(--gray); margin-top:2px; }
+.proj-card-bottom { padding:1.2rem 1.5rem; }
+.proj-team { display:flex; align-items:center; gap:10px; margin-top:0.8rem; }
+.proj-team-label { font-size:0.75rem; color:var(--gray); }
+
+/* Milestone panel */
+.milestone-item {
+  display:flex; align-items:center; gap:12px;
+  padding:10px 16px; border-bottom:1px solid rgba(26,52,96,0.4);
+}
+.milestone-item:last-child { border-bottom:none; }
+.ms-check {
+  width:22px; height:22px; border-radius:50%; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center; font-size:0.7rem;
+}
+.ms-check.done { background:rgba(74,222,128,0.15); border:1.5px solid var(--green); color:var(--green); }
+.ms-check.now  { background:rgba(0,212,255,0.1);   border:1.5px solid var(--cyan);  color:var(--cyan); }
+.ms-check.next { background:var(--navy2); border:1.5px solid var(--border); color:var(--gray); }
+.ms-label { flex:1; font-size:0.86rem; color:var(--text); }
+.ms-label.done-txt { text-decoration:line-through; opacity:0.6; }
+.ms-date  { font-size:0.75rem; color:var(--gray); }
+</style>
+</head>
+<body>
+<div class="portal-shell">
+  <div class="sidebar-overlay" onclick="closeSidebar()"></div>
+  <aside class="sidebar">
+    <a href="../index.html" class="sb-logo"><img src="../assets/logo-transparent.png" alt="TechNova Ltd"></a>
+    <div class="sb-client-badge"><div class="sb-avatar">JD</div><div><div class="sb-client-name">John Davidson</div><div class="sb-client-role">RetailMax Ltd</div></div></div>
+    <nav class="sb-group">
+      <div class="sb-group-label">Main</div>
+      <a href="dashboard.html" class="sb-link"><span class="sb-icon">🏠</span>Dashboard</a>
+      <a href="projects.html" class="sb-link active"><span class="sb-icon">📋</span>Projects<span class="sb-badge">3</span></a>
+      <a href="messages.html" class="sb-link"><span class="sb-icon">💬</span>Messages<span class="sb-badge red">4</span></a>
+      <div class="sb-group-label" style="margin-top:1.2rem">Finance</div>
+      <a href="invoices.html" class="sb-link"><span class="sb-icon">🧾</span>Invoices &amp; Payments</a>
+      <div class="sb-group-label" style="margin-top:1.2rem">Support</div>
+      <a href="tickets.html" class="sb-link"><span class="sb-icon">🎫</span>Support Tickets<span class="sb-badge yellow">2</span></a>
+      <a href="documents.html" class="sb-link"><span class="sb-icon">📁</span>Documents</a>
+      <div class="sb-group-label" style="margin-top:1.2rem">Account</div>
+      <a href="settings.html" class="sb-link"><span class="sb-icon">⚙️</span>Settings &amp; Profile</a>
+      <a href="admin-settings.html" class="sb-link" data-admin-only style="color:var(--yellow)"><span class="sb-icon">🛡</span>Admin Panel</a>
+    </nav>
+    <div class="sb-bottom"><button class="sb-logout" onclick="signOut()"><span>🚪</span> Sign Out</button></div>
+  </aside>
+
+  <div class="portal-main">
+    <header class="portal-header">
+      <div class="ph-left">
+        <button class="hamburger-portal" onclick="toggleSidebar()"><span></span><span></span><span></span></button>
+        <div><div class="ph-title">Projects</div><div class="ph-crumb"><a href="dashboard.html">Dashboard</a> › Projects</div></div>
+      </div>
+      <div class="ph-right">
+        <div class="ph-search"><span class="ph-search-icon">🔍</span><input type="text" placeholder="Search projects…"></div>
+        <div class="notif-wrapper"><div class="notif-badge-btn" id="notif-btn" onclick="toggleNotifPanel()">🔔<span id="notif-count"></span></div><div id="notif-panel"><div class="notif-panel-head"><h4>📧 Email Notifications</h4><button class="notif-panel-clear" onclick="document.getElementById('notif-list').innerHTML='<p style=color:var(--gray);font-size:.84rem;padding:1rem>Cleared.</p>';document.getElementById('notif-count').style.display='none'">Clear</button></div><div id="notif-list"><p style="color:var(--gray);font-size:.84rem;padding:1rem 1.2rem">No notifications yet.</p></div></div></div>
+        <a href="settings.html" class="ph-user"><div class="ph-user-avatar">JD</div><div class="ph-user-name">John D.</div></a>
+      </div>
+    </header>
+
+    <main class="portal-body">
+      <div class="page-title-row">
+        <div>
+          <h1>Active <span>Projects</span></h1>
+          <p>Track progress, milestones, and deliverables across all your TechNova engagements.</p>
+        </div>
+        <div class="page-actions">
+          <select class="filter-select" style="font-size:0.84rem">
+            <option>All Projects</option><option>In Progress</option><option>In Review</option><option>Completed</option>
+          </select>
+          <button class="btn btn-ghost btn-sm" onclick="showToast('Downloading project report…','info')">⬇ Export Report</button>
+        </div>
+      </div>
+
+      <!-- TABS -->
+      <div class="tabs" data-tabs-parent>
+        <button class="tab-btn active" data-tab="tab-cards">Project Cards</button>
+        <button class="tab-btn" data-tab="tab-milestones">Milestones</button>
+        <button class="tab-btn" data-tab="tab-timeline">Timeline</button>
+      </div>
+
+      <!-- TAB: CARDS -->
+      <div class="tab-pane active" id="tab-cards" data-tabs-parent>
+        <div class="project-cards">
+
+          <!-- Project 1 -->
+          <div class="proj-card">
+            <div class="proj-card-top cyan-bar">
+              <div class="proj-header">
+                <div class="proj-emoji" style="background:rgba(0,212,255,0.1)">🌐</div>
+                <div>
+                  <div class="proj-title">E-Commerce Platform Redesign</div>
+                  <div class="proj-client">TechNova Ref: TN-2025-082</div>
+                </div>
+                <span class="badge inprogress" style="margin-left:auto">In Progress</span>
+              </div>
+              <p class="proj-desc">Full redesign of RetailMax.co.uk including checkout optimisation, product catalogue rebuild, headless Shopify integration and performance tuning to achieve sub-2s load times.</p>
+              <div class="proj-stats-row">
+                <div class="proj-stat"><div class="proj-stat-val">68<span style="font-size:.8rem;color:var(--cyan)">%</span></div><div class="proj-stat-lbl">Complete</div></div>
+                <div class="proj-stat"><div class="proj-stat-val">4/6</div><div class="proj-stat-lbl">Sprints</div></div>
+                <div class="proj-stat"><div class="proj-stat-val">15 Mar</div><div class="proj-stat-lbl">Go-Live</div></div>
+              </div>
+              <div class="progress-meta"><span>Overall Progress</span><strong>68%</strong></div>
+              <div class="progress-bar"><div class="progress-fill" data-w="68" style="width:68%"></div></div>
+            </div>
+            <div class="proj-card-bottom">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <div class="proj-team">
+                  <div class="avatar-stack"><div class="av" title="Sarah M — PM">SM</div><div class="av" title="Tom R — Dev">TR</div><div class="av" title="Amy L — Design">AL</div><div class="av" title="+2 more" style="background:var(--border)">+2</div></div>
+                  <span class="proj-team-label">5 team members</span>
+                </div>
+                <div style="display:flex;gap:0.5rem">
+                  <button class="btn btn-ghost btn-sm" onclick="openModal('modal-proj1')">Details</button>
+                  <a href="messages.html" class="btn btn-primary btn-sm">Message PM</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div class="proj-card">
+            <div class="proj-card-top green-bar">
+              <div class="proj-header">
+                <div class="proj-emoji" style="background:rgba(74,222,128,0.1)">☁️</div>
+                <div>
+                  <div class="proj-title">Salesforce CRM Integration</div>
+                  <div class="proj-client">TechNova Ref: TN-2025-079</div>
+                </div>
+                <span class="badge review" style="margin-left:auto">In Review</span>
+              </div>
+              <p class="proj-desc">Full Salesforce Sales Cloud implementation with custom Apex triggers, product catalogue sync, order management integration, and reporting dashboards for the RetailMax sales team.</p>
+              <div class="proj-stats-row">
+                <div class="proj-stat"><div class="proj-stat-val">92<span style="font-size:.8rem;color:var(--green)">%</span></div><div class="proj-stat-lbl">Complete</div></div>
+                <div class="proj-stat"><div class="proj-stat-val">5/5</div><div class="proj-stat-lbl">Sprints</div></div>
+                <div class="proj-stat"><div class="proj-stat-val">28 Feb</div><div class="proj-stat-lbl">Go-Live</div></div>
+              </div>
+              <div class="progress-meta"><span>Overall Progress</span><strong>92%</strong></div>
+              <div class="progress-bar"><div class="progress-fill green" data-w="92" style="width:92%"></div></div>
+            </div>
+            <div class="proj-card-bottom">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <div class="proj-team">
+                  <div class="avatar-stack"><div class="av">SK</div><div class="av">LB</div><div class="av">+1</div></div>
+                  <span class="proj-team-label">3 team members</span>
+                </div>
+                <div style="display:flex;gap:0.5rem">
+                  <button class="btn btn-ghost btn-sm" onclick="openModal('modal-proj2')">Details</button>
+                  <a href="messages.html" class="btn btn-primary btn-sm">Message PM</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div class="proj-card">
+            <div class="proj-card-top purple-bar">
+              <div class="proj-header">
+                <div class="proj-emoji" style="background:rgba(167,139,250,0.1)">📱</div>
+                <div>
+                  <div class="proj-title">Mobile App — Phase 2</div>
+                  <div class="proj-client">TechNova Ref: TN-2026-001</div>
+                </div>
+                <span class="badge inprogress" style="margin-left:auto">In Progress</span>
+              </div>
+              <p class="proj-desc">Phase 2 of the RetailMax mobile app: loyalty programme, push notifications, AR product preview feature, Apple Pay/Google Pay integration, and React Native upgrade to v0.73.</p>
+              <div class="proj-stats-row">
+                <div class="proj-stat"><div class="proj-stat-val">12<span style="font-size:.8rem;color:var(--purple)">%</span></div><div class="proj-stat-lbl">Complete</div></div>
+                <div class="proj-stat"><div class="proj-stat-val">1/8</div><div class="proj-stat-lbl">Sprints</div></div>
+                <div class="proj-stat"><div class="proj-stat-val">30 Apr</div><div class="proj-stat-lbl">Go-Live</div></div>
+              </div>
+              <div class="progress-meta"><span>Overall Progress</span><strong>12%</strong></div>
+              <div class="progress-bar"><div class="progress-fill yellow" data-w="12" style="width:12%"></div></div>
+            </div>
+            <div class="proj-card-bottom">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <div class="proj-team">
+                  <div class="avatar-stack"><div class="av">RK</div><div class="av">MP</div><div class="av">JC</div><div class="av">+3</div></div>
+                  <span class="proj-team-label">6 team members</span>
+                </div>
+                <div style="display:flex;gap:0.5rem">
+                  <button class="btn btn-ghost btn-sm" onclick="openModal('modal-proj3')">Details</button>
+                  <a href="messages.html" class="btn btn-primary btn-sm">Message PM</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TAB: MILESTONES -->
+      <div class="tab-pane" id="tab-milestones">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.4rem">
+          <div class="panel">
+            <div class="panel-head"><h3>🌐 E-Commerce Redesign</h3><span class="badge inprogress">68%</span></div>
+            <div class="panel-body no-pad">
+              <div class="milestone-item"><div class="ms-check done">✓</div><div class="ms-label done-txt">Discovery & UX research</div><div class="ms-date">Jan 10</div></div>
+              <div class="milestone-item"><div class="ms-check done">✓</div><div class="ms-label done-txt">Wireframes approved</div><div class="ms-date">Jan 24</div></div>
+              <div class="milestone-item"><div class="ms-check done">✓</div><div class="ms-label done-txt">Design system delivered</div><div class="ms-date">Feb 7</div></div>
+              <div class="milestone-item"><div class="ms-check done">✓</div><div class="ms-label done-txt">Checkout redesign approved</div><div class="ms-date">Feb 21</div></div>
+              <div class="milestone-item"><div class="ms-check now">→</div><div class="ms-label">Product catalogue rebuild</div><div class="ms-date">Mar 7</div></div>
+              <div class="milestone-item"><div class="ms-check next">○</div><div class="ms-label">UAT & Go-live</div><div class="ms-date">Mar 15</div></div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><h3>☁️ Salesforce CRM</h3><span class="badge review">92%</span></div>
+            <div class="panel-body no-pad">
+              <div class="milestone-item"><div class="ms-check done">✓</div><div class="ms-label done-txt">CRM data mapping</div><div class="ms-date">Dec 5</div></div>
+              <div class="milestone-item"><div class="ms-check done">✓</div><div class="ms-label done-txt">Sales Cloud setup</div><div class="ms-date">Dec 19</div></div>
+              <div class="milestone-item"><div class="ms-check done">✓</div><div class="ms-label done-txt">Apex triggers & automation</div><div class="ms-date">Jan 16</div></div>
+              <div class="milestone-item"><div class="ms-check done">✓</div><div class="ms-label done-txt">Data migration & validation</div><div class="ms-date">Feb 10</div></div>
+              <div class="milestone-item"><div class="ms-check now">→</div><div class="ms-label">UAT sign-off</div><div class="ms-date">Feb 27</div></div>
+              <div class="milestone-item"><div class="ms-check next">○</div><div class="ms-label">Go-Live & handover</div><div class="ms-date">Feb 28</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: TIMELINE -->
+      <div class="tab-pane" id="tab-timeline">
+        <div class="panel"><div class="panel-body">
+          <div class="timeline">
+            <div class="tl-item"><div class="tl-dot done">✓</div><div class="tl-content"><div class="tl-title">E-Commerce — Checkout approved</div><div class="tl-meta">21 Feb 2026 · Milestone</div><div class="tl-body">Checkout redesign signed off by John Davidson. Positive feedback on the streamlined guest checkout and Apple Pay integration.</div></div></div>
+            <div class="tl-item"><div class="tl-dot done">✓</div><div class="tl-content"><div class="tl-title">CRM — Data migration validated</div><div class="tl-meta">10 Feb 2026 · Milestone</div><div class="tl-body">All 18,400 customer records migrated from legacy CRM to Salesforce Sales Cloud with 100% data integrity verified.</div></div></div>
+            <div class="tl-item"><div class="tl-dot done">✓</div><div class="tl-content"><div class="tl-title">Mobile App Phase 2 — Project kicked off</div><div class="tl-meta">3 Feb 2026 · Project Start</div><div class="tl-body">Discovery workshop completed. Technical specification agreed. Sprint 1 in progress covering loyalty programme architecture.</div></div></div>
+            <div class="tl-item"><div class="tl-dot now">→</div><div class="tl-content"><div class="tl-title">CRM — UAT in progress</div><div class="tl-meta">27 Feb 2026 · Now</div><div class="tl-body">User Acceptance Testing underway. 3 of 12 test scenarios remaining. Go-live planned for 28 February.</div></div></div>
+            <div class="tl-item"><div class="tl-dot next">○</div><div class="tl-content"><div class="tl-title">CRM — Go-Live</div><div class="tl-meta">28 Feb 2026 · Upcoming</div></div></div>
+            <div class="tl-item"><div class="tl-dot next">○</div><div class="tl-content"><div class="tl-title">E-Commerce — Product catalogue rebuild</div><div class="tl-meta">7 Mar 2026 · Upcoming</div></div></div>
+            <div class="tl-item"><div class="tl-dot next">○</div><div class="tl-content"><div class="tl-title">E-Commerce — UAT & Go-Live</div><div class="tl-meta">15 Mar 2026 · Upcoming</div></div></div>
+          </div>
+        </div></div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- MODAL: Project Detail -->
+<div class="modal-overlay" id="modal-proj1">
+  <div class="modal">
+    <div class="modal-head"><h3>🌐 E-Commerce Platform Redesign</h3><button class="modal-close" onclick="closeModal('modal-proj1')">✕</button></div>
+    <div class="modal-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.2rem">
+        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Project Ref</label><div style="color:var(--white);font-weight:600;margin-top:3px">TN-2025-082</div></div>
+        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Status</label><div style="margin-top:3px"><span class="badge inprogress">In Progress</span></div></div>
+        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Start Date</label><div style="color:var(--white);font-weight:600;margin-top:3px">10 Jan 2026</div></div>
+        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Go-Live</label><div style="color:var(--white);font-weight:600;margin-top:3px">15 Mar 2026</div></div>
+        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Budget</label><div style="color:var(--white);font-weight:600;margin-top:3px">£42,500</div></div>
+        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Project Manager</label><div style="color:var(--white);font-weight:600;margin-top:3px">Sarah Mitchell</div></div>
+      </div>
+      <div class="progress-meta"><span>Overall Progress</span><strong>68%</strong></div>
+      <div class="progress-bar" style="margin-bottom:1.2rem"><div class="progress-fill" style="width:68%"></div></div>
+      <p style="font-size:.86rem;color:var(--gray);line-height:1.7">Full redesign of RetailMax.co.uk including headless Shopify integration, checkout optimisation, Apple Pay/Google Pay, product catalogue rebuild, and Core Web Vitals performance improvements targeting sub-1.5s LCP.</p>
+    </div>
+    <div class="modal-foot"><button class="btn btn-ghost" onclick="closeModal('modal-proj1')">Close</button><a href="messages.html" class="btn btn-primary">Message Project Team</a></div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-proj2">
+  <div class="modal">
+    <div class="modal-head"><h3>☁️ Salesforce CRM Integration</h3><button class="modal-close" onclick="closeModal('modal-proj2')">✕</button></div>
+    <div class="modal-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.2rem">
+        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Project Ref</label><div style="color:var(--white);font-weight:600;margin-top:3px">TN-2025-079</div></div>
+        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Status</label><div style="margin-top:3px"><span class="badge review">In Review</span></div></div>
+        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Go-Live</label><div style="color:var(--white);font-weight:600;margin-top:3px">28 Feb 2026</div></div>
+        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Budget</label><div style="color:var(--white);font-weight:600;margin-top:3px">£28,000</div></div>
+      </div>
+      <div class="progress-meta"><span>Overall Progress</span><strong>92%</strong></div>
+      <div class="progress-bar" style="margin-bottom:1.2rem"><div class="progress-fill green" style="width:92%"></div></div>
+      <p style="font-size:.86rem;color:var(--gray);line-height:1.7">Full Salesforce Sales Cloud implementation with custom Apex triggers, product catalogue sync, order management integration, and executive reporting dashboards. UAT sign-off expected today.</p>
+    </div>
+    <div class="modal-foot"><button class="btn btn-ghost" onclick="closeModal('modal-proj2')">Close</button><a href="messages.html" class="btn btn-primary">Message Project Team</a></div>
+  </div>
+</div>
+<div class="modal-overlay" id="modal-proj3">
+  <div class="modal">
+    <div class="modal-head"><h3>📱 Mobile App — Phase 2</h3><button class="modal-close" onclick="closeModal('modal-proj3')">✕</button></div>
+    <div class="modal-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.2rem">
+        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Project Ref</label><div style="color:var(--white);font-weight:600;margin-top:3px">TN-2026-001</div></div>
+        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Status</label><div style="margin-top:3px"><span class="badge inprogress">In Progress</span></div></div>
+        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Go-Live</label><div style="color:var(--white);font-weight:600;margin-top:3px">30 Apr 2026</div></div>
+        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Budget</label><div style="color:var(--white);font-weight:600;margin-top:3px">£55,000</div></div>
+      </div>
+      <div class="progress-meta"><span>Overall Progress</span><strong>12%</strong></div>
+      <div class="progress-bar" style="margin-bottom:1.2rem"><div class="progress-fill yellow" style="width:12%"></div></div>
+      <p style="font-size:.86rem;color:var(--gray);line-height:1.7">Phase 2 of the RetailMax mobile app covering loyalty programme, push notifications, AR product preview, Apple Pay/Google Pay, and React Native 0.73 upgrade. Sprint 1 currently in progress.</p>
+    </div>
+    <div class="modal-foot"><button class="btn btn-ghost" onclick="closeModal('modal-proj3')">Close</button><a href="messages.html" class="btn btn-primary">Message Project Team</a></div>
+  </div>
+</div>
+
+<script src="../js/portal.js"></script>
+</body>
+</html>

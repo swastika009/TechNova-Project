@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Services – TechNova Ltd | Enterprise IT Solutions</title>
+<meta name="description" content="TechNova Ltd enterprise services — custom web development, Salesforce CRM, cloud & DevOps, mobile apps, cybersecurity, UI/UX and e-commerce.">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+/* ══ SERVICE ALTERNATING LAYOUT ═══════════════════════════ */
+.svc-section { padding:90px 0; border-bottom:1px solid var(--border); scroll-margin-top:90px; }
+.svc-section:nth-child(odd)  { background:var(--navy3); }
+.svc-section:nth-child(even) { background:var(--navy);  }
+.svc-layout { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+.svc-layout.flip { direction:rtl; }
+.svc-layout.flip > * { direction:ltr; }
+
+.svc-num { display:inline-flex; align-items:center; gap:10px; font-family:var(--font-h); font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--cyan); margin-bottom:.9rem; }
+.svc-num::before { content:''; width:28px; height:2px; background:var(--cyan); display:block; }
+.svc-title { font-family:var(--font-h); font-size:clamp(1.8rem,3vw,2.5rem); font-weight:800; color:var(--white); margin-bottom:1.1rem; line-height:1.15; }
+.svc-title span { color:var(--cyan); }
+.svc-body { font-size:.95rem; color:var(--gray); line-height:1.82; margin-bottom:1.6rem; }
+
+.feat-list { list-style:none; margin-bottom:1.8rem; }
+.feat-list li { display:flex; align-items:flex-start; gap:12px; padding:9px 0; border-bottom:1px solid var(--border); font-size:.9rem; color:var(--text); }
+.feat-list li:last-child { border-bottom:none; }
+.feat-list li .ck { color:var(--cyan); font-weight:700; flex-shrink:0; margin-top:1px; }
+
+.tag-row { display:flex; flex-wrap:wrap; gap:.45rem; margin-bottom:2rem; }
+
+/* ── Metric card ───────────────────────── */
+.mc { background:var(--card); border:1px solid var(--border); border-radius:var(--r); padding:2rem; position:relative; overflow:hidden; }
+.mc::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--cyan2),var(--cyan)); }
+.mc-grid { display:grid; grid-template-columns:1fr 1fr; gap:.9rem; margin-top:1.1rem; }
+.mc-box { background:var(--navy3); border-radius:10px; padding:1.1rem; text-align:center; border:1px solid var(--border); }
+.mc-val { font-family:var(--font-h); font-size:1.9rem; font-weight:800; color:var(--white); }
+.mc-val em { color:var(--cyan); font-size:1.1rem; font-style:normal; }
+.mc-lbl { font-size:.71rem; color:var(--gray); margin-top:3px; }
+
+.bar-item { margin-bottom:.9rem; }
+.bar-lbl { display:flex; justify-content:space-between; font-size:.79rem; color:var(--text); margin-bottom:5px; }
+.bar-lbl strong { color:var(--cyan); font-family:var(--font-h); }
+.bar-track { height:6px; background:var(--border); border-radius:6px; overflow:hidden; }
+.bar-fill  { height:100%; background:linear-gradient(90deg,var(--cyan2),var(--cyan)); border-radius:6px; }
+
+.row-item { display:flex; align-items:center; gap:12px; padding:10px 14px; background:var(--navy3); border-radius:9px; margin-bottom:8px; font-size:.87rem; color:var(--text); }
+.row-item:last-child { margin-bottom:0; }
+
+/* ══ VIDEO SHOWCASE ════════════════════════════════════════ */
+#svc-videos {
+  background: var(--navy4);
+  padding: 110px 0;
+  position: relative;
+}
+#svc-videos::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 60% 60% at 50% 50%, rgba(0,212,255,0.055) 0%, transparent 70%);
+  pointer-events:none;
+}
+
+.videos-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:1.8rem;
+  margin-top:3.5rem;
+}
+
+/* ─ Video card ─────────────────────────── */
+.vcard {
+  background:var(--card); border:1px solid var(--border); border-radius:16px;
+  overflow:hidden; transition:transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+  display:flex; flex-direction:column;
+}
+.vcard:hover { transform:translateY(-8px); border-color:rgba(0,212,255,.35); box-shadow:0 24px 48px rgba(0,0,0,.45); }
+
+/* 16:9 wrapper */
+.vthumb {
+  position:relative; width:100%; padding-top:56.25%;
+  background:var(--navy3); overflow:hidden; flex-shrink:0;
+}
+.vthumb video {
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; display:block;
+}
+
+/* Branded placeholder shown until video loads */
+.vplaceholder {
+  position:absolute; inset:0; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:12px;
+  background:linear-gradient(135deg, var(--navy2) 0%, var(--navy3) 100%);
+  transition:opacity .4s; pointer-events:none; z-index:1;
+}
+.vthumb.loaded .vplaceholder { opacity:0; }
+.vp-ring {
+  width:60px; height:60px; border-radius:50%;
+  background:rgba(0,212,255,.12); border:2px solid rgba(0,212,255,.35);
+  display:flex; align-items:center; justify-content:center; font-size:1.5rem;
+  animation:pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100%{ box-shadow:0 0 0 0 rgba(0,212,255,.35); }
+  50%     { box-shadow:0 0 0 14px rgba(0,212,255,0); }
+}
+.vp-name { font-family:var(--font-h); font-size:.8rem; font-weight:700; color:var(--cyan); letter-spacing:1.5px; text-transform:uppercase; }
+.vp-hint { font-size:.72rem; color:var(--gray); opacity:.75; }
+
+/* Play/pause overlay */
+.voverlay {
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  background:rgba(5,15,36,.5); opacity:0; transition:opacity .28s; z-index:2;
+}
+.vcard:hover .voverlay { opacity:1; }
+.vbtn {
+  width:54px; height:54px; border-radius:50%; background:var(--cyan);
+  border:none; display:flex; align-items:center; justify-content:center;
+  font-size:1.1rem; color:var(--navy); font-weight:900;
+  cursor:pointer; transform:scale(.85); transition:transform .22s;
+}
+.vcard:hover .vbtn { transform:scale(1); }
+
+/* Bottom muted badge */
+.vmuted {
+  position:absolute; bottom:10px; right:10px; z-index:3;
+  background:rgba(5,15,36,.75); border:1px solid var(--border);
+  border-radius:50px; padding:3px 10px;
+  font-size:.68rem; color:var(--gray); font-family:var(--font-h); letter-spacing:.5px;
+}
+
+/* Video card body */
+.vbody { padding:1.5rem; flex:1; display:flex; flex-direction:column; }
+.vtag {
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(0,212,255,.1); border:1px solid rgba(0,212,255,.25);
+  color:var(--cyan); font-size:.71rem; font-weight:700;
+  padding:4px 12px; border-radius:50px; letter-spacing:.5px; margin-bottom:.75rem; width:fit-content;
+}
+.vtag::before { content:'▶'; font-size:.58rem; }
+.vtitle { font-family:var(--font-h); font-size:1.05rem; font-weight:700; color:var(--white); margin-bottom:.55rem; }
+.vdesc  { font-size:.86rem; color:var(--gray); line-height:1.72; margin-bottom:1rem; flex:1; }
+.vchips { display:flex; flex-wrap:wrap; gap:.4rem; }
+.vchip  { font-size:.73rem; padding:3px 10px; border-radius:50px; background:var(--navy3); border:1px solid var(--border); color:var(--text); }
+
+/* Upload hint (only visible in dev via browser console) */
+.upload-note { display:none; }
+
+/* ══ MISC RESPONSIVE ════════════════════════════════════ */
+@media(max-width:1024px){
+  .svc-layout, .svc-layout.flip { grid-template-columns:1fr; direction:ltr; gap:2.5rem; }
+  .videos-grid { grid-template-columns:1fr; }
+}
+@media(max-width:600px){ .mc-grid { grid-template-columns:1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- ── NAVBAR ─────────────────────────── -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <img src="../assets/logo-transparent.png" alt="TechNova Ltd" class="logo-img" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li class="nav-dd">
+        <a href="services.html" class="active">Services ▾</a>
+        <div class="dd-menu">
+          <a href="services.html#web"><span>🌐</span>Web Development</a>
+          <a href="services.html#enterprise"><span>🏢</span>Enterprise Software</a>
+          <a href="services.html#mobile"><span>📱</span>Mobile Apps</a>
+          <a href="services.html#salesforce"><span>☁️</span>Salesforce CRM</a>
+          <a href="services.html#cloud"><span>🔧</span>Cloud & DevOps</a>
+          <a href="services.html#uiux"><span>🎨</span>UI/UX Design</a>
+          <a href="services.html#ecom"><span>🛒</span>E-Commerce</a>
+          <a href="services.html#cyber"><span>🔐</span>Cybersecurity</a>
+        </div>
+      </li>
+      <li><a href="industries.html">Industries</a></li>
+      <li><a href="case_studies.html">Case Studies</a></li>
+      <li><a href="careers.html">Careers</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="contact.html" class="btn btn-primary">Get a Consultation</a>
+    </div>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div id="mob-menu">
+  <a href="../index.html" class="mob-link">Home</a>
+  <a href="about.html" class="mob-link">About</a>
+  <a href="services.html" class="mob-link">Services</a>
+  <a href="industries.html" class="mob-link">Industries</a>
+  <a href="case_studies.html" class="mob-link">Case Studies</a>
+  <a href="careers.html" class="mob-link">Careers</a>
+  <a href="contact.html" class="mob-link">Contact</a>
+  <a href="contact.html" class="btn btn-primary">Get a Consultation</a>
+</div>
+
+<!-- ══ PAGE HERO ══════════════════════════════════════════ -->
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-grid"></div>
+  <div class="container page-hero-content">
+    <div class="breadcrumb"><a href="../index.html">Home</a><span>›</span><span>Services</span></div>
+    <div class="label">What We Build</div>
+    <h1>Enterprise-Grade Services<br><span>Built for Scale</span></h1>
+    <p class="lead">From custom web and mobile applications to Salesforce CRM, cloud migration and cybersecurity — end-to-end digital solutions engineered for lasting performance.</p>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:.5rem">
+      <a href="#svc-videos" class="btn btn-primary btn-lg">▶&nbsp; Watch Service Videos</a>
+      <a href="contact.html" class="btn btn-ghost btn-lg">Discuss Your Project →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     🎬  SERVICE VIDEOS SHOWCASE
+     ══════════════════════════════════════════════════════════
+     HOW TO ADD YOUR VIDEOS:
+     Place your video files in:  assets/videos/
+       ▸ web-development.mp4         (Video 1 — Web)
+       ▸ app-development.mp4         (Video 2 — Mobile/App)
+       ▸ salesforce-solutions.mp4    (Video 3 — Salesforce/CRM)
+     They auto-play muted on desktop and pause/play on button click.
+══════════════════════════════════════════════════════════ -->
+<section id="svc-videos">
+  <div class="container">
+
+    <!-- Header -->
+    <div style="text-align:center" class="reveal">
+      <div class="label" style="justify-content:center">Featured Services</div>
+      <h2 class="h2" style="margin-bottom:1rem">See Our <span>Expertise in Action</span></h2>
+      <p class="lead" style="max-width:600px;margin:0 auto">Watch how TechNova delivers enterprise-grade solutions across our three flagship service areas.</p>
+    </div>
+
+    <!-- 3-column video grid -->
+    <div class="videos-grid">
+
+      <!-- ▸ VIDEO 1 — Web Development ──────────────────── -->
+      <div class="vcard reveal" id="vc1">
+        <div class="vthumb" id="vt1">
+
+          <video id="v1"
+            src="../assets/service1.mp4"
+            muted loop playsinline preload="metadata"
+            oncanplay="vidReady('vt1')"
+            onerror="vidError('vt1')">
+          </video>
+
+          <!-- Branded placeholder (shown until video loads) -->
+          <div class="vplaceholder" id="vp1">
+            <div class="vp-ring">🌐</div>
+            <div class="vp-name">Web Development</div>
+            <div class="vp-hint">web-development.mp4</div>
+          </div>
+
+          <!-- Play / pause overlay -->
+          <div class="voverlay">
+            <button class="vbtn" id="vbtn1" onclick="toggleVid('v1','vbtn1')" aria-label="Play/Pause">▶</button>
+          </div>
+
+          <div class="vmuted" id="vmute1">🔇 muted</div>
+        </div>
+
+        <div class="vbody">
+          <div class="vtag">Service Showcase</div>
+          <div class="vtitle">Custom Web Development</div>
+          <div class="vdesc">See how TechNova architects and ships high-performance web applications with React, Next.js, .NET and Node.js — from first wireframe to live production.</div>
+          <div class="vchips">
+            <span class="vchip">React & Next.js</span>
+            <span class="vchip">Node.js / .NET</span>
+            <span class="vchip">Performance First</span>
+            <span class="vchip">SEO Optimised</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ▸ VIDEO 2 — App Development ─────────────────── -->
+      <div class="vcard reveal d1" id="vc2">
+        <div class="vthumb" id="vt2">
+
+          <video id="v2"
+            src="../assets/service2.mp4"
+            muted loop playsinline preload="metadata"
+            oncanplay="vidReady('vt2')"
+            onerror="vidError('vt2')">
+          </video>
+
+          <div class="vplaceholder" id="vp2">
+            <div class="vp-ring">📱</div>
+            <div class="vp-name">App Development</div>
+            <div class="vp-hint">app-development.mp4</div>
+          </div>
+
+          <div class="voverlay">
+            <button class="vbtn" id="vbtn2" onclick="toggleVid('v2','vbtn2')" aria-label="Play/Pause">▶</button>
+          </div>
+
+          <div class="vmuted" id="vmute2">🔇 muted</div>
+        </div>
+
+        <div class="vbody">
+          <div class="vtag">Service Showcase</div>
+          <div class="vtitle">Mobile App Development</div>
+          <div class="vdesc">Native-grade iOS & Android apps built with React Native and Flutter. Cross-platform efficiency with beautiful, offline-capable user experiences.</div>
+          <div class="vchips">
+            <span class="vchip">React Native</span>
+            <span class="vchip">Flutter</span>
+            <span class="vchip">iOS & Android</span>
+            <span class="vchip">Offline-First</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ▸ VIDEO 3 — Salesforce / CRM ────────────────── -->
+      <div class="vcard reveal d2" id="vc3">
+        <div class="vthumb" id="vt3">
+
+          <video id="v3"
+            src="../assets/service3.mp4"
+            muted loop playsinline preload="metadata"
+            oncanplay="vidReady('vt3')"
+            onerror="vidError('vt3')">
+          </video>
+
+          <div class="vplaceholder" id="vp3">
+            <div class="vp-ring">☁️</div>
+            <div class="vp-name">Salesforce CRM</div>
+            <div class="vp-hint">salesforce-solutions.mp4</div>
+          </div>
+
+          <div class="voverlay">
+            <button class="vbtn" id="vbtn3" onclick="toggleVid('v3','vbtn3')" aria-label="Play/Pause">▶</button>
+          </div>
+
+          <div class="vmuted" id="vmute3">🔇 muted</div>
+        </div>
+
+        <div class="vbody">
+          <div class="vtag">Service Showcase</div>
+          <div class="vtitle">Salesforce Consulting & CRM</div>
+          <div class="vdesc">Certified Salesforce implementations — Sales Cloud, Service Cloud, custom Apex & CRM automation that accelerates pipelines and improves client retention.</div>
+          <div class="vchips">
+            <span class="vchip">Sales Cloud</span>
+            <span class="vchip">Service Cloud</span>
+            <span class="vchip">Apex & LWC</span>
+            <span class="vchip">CRM Automation</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.videos-grid -->
+
+    <p style="text-align:center;font-size:.8rem;color:var(--gray);opacity:.65;margin-top:1.8rem">
+      🔇 Videos autoplay muted on desktop &nbsp;·&nbsp; Tap the play button to control playback on mobile.
+    </p>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     INDIVIDUAL SERVICE SECTIONS
+══════════════════════════════════════════════════════════ -->
+
+<!-- 01 — WEB DEVELOPMENT ─────────────────────────────────── -->
+<section class="svc-section" id="web">
+  <div class="container">
+    <div class="svc-layout">
+      <div class="reveal">
+        <div class="svc-num">Service 01</div>
+        <h2 class="svc-title">Custom <span>Web Development</span></h2>
+        <p class="svc-body">Tailored web applications built with React, Angular, Next.js, .NET and Node.js. We architect for performance, SEO, and seamless UX from day one — mobile-first and accessibility-compliant by default.</p>
+        <ul class="feat-list">
+          <li><span class="ck">✓</span>React, Angular & Next.js frontend engineering</li>
+          <li><span class="ck">✓</span>Node.js, .NET & Python backend APIs</li>
+          <li><span class="ck">✓</span>Progressive Web Apps with offline support</li>
+          <li><span class="ck">✓</span>CMS integration — Contentful, Sanity, WordPress</li>
+          <li><span class="ck">✓</span>Core Web Vitals optimisation & performance audits</li>
+          <li><span class="ck">✓</span>WCAG 2.1 AA accessibility compliance</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag tag-cyan">React</span><span class="tag tag-cyan">Next.js</span><span class="tag tag-cyan">Angular</span><span class="tag tag-cyan">Node.js</span><span class="tag tag-cyan">.NET</span><span class="tag tag-cyan">TypeScript</span>
+        </div>
+        <a href="contact.html" class="btn btn-primary">Start a Web Project →</a>
+      </div>
+      <div class="reveal d2">
+        <div class="mc">
+          <div style="font-size:2.2rem;margin-bottom:.8rem">🌐</div>
+          <h4 style="color:var(--white);font-family:var(--font-h);margin-bottom:1rem">Delivery Benchmarks</h4>
+          <div class="mc-grid">
+            <div class="mc-box"><div class="mc-val">98<em>%</em></div><div class="mc-lbl">Lighthouse Score</div></div>
+            <div class="mc-box"><div class="mc-val">&lt;1<em>s</em></div><div class="mc-lbl">Avg Load Time</div></div>
+            <div class="mc-box"><div class="mc-val">A<em>+</em></div><div class="mc-lbl">Security Rating</div></div>
+            <div class="mc-box"><div class="mc-val">100<em>%</em></div><div class="mc-lbl">Responsive</div></div>
+          </div>
+          <div style="margin-top:1.2rem">
+            <div class="bar-item"><div class="bar-lbl"><span>Client Satisfaction</span><strong>98%</strong></div><div class="bar-track"><div class="bar-fill" style="width:98%"></div></div></div>
+            <div class="bar-item"><div class="bar-lbl"><span>On-Time Delivery</span><strong>94%</strong></div><div class="bar-track"><div class="bar-fill" style="width:94%"></div></div></div>
+            <div class="bar-item" style="margin-bottom:0"><div class="bar-lbl"><span>Performance Score</span><strong>97%</strong></div><div class="bar-track"><div class="bar-fill" style="width:97%"></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 — ENTERPRISE SOFTWARE ─────────────────────────────── -->
+<section class="svc-section" id="enterprise">
+  <div class="container">
+    <div class="svc-layout flip">
+      <div class="reveal">
+        <div class="svc-num">Service 02</div>
+        <h2 class="svc-title">Enterprise <span>Software Development</span></h2>
+        <p class="svc-body">End-to-end enterprise systems engineered to automate operations, integrate workflows, and drive measurable performance at scale — from legacy modernisation to greenfield SaaS platforms.</p>
+        <ul class="feat-list">
+          <li><span class="ck">✓</span>Bespoke ERP and workflow automation</li>
+          <li><span class="ck">✓</span>Microservices & event-driven architecture</li>
+          <li><span class="ck">✓</span>Legacy system modernisation & migration</li>
+          <li><span class="ck">✓</span>Real-time data processing pipelines</li>
+          <li><span class="ck">✓</span>Multi-tenant SaaS platform development</li>
+          <li><span class="ck">✓</span>Enterprise API gateway & middleware</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag tag-cyan">.NET</span><span class="tag tag-cyan">Python</span><span class="tag tag-cyan">Java</span><span class="tag tag-cyan">Microservices</span><span class="tag tag-cyan">Kafka</span>
+        </div>
+        <a href="contact.html" class="btn btn-primary">Build Enterprise Software →</a>
+      </div>
+      <div class="reveal d2">
+        <div class="mc">
+          <div style="font-size:2.2rem;margin-bottom:.8rem">🏢</div>
+          <h4 style="color:var(--white);font-family:var(--font-h);margin-bottom:1rem">Agile Delivery Process</h4>
+          <div class="row-item"><div class="step-num" style="width:28px;height:28px;font-size:.78rem;flex-shrink:0">1</div>Discovery &amp; Requirements Analysis</div>
+          <div class="row-item"><div class="step-num" style="width:28px;height:28px;font-size:.78rem;flex-shrink:0">2</div>Architecture Design &amp; Tech Selection</div>
+          <div class="row-item"><div class="step-num" style="width:28px;height:28px;font-size:.78rem;flex-shrink:0">3</div>Agile Development — 2-week sprints</div>
+          <div class="row-item"><div class="step-num" style="width:28px;height:28px;font-size:.78rem;flex-shrink:0">4</div>QA Testing, Security Audit &amp; UAT</div>
+          <div class="row-item"><div class="step-num" style="width:28px;height:28px;font-size:.78rem;flex-shrink:0">5</div>CI/CD Deployment &amp; Monitoring</div>
+          <div class="row-item"><div class="step-num" style="width:28px;height:28px;font-size:.78rem;flex-shrink:0">6</div>Post-Launch Support &amp; Optimisation</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 — MOBILE APPS ─────────────────────────────────────── -->
+<section class="svc-section" id="mobile">
+  <div class="container">
+    <div class="svc-layout">
+      <div class="reveal">
+        <div class="svc-num">Service 03</div>
+        <h2 class="svc-title">Mobile App <span>Development</span></h2>
+        <p class="svc-body">High-quality iOS and Android applications with React Native and Flutter. Native-grade performance meets cross-platform efficiency — UX-first design your users will love from their very first tap.</p>
+        <ul class="feat-list">
+          <li><span class="ck">✓</span>React Native & Flutter cross-platform apps</li>
+          <li><span class="ck">✓</span>Native iOS (Swift) & Android (Kotlin) builds</li>
+          <li><span class="ck">✓</span>Offline-first architecture with smart sync</li>
+          <li><span class="ck">✓</span>Push notifications, deep links & real-time features</li>
+          <li><span class="ck">✓</span>App Store & Google Play publishing</li>
+          <li><span class="ck">✓</span>Biometrics, payments & third-party integrations</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag tag-cyan">React Native</span><span class="tag tag-cyan">Flutter</span><span class="tag tag-cyan">Swift</span><span class="tag tag-cyan">Kotlin</span><span class="tag tag-cyan">Firebase</span>
+        </div>
+        <a href="contact.html" class="btn btn-primary">Build Your App →</a>
+      </div>
+      <div class="reveal d2">
+        <div class="mc">
+          <div style="font-size:2.2rem;margin-bottom:.8rem">📱</div>
+          <h4 style="color:var(--white);font-family:var(--font-h);margin-bottom:1rem">Mobile Delivery Results</h4>
+          <div class="mc-grid">
+            <div class="mc-box"><div class="mc-val">70<em>%</em></div><div class="mc-lbl">Adoption Q1</div></div>
+            <div class="mc-box"><div class="mc-box-inner"><div class="mc-val" style="font-size:1.6rem">4.9<em style="color:#FFB830;font-size:.9rem">★</em></div><div class="mc-lbl">App Store Rating</div></div></div>
+            <div class="mc-box"><div class="mc-val" style="font-size:1.3rem">iOS<em style="font-size:.85rem"> + </em>And</div><div class="mc-lbl">Dual Platform</div></div>
+            <div class="mc-box"><div class="mc-val">&lt;2<em>s</em></div><div class="mc-lbl">App Load Time</div></div>
+          </div>
+          <div style="margin-top:1.2rem">
+            <div class="bar-item"><div class="bar-lbl"><span>Cross-platform coverage</span><strong>100%</strong></div><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div>
+            <div class="bar-item" style="margin-bottom:0"><div class="bar-lbl"><span>Crash-free session rate</span><strong>99.7%</strong></div><div class="bar-track"><div class="bar-fill" style="width:99.7%"></div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 — SALESFORCE CRM ──────────────────────────────────── -->
+<section class="svc-section" id="salesforce">
+  <div class="container">
+    <div class="svc-layout flip">
+      <div class="reveal">
+        <div class="svc-num">Service 04</div>
+        <h2 class="svc-title">Salesforce <span>Consulting & CRM</span></h2>
+        <p class="svc-body">Certified Salesforce consultants delivering Sales Cloud, Service Cloud, Marketing Cloud, and bespoke CRM automation to accelerate pipelines, improve response times, and give teams full visibility.</p>
+        <ul class="feat-list">
+          <li><span class="ck">✓</span>Sales Cloud, Service Cloud & Experience Cloud</li>
+          <li><span class="ck">✓</span>Marketing Cloud & Pardot automation</li>
+          <li><span class="ck">✓</span>Custom Apex & Lightning Web Components (LWC)</li>
+          <li><span class="ck">✓</span>Data migration, cleansing & deduplication</li>
+          <li><span class="ck">✓</span>ERP, marketing & finance integrations</li>
+          <li><span class="ck">✓</span>Ongoing admin, training & support retainers</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag tag-cyan">Salesforce</span><span class="tag tag-cyan">Sales Cloud</span><span class="tag tag-cyan">Apex</span><span class="tag tag-cyan">LWC</span><span class="tag tag-cyan">Pardot</span>
+        </div>
+        <a href="contact.html" class="btn btn-primary">Discuss CRM Strategy →</a>
+      </div>
+      <div class="reveal d2">
+        <div class="mc">
+          <div style="font-size:2.2rem;margin-bottom:.8rem">☁️</div>
+          <h4 style="color:var(--white);font-family:var(--font-h);margin-bottom:1rem">CRM Impact Delivered</h4>
+          <div class="bar-item"><div class="bar-lbl"><span>Lead Conversion Rate Increase</span><strong>+33%</strong></div><div class="bar-track"><div class="bar-fill" style="width:83%"></div></div></div>
+          <div class="bar-item"><div class="bar-lbl"><span>Faster Client Response Time</span><strong>−35%</strong></div><div class="bar-track"><div class="bar-fill" style="width:65%"></div></div></div>
+          <div class="bar-item"><div class="bar-lbl"><span>Pipeline Visibility Improvement</span><strong>+90%</strong></div><div class="bar-track"><div class="bar-fill" style="width:90%"></div></div></div>
+          <div class="bar-item" style="margin-bottom:0"><div class="bar-lbl"><span>Manual Process Reduction</span><strong>−60%</strong></div><div class="bar-track"><div class="bar-fill" style="width:60%"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 — CLOUD & DEVOPS ──────────────────────────────────── -->
+<section class="svc-section" id="cloud">
+  <div class="container">
+    <div class="svc-layout">
+      <div class="reveal">
+        <div class="svc-num">Service 05</div>
+        <h2 class="svc-title">Cloud Architecture <span>& DevOps</span></h2>
+        <p class="svc-body">AWS and Azure architecture, zero-downtime migrations, and CI/CD pipeline automation for resilient, cost-effective operations. Container orchestration and infrastructure-as-code at enterprise scale.</p>
+        <ul class="feat-list">
+          <li><span class="ck">✓</span>AWS & Azure cloud architecture & migration</li>
+          <li><span class="ck">✓</span>Docker, Kubernetes & container orchestration</li>
+          <li><span class="ck">✓</span>CI/CD — GitHub Actions, Jenkins, GitLab CI</li>
+          <li><span class="ck">✓</span>Infrastructure as Code — Terraform, CloudFormation</li>
+          <li><span class="ck">✓</span>SRE, observability & real-time monitoring</li>
+          <li><span class="ck">✓</span>FinOps cost optimisation strategy</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag tag-cyan">AWS</span><span class="tag tag-cyan">Azure</span><span class="tag tag-cyan">Docker</span><span class="tag tag-cyan">Kubernetes</span><span class="tag tag-cyan">Terraform</span>
+        </div>
+        <a href="contact.html" class="btn btn-primary">Plan Your Cloud Migration →</a>
+      </div>
+      <div class="reveal d2">
+        <div class="mc">
+          <div style="font-size:2.2rem;margin-bottom:.8rem">🔧</div>
+          <h4 style="color:var(--white);font-family:var(--font-h);margin-bottom:1rem">Cloud Migration Outcomes</h4>
+          <div class="mc-grid">
+            <div class="mc-box"><div class="mc-val">28<em>%</em></div><div class="mc-lbl">Cost Reduction</div></div>
+            <div class="mc-box"><div class="mc-val">99.9<em>%</em></div><div class="mc-lbl">Uptime SLA</div></div>
+            <div class="mc-box"><div class="mc-val">0</div><div class="mc-lbl">Downtime Migrations</div></div>
+            <div class="mc-box"><div class="mc-val">10<em>×</em></div><div class="mc-lbl">Deploy Frequency</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 — UI/UX DESIGN ────────────────────────────────────── -->
+<section class="svc-section" id="uiux">
+  <div class="container">
+    <div class="svc-layout flip">
+      <div class="reveal">
+        <div class="svc-num">Service 06</div>
+        <h2 class="svc-title">UI/UX Strategy <span>& Product Design</span></h2>
+        <p class="svc-body">Human-centred design combining user research, information architecture, prototyping, and pixel-perfect visual execution. Products users genuinely love — intuitive, accessible, and conversion-optimised.</p>
+        <ul class="feat-list">
+          <li><span class="ck">✓</span>User research, personas & journey mapping</li>
+          <li><span class="ck">✓</span>Information architecture & wireframing</li>
+          <li><span class="ck">✓</span>High-fidelity Figma prototyping</li>
+          <li><span class="ck">✓</span>Design systems & component libraries</li>
+          <li><span class="ck">✓</span>CRO & A/B testing</li>
+          <li><span class="ck">✓</span>WCAG 2.1 AA accessibility compliance</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag tag-cyan">Figma</span><span class="tag tag-cyan">Design Systems</span><span class="tag tag-cyan">Prototyping</span><span class="tag tag-cyan">CRO</span>
+        </div>
+        <a href="contact.html" class="btn btn-primary">Start Your Design Project →</a>
+      </div>
+      <div class="reveal d2">
+        <div class="mc">
+          <div style="font-size:2.2rem;margin-bottom:.8rem">🎨</div>
+          <h4 style="color:var(--white);font-family:var(--font-h);margin-bottom:1rem">Design-Driven Results</h4>
+          <div class="row-item" style="justify-content:space-between">Conversion Rate Uplift<strong style="color:var(--cyan);font-family:var(--font-h)">+42%</strong></div>
+          <div class="row-item" style="justify-content:space-between">Bounce Rate Reduction<strong style="color:var(--cyan);font-family:var(--font-h)">−38%</strong></div>
+          <div class="row-item" style="justify-content:space-between">User Satisfaction Score<strong style="color:var(--cyan);font-family:var(--font-h)">4.8 / 5</strong></div>
+          <div class="row-item" style="justify-content:space-between">Task Completion Rate<strong style="color:var(--cyan);font-family:var(--font-h)">+55%</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 — E-COMMERCE ──────────────────────────────────────── -->
+<section class="svc-section" id="ecom">
+  <div class="container">
+    <div class="svc-layout">
+      <div class="reveal">
+        <div class="svc-num">Service 07</div>
+        <h2 class="svc-title">E-Commerce <span>Development</span></h2>
+        <p class="svc-body">Custom storefronts and headless e-commerce on Shopify, WooCommerce, and Magento — built for conversions, speed, and seamless customer journeys from first click to final checkout.</p>
+        <ul class="feat-list">
+          <li><span class="ck">✓</span>Custom Shopify, WooCommerce & Magento builds</li>
+          <li><span class="ck">✓</span>Headless e-commerce with Next.js</li>
+          <li><span class="ck">✓</span>Stripe, PayPal, Klarna gateway integrations</li>
+          <li><span class="ck">✓</span>Inventory & order management systems</li>
+          <li><span class="ck">✓</span>Multi-currency, multi-language & tax automation</li>
+          <li><span class="ck">✓</span>Checkout UX optimisation & CRO</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag tag-cyan">Shopify</span><span class="tag tag-cyan">WooCommerce</span><span class="tag tag-cyan">Headless</span><span class="tag tag-cyan">Stripe</span>
+        </div>
+        <a href="contact.html" class="btn btn-primary">Build Your Store →</a>
+      </div>
+      <div class="reveal d2">
+        <div class="mc">
+          <div style="font-size:2.2rem;margin-bottom:.8rem">🛒</div>
+          <h4 style="color:var(--white);font-family:var(--font-h);margin-bottom:1rem">E-Commerce Client Results</h4>
+          <div class="mc-grid">
+            <div class="mc-box"><div class="mc-val">45<em>%</em></div><div class="mc-lbl">Revenue Growth</div></div>
+            <div class="mc-box"><div class="mc-val">1M<em>+</em></div><div class="mc-lbl">Monthly Traffic</div></div>
+            <div class="mc-box"><div class="mc-val">3.2<em>×</em></div><div class="mc-lbl">Conversion Lift</div></div>
+            <div class="mc-box"><div class="mc-val">&lt;2<em>s</em></div><div class="mc-lbl">Checkout Speed</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 — CYBERSECURITY ───────────────────────────────────── -->
+<section class="svc-section" id="cyber">
+  <div class="container">
+    <div class="svc-layout flip">
+      <div class="reveal">
+        <div class="svc-num">Service 08</div>
+        <h2 class="svc-title">Cybersecurity <span>& Data Protection</span></h2>
+        <p class="svc-body">Advanced threat protection, GDPR-compliance architecture, penetration testing, and enterprise-grade security audits to protect your digital assets, customer data, and organisational reputation.</p>
+        <ul class="feat-list">
+          <li><span class="ck">✓</span>Penetration testing & vulnerability assessments</li>
+          <li><span class="ck">✓</span>GDPR compliance audits & data protection frameworks</li>
+          <li><span class="ck">✓</span>Security architecture review & threat modelling</li>
+          <li><span class="ck">✓</span>Secure code review & DevSecOps integration</li>
+          <li><span class="ck">✓</span>Identity & access management (IAM / Zero Trust)</li>
+          <li><span class="ck">✓</span>Incident response planning & 24/7 monitoring</li>
+        </ul>
+        <div class="tag-row">
+          <span class="tag tag-cyan">GDPR</span><span class="tag tag-cyan">Pen Testing</span><span class="tag tag-cyan">Zero Trust</span><span class="tag tag-cyan">SOC 2</span><span class="tag tag-cyan">IAM</span>
+        </div>
+        <a href="contact.html" class="btn btn-primary">Secure Your Business →</a>
+      </div>
+      <div class="reveal d2">
+        <div class="mc">
+          <div style="font-size:2.2rem;margin-bottom:.8rem">🔐</div>
+          <h4 style="color:var(--white);font-family:var(--font-h);margin-bottom:1rem">Security Outcomes Delivered</h4>
+          <div class="row-item" style="justify-content:space-between">Zero-breach compliance framework<strong style="color:#4ade80">✓ Active</strong></div>
+          <div class="row-item" style="justify-content:space-between">GDPR-aligned architecture<strong style="color:#4ade80">✓ Active</strong></div>
+          <div class="row-item" style="justify-content:space-between">Automated threat monitoring<strong style="color:#4ade80">✓ Active</strong></div>
+          <div class="row-item" style="justify-content:space-between">Regulatory reporting automation<strong style="color:#4ade80">✓ Active</strong></div>
+          <div class="row-item" style="justify-content:space-between">Avg vulnerabilities found & fixed<strong style="color:var(--warn);font-family:var(--font-h)">24 / project</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA ──────────────────────────────────────────────────── -->
+<section class="cta-section">
+  <div class="container">
+    <p style="color:var(--cyan);font-weight:600;margin-bottom:1rem">Not sure which service you need?</p>
+    <h2 class="h2" style="margin-bottom:1.2rem">Let's Find the Right <span>Solution Together</span></h2>
+    <p class="lead" style="margin:0 auto 2.5rem;text-align:center">Book a free consultation — our team will map the best technology approach for your specific goals.</p>
+    <div class="cta-btns">
+      <a href="contact.html" class="btn btn-primary btn-lg">Book Free Consultation →</a>
+      <a href="case_studies.html" class="btn btn-ghost btn-lg">See Our Work</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER ───────────────────────────────────────────────── -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="../index.html" class="nav-logo" style="display:inline-flex;margin-bottom:0.8rem">
+          <img src="../assets/logo-transparent.png" alt="TechNova Ltd" class="footer-logo-img">
+        </a>
+        <p class="footer-tagline">Engineering the Future of Digital Excellence. London-based digital transformation delivering enterprise-grade solutions globally.</p>
+        <div class="footer-socials"><a href="#" class="soc">in</a><a href="#" class="soc">𝕏</a><a href="#" class="soc">⌥</a><a href="#" class="soc">▶</a></div>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#web">Web Development</a></li>
+          <li><a href="#enterprise">Enterprise Software</a></li>
+          <li><a href="#mobile">Mobile Apps</a></li>
+          <li><a href="#salesforce">Salesforce CRM</a></li>
+          <li><a href="#cloud">Cloud & DevOps</a></li>
+          <li><a href="#uiux">UI/UX Design</a></li>
+          <li><a href="#ecom">E-Commerce</a></li>
+          <li><a href="#cyber">Cybersecurity</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="case_studies.html">Case Studies</a></li>
+          <li><a href="industries.html">Industries</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <div class="fc-row"><span class="ico">📍</span><span>London, United Kingdom</span></div>
+        <div class="fc-row"><span class="ico">✉</span><span>info@technova.com</span></div>
+        <div class="fc-row"><span class="ico">📞</span><span>+44 12 3456 7890</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 TechNova Ltd. All rights reserved. Registered in England & Wales No. 14873291</div>
+      <div class="footer-legal"><a href="privacy_policy.html">Privacy Policy</a><a href="terms&conditions.html">Terms &amp; Conditions</a><a href="cookie_policy.html">Cookie Policy</a></div>
+    </div>
+  </div>
+</footer>
+
+<button id="scroll-top">↑</button>
+<script src="../js/main.js"></script>
+<script>
+/* ══ VIDEO LOGIC ══════════════════════════════════════════
+   vidReady()   — marks thumb as loaded, hides placeholder
+   vidError()   — keeps placeholder visible, hides muted badge
+   toggleVid()  — play/pause on button click
+   autoplayAll()— desktop autoplay muted
+═══════════════════════════════════════════════════════════ */
+function vidReady(thumbId){
+  const t = document.getElementById(thumbId);
+  if(t) t.classList.add('loaded');
+}
+function vidError(thumbId){
+  const t = document.getElementById(thumbId);
+  if(t){ t.classList.remove('loaded'); }
+  // Hide the muted badge if no video
+  const idx = thumbId.slice(-1);
+  const badge = document.getElementById('vmute'+idx);
+  if(badge) badge.style.display='none';
+}
+function toggleVid(vidId, btnId){
+  const v = document.getElementById(vidId);
+  const b = document.getElementById(btnId);
+  if(!v) return;
+  if(v.paused){ v.play(); if(b) b.textContent='⏸'; }
+  else        { v.pause(); if(b) b.textContent='▶'; }
+}
+
+/* Sync button icon when video state changes externally */
+function bindVid(id, btnId){
+  const v = document.getElementById(id);
+  const b = document.getElementById(btnId);
+  if(!v) return;
+  v.addEventListener('play',  ()=>{ if(b) b.textContent='⏸'; });
+  v.addEventListener('pause', ()=>{ if(b) b.textContent='▶'; });
+  v.addEventListener('ended', ()=>{ if(b) b.textContent='▶'; });
+}
+
+function autoplayAll(){
+  const mobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)||window.innerWidth<768;
+  [['v1','vbtn1'],['v2','vbtn2'],['v3','vbtn3']].forEach(([id,bid])=>{
+    bindVid(id, bid);
+    if(!mobile){
+      const v = document.getElementById(id);
+      if(v && v.src){ v.muted=true; v.play().catch(()=>{}); }
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', autoplayAll);
+</script>
+</body>
+</html>

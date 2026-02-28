@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Documents – TechNova Client Portal</title>
+<link rel="stylesheet" href="../css/portal.css">
+<style>
+.doc-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:1rem; }
+.doc-card { background:var(--card); border:1px solid var(--border); border-radius:var(--r); padding:1.3rem; transition:var(--trans); }
+.doc-card:hover { border-color:rgba(0,212,255,0.3); transform:translateY(-3px); }
+.doc-icon { font-size:2.2rem; margin-bottom:.75rem; }
+.doc-name { font-weight:600; color:var(--white); font-size:.9rem; margin-bottom:4px; word-break:break-word; }
+.doc-meta { font-size:.75rem; color:var(--gray); }
+.doc-actions { display:flex; gap:6px; margin-top:1rem; }
+.upload-section { margin-bottom:2rem; }
+.file-list { display:flex; flex-direction:column; gap:.75rem; margin-top:1.2rem; }
+.file-item { background:var(--card); border:1px solid var(--border); border-radius:var(--r2); padding:.9rem 1.1rem; display:flex; align-items:center; gap:12px; }
+.fi-icon { font-size:1.5rem; flex-shrink:0; }
+.fi-info { flex:1; min-width:0; }
+.fi-name { font-size:.88rem; font-weight:600; color:var(--white); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.fi-meta { font-size:.73rem; color:var(--gray); margin-top:2px; }
+.fi-prog { width:100px; flex-shrink:0; }
+.fi-del  { flex-shrink:0; }
+
+/* Storage bar */
+.storage-bar { background:var(--card); border:1px solid var(--border); border-radius:var(--r); padding:1.3rem 1.5rem; margin-bottom:1.5rem; }
+.storage-used { font-family:var(--font-h); font-weight:800; font-size:1.2rem; color:var(--white); }
+.folder-item { display:flex; align-items:center; gap:12px; padding:11px 14px; border-bottom:1px solid rgba(26,52,96,0.4); cursor:pointer; transition:background 0.2s; }
+.folder-item:hover { background:rgba(255,255,255,0.03); }
+.folder-item:last-child { border-bottom:none; }
+</style>
+</head>
+<body>
+<div class="portal-shell">
+  <div class="sidebar-overlay" onclick="closeSidebar()"></div>
+  <aside class="sidebar">
+    <a href="../index.html" class="sb-logo"><img src="../assets/logo-transparent.png" alt="TechNova Ltd"></a>
+    <div class="sb-client-badge"><div class="sb-avatar">JD</div><div><div class="sb-client-name">John Davidson</div><div class="sb-client-role">RetailMax Ltd</div></div></div>
+    <nav class="sb-group">
+      <div class="sb-group-label">Main</div>
+      <a href="dashboard.html" class="sb-link"><span class="sb-icon">🏠</span>Dashboard</a>
+      <a href="projects.html" class="sb-link"><span class="sb-icon">📋</span>Projects<span class="sb-badge">3</span></a>
+      <a href="messages.html" class="sb-link"><span class="sb-icon">💬</span>Messages<span class="sb-badge red">4</span></a>
+      <div class="sb-group-label" style="margin-top:1.2rem">Finance</div>
+      <a href="invoices.html" class="sb-link"><span class="sb-icon">🧾</span>Invoices &amp; Payments</a>
+      <div class="sb-group-label" style="margin-top:1.2rem">Support</div>
+      <a href="tickets.html" class="sb-link"><span class="sb-icon">🎫</span>Support Tickets<span class="sb-badge yellow">2</span></a>
+      <a href="documents.html" class="sb-link active"><span class="sb-icon">📁</span>Documents</a>
+      <div class="sb-group-label" style="margin-top:1.2rem">Account</div>
+      <a href="settings.html" class="sb-link"><span class="sb-icon">⚙️</span>Settings &amp; Profile</a>
+      <a href="admin-settings.html" class="sb-link" data-admin-only style="color:var(--yellow)"><span class="sb-icon">🛡</span>Admin Panel</a>
+    </nav>
+    <div class="sb-bottom"><button class="sb-logout" onclick="signOut()"><span>🚪</span> Sign Out</button></div>
+  </aside>
+
+  <div class="portal-main">
+    <header class="portal-header">
+      <div class="ph-left"><button class="hamburger-portal" onclick="toggleSidebar()"><span></span><span></span><span></span></button><div><div class="ph-title">Documents</div><div class="ph-crumb"><a href="dashboard.html">Dashboard</a> › Documents</div></div></div>
+      <div class="ph-right"><div class="ph-search"><span>🔍</span><input type="text" placeholder="Search files…"></div><div class="notif-wrapper"><div class="notif-badge-btn" id="notif-btn" onclick="toggleNotifPanel()">🔔<span id="notif-count"></span></div><div id="notif-panel"><div class="notif-panel-head"><h4>📧 Email Notifications</h4><button class="notif-panel-clear" onclick="document.getElementById('notif-list').innerHTML='<p style=color:var(--gray);font-size:.84rem;padding:1rem>Cleared.</p>';document.getElementById('notif-count').style.display='none'">Clear</button></div><div id="notif-list"><p style="color:var(--gray);font-size:.84rem;padding:1rem 1.2rem">No notifications yet.</p></div></div></div><a href="settings.html" class="ph-user"><div class="ph-user-avatar">JD</div><div class="ph-user-name">John D.</div></a></div>
+    </header>
+
+    <main class="portal-body">
+      <div class="page-title-row">
+        <div><h1>Project <span>Documents</span></h1><p>Upload, manage, and download all files shared between you and TechNova.</p></div>
+        <div class="page-actions">
+          <select class="filter-select"><option>All Projects</option><option>E-Commerce</option><option>Salesforce CRM</option><option>Mobile App</option></select>
+          <button class="btn btn-ghost btn-sm" onclick="showToast('Downloading all files as ZIP…','info')">⬇ Download All</button>
+        </div>
+      </div>
+
+      <!-- Storage -->
+      <div class="storage-bar">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem">
+          <div><span class="storage-used">2.4 GB</span><span style="color:var(--gray);font-size:.83rem"> of 10 GB used</span></div>
+          <span style="font-size:.78rem;color:var(--gray)">7.6 GB remaining</span>
+        </div>
+        <div class="progress-bar" style="height:8px"><div class="progress-fill" style="width:24%"></div></div>
+        <div style="display:flex;gap:1.5rem;margin-top:.75rem;font-size:.75rem;color:var(--gray)">
+          <span>📄 PDFs: 1.1 GB</span><span>🖼️ Images: 0.8 GB</span><span>📦 Archives: 0.3 GB</span><span>📊 Sheets: 0.2 GB</span>
+        </div>
+      </div>
+
+      <div class="tabs" data-tabs-parent>
+        <button class="tab-btn active" data-tab="tab-upload">Upload Files</button>
+        <button class="tab-btn" data-tab="tab-shared">Shared by TechNova</button>
+        <button class="tab-btn" data-tab="tab-my">My Uploads</button>
+        <button class="tab-btn" data-tab="tab-contracts">Contracts</button>
+      </div>
+
+      <!-- UPLOAD TAB -->
+      <div class="tab-pane active" id="tab-upload" data-tabs-parent>
+        <div class="upload-section">
+          <div class="dropzone">
+            <input type="file" multiple style="display:none" accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.zip,.mp4,.csv">
+            <div class="dz-icon">📤</div>
+            <div class="dz-title">Drag &amp; drop files here</div>
+            <div class="dz-sub">or click to browse your computer</div>
+            <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();this.closest('.dropzone').querySelector('input').click()">Browse Files</button>
+            <div class="dz-types" style="margin-top:1rem">
+              <span class="dz-type">PDF</span><span class="dz-type">DOCX</span><span class="dz-type">XLSX</span><span class="dz-type">PNG/JPG</span><span class="dz-type">ZIP</span><span class="dz-type">MP4</span><span class="dz-type">CSV</span>
+            </div>
+            <div style="font-size:.75rem;color:var(--gray);margin-top:.75rem">Maximum file size: 500MB per file</div>
+          </div>
+          <div class="file-list" id="file-list-upload">
+            <p style="font-size:.83rem;color:var(--gray);text-align:center;padding:1rem">Files you upload will appear here.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SHARED BY TECHNOVA TAB -->
+      <div class="tab-pane" id="tab-shared" data-tabs-parent>
+        <div style="margin-bottom:1.5rem">
+          <div class="panel">
+            <div class="panel-head"><h3>📋 E-Commerce Redesign</h3><span class="badge inprogress">6 files</span></div>
+            <div class="panel-body no-pad">
+              <div class="folder-item" onclick="showToast('Downloading file…','info')"><span style="font-size:1.4rem">📄</span><div style="flex:1"><div style="font-size:.88rem;font-weight:600;color:var(--white)">RetailMax-Design-System-v2.figma</div><div style="font-size:.73rem;color:var(--gray)">Shared by Amy Liu · 24 Feb · 12.4 MB</div></div><button class="btn btn-ghost btn-sm">⬇</button></div>
+              <div class="folder-item" onclick="showToast('Downloading file…','info')"><span style="font-size:1.4rem">📋</span><div style="flex:1"><div style="font-size:.88rem;font-weight:600;color:var(--white)">Sprint-4-Review-Presentation.pptx</div><div style="font-size:.73rem;color:var(--gray)">Shared by Sarah Mitchell · 21 Feb · 3.2 MB</div></div><button class="btn btn-ghost btn-sm">⬇</button></div>
+              <div class="folder-item" onclick="showToast('Downloading file…','info')"><span style="font-size:1.4rem">🖼️</span><div style="flex:1"><div style="font-size:.88rem;font-weight:600;color:var(--white)">checkout-wireframes-v3.png</div><div style="font-size:.73rem;color:var(--gray)">Shared by Amy Liu · 18 Feb · 4.1 MB</div></div><button class="btn btn-ghost btn-sm">⬇</button></div>
+              <div class="folder-item" onclick="showToast('Downloading file…','info')"><span style="font-size:1.4rem">📄</span><div style="flex:1"><div style="font-size:.88rem;font-weight:600;color:var(--white)">Performance-Audit-Report.pdf</div><div style="font-size:.73rem;color:var(--gray)">Shared by Tom Richards · 15 Feb · 890 KB</div></div><button class="btn btn-ghost btn-sm">⬇</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h3>☁️ Salesforce CRM</h3><span class="badge active">4 files</span></div>
+          <div class="panel-body no-pad">
+            <div class="folder-item" onclick="showToast('Downloading file…','info')"><span style="font-size:1.4rem">📊</span><div style="flex:1"><div style="font-size:.88rem;font-weight:600;color:var(--white)">Data-Migration-Validation-Report.xlsx</div><div style="font-size:.73rem;color:var(--gray)">Shared by Sunita Kapoor · 10 Feb · 1.8 MB</div></div><button class="btn btn-ghost btn-sm">⬇</button></div>
+            <div class="folder-item" onclick="showToast('Downloading file…','info')"><span style="font-size:1.4rem">📄</span><div style="flex:1"><div style="font-size:.88rem;font-weight:600;color:var(--white)">Salesforce-Admin-Guide-RetailMax.pdf</div><div style="font-size:.73rem;color:var(--gray)">Shared by Sunita Kapoor · 5 Feb · 2.4 MB</div></div><button class="btn btn-ghost btn-sm">⬇</button></div>
+            <div class="folder-item" onclick="showToast('Downloading file…','info')"><span style="font-size:1.4rem">📋</span><div style="flex:1"><div style="font-size:.88rem;font-weight:600;color:var(--white)">mobile-wireframes-v2.pdf</div><div style="font-size:.73rem;color:var(--gray)">Shared by Raj Kumar · 2 Feb · 5.6 MB</div></div><button class="btn btn-ghost btn-sm">⬇</button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MY UPLOADS TAB -->
+      <div class="tab-pane" id="tab-my" data-tabs-parent>
+        <div class="doc-grid">
+          <div class="doc-card"><div class="doc-icon">📄</div><div class="doc-name">Brand-Guidelines-2026.pdf</div><div class="doc-meta">Uploaded 12 Jan · 4.2 MB · PDF</div><div class="doc-actions"><button class="btn btn-ghost btn-sm" onclick="showToast('Downloading…','info')">⬇ Download</button><button class="btn btn-danger btn-sm" onclick="confirmAction('Delete this file?', () => this.closest('.doc-card').remove())">🗑</button></div></div>
+          <div class="doc-card"><div class="doc-icon">📊</div><div class="doc-name">RetailMax-Analytics-Q4-2025.xlsx</div><div class="doc-meta">Uploaded 8 Jan · 1.1 MB · XLSX</div><div class="doc-actions"><button class="btn btn-ghost btn-sm" onclick="showToast('Downloading…','info')">⬇ Download</button><button class="btn btn-danger btn-sm" onclick="confirmAction('Delete this file?', () => this.closest('.doc-card').remove())">🗑</button></div></div>
+          <div class="doc-card"><div class="doc-icon">🖼️</div><div class="doc-name">product-photography-batch1.zip</div><div class="doc-meta">Uploaded 3 Feb · 156 MB · ZIP</div><div class="doc-actions"><button class="btn btn-ghost btn-sm" onclick="showToast('Downloading…','info')">⬇ Download</button><button class="btn btn-danger btn-sm" onclick="confirmAction('Delete this file?', () => this.closest('.doc-card').remove())">🗑</button></div></div>
+          <div class="doc-card"><div class="doc-icon">📄</div><div class="doc-name">Customer-Data-Export-Jan2026.csv</div><div class="doc-meta">Uploaded 15 Jan · 840 KB · CSV</div><div class="doc-actions"><button class="btn btn-ghost btn-sm" onclick="showToast('Downloading…','info')">⬇ Download</button><button class="btn btn-danger btn-sm" onclick="confirmAction('Delete this file?', () => this.closest('.doc-card').remove())">🗑</button></div></div>
+        </div>
+      </div>
+
+      <!-- CONTRACTS TAB -->
+      <div class="tab-pane" id="tab-contracts" data-tabs-parent>
+        <div class="doc-grid">
+          <div class="doc-card" style="border-left:4px solid var(--green)"><div class="doc-icon">✍️</div><div class="doc-name">Master Service Agreement — RetailMax Ltd</div><div class="doc-meta">Signed 5 Nov 2025 · PDF · 14 pages</div><span class="badge active" style="margin-top:.75rem">Signed</span><div class="doc-actions"><button class="btn btn-ghost btn-sm" onclick="showToast('Downloading contract…','info')">⬇ Download</button></div></div>
+          <div class="doc-card" style="border-left:4px solid var(--cyan)"><div class="doc-icon">📋</div><div class="doc-name">SOW — E-Commerce Platform Redesign</div><div class="doc-meta">Signed 9 Jan 2026 · PDF · 8 pages</div><span class="badge active" style="margin-top:.75rem">Signed</span><div class="doc-actions"><button class="btn btn-ghost btn-sm" onclick="showToast('Downloading…','info')">⬇ Download</button></div></div>
+          <div class="doc-card" style="border-left:4px solid var(--cyan)"><div class="doc-icon">📋</div><div class="doc-name">SOW — Salesforce CRM Integration</div><div class="doc-meta">Signed 1 Dec 2025 · PDF · 6 pages</div><span class="badge active" style="margin-top:.75rem">Signed</span><div class="doc-actions"><button class="btn btn-ghost btn-sm" onclick="showToast('Downloading…','info')">⬇ Download</button></div></div>
+          <div class="doc-card" style="border-left:4px solid var(--purple)"><div class="doc-icon">📋</div><div class="doc-name">SOW — Mobile App Phase 2</div><div class="doc-meta">Signed 2 Feb 2026 · PDF · 10 pages</div><span class="badge active" style="margin-top:.75rem">Signed</span><div class="doc-actions"><button class="btn btn-ghost btn-sm" onclick="showToast('Downloading…','info')">⬇ Download</button></div></div>
+          <div class="doc-card" style="border-left:4px solid var(--yellow)"><div class="doc-icon">🔒</div><div class="doc-name">NDA — RetailMax Ltd × TechNova</div><div class="doc-meta">Signed 1 Nov 2025 · PDF · 3 pages</div><span class="badge active" style="margin-top:.75rem">Signed</span><div class="doc-actions"><button class="btn btn-ghost btn-sm" onclick="showToast('Downloading…','info')">⬇ Download</button></div></div>
+          <div class="doc-card" style="border-left:4px solid var(--gray)"><div class="doc-icon">📄</div><div class="doc-name">DPA — Data Processing Agreement</div><div class="doc-meta">Signed 5 Nov 2025 · PDF · 7 pages</div><span class="badge active" style="margin-top:.75rem">Signed</span><div class="doc-actions"><button class="btn btn-ghost btn-sm" onclick="showToast('Downloading…','info')">⬇ Download</button></div></div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="../js/portal.js"></script>
+</body>
+</html>

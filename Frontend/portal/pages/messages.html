@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Messages – TechNova Client Portal</title>
+<link rel="stylesheet" href="../css/portal.css">
+</head>
+<body>
+<div class="portal-shell">
+  <div class="sidebar-overlay" onclick="closeSidebar()"></div>
+  <aside class="sidebar">
+    <a href="../index.html" class="sb-logo"><img src="../assets/logo-transparent.png" alt="TechNova Ltd"></a>
+    <div class="sb-client-badge"><div class="sb-avatar">JD</div><div><div class="sb-client-name">John Davidson</div><div class="sb-client-role">RetailMax Ltd</div></div></div>
+    <nav class="sb-group">
+      <div class="sb-group-label">Main</div>
+      <a href="dashboard.html" class="sb-link"><span class="sb-icon">🏠</span>Dashboard</a>
+      <a href="projects.html" class="sb-link"><span class="sb-icon">📋</span>Projects<span class="sb-badge">3</span></a>
+      <a href="messages.html" class="sb-link active"><span class="sb-icon">💬</span>Messages<span class="sb-badge red">4</span></a>
+      <div class="sb-group-label" style="margin-top:1.2rem">Finance</div>
+      <a href="invoices.html" class="sb-link"><span class="sb-icon">🧾</span>Invoices &amp; Payments</a>
+      <div class="sb-group-label" style="margin-top:1.2rem">Support</div>
+      <a href="tickets.html" class="sb-link"><span class="sb-icon">🎫</span>Support Tickets<span class="sb-badge yellow">2</span></a>
+      <a href="documents.html" class="sb-link"><span class="sb-icon">📁</span>Documents</a>
+      <div class="sb-group-label" style="margin-top:1.2rem">Account</div>
+      <a href="settings.html" class="sb-link"><span class="sb-icon">⚙️</span>Settings &amp; Profile</a>
+      <a href="admin-settings.html" class="sb-link" data-admin-only style="color:var(--yellow)"><span class="sb-icon">🛡</span>Admin Panel</a>
+    </nav>
+    <div class="sb-bottom"><button class="sb-logout" onclick="signOut()"><span>🚪</span> Sign Out</button></div>
+  </aside>
+
+  <div class="portal-main">
+    <header class="portal-header">
+      <div class="ph-left"><button class="hamburger-portal" onclick="toggleSidebar()"><span></span><span></span><span></span></button><div><div class="ph-title">Messages</div><div class="ph-crumb"><a href="dashboard.html">Dashboard</a> › Messages</div></div></div>
+      <div class="ph-right"><div class="notif-wrapper"><div class="notif-badge-btn" id="notif-btn" onclick="toggleNotifPanel()">🔔<span id="notif-count"></span></div><div id="notif-panel"><div class="notif-panel-head"><h4>📧 Email Notifications</h4><button class="notif-panel-clear" onclick="document.getElementById('notif-list').innerHTML='<p style=color:var(--gray);font-size:.84rem;padding:1rem>Cleared.</p>';document.getElementById('notif-count').style.display='none'">Clear</button></div><div id="notif-list"><p style="color:var(--gray);font-size:.84rem;padding:1rem 1.2rem">No notifications yet.</p></div></div></div><a href="settings.html" class="ph-user"><div class="ph-user-avatar">JD</div><div class="ph-user-name">John D.</div></a></div>
+    </header>
+
+    <main class="portal-body">
+      <div class="page-title-row" style="margin-bottom:1.2rem">
+        <div><h1>Team <span>Messages</span></h1><p>Direct communication with your TechNova project team.</p></div>
+      </div>
+
+      <div class="chat-shell">
+        <!-- Conversation list -->
+        <div class="chat-list">
+          <div class="chat-list-head">💬 Conversations <span style="font-size:.72rem;color:var(--cyan);font-weight:700;margin-left:auto">4 unread</span></div>
+
+          <div class="chat-item active" onclick="selectChat(this)">
+            <div class="ci-avatar">👩‍💼</div>
+            <div style="flex:1;min-width:0">
+              <div class="ci-name">Sarah Mitchell</div>
+              <div class="ci-preview">Sprint review confirmed for tomorrow 10am…</div>
+            </div>
+            <div class="ci-meta"><div class="ci-time">2h ago</div><div class="ci-unread">2</div></div>
+          </div>
+
+          <div class="chat-item" onclick="selectChat(this)">
+            <div class="ci-avatar">👨‍💻</div>
+            <div style="flex:1;min-width:0">
+              <div class="ci-name">Tom Richards</div>
+              <div class="ci-preview">Fix is deployed to staging, please test…</div>
+            </div>
+            <div class="ci-meta"><div class="ci-time">4h ago</div><div class="ci-unread">1</div></div>
+          </div>
+
+          <div class="chat-item" onclick="selectChat(this)">
+            <div class="ci-avatar">👩‍💻</div>
+            <div style="flex:1;min-width:0">
+              <div class="ci-name">Sunita Kapoor</div>
+              <div class="ci-preview">The SOQL filter issue is identified…</div>
+            </div>
+            <div class="ci-meta"><div class="ci-time">Yesterday</div><div class="ci-unread">1</div></div>
+          </div>
+
+          <div class="chat-item" onclick="selectChat(this)">
+            <div class="ci-avatar">🧑‍🎨</div>
+            <div style="flex:1;min-width:0">
+              <div class="ci-name">Amy Liu</div>
+              <div class="ci-preview">Design system v2 has been shared…</div>
+            </div>
+            <div class="ci-meta"><div class="ci-time">2 days ago</div></div>
+          </div>
+
+          <div class="chat-item" onclick="selectChat(this)">
+            <div class="ci-avatar">📋</div>
+            <div style="flex:1;min-width:0">
+              <div class="ci-name">Project Updates</div>
+              <div class="ci-preview">Automated: Sprint 4 review completed</div>
+            </div>
+            <div class="ci-meta"><div class="ci-time">3 days ago</div></div>
+          </div>
+        </div>
+
+        <!-- Chat window -->
+        <div class="chat-window">
+          <div class="chat-win-head">
+            <div class="chat-win-avatar">👩‍💼</div>
+            <div>
+              <div class="chat-win-name">Sarah Mitchell</div>
+              <div class="chat-win-status">● Online · Project Manager — E-Commerce</div>
+            </div>
+            <div style="margin-left:auto;display:flex;gap:8px">
+              <button class="btn btn-ghost btn-sm btn-icon" onclick="showToast('Calling Sarah…','info')" title="Video call">📹</button>
+              <button class="btn btn-ghost btn-sm btn-icon" onclick="showToast('Info panel coming soon','info')" title="Info">ℹ</button>
+            </div>
+          </div>
+
+          <div class="chat-messages" id="chat-messages">
+            <!-- Date divider -->
+            <div style="text-align:center;font-size:.72rem;color:var(--gray);padding:.25rem 0;position:relative"><span style="background:var(--navy3);padding:0 12px;position:relative;z-index:1">Yesterday</span><div style="position:absolute;top:50%;left:0;right:0;height:1px;background:var(--border)"></div></div>
+
+            <div class="msg-row own">
+              <div class="msg-content">
+                <div class="msg-bubble">Hi Sarah, quick update — I've reviewed the Sprint 3 deliverables and the design system is looking great. Really happy with the direction. Can we schedule a call to discuss the checkout flow before the Sprint 4 kickoff?</div>
+                <div class="msg-time">Yesterday, 14:30</div>
+              </div>
+              <div class="msg-avatar">JD</div>
+            </div>
+
+            <div class="msg-row">
+              <div class="msg-avatar">SM</div>
+              <div class="msg-content">
+                <div class="msg-bubble">Great to hear, John! Absolutely — how does Thursday 10am work? I can set up a Zoom and walk you through the prototype we've built for checkout. Tom and Amy will join too.</div>
+                <div class="msg-time">Yesterday, 15:02</div>
+              </div>
+            </div>
+
+            <div class="msg-row own">
+              <div class="msg-content">
+                <div class="msg-bubble">Thursday 10am works perfectly. Looking forward to seeing the prototype!</div>
+                <div class="msg-time">Yesterday, 15:15</div>
+              </div>
+              <div class="msg-avatar">JD</div>
+            </div>
+
+            <!-- Date divider -->
+            <div style="text-align:center;font-size:.72rem;color:var(--gray);padding:.25rem 0;position:relative"><span style="background:var(--navy3);padding:0 12px;position:relative;z-index:1">Today</span><div style="position:absolute;top:50%;left:0;right:0;height:1px;background:var(--border)"></div></div>
+
+            <div class="msg-row">
+              <div class="msg-avatar">SM</div>
+              <div class="msg-content">
+                <div class="msg-bubble">Good morning John! Just a reminder that the Sprint Review is confirmed for tomorrow at 10:00 AM (Zoom link in your calendar invite). We've also uploaded the Sprint 4 presentation to your Documents folder. Looking forward to it! 🚀</div>
+                <div class="msg-time">09:15</div>
+              </div>
+            </div>
+
+            <div class="msg-row">
+              <div class="msg-avatar">SM</div>
+              <div class="msg-content">
+                <div class="msg-bubble">Also — Tom has deployed the Safari checkout fix to staging. Could you test at retailmax-staging.co.uk and confirm? We're targeting production deployment tonight.</div>
+                <div class="msg-time">09:22</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="chat-input-row">
+            <button class="btn btn-ghost btn-sm btn-icon" onclick="showToast('Attach a file','info')" title="Attach file">📎</button>
+            <input type="text" class="chat-input" id="chat-input" placeholder="Type a message… (Enter to send)">
+            <button class="btn btn-primary" id="chat-send">Send →</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="../js/portal.js"></script>
+<script>
+// Scroll to bottom on load
+document.addEventListener('DOMContentLoaded', () => {
+  const msgs = document.getElementById('chat-messages');
+  if(msgs) msgs.scrollTop = msgs.scrollHeight;
+});
+</script>
+</body>
+</html>

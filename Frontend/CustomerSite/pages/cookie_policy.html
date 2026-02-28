@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Cookie Policy – TechNova Ltd</title>
+<meta name="description" content="TechNova Ltd Cookie Policy – information about how we use cookies and similar technologies on our website.">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+/* Cookie preference toggles */
+.cookie-cat {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--r);
+  margin-bottom: 1.2rem; overflow: hidden;
+}
+.cookie-cat-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 1.4rem; cursor: pointer; gap: 1rem;
+}
+.cookie-cat-head:hover { background: rgba(255,255,255,0.02); }
+.cat-left { display: flex; align-items: center; gap: 12px; }
+.cat-icon { font-size: 1.4rem; }
+.cat-name { font-family: var(--font-h); font-weight: 700; color: var(--white); font-size: 0.95rem; }
+.cat-desc-short { font-size: 0.8rem; color: var(--gray); margin-top: 2px; }
+.toggle-wrap { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.toggle-label { font-size: 0.78rem; color: var(--gray); }
+.toggle {
+  position: relative; width: 46px; height: 24px; border-radius: 12px;
+  background: var(--border); cursor: pointer; transition: background 0.3s; flex-shrink: 0;
+}
+.toggle.on { background: var(--cyan); }
+.toggle.locked { background: var(--cyan); opacity: 0.65; cursor: not-allowed; }
+.toggle::after {
+  content: ''; position: absolute; top: 3px; left: 3px;
+  width: 18px; height: 18px; border-radius: 50%; background: var(--white);
+  transition: transform 0.3s;
+}
+.toggle.on::after, .toggle.locked::after { transform: translateX(22px); }
+.cookie-detail { padding: 0 1.4rem 1.4rem; display: none; }
+.cookie-cat.open .cookie-detail { display: block; }
+.cookie-saved {
+  display: none; position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  background: #4ade80; color: #052e16; padding: 12px 28px; border-radius: 50px;
+  font-family: var(--font-h); font-weight: 700; font-size: 0.9rem; z-index: 2000;
+  box-shadow: 0 8px 24px rgba(74,222,128,0.35);
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAVBAR ─────────────────────────── -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <img src="../assets/logo-transparent.png" alt="TechNova Ltd" class="logo-img" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li class="nav-dd">
+        <a href="services.html">Services ▾</a>
+        <div class="dd-menu">
+          <a href="services.html#web"><span>🌐</span>Web Development</a>
+          <a href="services.html#enterprise"><span>🏢</span>Enterprise Software</a>
+          <a href="services.html#mobile"><span>📱</span>Mobile Apps</a>
+          <a href="services.html#salesforce"><span>☁️</span>Salesforce CRM</a>
+          <a href="services.html#cloud"><span>🔧</span>Cloud & DevOps</a>
+          <a href="services.html#uiux"><span>🎨</span>UI/UX Design</a>
+          <a href="services.html#ecom"><span>🛒</span>E-Commerce</a>
+          <a href="services.html#cyber"><span>🔐</span>Cybersecurity</a>
+        </div>
+      </li>
+      <li><a href="industries.html">Industries</a></li>
+      <li><a href="case_studies.html">Case Studies</a></li>
+      <li><a href="careers.html">Careers</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="contact.html" class="btn btn-primary">Get a Consultation</a>
+    </div>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div id="mob-menu">
+  <a href="../index.html" class="mob-link">Home</a>
+  <a href="about.html" class="mob-link">About</a>
+  <a href="services.html" class="mob-link">Services</a>
+  <a href="industries.html" class="mob-link">Industries</a>
+  <a href="case_studies.html" class="mob-link">Case Studies</a>
+  <a href="careers.html" class="mob-link">Careers</a>
+  <a href="contact.html" class="mob-link">Contact</a>
+  <a href="contact.html" class="btn btn-primary">Get a Consultation</a>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-bg"></div><div class="page-hero-grid"></div>
+  <div class="container page-hero-content">
+    <div class="breadcrumb"><a href="../index.html">Home</a><span>›</span><span>Cookie Policy</span></div>
+    <div class="label">Legal</div>
+    <h1>Cookie <span>Policy</span></h1>
+    <p class="lead">Information about how TechNova Ltd uses cookies and similar technologies on our website, and how you can control your preferences.</p>
+  </div>
+</div>
+
+<section class="section" style="background:var(--navy3)">
+  <div class="container">
+    <div class="policy-meta reveal">
+      <div class="pm-item"><label>Last Updated</label><span>27 February 2026</span></div>
+      <div class="pm-item"><label>Applies To</label><span>technova-uk.com</span></div>
+      <div class="pm-item"><label>Regulation</label><span>UK PECR & UK GDPR</span></div>
+    </div>
+
+    <div class="policy-layout">
+      <aside>
+        <div class="policy-toc reveal">
+          <h4>Contents</h4>
+          <ul>
+            <li><a href="#c1">1. What Are Cookies</a></li>
+            <li><a href="#c2">2. How We Use Cookies</a></li>
+            <li><a href="#c3">3. Types of Cookies</a></li>
+            <li><a href="#c4">4. Cookie Details</a></li>
+            <li><a href="#c5">5. Your Preferences</a></li>
+            <li><a href="#c6">6. Browser Controls</a></li>
+            <li><a href="#c7">7. Third-Party Cookies</a></li>
+            <li><a href="#c8">8. Policy Updates</a></li>
+            <li><a href="#c9">9. Contact</a></li>
+          </ul>
+        </div>
+      </aside>
+
+      <div class="reveal d1">
+        <div class="p-highlight"><p>We use cookies and similar technologies to make our website work properly, improve your experience, and analyse how our website is used. You can manage your cookie preferences at any time using the interactive panel in <a href="#c5" style="color:var(--cyan)">Section 5</a> below.</p></div>
+
+        <div class="policy-section" id="c1">
+          <h2><span class="sn">1</span>What Are Cookies?</h2>
+          <p>Cookies are small text files placed on your device (computer, tablet, or mobile) when you visit a website. They are widely used to make websites work more efficiently, remember your preferences, and provide information to website owners.</p>
+          <p>Similar technologies we may use include:</p>
+          <ul>
+            <li><strong style="color:var(--white)">Web beacons / pixel tags:</strong> Small transparent images embedded in emails or web pages that track whether content has been opened or viewed.</li>
+            <li><strong style="color:var(--white)">Local storage:</strong> Data stored locally in your browser (similar to cookies but not sent to our servers automatically).</li>
+            <li><strong style="color:var(--white)">Session storage:</strong> Temporary data stored for the duration of your browser session.</li>
+          </ul>
+          <p>Throughout this policy, "cookies" refers to all such technologies collectively.</p>
+        </div>
+
+        <div class="policy-section" id="c2">
+          <h2><span class="sn">2</span>How We Use Cookies</h2>
+          <p>We use cookies to:</p>
+          <ul>
+            <li>Ensure our website functions correctly and securely;</li>
+            <li>Remember your cookie preferences and consent;</li>
+            <li>Maintain your session when using our Client Portal;</li>
+            <li>Understand how visitors use our website (pages visited, time spent, referral sources);</li>
+            <li>Improve the performance, content, and user experience of our website;</li>
+            <li>Measure the effectiveness of our marketing campaigns;</li>
+            <li>Deliver relevant content based on your browsing behaviour (with your consent).</li>
+          </ul>
+          <p>We do <strong style="color:var(--white)">not</strong> use cookies to collect sensitive personal data such as financial information, passwords, or health data, and we do not sell cookie-derived data to third parties.</p>
+        </div>
+
+        <div class="policy-section" id="c3">
+          <h2><span class="sn">3</span>Types of Cookies We Use</h2>
+          <table class="p-table">
+            <thead><tr><th>Category</th><th>Description</th><th>Consent Required?</th></tr></thead>
+            <tbody>
+              <tr><td><strong style="color:var(--white)">Strictly Necessary</strong></td><td>Essential for the website to function. Cannot be disabled. Includes session management, security tokens, and load balancing.</td><td>No — always active</td></tr>
+              <tr><td><strong style="color:var(--white)">Functional</strong></td><td>Enable enhanced functionality and personalisation, such as remembering your cookie preferences, language selection, and chat window state.</td><td>Yes</td></tr>
+              <tr><td><strong style="color:var(--white)">Analytics & Performance</strong></td><td>Help us understand how visitors interact with our website by collecting anonymised data about page views, traffic sources, and user behaviour.</td><td>Yes</td></tr>
+              <tr><td><strong style="color:var(--white)">Marketing & Targeting</strong></td><td>Used to deliver relevant advertisements and track the effectiveness of marketing campaigns across websites and social media platforms.</td><td>Yes</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="policy-section" id="c4">
+          <h2><span class="sn">4</span>Cookie Details</h2>
+          <h3>Strictly Necessary Cookies</h3>
+          <table class="p-table">
+            <thead><tr><th>Cookie Name</th><th>Provider</th><th>Purpose</th><th>Duration</th></tr></thead>
+            <tbody>
+              <tr><td>_tn_session</td><td>TechNova Ltd</td><td>Maintains your session on the Client Portal</td><td>Session</td></tr>
+              <tr><td>_tn_csrf</td><td>TechNova Ltd</td><td>CSRF protection token for form submissions</td><td>Session</td></tr>
+              <tr><td>_tn_cookie_consent</td><td>TechNova Ltd</td><td>Stores your cookie consent preferences</td><td>12 months</td></tr>
+              <tr><td>_tn_auth</td><td>TechNova Ltd</td><td>Secure authentication token (Client Portal)</td><td>30 minutes</td></tr>
+            </tbody>
+          </table>
+          <h3>Functional Cookies</h3>
+          <table class="p-table">
+            <thead><tr><th>Cookie Name</th><th>Provider</th><th>Purpose</th><th>Duration</th></tr></thead>
+            <tbody>
+              <tr><td>_tn_lang</td><td>TechNova Ltd</td><td>Remembers your language preference</td><td>12 months</td></tr>
+              <tr><td>_tn_theme</td><td>TechNova Ltd</td><td>Stores display preference settings</td><td>12 months</td></tr>
+              <tr><td>intercom-session-*</td><td>Intercom</td><td>Live chat session management</td><td>Session</td></tr>
+            </tbody>
+          </table>
+          <h3>Analytics & Performance Cookies</h3>
+          <table class="p-table">
+            <thead><tr><th>Cookie Name</th><th>Provider</th><th>Purpose</th><th>Duration</th></tr></thead>
+            <tbody>
+              <tr><td>_ga</td><td>Google Analytics</td><td>Distinguishes unique users; anonymised usage tracking</td><td>2 years</td></tr>
+              <tr><td>_ga_*</td><td>Google Analytics</td><td>Maintains session state for GA4 measurement</td><td>2 years</td></tr>
+              <tr><td>_gid</td><td>Google Analytics</td><td>Distinguishes users across sessions</td><td>24 hours</td></tr>
+              <tr><td>_gat_gtag_*</td><td>Google Analytics</td><td>Throttles request rate</td><td>1 minute</td></tr>
+              <tr><td>_hjSession_*</td><td>Hotjar</td><td>Heatmaps and session recording (anonymised)</td><td>30 minutes</td></tr>
+              <tr><td>_hjSessionUser_*</td><td>Hotjar</td><td>Persists Hotjar user ID across sessions</td><td>12 months</td></tr>
+            </tbody>
+          </table>
+          <h3>Marketing & Targeting Cookies</h3>
+          <table class="p-table">
+            <thead><tr><th>Cookie Name</th><th>Provider</th><th>Purpose</th><th>Duration</th></tr></thead>
+            <tbody>
+              <tr><td>_fbp</td><td>Meta (Facebook)</td><td>Used by Facebook Pixel to deliver targeted ads</td><td>3 months</td></tr>
+              <tr><td>li_fat_id</td><td>LinkedIn</td><td>LinkedIn ad conversion tracking</td><td>30 days</td></tr>
+              <tr><td>_gcl_au</td><td>Google Ads</td><td>Google Ads conversion tracking</td><td>3 months</td></tr>
+              <tr><td>IDE</td><td>Google DoubleClick</td><td>Cross-site ad targeting and retargeting</td><td>13 months</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Interactive preferences -->
+        <div class="policy-section" id="c5">
+          <h2><span class="sn">5</span>Your Cookie Preferences</h2>
+          <p>Use the toggles below to manage your consent for each category of non-essential cookies. Strictly Necessary cookies cannot be disabled as they are essential for the website to function.</p>
+
+          <div style="margin:2rem 0">
+            <!-- Strictly Necessary -->
+            <div class="cookie-cat open">
+              <div class="cookie-cat-head" onclick="toggleCat(this)">
+                <div class="cat-left">
+                  <div class="cat-icon">🔒</div>
+                  <div><div class="cat-name">Strictly Necessary</div><div class="cat-desc-short">Always active — required for the website to function</div></div>
+                </div>
+                <div class="toggle-wrap">
+                  <span class="toggle-label">Always On</span>
+                  <div class="toggle locked"></div>
+                </div>
+              </div>
+              <div class="cookie-detail">
+                <p style="font-size:0.88rem;color:var(--gray);line-height:1.7;margin:0">These cookies are essential for our website to operate. They include session management, security tokens, and your stored cookie consent choices. They cannot be disabled — without them, services you have requested cannot be provided.</p>
+              </div>
+            </div>
+
+            <!-- Functional -->
+            <div class="cookie-cat" id="cat-functional">
+              <div class="cookie-cat-head" onclick="toggleCat(this)">
+                <div class="cat-left">
+                  <div class="cat-icon">⚙️</div>
+                  <div><div class="cat-name">Functional</div><div class="cat-desc-short">Enhanced features and personalisation</div></div>
+                </div>
+                <div class="toggle-wrap">
+                  <span class="toggle-label" id="lbl-functional">Disabled</span>
+                  <div class="toggle" id="tog-functional" onclick="event.stopPropagation();toggleConsent('functional')"></div>
+                </div>
+              </div>
+              <div class="cookie-detail">
+                <p style="font-size:0.88rem;color:var(--gray);line-height:1.7;margin:0">These cookies enable enhanced functionality such as remembering your preferences (language, display settings) and powering our live chat support. Disabling these may affect certain features of our website.</p>
+              </div>
+            </div>
+
+            <!-- Analytics -->
+            <div class="cookie-cat" id="cat-analytics">
+              <div class="cookie-cat-head" onclick="toggleCat(this)">
+                <div class="cat-left">
+                  <div class="cat-icon">📊</div>
+                  <div><div class="cat-name">Analytics & Performance</div><div class="cat-desc-short">Understand how our website is used</div></div>
+                </div>
+                <div class="toggle-wrap">
+                  <span class="toggle-label" id="lbl-analytics">Disabled</span>
+                  <div class="toggle" id="tog-analytics" onclick="event.stopPropagation();toggleConsent('analytics')"></div>
+                </div>
+              </div>
+              <div class="cookie-detail">
+                <p style="font-size:0.88rem;color:var(--gray);line-height:1.7;margin:0">These cookies (Google Analytics, Hotjar) collect anonymised information about how visitors use our website — pages visited, time spent, and traffic sources. This helps us improve our website and your experience. No personally identifiable information is collected.</p>
+              </div>
+            </div>
+
+            <!-- Marketing -->
+            <div class="cookie-cat" id="cat-marketing">
+              <div class="cookie-cat-head" onclick="toggleCat(this)">
+                <div class="cat-left">
+                  <div class="cat-icon">🎯</div>
+                  <div><div class="cat-name">Marketing & Targeting</div><div class="cat-desc-short">Relevant ads and campaign measurement</div></div>
+                </div>
+                <div class="toggle-wrap">
+                  <span class="toggle-label" id="lbl-marketing">Disabled</span>
+                  <div class="toggle" id="tog-marketing" onclick="event.stopPropagation();toggleConsent('marketing')"></div>
+                </div>
+              </div>
+              <div class="cookie-detail">
+                <p style="font-size:0.88rem;color:var(--gray);line-height:1.7;margin:0">These cookies (Meta Pixel, LinkedIn Insight, Google Ads) are used to measure the effectiveness of our advertising campaigns and to show you relevant TechNova ads on other platforms. They may share data with advertising networks.</p>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:1rem;margin-top:1.5rem;flex-wrap:wrap">
+              <button onclick="savePreferences()" class="btn btn-primary">Save My Preferences</button>
+              <button onclick="acceptAll()" class="btn btn-ghost">Accept All Cookies</button>
+              <button onclick="rejectAll()" style="background:transparent;border:1.5px solid var(--border);color:var(--gray);padding:14px 28px;border-radius:6px;font-size:0.9rem;font-weight:600;cursor:pointer;transition:all 0.2s" onmouseover="this.style.borderColor='var(--gray)'" onmouseout="this.style.borderColor='var(--border)'">Reject Non-Essential</button>
+            </div>
+          </div>
+
+          <div id="save-msg" class="cookie-saved">✓ Preferences saved!</div>
+        </div>
+
+        <div class="policy-section" id="c6">
+          <h2><span class="sn">6</span>Browser Controls</h2>
+          <p>In addition to the preference panel above, you can control cookies through your browser settings. Most browsers allow you to:</p>
+          <ul>
+            <li>View and delete existing cookies;</li>
+            <li>Block all cookies or specific types of cookies;</li>
+            <li>Set alerts when cookies are being placed.</li>
+          </ul>
+          <p>Please note that blocking all cookies may affect the functionality of our website and some features may not work as intended. Guidance for major browsers:</p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:0.8rem;margin-top:1rem">
+            <a href="https://support.google.com/chrome/answer/95647" target="_blank" style="display:block;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center;color:var(--text);font-size:0.82rem;font-weight:600;text-decoration:none;transition:all 0.2s" onmouseover="this.style.borderColor='var(--cyan)';this.style.color='var(--cyan)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">🌐 Chrome</a>
+            <a href="https://support.mozilla.org/en-US/kb/cookies-information-websites-store-on-your-computer" target="_blank" style="display:block;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center;color:var(--text);font-size:0.82rem;font-weight:600;text-decoration:none;transition:all 0.2s" onmouseover="this.style.borderColor='var(--cyan)';this.style.color='var(--cyan)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">🦊 Firefox</a>
+            <a href="https://support.apple.com/en-gb/guide/safari/sfri11471/mac" target="_blank" style="display:block;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center;color:var(--text);font-size:0.82rem;font-weight:600;text-decoration:none;transition:all 0.2s" onmouseover="this.style.borderColor='var(--cyan)';this.style.color='var(--cyan)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">🧭 Safari</a>
+            <a href="https://support.microsoft.com/en-us/microsoft-edge/delete-cookies-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" style="display:block;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center;color:var(--text);font-size:0.82rem;font-weight:600;text-decoration:none;transition:all 0.2s" onmouseover="this.style.borderColor='var(--cyan)';this.style.color='var(--cyan)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text)'">🔷 Edge</a>
+          </div>
+          <p style="margin-top:1.2rem">You can also opt out of interest-based advertising by visiting <a href="https://youronlinechoices.eu" style="color:var(--cyan)" target="_blank">Your Online Choices</a> or the <a href="https://optout.networkadvertising.org" style="color:var(--cyan)" target="_blank">Network Advertising Initiative</a>.</p>
+        </div>
+
+        <div class="policy-section" id="c7">
+          <h2><span class="sn">7</span>Third-Party Cookies</h2>
+          <p>Some cookies on our website are set by third-party services. We do not control these cookies and they are subject to the privacy policies of the respective third parties:</p>
+          <table class="p-table">
+            <thead><tr><th>Third Party</th><th>Service</th><th>Privacy Policy</th></tr></thead>
+            <tbody>
+              <tr><td>Google</td><td>Google Analytics, Google Ads</td><td><a href="https://policies.google.com/privacy" style="color:var(--cyan)" target="_blank">policies.google.com/privacy</a></td></tr>
+              <tr><td>Meta (Facebook)</td><td>Facebook Pixel</td><td><a href="https://www.facebook.com/privacy/policy" style="color:var(--cyan)" target="_blank">facebook.com/privacy/policy</a></td></tr>
+              <tr><td>LinkedIn</td><td>LinkedIn Insight Tag</td><td><a href="https://www.linkedin.com/legal/privacy-policy" style="color:var(--cyan)" target="_blank">linkedin.com/legal/privacy-policy</a></td></tr>
+              <tr><td>Hotjar</td><td>Heatmaps & Session Recording</td><td><a href="https://www.hotjar.com/legal/policies/privacy" style="color:var(--cyan)" target="_blank">hotjar.com/legal/policies/privacy</a></td></tr>
+              <tr><td>Intercom</td><td>Live Chat</td><td><a href="https://www.intercom.com/legal/privacy" style="color:var(--cyan)" target="_blank">intercom.com/legal/privacy</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="policy-section" id="c8">
+          <h2><span class="sn">8</span>Policy Updates</h2>
+          <p>We may update this Cookie Policy from time to time to reflect changes in the cookies we use, new regulatory requirements, or improvements to our website. When we make material changes, we will update the "Last Updated" date at the top of this page and, where appropriate, display a notice on our website.</p>
+          <p>We encourage you to review this policy periodically. The current version will always be available at this URL.</p>
+        </div>
+
+        <div class="policy-section" id="c9">
+          <h2><span class="sn">9</span>Contact Us</h2>
+          <p>If you have any questions about our use of cookies, please contact:</p>
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;margin-top:1rem">
+            <p style="margin:0"><strong style="color:var(--white)">Data Protection Officer – TechNova Ltd</strong><br/>London, United Kingdom, United Kingdom<br/>Email: <a href="/cdn-cgi/l/email-protection#e191938897808298a1958482898f8e9780cc948acf828e8c" style="color:var(--cyan)"><span class="__cf_email__" data-cfemail="59292b302f383a20192d3c3a3137362f38742c32773a3634">[email&#160;protected]</span></a><br/>Phone: +44 12 3456 7890</p>
+          </div>
+          <p style="margin-top:1.2rem">You also have the right to lodge a complaint with the <strong style="color:var(--white)">Information Commissioner's Office (ICO)</strong>: <a href="https://ico.org.uk" style="color:var(--cyan)" target="_blank">ico.org.uk</a> | 0303 123 1113</p>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:3rem">
+          <a href="privacy_policy.html" style="display:block;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.4rem;text-decoration:none;transition:all 0.3s" onmouseover="this.style.borderColor='rgba(0,212,255,0.35)'" onmouseout="this.style.borderColor='var(--border)'">
+            <div style="font-size:1.5rem;margin-bottom:0.5rem">🔒</div>
+            <div style="font-family:var(--font-h);font-weight:700;color:var(--white);margin-bottom:0.3rem">Privacy Policy</div>
+            <div style="font-size:0.82rem;color:var(--gray)">How we handle your personal data →</div>
+          </a>
+          <a href="terms&conditions.html" style="display:block;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.4rem;text-decoration:none;transition:all 0.3s" onmouseover="this.style.borderColor='rgba(0,212,255,0.35)'" onmouseout="this.style.borderColor='var(--border)'">
+            <div style="font-size:1.5rem;margin-bottom:0.5rem">📄</div>
+            <div style="font-family:var(--font-h);font-weight:700;color:var(--white);margin-bottom:0.3rem">Terms & Conditions</div>
+            <div style="font-size:0.82rem;color:var(--gray)">Our Terms of Service →</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER ───────────────────────────────────────────────── -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="../index.html" class="nav-logo" style="display:inline-flex;margin-bottom:0.8rem">
+          <img src="../assets/logo-transparent.png" alt="TechNova Ltd" class="footer-logo-img">
+        </a>
+        <p class="footer-tagline">Engineering the Future of Digital Excellence. London-based digital transformation delivering enterprise-grade solutions globally.</p>
+        <div class="footer-socials"><a href="#" class="soc">in</a><a href="#" class="soc">𝕏</a><a href="#" class="soc">⌥</a><a href="#" class="soc">▶</a></div>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#web">Web Development</a></li>
+          <li><a href="#enterprise">Enterprise Software</a></li>
+          <li><a href="#mobile">Mobile Apps</a></li>
+          <li><a href="#salesforce">Salesforce CRM</a></li>
+          <li><a href="#cloud">Cloud & DevOps</a></li>
+          <li><a href="#uiux">UI/UX Design</a></li>
+          <li><a href="#ecom">E-Commerce</a></li>
+          <li><a href="#cyber">Cybersecurity</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="case_studies.html">Case Studies</a></li>
+          <li><a href="industries.html">Industries</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <div class="fc-row"><span class="ico">📍</span><span>London, United Kingdom</span></div>
+        <div class="fc-row"><span class="ico">✉</span><span>info@technova.com</span></div>
+        <div class="fc-row"><span class="ico">📞</span><span>+44 12 3456 7890</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 TechNova Ltd. All rights reserved. Registered in England & Wales No. 14873291</div>
+      <div class="footer-legal"><a href="privacy_policy.html">Privacy Policy</a><a href="terms&conditions.html">Terms &amp; Conditions</a><a href="cookie_policy.html">Cookie Policy</a></div>
+    </div>
+  </div>
+</footer>
+
+<button id="scroll-top">↑</button>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../js/main.js"></script>
+<script>
+// Cookie consent states
+const state = { functional: false, analytics: false, marketing: false };
+
+function toggleCat(head) {
+  const cat = head.closest('.cookie-cat');
+  cat.classList.toggle('open');
+}
+
+function toggleConsent(key) {
+  state[key] = !state[key];
+  const tog = document.getElementById('tog-' + key);
+  const lbl = document.getElementById('lbl-' + key);
+  tog.classList.toggle('on', state[key]);
+  lbl.textContent = state[key] ? 'Enabled' : 'Disabled';
+}
+
+function savePreferences() {
+  showSaved();
+}
+
+function acceptAll() {
+  ['functional','analytics','marketing'].forEach(k => {
+    state[k] = true;
+    document.getElementById('tog-' + k).classList.add('on');
+    document.getElementById('lbl-' + k).textContent = 'Enabled';
+  });
+  showSaved();
+}
+
+function rejectAll() {
+  ['functional','analytics','marketing'].forEach(k => {
+    state[k] = false;
+    document.getElementById('tog-' + k).classList.remove('on');
+    document.getElementById('lbl-' + k).textContent = 'Disabled';
+  });
+  showSaved();
+}

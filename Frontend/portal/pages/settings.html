@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Settings – TechNova Client Portal</title>
+<link rel="stylesheet" href="../css/portal.css">
+<style>
+.settings-layout { display:grid; grid-template-columns:220px 1fr; gap:1.5rem; }
+.settings-nav { background:var(--card); border:1px solid var(--border); border-radius:var(--r); padding:.75rem 0; height:fit-content; }
+.sn-link { display:flex; align-items:center; gap:10px; padding:.75rem 1.2rem; font-size:.88rem; color:var(--gray); transition:var(--trans); cursor:pointer; border-left:3px solid transparent; }
+.sn-link:hover { color:var(--white); background:rgba(255,255,255,0.03); }
+.sn-link.active { color:var(--cyan); background:rgba(0,212,255,0.07); border-left-color:var(--cyan); }
+.avatar-upload { position:relative; width:90px; height:90px; }
+.avatar-upload .avatar-img { width:90px; height:90px; border-radius:50%; background:linear-gradient(135deg,var(--cyan2),var(--cyan)); display:flex; align-items:center; justify-content:center; font-family:var(--font-h); font-weight:800; font-size:2rem; color:var(--navy); }
+.avatar-upload .avatar-edit { position:absolute; bottom:2px; right:2px; width:28px; height:28px; border-radius:50%; background:var(--card); border:2px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:.8rem; cursor:pointer; transition:var(--trans); }
+.avatar-upload .avatar-edit:hover { border-color:var(--cyan); }
+
+/* Toggle switch */
+.toggle-row { display:flex; align-items:center; justify-content:space-between; padding:1rem 0; border-bottom:1px solid rgba(26,52,96,0.4); }
+.toggle-row:last-child { border-bottom:none; }
+.toggle-info h4 { font-size:.9rem; font-weight:600; color:var(--white); }
+.toggle-info p  { font-size:.78rem; color:var(--gray); margin-top:2px; }
+.toggle-sw { position:relative; width:44px; height:24px; }
+.toggle-sw input { opacity:0; width:0; height:0; }
+.toggle-sw .slider { position:absolute; inset:0; background:var(--border); border-radius:12px; cursor:pointer; transition:.3s; }
+.toggle-sw .slider::before { content:''; position:absolute; width:18px; height:18px; left:3px; top:3px; background:var(--white); border-radius:50%; transition:.3s; }
+.toggle-sw input:checked + .slider { background:var(--cyan); }
+.toggle-sw input:checked + .slider::before { transform:translateX(20px); }
+
+.danger-zone { background:rgba(248,113,113,0.05); border:1px solid rgba(248,113,113,0.2); border-radius:var(--r); padding:1.5rem; }
+@media(max-width:800px){ .settings-layout { grid-template-columns:1fr; } .settings-nav { display:flex; overflow-x:auto; flex-direction:row; padding:.5rem; } .sn-link { border-left:none; border-bottom:2px solid transparent; white-space:nowrap; } .sn-link.active { border-left:none; border-bottom-color:var(--cyan); } }
+</style>
+</head>
+<body>
+<div class="portal-shell">
+  <div class="sidebar-overlay" onclick="closeSidebar()"></div>
+  <aside class="sidebar">
+    <a href="../index.html" class="sb-logo"><img src="../assets/logo-transparent.png" alt="TechNova Ltd"></a>
+    <div class="sb-client-badge"><div class="sb-avatar">JD</div><div><div class="sb-client-name">John Davidson</div><div class="sb-client-role">RetailMax Ltd</div></div></div>
+    <nav class="sb-group">
+      <div class="sb-group-label">Main</div>
+      <a href="dashboard.html" class="sb-link"><span class="sb-icon">🏠</span>Dashboard</a>
+      <a href="projects.html" class="sb-link"><span class="sb-icon">📋</span>Projects<span class="sb-badge">3</span></a>
+      <a href="messages.html" class="sb-link"><span class="sb-icon">💬</span>Messages<span class="sb-badge red">4</span></a>
+      <div class="sb-group-label" style="margin-top:1.2rem">Finance</div>
+      <a href="invoices.html" class="sb-link"><span class="sb-icon">🧾</span>Invoices &amp; Payments</a>
+      <div class="sb-group-label" style="margin-top:1.2rem">Support</div>
+      <a href="tickets.html" class="sb-link"><span class="sb-icon">🎫</span>Support Tickets<span class="sb-badge yellow">2</span></a>
+      <a href="documents.html" class="sb-link"><span class="sb-icon">📁</span>Documents</a>
+      <div class="sb-group-label" style="margin-top:1.2rem">Account</div>
+      <a href="settings.html" class="sb-link active"><span class="sb-icon">⚙️</span>Settings &amp; Profile</a>
+    </nav>
+    <div class="sb-bottom"><button class="sb-logout" onclick="signOut()"><span>🚪</span> Sign Out</button></div>
+  </aside>
+
+  <div class="portal-main">
+    <header class="portal-header">
+      <div class="ph-left"><button class="hamburger-portal" onclick="toggleSidebar()"><span></span><span></span><span></span></button><div><div class="ph-title">Settings &amp; Profile</div><div class="ph-crumb"><a href="dashboard.html">Dashboard</a> › Settings</div></div></div>
+      <div class="ph-right"><div class="notif-wrapper"><div class="notif-badge-btn" id="notif-btn" onclick="toggleNotifPanel()">🔔<span id="notif-count"></span></div><div id="notif-panel"><div class="notif-panel-head"><h4>📧 Email Notifications</h4><button class="notif-panel-clear" onclick="document.getElementById('notif-list').innerHTML='<p style=color:var(--gray);font-size:.84rem;padding:1rem>Cleared.</p>';document.getElementById('notif-count').style.display='none'">Clear</button></div><div id="notif-list"><p style="color:var(--gray);font-size:.84rem;padding:1rem 1.2rem">No notifications yet.</p></div></div></div><a href="settings.html" class="ph-user"><div class="ph-user-avatar">JD</div><div class="ph-user-name">John D.</div></a></div>
+    </header>
+
+    <main class="portal-body">
+      <div class="page-title-row">
+        <div><h1>Settings <span>&amp; Profile</span></h1><p>Manage your account, preferences, and security settings.</p></div>
+      </div>
+
+      <div class="settings-layout" data-tabs-parent>
+        <!-- Side nav -->
+        <div class="settings-nav">
+          <div class="sn-link active" onclick="switchSettings('profile',this)"><span>👤</span>My Profile</div>
+          <div class="sn-link" onclick="switchSettings('company',this)"><span>🏢</span>Company Details</div>
+          <div class="sn-link" onclick="switchSettings('notifications',this)"><span>🔔</span>Notifications</div>
+          <div class="sn-link" onclick="switchSettings('security',this)"><span>🔒</span>Security</div>
+          <div class="sn-link" onclick="switchSettings('billing',this)"><span>💳</span>Billing Preferences</div>
+          <div class="sn-link" onclick="switchSettings('danger',this)"><span>⚠️</span>Danger Zone</div>
+        </div>
+
+        <!-- Settings content -->
+        <div id="settings-content">
+
+          <!-- PROFILE -->
+          <div id="pane-profile" class="panel">
+            <div class="panel-head"><h3>👤 My Profile</h3><span class="badge active">Active Account</span></div>
+            <div class="panel-body">
+              <div style="display:flex;align-items:center;gap:1.5rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)">
+                <div class="avatar-upload">
+                  <div class="avatar-img">JD</div>
+                  <div class="avatar-edit" onclick="showToast('Photo upload coming soon','info')" title="Change photo">📷</div>
+                </div>
+                <div>
+                  <div style="font-family:var(--font-h);font-weight:800;font-size:1.2rem;color:var(--white)">John Davidson</div>
+                  <div style="font-size:.85rem;color:var(--gray);margin-top:3px"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="066c696e68286267706f6275696846746372676f6a6b677e28656928736d">[email&#160;protected]</a></div>
+                  <div style="font-size:.8rem;color:var(--cyan);margin-top:4px">Director of Digital · RetailMax Ltd</div>
+                  <div style="font-size:.75rem;color:var(--gray);margin-top:4px">Member since November 2025</div>
+                </div>
+              </div>
+              <form onsubmit="saveProfile(event)">
+                <div class="form-row">
+                  <div class="form-group"><label class="form-label">First Name</label><input type="text" class="form-input" value="John"></div>
+                  <div class="form-group"><label class="form-label">Last Name</label><input type="text" class="form-input" value="Davidson"></div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input" value="john.davidson@retailmax.co.uk"></div>
+                  <div class="form-group"><label class="form-label">Phone Number</label><input type="tel" class="form-input" value="+44 7700 900 456"></div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group"><label class="form-label">Job Title</label><input type="text" class="form-input" value="Director of Digital"></div>
+                  <div class="form-group"><label class="form-label">Department</label><input type="text" class="form-input" value="Digital & Technology"></div>
+                </div>
+                <div class="form-group"><label class="form-label">Timezone</label><select class="form-select"><option selected>Europe/London (UTC+0)</option><option>Europe/Paris (UTC+1)</option><option>America/New_York (UTC-5)</option></select></div>
+                <button type="submit" class="btn btn-primary">Save Profile</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- COMPANY -->
+          <div id="pane-company" class="panel" style="display:none">
+            <div class="panel-head"><h3>🏢 Company Details</h3></div>
+            <div class="panel-body">
+              <form onsubmit="saveProfile(event)">
+                <div class="form-group"><label class="form-label">Company Name</label><input type="text" class="form-input" value="RetailMax Ltd"></div>
+                <div class="form-row">
+                  <div class="form-group"><label class="form-label">Company Reg. No.</label><input type="text" class="form-input" value="09876543"></div>
+                  <div class="form-group"><label class="form-label">VAT Number</label><input type="text" class="form-input" value="GB 987 6543 21"></div>
+                </div>
+                <div class="form-group"><label class="form-label">Registered Address</label><textarea class="form-textarea" style="min-height:80px">45 Commerce Street
+Manchester
+M1 2AB
+United Kingdom</textarea></div>
+                <div class="form-row">
+                  <div class="form-group"><label class="form-label">Industry</label><select class="form-select"><option selected>Retail &amp; E-Commerce</option><option>FinTech</option><option>Healthcare</option><option>SaaS</option></select></div>
+                  <div class="form-group"><label class="form-label">Company Size</label><select class="form-select"><option>1–10</option><option>11–50</option><option selected>51–200</option><option>200+</option></select></div>
+                </div>
+                <div class="form-group"><label class="form-label">Primary Billing Email</label><input type="email" class="form-input" value="finance@retailmax.co.uk"></div>
+                <button type="submit" class="btn btn-primary">Save Company Details</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- NOTIFICATIONS -->
+          <div id="pane-notifications" class="panel" style="display:none">
+            <div class="panel-head"><h3>🔔 Notification Preferences</h3></div>
+            <div class="panel-body">
+              <p style="font-size:.85rem;color:var(--gray);margin-bottom:1.4rem">Control which notifications you receive and how they're delivered.</p>
+              <div class="toggle-row"><div class="toggle-info"><h4>Project Milestone Updates</h4><p>Get notified when a project milestone is completed or a sprint is delivered.</p></div><label class="toggle-sw"><input type="checkbox" checked onchange="showToast('Preference saved','success')"><span class="slider"></span></label></div>
+              <div class="toggle-row"><div class="toggle-info"><h4>New Messages</h4><p>Receive email notifications when your project team sends a message.</p></div><label class="toggle-sw"><input type="checkbox" checked onchange="showToast('Preference saved','success')"><span class="slider"></span></label></div>
+              <div class="toggle-row"><div class="toggle-info"><h4>Invoice &amp; Payment Alerts</h4><p>Get notified when a new invoice is issued or a payment is confirmed.</p></div><label class="toggle-sw"><input type="checkbox" checked onchange="showToast('Preference saved','success')"><span class="slider"></span></label></div>
+              <div class="toggle-row"><div class="toggle-info"><h4>Support Ticket Updates</h4><p>Receive updates when your ticket status changes or a reply is posted.</p></div><label class="toggle-sw"><input type="checkbox" checked onchange="showToast('Preference saved','success')"><span class="slider"></span></label></div>
+              <div class="toggle-row"><div class="toggle-info"><h4>Document Shared</h4><p>Notify me when TechNova shares a document in the portal.</p></div><label class="toggle-sw"><input type="checkbox" checked onchange="showToast('Preference saved','success')"><span class="slider"></span></label></div>
+              <div class="toggle-row"><div class="toggle-info"><h4>Weekly Project Summary</h4><p>Receive a weekly email summary of all active project progress.</p></div><label class="toggle-sw"><input type="checkbox" onchange="showToast('Preference saved','success')"><span class="slider"></span></label></div>
+              <div class="toggle-row"><div class="toggle-info"><h4>Marketing &amp; Updates</h4><p>TechNova news, case studies, and service announcements.</p></div><label class="toggle-sw"><input type="checkbox" onchange="showToast('Preference saved','success')"><span class="slider"></span></label></div>
+            </div>
+          </div>
+
+          <!-- SECURITY -->
+          <div id="pane-security" class="panel" style="display:none">
+            <div class="panel-head"><h3>🔒 Security Settings</h3></div>
+            <div class="panel-body">
+              <h4 style="font-family:var(--font-h);color:var(--white);margin-bottom:1rem">Change Password</h4>
+              <form onsubmit="savePw(event)" style="margin-bottom:2rem">
+                <div class="form-group"><label class="form-label">Current Password</label><input type="password" class="form-input" placeholder="Enter current password"></div>
+                <div class="form-row">
+                  <div class="form-group"><label class="form-label">New Password</label><input type="password" class="form-input" placeholder="Min 8 characters"></div>
+                  <div class="form-group"><label class="form-label">Confirm New Password</label><input type="password" class="form-input" placeholder="Repeat new password"></div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm">Update Password</button>
+              </form>
+
+              <h4 style="font-family:var(--font-h);color:var(--white);margin-bottom:.8rem">Two-Factor Authentication</h4>
+              <div class="toggle-row"><div class="toggle-info"><h4>Authenticator App (TOTP)</h4><p>Use Google Authenticator or Authy for login verification.</p></div><label class="toggle-sw"><input type="checkbox" onchange="showToast('2FA setup requires mobile app — feature coming soon','info')"><span class="slider"></span></label></div>
+              <div class="toggle-row"><div class="toggle-info"><h4>SMS Verification</h4><p>Receive a code via SMS on login from new devices.</p></div><label class="toggle-sw"><input type="checkbox" checked onchange="showToast('Preference saved','success')"><span class="slider"></span></label></div>
+
+              <h4 style="font-family:var(--font-h);color:var(--white);margin:1.5rem 0 .8rem">Active Sessions</h4>
+              <div style="background:var(--navy2);border:1px solid var(--border);border-radius:var(--r2);padding:1rem 1.2rem;margin-bottom:.6rem;display:flex;align-items:center;justify-content:space-between">
+                <div><div style="font-size:.88rem;font-weight:600;color:var(--white)">Chrome · macOS · Manchester, UK</div><div style="font-size:.75rem;color:var(--green);margin-top:2px">● Current session</div></div>
+              </div>
+              <div style="background:var(--navy2);border:1px solid var(--border);border-radius:var(--r2);padding:1rem 1.2rem;display:flex;align-items:center;justify-content:space-between">
+                <div><div style="font-size:.88rem;font-weight:600;color:var(--white)">Safari · iPhone · Manchester, UK</div><div style="font-size:.75rem;color:var(--gray);margin-top:2px">Last active: 4 hours ago</div></div>
+                <button class="btn btn-danger btn-sm" onclick="showToast('Session revoked','success')">Revoke</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- BILLING -->
+          <div id="pane-billing" class="panel" style="display:none">
+            <div class="panel-head"><h3>💳 Billing Preferences</h3></div>
+            <div class="panel-body">
+              <div style="background:var(--navy2);border:1px solid var(--border);border-radius:var(--r2);padding:1.2rem;margin-bottom:1.5rem">
+                <div style="font-size:.75rem;color:var(--gray);margin-bottom:6px;text-transform:uppercase;letter-spacing:1px">Saved Payment Method</div>
+                <div style="display:flex;align-items:center;gap:12px">
+                  <span style="font-size:1.6rem">💳</span>
+                  <div><div style="font-size:.92rem;font-weight:600;color:var(--white)">•••• •••• •••• 4242</div><div style="font-size:.78rem;color:var(--gray)">Visa · Expires 12/27 · Primary card</div></div>
+                  <span class="badge active" style="margin-left:auto">Active</span>
+                </div>
+              </div>
+              <form onsubmit="saveBilling(event)">
+                <div class="form-group"><label class="form-label">Billing Contact Name</label><input type="text" class="form-input" value="John Davidson"></div>
+                <div class="form-group"><label class="form-label">Billing Email</label><input type="email" class="form-input" value="finance@retailmax.co.uk"></div>
+                <div class="form-group"><label class="form-label">Purchase Order (PO) Number</label><input type="text" class="form-input" placeholder="If required for your accounts team" value="PO-2026-089"></div>
+                <div class="form-group"><label class="form-label">Preferred Payment Method</label><select class="form-select"><option selected>Bank Transfer (BACS)</option><option>Credit Card (Stripe)</option><option>PayPal</option></select></div>
+                <div class="toggle-row" style="padding:.75rem 0;border-bottom:none"><div class="toggle-info"><h4>Auto-pay invoices</h4><p>Automatically pay invoices on their due date using your saved card.</p></div><label class="toggle-sw"><input type="checkbox" onchange="showToast('Auto-pay preference saved','success')"><span class="slider"></span></label></div>
+                <button type="submit" class="btn btn-primary" style="margin-top:.75rem">Save Billing Preferences</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- DANGER ZONE -->
+          <div id="pane-danger" class="panel" style="display:none">
+            <div class="panel-head"><h3>⚠️ Danger Zone</h3></div>
+            <div class="panel-body">
+              <div class="danger-zone" style="margin-bottom:1.2rem">
+                <h4 style="color:var(--red);font-family:var(--font-h);margin-bottom:.5rem">Close Portal Account</h4>
+                <p style="font-size:.85rem;color:var(--gray);line-height:1.7;margin-bottom:1rem">Closing your portal account will remove your access immediately. Your project and invoice history will be retained by TechNova for 7 years in accordance with our data retention policy. This action cannot be undone.</p>
+                <button class="btn btn-danger" onclick="confirmAction('Are you sure you want to close your account? This action cannot be undone.', () => showToast('Account closure request submitted. Our team will contact you within 24 hours.','info',5000))">Close My Account</button>
+              </div>
+              <div class="danger-zone">
+                <h4 style="color:var(--yellow);font-family:var(--font-h);margin-bottom:.5rem">Request Data Export</h4>
+                <p style="font-size:.85rem;color:var(--gray);line-height:1.7;margin-bottom:1rem">Request an export of all your personal data held by TechNova Ltd in compliance with UK GDPR (Right of Access / Data Portability). You'll receive a secure download link within 30 days.</p>
+                <button class="btn btn-ghost" onclick="showToast('Data export request submitted. You\'ll receive a download link within 30 days.','success',5000)">Request Data Export</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../js/portal.js"></script>
+<script>
+const paneMap = { profile:'pane-profile', company:'pane-company', notifications:'pane-notifications', security:'pane-security', billing:'pane-billing', danger:'pane-danger' };
+function switchSettings(key, el) {
+  document.querySelectorAll('.sn-link').forEach(l => l.classList.remove('active'));
+  el.classList.add('active');
+  Object.values(paneMap).forEach(id => { const p = document.getElementById(id); if(p) p.style.display='none'; });
+  const target = document.getElementById(paneMap[key]);
+  if(target) target.style.display = 'block';
+}
+function saveProfile(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button[type="submit"]');
+  const orig = btn.textContent; btn.textContent = 'Saving…'; btn.disabled=true;
+  setTimeout(() => { btn.textContent = orig; btn.disabled=false; showToast('Changes saved successfully!','success'); }, 900);
+}
+function savePw(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button[type="submit"]');
+  btn.textContent = 'Updating…'; btn.disabled=true;
+  setTimeout(() => { btn.textContent='Update Password'; btn.disabled=false; showToast('Password updated successfully!','success'); }, 1200);
+}
