@@ -1,12 +1,49 @@
 const leadService = require('../services/leadService');
+const { Lead } = require('../models');
 const { successResponse, errorResponse } = require('../utils/responseFormatter');
 
-exports.createLead = async (req, res, next) => {
+exports.createLead = async (req, res) => {
     try {
-        const newLead = await leadService.createLead(req.body);
-        return successResponse(res, 201, 'Lead created successfully', newLead);
+        // 🚨 Grab ALL fields from the frontend request
+        const { 
+            Client_Name, 
+            Email, 
+            Contact_Number, 
+            Country, 
+            Industry, 
+            Service_Interested, 
+            Budget, 
+            Lead_Source, 
+            Status 
+        } = req.body;
+
+        const leadId = `LD-${Date.now()}`;
+
+        const newLead = await Lead.create({
+            Lead_ID: leadId,
+            Client_Name,
+            Email: Email || null,
+            Contact_Number: Contact_Number || null,
+            Country: Country || 'Unknown',
+            Industry: Industry || 'Unknown',
+            Service_Interested: Service_Interested || 'Unknown',
+            Budget: Budget || 0,
+            Lead_Source: Lead_Source || 'Direct',
+            Currency: 'USD', 
+            Status: Status || 'New'
+        });
+
+        res.status(201).json({
+            status: 'success',
+            data: newLead
+        });
+
     } catch (error) {
-        next(error);
+        console.error('Error creating lead:', error);
+        res.status(400).json({
+            status: 'error',
+            message: error.message
+        });
     }
 };
 
@@ -36,5 +73,24 @@ exports.convertLeadToProject = async (req, res, next) => {
         }
         // Otherwise, send it to the global error handler
         next(error);
+    }
+};
+
+exports.deleteLead = async (req, res) => {
+    try {
+        const lead = await Lead.findByPk(req.params.id);
+        
+        if (!lead) {
+            return res.status(404).json({ status: 'error', message: 'Lead not found' });
+        }
+        
+        await lead.destroy();
+        
+        res.status(200).json({ 
+            status: 'success', 
+            message: 'Lead permanently deleted.' 
+        });
+    } catch (error) {
+        res.status(500).json({ status: 'error', message: error.message });
     }
 };

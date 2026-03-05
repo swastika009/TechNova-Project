@@ -11,5 +11,6 @@ router.use(restrictTo('Super Admin', 'Delivery Manager', 'Sales/Admin'));
 router.post('/', leadController.createLead);
 router.get('/', leadController.getAllLeads);
 router.post('/:id/convert', leadController.convertLeadToProject);
+router.delete('/:id', leadController.deleteLead);
 
 module.exports = router;

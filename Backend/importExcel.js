@@ -45,12 +45,14 @@ const importData = async () => {
             const rawEmail = row.Email && row.Email !== 'Not Provided' ? row.Email : null;
             const rawContact = row.Contact_Number && row.Contact_Number !== 'Not Provided' ? row.Contact_Number : null;
 
-            // CREATE LEAD 
+           
+           // CREATE LEAD 
             const lead = await Lead.create({
                 Lead_ID: leadId,
                 Client_Name: row.Client_Name || `Unknown Client ${index}`,
                 Email: rawEmail,
                 Contact_Number: rawContact,
+                Country: row.Country || 'Unknown', 
                 Lead_Source: row.Lead_Source || 'Unknown',
                 Industry: row.Industry || 'Unknown',
                 Service_Interested: row.Service_Interested || 'Unknown',

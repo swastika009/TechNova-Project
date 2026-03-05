@@ -19,6 +19,10 @@ const Lead = sequelize.define('Lead', {
         type: DataTypes.STRING,
         allowNull: true 
     },
+    Country: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
     Lead_Source: {
         type: DataTypes.STRING,
         allowNull: true 

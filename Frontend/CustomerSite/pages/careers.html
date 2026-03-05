@@ -1,222 +1,686 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Careers – TechNova Ltd</title>
-<link rel="stylesheet" href="../css/style.css">
-<style>
-.perk-card { background:var(--card); border:1px solid var(--border); border-radius:var(--r); padding:1.8rem; text-align:center; transition:all 0.3s; }
-.perk-card:hover { transform:translateY(-5px); border-color:rgba(0,212,255,0.25); }
-.perk-icon { font-size:2.4rem; margin-bottom:1rem; }
-.perk-title { font-family:var(--font-h); font-weight:700; color:var(--white); margin-bottom:0.5rem; }
-.perk-text  { font-size:0.87rem; color:var(--gray); line-height:1.68; }
-.job-row {
-  background:var(--card); border:1px solid var(--border); border-radius:var(--r);
-  padding:1.5rem 2rem; display:flex; align-items:center; justify-content:space-between;
-  gap:1rem; transition:all 0.3s; margin-bottom:1rem;
-}
-.job-row:hover { border-color:rgba(0,212,255,0.3); transform:translateX(6px); box-shadow:0 8px 24px rgba(0,0,0,0.2); }
-.job-dept { font-size:0.72rem; font-weight:700; color:var(--cyan); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:5px; }
-.job-title { font-family:var(--font-h); font-weight:700; color:var(--white); font-size:1rem; }
-.job-meta  { display:flex; gap:0.6rem; flex-wrap:wrap; margin-top:0.5rem; }
-.job-apply {
-  display:flex; align-items:center; gap:8px; padding:10px 22px; border-radius:6px;
-  background:transparent; border:1.5px solid var(--border); color:var(--text);
-  font-size:0.85rem; font-weight:600; cursor:pointer; transition:all 0.2s; flex-shrink:0; text-decoration:none;
-}
-.job-row:hover .job-apply { border-color:var(--cyan); color:var(--cyan); }
-.dept-section { margin-bottom:3rem; }
-.dept-heading { font-family:var(--font-h); font-size:0.78rem; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--gray); margin-bottom:1.2rem; padding-bottom:0.8rem; border-bottom:1px solid var(--border); }
-</style>
-</head>
-<body>
-
-<!-- ── NAVBAR ─────────────────────────── -->
-<nav id="navbar">
-  <div class="nav-inner">
-    <a href="../index.html" class="nav-logo">
-      <img src="../assets/logo-transparent.png" alt="TechNova Ltd" class="logo-img" />
-    </a>
-    <ul class="nav-links">
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li class="nav-dd">
-        <a href="services.html">Services ▾</a>
-        <div class="dd-menu">
-          <a href="services.html#web"><span>🌐</span>Web Development</a>
-          <a href="services.html#enterprise"><span>🏢</span>Enterprise Software</a>
-          <a href="services.html#mobile"><span>📱</span>Mobile Apps</a>
-          <a href="services.html#salesforce"><span>☁️</span>Salesforce CRM</a>
-          <a href="services.html#cloud"><span>🔧</span>Cloud & DevOps</a>
-          <a href="services.html#uiux"><span>🎨</span>UI/UX Design</a>
-          <a href="services.html#ecom"><span>🛒</span>E-Commerce</a>
-          <a href="services.html#cyber"><span>🔐</span>Cybersecurity</a>
-        </div>
-      </li>
-      <li><a href="industries.html">Industries</a></li>
-      <li><a href="case_studies.html">Case Studies</a></li>
-      <li><a href="careers.html" class="active">Careers</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-    <div class="nav-actions">
-      <a href="contact.html" class="btn btn-primary">Get a Consultation</a>
-    </div>
-    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
-      <span></span><span></span><span></span>
-    </div>
-  </div>
-</nav>
-
-<!-- Mobile menu -->
-<div id="mob-menu">
-  <a href="../index.html" class="mob-link">Home</a>
-  <a href="about.html" class="mob-link">About</a>
-  <a href="services.html" class="mob-link">Services</a>
-  <a href="industries.html" class="mob-link">Industries</a>
-  <a href="case_studies.html" class="mob-link">Case Studies</a>
-  <a href="careers.html" class="mob-link">Careers</a>
-  <a href="contact.html" class="mob-link">Contact</a>
-  <a href="contact.html" class="btn btn-primary">Get a Consultation</a>
-</div>
-
-<div class="page-hero">
-  <div class="page-hero-bg"></div><div class="page-hero-grid"></div>
-  <div class="container page-hero-content">
-    <div class="breadcrumb"><a href="../index.html">Home</a><span>›</span><span>Careers</span></div>
-    <div class="label">Join Our Team</div>
-    <h1>Build the Future of<br/><span>Digital Excellence</span></h1>
-    <p class="lead">Work with world-class engineers, designers, and strategists on enterprise projects that matter. Remote-first culture, learning investment, and a team that genuinely cares.</p>
-    <div style="display:flex;gap:1rem;flex-wrap:wrap">
-      <a href="#open-roles" class="btn btn-primary btn-lg">View Open Roles →</a>
-    </div>
-  </div>
-</div>
-
-<!-- PERKS -->
-<section class="section" style="background:var(--navy3)">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:4rem" class="reveal">
-      <div class="label" style="justify-content:center">Why TechNova</div>
-      <h2 class="h2">A Place to <span>Grow, Build & Thrive</span></h2>
-      <p class="lead" style="margin:1rem auto 0">We invest in our people as much as we invest in our clients.</p>
-    </div>
-    <div class="grid-4">
-      <div class="perk-card reveal"><div class="perk-icon">🌍</div><div class="perk-title">Remote-First Culture</div><div class="perk-text">Work from anywhere in the UK or globally. Flexible hours built around outcomes, not office attendance.</div></div>
-      <div class="perk-card reveal d1"><div class="perk-icon">📚</div><div class="perk-title">Learning & Certification</div><div class="perk-text">Fully funded certifications for AWS, Azure, Salesforce, and more. Annual learning budget for every team member.</div></div>
-      <div class="perk-card reveal d2"><div class="perk-icon">💰</div><div class="perk-title">Competitive Compensation</div><div class="perk-text">Market-leading salaries, performance bonuses, and equity participation for senior roles.</div></div>
-      <div class="perk-card reveal d3"><div class="perk-icon">🚀</div><div class="perk-title">High-Impact Projects</div><div class="perk-text">Work on enterprise-scale projects across FinTech, healthcare, cloud, and AI with real measurable outcomes.</div></div>
-      <div class="perk-card reveal"><div class="perk-icon">🤝</div><div class="perk-title">Collaborative Team</div><div class="perk-text">A tight-knit, diverse team of specialists who share knowledge, support each other, and celebrate wins together.</div></div>
-      <div class="perk-card reveal d1"><div class="perk-icon">⚡</div><div class="perk-title">Fast Career Growth</div><div class="perk-text">Clear progression paths, regular performance reviews, and stretch opportunities for those who want to lead.</div></div>
-      <div class="perk-card reveal d2"><div class="perk-icon">🏥</div><div class="perk-title">Health & Wellbeing</div><div class="perk-text">Private healthcare, mental health support, and wellbeing allowance to keep you at your best.</div></div>
-      <div class="perk-card reveal d3"><div class="perk-icon">🎉</div><div class="perk-title">Team Events</div><div class="perk-text">Quarterly team gatherings, hackathons, tech talks, and annual retreats connecting our global team.</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- OPEN ROLES -->
-<section class="section" id="open-roles" style="background:var(--navy)">
-  <div class="container">
-    <div style="text-align:center;margin-bottom:4rem" class="reveal">
-      <div class="label" style="justify-content:center">Open Positions</div>
-      <h2 class="h2">We're <span>Actively Hiring</span></h2>
-      <p class="lead" style="margin:1rem auto 0">All roles are remote-first with flexible work arrangements. Dynamic listings updated as the company grows.</p>
-    </div>
-
-    <div class="dept-section reveal">
-      <div class="dept-heading">Engineering</div>
-      <div class="job-row"><div><div class="job-dept">Frontend</div><div class="job-title">Frontend Developer</div><div class="job-meta"><span class="tag tag-cyan">React / Angular</span><span class="tag tag-cyan">Full-time</span><span class="tag tag-cyan">Remote</span></div></div><a href="contact.html" class="job-apply">Apply Now →</a></div>
-      <div class="job-row"><div><div class="job-dept">Backend</div><div class="job-title">Backend Engineer</div><div class="job-meta"><span class="tag tag-cyan">.NET / Node.js</span><span class="tag tag-cyan">Full-time</span><span class="tag tag-cyan">London / Remote</span></div></div><a href="contact.html" class="job-apply">Apply Now →</a></div>
-      <div class="job-row"><div><div class="job-dept">Mobile</div><div class="job-title">Mobile App Developer</div><div class="job-meta"><span class="tag tag-cyan">React Native / Flutter</span><span class="tag tag-cyan">Full-time</span><span class="tag tag-cyan">Remote</span></div></div><a href="contact.html" class="job-apply">Apply Now →</a></div>
-      <div class="job-row"><div><div class="job-dept">QA</div><div class="job-title">QA Automation Engineer</div><div class="job-meta"><span class="tag tag-cyan">Cypress / Selenium</span><span class="tag tag-cyan">Full-time</span><span class="tag tag-cyan">Remote</span></div></div><a href="contact.html" class="job-apply">Apply Now →</a></div>
-    </div>
-
-    <div class="dept-section reveal">
-      <div class="dept-heading">Cloud & Infrastructure</div>
-      <div class="job-row"><div><div class="job-dept">DevOps</div><div class="job-title">DevOps Engineer</div><div class="job-meta"><span class="tag tag-cyan">AWS / Azure</span><span class="tag tag-cyan">Full-time</span><span class="tag tag-cyan">Remote</span></div></div><a href="contact.html" class="job-apply">Apply Now →</a></div>
-      <div class="job-row"><div><div class="job-dept">Cloud</div><div class="job-title">Cloud Architect</div><div class="job-meta"><span class="tag tag-cyan">AWS / Azure Certified</span><span class="tag tag-cyan">Senior</span><span class="tag tag-cyan">Remote</span></div></div><a href="contact.html" class="job-apply">Apply Now →</a></div>
-      <div class="job-row"><div><div class="job-dept">Security</div><div class="job-title">Cybersecurity Specialist</div><div class="job-meta"><span class="tag tag-cyan">Pen Testing</span><span class="tag tag-cyan">GDPR</span><span class="tag tag-cyan">Senior</span></div></div><a href="contact.html" class="job-apply">Apply Now →</a></div>
-    </div>
-
-    <div class="dept-section reveal">
-      <div class="dept-heading">CRM & Consulting</div>
-      <div class="job-row"><div><div class="job-dept">CRM</div><div class="job-title">Salesforce Consultant / Developer</div><div class="job-meta"><span class="tag tag-cyan">Certified</span><span class="tag tag-cyan">Full-time</span><span class="tag tag-cyan">Remote</span></div></div><a href="contact.html" class="job-apply">Apply Now →</a></div>
-    </div>
-
-    <div class="dept-section reveal">
-      <div class="dept-heading">Design & Strategy</div>
-      <div class="job-row"><div><div class="job-dept">Design</div><div class="job-title">UI/UX Designer</div><div class="job-meta"><span class="tag tag-cyan">Figma</span><span class="tag tag-cyan">Product Design</span><span class="tag tag-cyan">Full-time</span></div></div><a href="contact.html" class="job-apply">Apply Now →</a></div>
-      <div class="job-row"><div><div class="job-dept">Strategy</div><div class="job-title">Business Analyst</div><div class="job-meta"><span class="tag tag-cyan">Agile</span><span class="tag tag-cyan">BRD / SRS</span><span class="tag tag-cyan">Full-time</span></div></div><a href="contact.html" class="job-apply">Apply Now →</a></div>
-    </div>
-
-  </div>
-</section>
-
-<!-- PROCESS -->
-<section class="section" style="background:var(--card)">
-  <div class="container" style="max-width:800px">
-    <div style="text-align:center;margin-bottom:4rem" class="reveal">
-      <div class="label" style="justify-content:center">How to Apply</div>
-      <h2 class="h2">Our Hiring <span>Process</span></h2>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:1.5rem">
-      <div style="display:flex;align-items:flex-start;gap:1.5rem;padding:1.5rem;background:var(--navy);border:1px solid var(--border);border-radius:var(--r)" class="reveal"><div class="step-num">1</div><div><div style="font-family:var(--font-h);font-weight:700;color:var(--white);margin-bottom:0.4rem">Apply Online</div><div style="font-size:0.9rem;color:var(--gray);line-height:1.65">Submit your CV and a short note about why you want to join TechNova. No lengthy cover letters — just your work and your story.</div></div></div>
-      <div style="display:flex;align-items:flex-start;gap:1.5rem;padding:1.5rem;background:var(--navy);border:1px solid var(--border);border-radius:var(--r)" class="reveal d1"><div class="step-num">2</div><div><div style="font-family:var(--font-h);font-weight:700;color:var(--white);margin-bottom:0.4rem">Intro Call (30 min)</div><div style="font-size:0.9rem;color:var(--gray);line-height:1.65">A quick chat with our talent team to learn about you, your experience, and what you're looking for. We'll tell you more about the role and TechNova.</div></div></div>
-      <div style="display:flex;align-items:flex-start;gap:1.5rem;padding:1.5rem;background:var(--navy);border:1px solid var(--border);border-radius:var(--r)" class="reveal d2"><div class="step-num">3</div><div><div style="font-family:var(--font-h);font-weight:700;color:var(--white);margin-bottom:0.4rem">Technical Interview</div><div style="font-size:0.9rem;color:var(--gray);line-height:1.65">A practical, real-world task relevant to the role — no puzzles or trick questions. We want to see how you think and solve problems.</div></div></div>
-      <div style="display:flex;align-items:flex-start;gap:1.5rem;padding:1.5rem;background:var(--navy);border:1px solid var(--border);border-radius:var(--r)" class="reveal"><div class="step-num">4</div><div><div style="font-family:var(--font-h);font-weight:700;color:var(--white);margin-bottom:0.4rem">Final Interview</div><div style="font-size:0.9rem;color:var(--gray);line-height:1.65">Meet the team you'd be joining — a collaborative conversation about values, working style, and long-term goals.</div></div></div>
-      <div style="display:flex;align-items:flex-start;gap:1.5rem;padding:1.5rem;background:var(--navy);border:1px solid var(--border);border-radius:var(--r)" class="reveal d1"><div class="step-num">5</div><div><div style="font-family:var(--font-h);font-weight:700;color:var(--white);margin-bottom:0.4rem">Offer & Onboarding</div><div style="font-size:0.9rem;color:var(--gray);line-height:1.65">We move fast. If we're aligned, you'll have an offer within 5 business days, followed by a structured onboarding programme.</div></div></div>
-    </div>
-  </div>
-</section>
-
-<section class="cta-section"><div class="container"><p style="color:var(--cyan);font-weight:600;margin-bottom:1rem">Don't see the right role?</p><h2 class="h2" style="margin-bottom:1.2rem">Contact Us</h2><p class="lead" style="margin:0 auto 2.5rem;text-align:center">We're always on the lookout for exceptional talent. Reach out and let's start a conversation.</p><div class="cta-btns"><a href="contact.html" class="btn btn-primary btn-lg">Consult →</a></div></div></section>
-
-<!-- FOOTER ───────────────────────────────────────────────── -->
-<footer id="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <a href="../index.html" class="nav-logo" style="display:inline-flex;margin-bottom:0.8rem">
-          <img src="../assets/logo-transparent.png" alt="TechNova Ltd" class="footer-logo-img">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Careers – TechNova Ltd</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      .perk-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        padding: 1.8rem;
+        text-align: center;
+        transition: all 0.3s;
+      }
+      .perk-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(0, 212, 255, 0.25);
+      }
+      .perk-icon {
+        font-size: 2.4rem;
+        margin-bottom: 1rem;
+      }
+      .perk-title {
+        font-family: var(--font-h);
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 0.5rem;
+      }
+      .perk-text {
+        font-size: 0.87rem;
+        color: var(--gray);
+        line-height: 1.68;
+      }
+      .job-row {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        padding: 1.5rem 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        transition: all 0.3s;
+        margin-bottom: 1rem;
+      }
+      .job-row:hover {
+        border-color: rgba(0, 212, 255, 0.3);
+        transform: translateX(6px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      }
+      .job-dept {
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--cyan);
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+      }
+      .job-title {
+        font-family: var(--font-h);
+        font-weight: 700;
+        color: var(--white);
+        font-size: 1rem;
+      }
+      .job-meta {
+        display: flex;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+        margin-top: 0.5rem;
+      }
+      .job-apply {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 22px;
+        border-radius: 6px;
+        background: transparent;
+        border: 1.5px solid var(--border);
+        color: var(--text);
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        flex-shrink: 0;
+        text-decoration: none;
+      }
+      .job-row:hover .job-apply {
+        border-color: var(--cyan);
+        color: var(--cyan);
+      }
+      .dept-section {
+        margin-bottom: 3rem;
+      }
+      .dept-heading {
+        font-family: var(--font-h);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--gray);
+        margin-bottom: 1.2rem;
+        padding-bottom: 0.8rem;
+        border-bottom: 1px solid var(--border);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ── NAVBAR ─────────────────────────── -->
+    <nav id="navbar">
+      <div class="nav-inner">
+        <a href="../index.html" class="nav-logo">
+          <img
+            src="../assets/logo-transparent.png"
+            alt="TechNova Ltd"
+            class="logo-img"
+          />
         </a>
-        <p class="footer-tagline">Engineering the Future of Digital Excellence. London-based digital transformation delivering enterprise-grade solutions globally.</p>
-        <div class="footer-socials"><a href="#" class="soc">in</a><a href="#" class="soc">𝕏</a><a href="#" class="soc">⌥</a><a href="#" class="soc">▶</a></div>
-      </div>
-      <div class="footer-col">
-        <h5>Services</h5>
-        <ul>
-          <li><a href="#web">Web Development</a></li>
-          <li><a href="#enterprise">Enterprise Software</a></li>
-          <li><a href="#mobile">Mobile Apps</a></li>
-          <li><a href="#salesforce">Salesforce CRM</a></li>
-          <li><a href="#cloud">Cloud & DevOps</a></li>
-          <li><a href="#uiux">UI/UX Design</a></li>
-          <li><a href="#ecom">E-Commerce</a></li>
-          <li><a href="#cyber">Cybersecurity</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h5>Company</h5>
-        <ul>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="case_studies.html">Case Studies</a></li>
+        <ul class="nav-links">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li class="nav-dd">
+            <a href="services.html">Services ▾</a>
+            <div class="dd-menu">
+              <a href="services.html#web"><span>🌐</span>Web Development</a>
+              <a href="services.html#enterprise"
+                ><span>🏢</span>Enterprise Software</a
+              >
+              <a href="services.html#mobile"><span>📱</span>Mobile Apps</a>
+              <a href="services.html#salesforce"
+                ><span>☁️</span>Salesforce CRM</a
+              >
+              <a href="services.html#cloud"><span>🔧</span>Cloud & DevOps</a>
+              <a href="services.html#uiux"><span>🎨</span>UI/UX Design</a>
+              <a href="services.html#ecom"><span>🛒</span>E-Commerce</a>
+              <a href="services.html#cyber"><span>🔐</span>Cybersecurity</a>
+            </div>
+          </li>
           <li><a href="industries.html">Industries</a></li>
-          <li><a href="careers.html">Careers</a></li>
+          <li><a href="case_studies.html">Case Studies</a></li>
+          <li><a href="careers.html" class="active">Careers</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
+        <div class="nav-actions">
+          <a href="contact.html" class="btn btn-primary">Get a Consultation</a>
+        </div>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+          <span></span><span></span><span></span>
+        </div>
       </div>
-      <div class="footer-col">
-        <h5>Contact</h5>
-        <div class="fc-row"><span class="ico">📍</span><span>London, United Kingdom</span></div>
-        <div class="fc-row"><span class="ico">✉</span><span>info@technova.com</span></div>
-        <div class="fc-row"><span class="ico">📞</span><span>+44 12 3456 7890</span></div>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div id="mob-menu">
+      <a href="../index.html" class="mob-link">Home</a>
+      <a href="about.html" class="mob-link">About</a>
+      <a href="services.html" class="mob-link">Services</a>
+      <a href="industries.html" class="mob-link">Industries</a>
+      <a href="case_studies.html" class="mob-link">Case Studies</a>
+      <a href="careers.html" class="mob-link">Careers</a>
+      <a href="contact.html" class="mob-link">Contact</a>
+      <a href="contact.html" class="btn btn-primary">Get a Consultation</a>
+    </div>
+
+    <div class="page-hero">
+      <div class="page-hero-bg"></div>
+      <div class="page-hero-grid"></div>
+      <div class="container page-hero-content">
+        <div class="breadcrumb">
+          <a href="../index.html">Home</a><span>›</span><span>Careers</span>
+        </div>
+        <div class="label">Join Our Team</div>
+        <h1>Build the Future of<br /><span>Digital Excellence</span></h1>
+        <p class="lead">
+          Work with world-class engineers, designers, and strategists on
+          enterprise projects that matter. Remote-first culture, learning
+          investment, and a team that genuinely cares.
+        </p>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap">
+          <a href="#open-roles" class="btn btn-primary btn-lg"
+            >View Open Roles →</a
+          >
+        </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <div class="footer-copy">© 2026 TechNova Ltd. All rights reserved. Registered in England & Wales No. 14873291</div>
-      <div class="footer-legal"><a href="privacy_policy.html">Privacy Policy</a><a href="terms&conditions.html">Terms &amp; Conditions</a><a href="cookie_policy.html">Cookie Policy</a></div>
-    </div>
-  </div>
-</footer>
-<script src="../js/main.js"></script>
-</body>
+
+    <!-- PERKS -->
+    <section class="section" style="background: var(--navy3)">
+      <div class="container">
+        <div style="text-align: center; margin-bottom: 4rem" class="reveal">
+          <div class="label" style="justify-content: center">Why TechNova</div>
+          <h2 class="h2">A Place to <span>Grow, Build & Thrive</span></h2>
+          <p class="lead" style="margin: 1rem auto 0">
+            We invest in our people as much as we invest in our clients.
+          </p>
+        </div>
+        <div class="grid-4">
+          <div class="perk-card reveal">
+            <div class="perk-icon">🌍</div>
+            <div class="perk-title">Remote-First Culture</div>
+            <div class="perk-text">
+              Work from anywhere in the UK or globally. Flexible hours built
+              around outcomes, not office attendance.
+            </div>
+          </div>
+          <div class="perk-card reveal d1">
+            <div class="perk-icon">📚</div>
+            <div class="perk-title">Learning & Certification</div>
+            <div class="perk-text">
+              Fully funded certifications for AWS, Azure, Salesforce, and more.
+              Annual learning budget for every team member.
+            </div>
+          </div>
+          <div class="perk-card reveal d2">
+            <div class="perk-icon">💰</div>
+            <div class="perk-title">Competitive Compensation</div>
+            <div class="perk-text">
+              Market-leading salaries, performance bonuses, and equity
+              participation for senior roles.
+            </div>
+          </div>
+          <div class="perk-card reveal d3">
+            <div class="perk-icon">🚀</div>
+            <div class="perk-title">High-Impact Projects</div>
+            <div class="perk-text">
+              Work on enterprise-scale projects across FinTech, healthcare,
+              cloud, and AI with real measurable outcomes.
+            </div>
+          </div>
+          <div class="perk-card reveal">
+            <div class="perk-icon">🤝</div>
+            <div class="perk-title">Collaborative Team</div>
+            <div class="perk-text">
+              A tight-knit, diverse team of specialists who share knowledge,
+              support each other, and celebrate wins together.
+            </div>
+          </div>
+          <div class="perk-card reveal d1">
+            <div class="perk-icon">⚡</div>
+            <div class="perk-title">Fast Career Growth</div>
+            <div class="perk-text">
+              Clear progression paths, regular performance reviews, and stretch
+              opportunities for those who want to lead.
+            </div>
+          </div>
+          <div class="perk-card reveal d2">
+            <div class="perk-icon">🏥</div>
+            <div class="perk-title">Health & Wellbeing</div>
+            <div class="perk-text">
+              Private healthcare, mental health support, and wellbeing allowance
+              to keep you at your best.
+            </div>
+          </div>
+          <div class="perk-card reveal d3">
+            <div class="perk-icon">🎉</div>
+            <div class="perk-title">Team Events</div>
+            <div class="perk-text">
+              Quarterly team gatherings, hackathons, tech talks, and annual
+              retreats connecting our global team.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OPEN ROLES -->
+    <section class="section" id="open-roles" style="background: var(--navy)">
+      <div class="container">
+        <div style="text-align: center; margin-bottom: 4rem" class="reveal">
+          <div class="label" style="justify-content: center">
+            Open Positions
+          </div>
+          <h2 class="h2">We're <span>Actively Hiring</span></h2>
+          <p class="lead" style="margin: 1rem auto 0">
+            All roles are remote-first with flexible work arrangements. Dynamic
+            listings updated as the company grows.
+          </p>
+        </div>
+
+        <div class="dept-section reveal">
+          <div class="dept-heading">Engineering</div>
+          <div class="job-row">
+            <div>
+              <div class="job-dept">Frontend</div>
+              <div class="job-title">Frontend Developer</div>
+              <div class="job-meta">
+                <span class="tag tag-cyan">React / Angular</span
+                ><span class="tag tag-cyan">Full-time</span
+                ><span class="tag tag-cyan">Remote</span>
+              </div>
+            </div>
+            <a href="contact.html" class="job-apply">Apply Now →</a>
+          </div>
+          <div class="job-row">
+            <div>
+              <div class="job-dept">Backend</div>
+              <div class="job-title">Backend Engineer</div>
+              <div class="job-meta">
+                <span class="tag tag-cyan">.NET / Node.js</span
+                ><span class="tag tag-cyan">Full-time</span
+                ><span class="tag tag-cyan">London / Remote</span>
+              </div>
+            </div>
+            <a href="contact.html" class="job-apply">Apply Now →</a>
+          </div>
+          <div class="job-row">
+            <div>
+              <div class="job-dept">Mobile</div>
+              <div class="job-title">Mobile App Developer</div>
+              <div class="job-meta">
+                <span class="tag tag-cyan">React Native / Flutter</span
+                ><span class="tag tag-cyan">Full-time</span
+                ><span class="tag tag-cyan">Remote</span>
+              </div>
+            </div>
+            <a href="contact.html" class="job-apply">Apply Now →</a>
+          </div>
+          <div class="job-row">
+            <div>
+              <div class="job-dept">QA</div>
+              <div class="job-title">QA Automation Engineer</div>
+              <div class="job-meta">
+                <span class="tag tag-cyan">Cypress / Selenium</span
+                ><span class="tag tag-cyan">Full-time</span
+                ><span class="tag tag-cyan">Remote</span>
+              </div>
+            </div>
+            <a href="contact.html" class="job-apply">Apply Now →</a>
+          </div>
+        </div>
+
+        <div class="dept-section reveal">
+          <div class="dept-heading">Cloud & Infrastructure</div>
+          <div class="job-row">
+            <div>
+              <div class="job-dept">DevOps</div>
+              <div class="job-title">DevOps Engineer</div>
+              <div class="job-meta">
+                <span class="tag tag-cyan">AWS / Azure</span
+                ><span class="tag tag-cyan">Full-time</span
+                ><span class="tag tag-cyan">Remote</span>
+              </div>
+            </div>
+            <a href="contact.html" class="job-apply">Apply Now →</a>
+          </div>
+          <div class="job-row">
+            <div>
+              <div class="job-dept">Cloud</div>
+              <div class="job-title">Cloud Architect</div>
+              <div class="job-meta">
+                <span class="tag tag-cyan">AWS / Azure Certified</span
+                ><span class="tag tag-cyan">Senior</span
+                ><span class="tag tag-cyan">Remote</span>
+              </div>
+            </div>
+            <a href="contact.html" class="job-apply">Apply Now →</a>
+          </div>
+          <div class="job-row">
+            <div>
+              <div class="job-dept">Security</div>
+              <div class="job-title">Cybersecurity Specialist</div>
+              <div class="job-meta">
+                <span class="tag tag-cyan">Pen Testing</span
+                ><span class="tag tag-cyan">GDPR</span
+                ><span class="tag tag-cyan">Senior</span>
+              </div>
+            </div>
+            <a href="contact.html" class="job-apply">Apply Now →</a>
+          </div>
+        </div>
+
+        <div class="dept-section reveal">
+          <div class="dept-heading">CRM & Consulting</div>
+          <div class="job-row">
+            <div>
+              <div class="job-dept">CRM</div>
+              <div class="job-title">Salesforce Consultant / Developer</div>
+              <div class="job-meta">
+                <span class="tag tag-cyan">Certified</span
+                ><span class="tag tag-cyan">Full-time</span
+                ><span class="tag tag-cyan">Remote</span>
+              </div>
+            </div>
+            <a href="contact.html" class="job-apply">Apply Now →</a>
+          </div>
+        </div>
+
+        <div class="dept-section reveal">
+          <div class="dept-heading">Design & Strategy</div>
+          <div class="job-row">
+            <div>
+              <div class="job-dept">Design</div>
+              <div class="job-title">UI/UX Designer</div>
+              <div class="job-meta">
+                <span class="tag tag-cyan">Figma</span
+                ><span class="tag tag-cyan">Product Design</span
+                ><span class="tag tag-cyan">Full-time</span>
+              </div>
+            </div>
+            <a href="contact.html" class="job-apply">Apply Now →</a>
+          </div>
+          <div class="job-row">
+            <div>
+              <div class="job-dept">Strategy</div>
+              <div class="job-title">Business Analyst</div>
+              <div class="job-meta">
+                <span class="tag tag-cyan">Agile</span
+                ><span class="tag tag-cyan">BRD / SRS</span
+                ><span class="tag tag-cyan">Full-time</span>
+              </div>
+            </div>
+            <a href="contact.html" class="job-apply">Apply Now →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="section" style="background: var(--card)">
+      <div class="container" style="max-width: 800px">
+        <div style="text-align: center; margin-bottom: 4rem" class="reveal">
+          <div class="label" style="justify-content: center">How to Apply</div>
+          <h2 class="h2">Our Hiring <span>Process</span></h2>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 1.5rem">
+          <div
+            style="
+              display: flex;
+              align-items: flex-start;
+              gap: 1.5rem;
+              padding: 1.5rem;
+              background: var(--navy);
+              border: 1px solid var(--border);
+              border-radius: var(--r);
+            "
+            class="reveal"
+          >
+            <div class="step-num">1</div>
+            <div>
+              <div
+                style="
+                  font-family: var(--font-h);
+                  font-weight: 700;
+                  color: var(--white);
+                  margin-bottom: 0.4rem;
+                "
+              >
+                Apply Online
+              </div>
+              <div
+                style="font-size: 0.9rem; color: var(--gray); line-height: 1.65"
+              >
+                Submit your CV and a short note about why you want to join
+                TechNova. No lengthy cover letters — just your work and your
+                story.
+              </div>
+            </div>
+          </div>
+          <div
+            style="
+              display: flex;
+              align-items: flex-start;
+              gap: 1.5rem;
+              padding: 1.5rem;
+              background: var(--navy);
+              border: 1px solid var(--border);
+              border-radius: var(--r);
+            "
+            class="reveal d1"
+          >
+            <div class="step-num">2</div>
+            <div>
+              <div
+                style="
+                  font-family: var(--font-h);
+                  font-weight: 700;
+                  color: var(--white);
+                  margin-bottom: 0.4rem;
+                "
+              >
+                Intro Call (30 min)
+              </div>
+              <div
+                style="font-size: 0.9rem; color: var(--gray); line-height: 1.65"
+              >
+                A quick chat with our talent team to learn about you, your
+                experience, and what you're looking for. We'll tell you more
+                about the role and TechNova.
+              </div>
+            </div>
+          </div>
+          <div
+            style="
+              display: flex;
+              align-items: flex-start;
+              gap: 1.5rem;
+              padding: 1.5rem;
+              background: var(--navy);
+              border: 1px solid var(--border);
+              border-radius: var(--r);
+            "
+            class="reveal d2"
+          >
+            <div class="step-num">3</div>
+            <div>
+              <div
+                style="
+                  font-family: var(--font-h);
+                  font-weight: 700;
+                  color: var(--white);
+                  margin-bottom: 0.4rem;
+                "
+              >
+                Technical Interview
+              </div>
+              <div
+                style="font-size: 0.9rem; color: var(--gray); line-height: 1.65"
+              >
+                A practical, real-world task relevant to the role — no puzzles
+                or trick questions. We want to see how you think and solve
+                problems.
+              </div>
+            </div>
+          </div>
+          <div
+            style="
+              display: flex;
+              align-items: flex-start;
+              gap: 1.5rem;
+              padding: 1.5rem;
+              background: var(--navy);
+              border: 1px solid var(--border);
+              border-radius: var(--r);
+            "
+            class="reveal"
+          >
+            <div class="step-num">4</div>
+            <div>
+              <div
+                style="
+                  font-family: var(--font-h);
+                  font-weight: 700;
+                  color: var(--white);
+                  margin-bottom: 0.4rem;
+                "
+              >
+                Final Interview
+              </div>
+              <div
+                style="font-size: 0.9rem; color: var(--gray); line-height: 1.65"
+              >
+                Meet the team you'd be joining — a collaborative conversation
+                about values, working style, and long-term goals.
+              </div>
+            </div>
+          </div>
+          <div
+            style="
+              display: flex;
+              align-items: flex-start;
+              gap: 1.5rem;
+              padding: 1.5rem;
+              background: var(--navy);
+              border: 1px solid var(--border);
+              border-radius: var(--r);
+            "
+            class="reveal d1"
+          >
+            <div class="step-num">5</div>
+            <div>
+              <div
+                style="
+                  font-family: var(--font-h);
+                  font-weight: 700;
+                  color: var(--white);
+                  margin-bottom: 0.4rem;
+                "
+              >
+                Offer & Onboarding
+              </div>
+              <div
+                style="font-size: 0.9rem; color: var(--gray); line-height: 1.65"
+              >
+                We move fast. If we're aligned, you'll have an offer within 5
+                business days, followed by a structured onboarding programme.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="container">
+        <p style="color: var(--cyan); font-weight: 600; margin-bottom: 1rem">
+          Don't see the right role?
+        </p>
+        <h2 class="h2" style="margin-bottom: 1.2rem">Contact Us</h2>
+        <p class="lead" style="margin: 0 auto 2.5rem; text-align: center">
+          We're always on the lookout for exceptional talent. Reach out and
+          let's start a conversation.
+        </p>
+        <div class="cta-btns">
+          <a href="contact.html" class="btn btn-primary btn-lg">Consult →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER ───────────────────────────────────────────────── -->
+    <footer id="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <a
+              href="../index.html"
+              class="nav-logo"
+              style="display: inline-flex; margin-bottom: 0.8rem"
+            >
+              <img
+                src="../assets/logo-transparent.png"
+                alt="TechNova Ltd"
+                class="footer-logo-img"
+              />
+            </a>
+            <p class="footer-tagline">
+              Engineering the Future of Digital Excellence. London-based digital
+              transformation delivering enterprise-grade solutions globally.
+            </p>
+            <div class="footer-socials">
+              <a href="#" class="soc">in</a><a href="#" class="soc">𝕏</a
+              ><a href="#" class="soc">⌥</a><a href="#" class="soc">▶</a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h5>Services</h5>
+            <ul>
+              <li><a href="#web">Web Development</a></li>
+              <li><a href="#enterprise">Enterprise Software</a></li>
+              <li><a href="#mobile">Mobile Apps</a></li>
+              <li><a href="#salesforce">Salesforce CRM</a></li>
+              <li><a href="#cloud">Cloud & DevOps</a></li>
+              <li><a href="#uiux">UI/UX Design</a></li>
+              <li><a href="#ecom">E-Commerce</a></li>
+              <li><a href="#cyber">Cybersecurity</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h5>Company</h5>
+            <ul>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="case_studies.html">Case Studies</a></li>
+              <li><a href="industries.html">Industries</a></li>
+              <li><a href="careers.html">Careers</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h5>Contact</h5>
+            <div class="fc-row">
+              <span class="ico">📍</span><span>London, United Kingdom</span>
+            </div>
+            <div class="fc-row">
+              <span class="ico">✉</span><span>info@technova.com</span>
+            </div>
+            <div class="fc-row">
+              <span class="ico">📞</span><span>+44 12 3456 7890</span>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <div class="footer-copy">
+            © 2026 TechNova Ltd. All rights reserved. Registered in England &
+            Wales No. 14873291
+          </div>
+          <div class="footer-legal">
+            <a href="privacy_policy.html">Privacy Policy</a
+            ><a href="terms&conditions.html">Terms &amp; Conditions</a
+            ><a href="cookie_policy.html">Cookie Policy</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="../js/main.js"></script>
+  </body>
 </html>

@@ -12,7 +12,7 @@ const { authorizeRoles } = require('../middlewares/roleMiddleware');
 
 router.use(protect);
 
-router.get('/', authorizeRoles('Super Admin', 'Delivery Manager', 'Sales/Admin'), getAllProjects);
+router.get('/', authorizeRoles('Super Admin', 'Delivery Manager', 'Sales/Admin' , 'Client'), getAllProjects);
 
 router.get('/:id', authorizeRoles('Super Admin', 'Delivery Manager', 'Client'), getProjectById);
 

@@ -4,8 +4,8 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Admin Panel – TechNova Portal</title>
 <link rel="stylesheet" href="../css/portal.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-
 /* ── Admin-only badge ── */
 .admin-badge {
   display:inline-flex; align-items:center; gap:6px;
@@ -77,7 +77,6 @@
 <div class="portal-shell">
   <div class="sidebar-overlay" onclick="closeSidebar()"></div>
 
-  <!-- SIDEBAR -->
   <aside class="sidebar">
     <a href="../../CustomerSite/index.html" class="sb-logo"><img src="../../CustomerSite/assets/logo-transparent.png" alt="TechNova Ltd"></a>
     <div class="sb-client-badge">
@@ -89,37 +88,35 @@
     </div>
     <nav class="sb-group">
       <div class="sb-group-label">Portal</div>
-      <a href="dashboard.html" class="sb-link"><span class="sb-icon">🏠</span>Dashboard</a>
-      <a href="projects.html"  class="sb-link"><span class="sb-icon">📋</span>Projects</a>
-      <a href="messages.html"  class="sb-link"><span class="sb-icon">💬</span>Messages</a>
+      <a href="dashboard.html" class="sb-link"><span class="sb-icon"><i class="fa-solid fa-house"></i></span>Dashboard</a>
+      <a href="projects.html"  class="sb-link"><span class="sb-icon"><i class="fa-solid fa-clipboard-list"></i></span>Projects</a>
+      <a href="messages.html"  class="sb-link"><span class="sb-icon"><i class="fa-solid fa-comment-dots"></i></span>Messages</a>
 
       <div class="sb-group-label" style="margin-top:1.2rem">Admin</div>
-      <a href="admin-settings.html" class="sb-link active" style="color:var(--yellow);border-left-color:var(--yellow)"><span class="sb-icon">🛡</span>Admin Panel</a>
+      <a href="admin-settings.html" class="sb-link active" style="color:var(--yellow);border-left-color:var(--yellow)"><span class="sb-icon"><i class="fa-solid fa-shield-halved"></i></span>Admin Panel</a>
 
       <div class="sb-group-label" style="margin-top:1.2rem">Account</div>
-      <a href="settings.html"  class="sb-link"><span class="sb-icon">⚙️</span>Settings</a>
+      <a href="settings.html"  class="sb-link"><span class="sb-icon"><i class="fa-solid fa-gear"></i></span>Settings</a>
     </nav>
     <div class="sb-bottom">
-      <button class="sb-logout" onclick="signOut()"><span>🚪</span> Sign Out</button>
+      <button class="sb-logout" onclick="signOut()"><span><i class="fa-solid fa-arrow-right-from-bracket"></i></span> Sign Out</button>
     </div>
   </aside>
 
-  <!-- MAIN -->
   <div class="portal-main">
     <header class="portal-header">
       <div class="ph-left">
         <button class="hamburger-portal" onclick="toggleSidebar()"><span></span><span></span><span></span></button>
         <div>
-          <div class="ph-title">Admin Panel <span class="admin-badge" style="margin-left:.75rem;vertical-align:middle">🔐 Super Admin Only</span></div>
+          <div class="ph-title">Admin Panel <span class="admin-badge" style="margin-left:.75rem;vertical-align:middle"><i class="fa-solid fa-lock"></i> Super Admin Only</span></div>
           <div class="ph-crumb"><a href="dashboard.html">Portal</a> › Admin Panel</div>
         </div>
       </div>
       <div class="ph-right">
-        <!-- Notification bell -->
         <div class="notif-wrapper">
-          <div class="notif-badge-btn" id="notif-btn" onclick="toggleNotifPanel()">🔔<span id="notif-count"></span></div>
+          <div class="notif-badge-btn" id="notif-btn" onclick="toggleNotifPanel()"><i class="fa-solid fa-bell"></i><span id="notif-count"></span></div>
           <div id="notif-panel">
-            <div class="notif-panel-head"><h4>📧 Email Notifications</h4><button class="notif-panel-clear" onclick="clearAllNotifs()">Clear all</button></div>
+            <div class="notif-panel-head"><h4><i class="fa-solid fa-envelope"></i> Email Notifications</h4><button class="notif-panel-clear" onclick="clearAllNotifs()">Clear all</button></div>
             <div id="notif-list"><p style="color:var(--gray);font-size:.84rem;padding:1rem 1.2rem">No notifications yet.</p></div>
           </div>
         </div>
@@ -136,30 +133,25 @@
         </div>
       </div>
 
-      <!-- Admin nav -->
       <div class="admin-nav">
-        <button class="admin-nav-btn active" onclick="showSection('leads',this)">📥 Leads (FR-10)</button>
-        <button class="admin-nav-btn" onclick="showSection('convert',this)">🔄 Lead → Project (FR-11)</button>
-        <button class="admin-nav-btn" onclick="showSection('projects',this)">📋 Projects (FR-13)</button>
-        <button class="admin-nav-btn" onclick="showSection('resources',this)">👥 Resources (FR-12)</button>
-        <button class="admin-nav-btn" onclick="showSection('analytics',this)">📊 Analytics (FR-14)</button>
-        <button class="admin-nav-btn" onclick="showSection('content',this)">🌐 Content (FR-09)</button>
-        <button class="admin-nav-btn" onclick="showSection('audit',this)">📜 Audit Log</button>
+        <button class="admin-nav-btn active" onclick="showSection('leads',this)"><i class="fa-solid fa-inbox" style="margin-right:6px"></i> Leads (FR-10)</button>
+        <button class="admin-nav-btn" onclick="showSection('convert',this)"><i class="fa-solid fa-rotate" style="margin-right:6px"></i> Lead → Project (FR-11)</button>
+        <button class="admin-nav-btn" onclick="showSection('projects',this)"><i class="fa-solid fa-clipboard-list" style="margin-right:6px"></i> Projects (FR-13)</button>
+        <button class="admin-nav-btn" onclick="showSection('resources',this)"><i class="fa-solid fa-users" style="margin-right:6px"></i> Resources (FR-12)</button>
+        <button class="admin-nav-btn" onclick="showSection('analytics',this)"><i class="fa-solid fa-chart-simple" style="margin-right:6px"></i> Analytics (FR-14)</button>
+        <button class="admin-nav-btn" onclick="showSection('content',this)"><i class="fa-solid fa-globe" style="margin-right:6px"></i> Content (FR-09)</button>
+        <button class="admin-nav-btn" onclick="showSection('audit',this)"><i class="fa-solid fa-file-contract" style="margin-right:6px"></i> Audit Log</button>
       </div>
 
-      <!-- ═══════════════════════════════════════
-           SECTION: LEADS — FR-10
-      ═══════════════════════════════════════ -->
       <div id="sec-leads">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem;flex-wrap:wrap;gap:.75rem">
-          <div><h3 style="font-family:var(--font-h);color:var(--white)">📥 Lead Management</h3><p style="font-size:.82rem;color:var(--gray);margin-top:3px">FR-10 — View, filter, and export all incoming leads from the Contact Us form.</p></div>
+          <div><h3 style="font-family:var(--font-h);color:var(--white)"><i class="fa-solid fa-inbox"></i> Lead Management</h3><p style="font-size:.82rem;color:var(--gray);margin-top:3px">FR-10 — View, filter, and export all incoming leads from the Contact Us form.</p></div>
           <div style="display:flex;gap:.75rem;flex-wrap:wrap">
-            <button class="btn btn-ghost btn-sm" onclick="exportLeads()">⬇ Export CSV</button>
-            <button class="btn btn-primary btn-sm" onclick="openModal('modal-add-lead')">+ Add Lead</button>
+            <button class="btn btn-ghost btn-sm" onclick="exportLeads()"><i class="fa-solid fa-download"></i> Export CSV</button>
+            <button class="btn btn-primary btn-sm" onclick="openModal('modal-add-lead')"><i class="fa-solid fa-plus"></i> Add Lead</button>
           </div>
         </div>
 
-        <!-- Filters (BRD §7.2: country, status, lead source) -->
         <div class="filter-bar">
           <select class="filter-select" id="filter-country"><option value="">All Countries</option><option>United Kingdom</option><option>United States</option><option>Australia</option><option>India</option></select>
           <select class="filter-select" id="filter-status"><option value="">All Status</option><option>New</option><option>Qualified</option><option>Converted</option><option>Invalid</option></select>
@@ -169,159 +161,64 @@
         </div>
 
         <div class="panel">
-          <div class="panel-head"><h3>All Leads</h3><span style="font-size:.8rem;color:var(--gray)" id="lead-count">12 leads</span></div>
+          <div class="panel-head"><h3>All Leads</h3><span style="font-size:.8rem;color:var(--gray)" id="lead-count">0 leads</span></div>
           <div class="panel-body no-pad">
             <table class="data-table" id="leads-table">
               <thead><tr><th>Name</th><th>Email</th><th>Country</th><th>Industry</th><th>Service</th><th>Budget (USD)</th><th>Source</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
               <tbody id="leads-tbody">
-                <tr data-country="United Kingdom" data-status="New" data-source="Contact Form">
-                  <td class="td-bold">James Harrington</td><td class="td-gray">j.harrington@globalretail.co.uk</td><td>🇬🇧 UK</td><td>Retail</td><td>Web Development</td><td>$45,000</td><td>Contact Form</td><td>24 Feb 2026</td>
-                  <td><span class="badge inprogress status-new" style="border:none;background:rgba(0,212,255,.1);color:var(--cyan)">New</span></td>
-                  <td><div style="display:flex;gap:4px">
-                    <button class="btn btn-sm btn-ghost" onclick="qualifyLead(this,'James Harrington')">Qualify</button>
-                    <button class="btn btn-sm btn-primary" onclick="openConvertModal('James Harrington','United Kingdom','Web Development')">Convert →</button>
-                  </div></td>
-                </tr>
-                <tr data-country="United States" data-status="Qualified" data-source="LinkedIn">
-                  <td class="td-bold">Amanda Pierce</td><td class="td-gray">a.pierce@fintech-usa.com</td><td>🇺🇸 USA</td><td>FinTech</td><td>Salesforce CRM</td><td>$82,000</td><td>LinkedIn</td><td>22 Feb 2026</td>
-                  <td><span class="badge review" style="background:rgba(167,139,250,.1);color:var(--purple);border-color:rgba(167,139,250,.25)">Qualified</span></td>
-                  <td><div style="display:flex;gap:4px">
-                    <button class="btn btn-sm btn-primary" onclick="openConvertModal('Amanda Pierce','United States','Salesforce CRM')">Convert →</button>
-                  </div></td>
-                </tr>
-                <tr data-country="Australia" data-status="Converted" data-source="Referral">
-                  <td class="td-bold">Luke Brennan</td><td class="td-gray">luke@healthcore-au.com</td><td>🇦🇺 AUS</td><td>Healthcare</td><td>Enterprise Software</td><td>$120,000</td><td>Referral</td><td>10 Jan 2026</td>
-                  <td><span class="badge paid">Converted</span></td>
-                  <td><span style="font-size:.75rem;color:var(--green)">✓ Converted to project</span></td>
-                </tr>
-                <tr data-country="United Kingdom" data-status="New" data-source="Google Ads">
-                  <td class="td-bold">Priya Sharma</td><td class="td-gray">priya@edtech-uk.com</td><td>🇬🇧 UK</td><td>Education</td><td>Mobile App</td><td>$35,000</td><td>Google Ads</td><td>25 Feb 2026</td>
-                  <td><span class="badge inprogress" style="background:rgba(0,212,255,.1);color:var(--cyan)">New</span></td>
-                  <td><div style="display:flex;gap:4px">
-                    <button class="btn btn-sm btn-ghost" onclick="qualifyLead(this,'Priya Sharma')">Qualify</button>
-                    <button class="btn btn-sm btn-primary" onclick="openConvertModal('Priya Sharma','United Kingdom','Mobile App')">Convert →</button>
-                  </div></td>
-                </tr>
-                <tr data-country="United Kingdom" data-status="Qualified" data-source="Contact Form">
-                  <td class="td-bold">Thomas Webb</td><td class="td-gray">t.webb@logisticshub.co.uk</td><td>🇬🇧 UK</td><td>Logistics</td><td>Cloud & DevOps</td><td>$67,000</td><td>Contact Form</td><td>20 Feb 2026</td>
-                  <td><span class="badge review" style="background:rgba(167,139,250,.1);color:var(--purple);border-color:rgba(167,139,250,.25)">Qualified</span></td>
-                  <td><div style="display:flex;gap:4px">
-                    <button class="btn btn-sm btn-primary" onclick="openConvertModal('Thomas Webb','United Kingdom','Cloud & DevOps')">Convert →</button>
-                  </div></td>
-                </tr>
-                <tr data-country="United States" data-status="Invalid" data-source="Contact Form">
-                  <td class="td-bold" style="opacity:.6">invalid.test</td><td class="td-gray" style="opacity:.6">notanemail@@</td><td>🇺🇸 USA</td><td>SaaS</td><td>API Development</td><td>$5,000</td><td>Contact Form</td><td>23 Feb 2026</td>
-                  <td><span class="badge overdue">Invalid</span></td>
-                  <td><span style="font-size:.75rem;color:var(--red)">⚠ Invalid email</span></td>
-                </tr>
-                <tr data-country="United Kingdom" data-status="Converted" data-source="Referral">
-                  <td class="td-bold">John Davidson</td><td class="td-gray">john.davidson@retailmax.co.uk</td><td>🇬🇧 UK</td><td>Retail</td><td>Web Development</td><td>$52,000</td><td>Referral</td><td>05 Jan 2026</td>
-                  <td><span class="badge paid">Converted</span></td>
-                  <td><span style="font-size:.75rem;color:var(--green)">✓ Converted to project</span></td>
-                </tr>
-              </tbody>
+                 </tbody>
             </table>
           </div>
           <div class="panel-foot">
             <div style="display:flex;gap:1.2rem;font-size:.78rem;color:var(--gray)">
-              <span>🔵 New: 3</span><span>🟣 Qualified: 2</span><span>🟢 Converted: 2</span><span>🔴 Invalid: 1</span>
+              <span><i class="fa-solid fa-circle" style="color:var(--cyan); font-size:0.6rem"></i> New</span>
+              <span><i class="fa-solid fa-circle" style="color:var(--purple); font-size:0.6rem"></i> Qualified</span>
+              <span><i class="fa-solid fa-circle" style="color:var(--green); font-size:0.6rem"></i> Converted</span>
+              <span><i class="fa-solid fa-circle" style="color:var(--red); font-size:0.6rem"></i> Invalid</span>
             </div>
             <span style="font-size:.78rem;color:var(--gray)">Conversion rate: <strong style="color:var(--cyan)">50%</strong> (BRD §7.8)</span>
           </div>
         </div>
       </div>
 
-      <!-- ═══════════════════════════════════════
-           SECTION: LEAD → PROJECT CONVERSION — FR-11
-      ═══════════════════════════════════════ -->
       <div id="sec-convert" style="display:none">
-        <h3 style="font-family:var(--font-h);color:var(--white);margin-bottom:.4rem">🔄 Lead → Project Conversion</h3>
+        <h3 style="font-family:var(--font-h);color:var(--white);margin-bottom:.4rem"><i class="fa-solid fa-rotate"></i> Lead → Project Conversion</h3>
         <p style="font-size:.82rem;color:var(--gray);margin-bottom:1.4rem">FR-11 — One lead → one project only. Cannot convert twice. Project status auto-set to "New" on creation. (BRD §7.4)</p>
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
           <div class="panel">
             <div class="panel-head"><h3>Qualified Leads Ready to Convert</h3></div>
-            <div class="panel-body no-pad">
-              <div style="padding:1rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
-                <div><div style="font-weight:600;color:var(--white);font-size:.9rem">Amanda Pierce</div><div style="font-size:.76rem;color:var(--gray)">FinTech USA · Salesforce CRM · $82,000</div></div>
-                <button class="btn btn-primary btn-sm" onclick="openConvertModal('Amanda Pierce','United States','Salesforce CRM')">Convert →</button>
-              </div>
-              <div style="padding:1rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
-                <div><div style="font-weight:600;color:var(--white);font-size:.9rem">Thomas Webb</div><div style="font-size:.76rem;color:var(--gray)">Logistics UK · Cloud &amp; DevOps · $67,000</div></div>
-                <button class="btn btn-primary btn-sm" onclick="openConvertModal('Thomas Webb','United Kingdom','Cloud & DevOps')">Convert →</button>
-              </div>
-              <div style="padding:1rem 1.2rem;display:flex;align-items:center;justify-content:space-between">
-                <div><div style="font-weight:600;color:var(--white);font-size:.9rem">James Harrington</div><div style="font-size:.76rem;color:var(--gray)">Retail UK · Web Development · $45,000</div></div>
-                <button class="btn btn-primary btn-sm" onclick="openConvertModal('James Harrington','United Kingdom','Web Development')">Convert →</button>
-              </div>
+            <div class="panel-body no-pad" id="convert-qualified-list">
+               <div style="padding: 1.5rem; text-align:center; color:var(--gray);"><i class="fa-solid fa-spinner fa-spin"></i> Loading qualified leads...</div>
             </div>
           </div>
 
           <div class="panel">
-            <div class="panel-head"><h3>Recently Converted</h3><span class="badge active">2 projects created</span></div>
-            <div class="panel-body no-pad">
-              <div style="padding:1rem 1.2rem;border-bottom:1px solid var(--border)">
-                <div style="font-weight:600;color:var(--white);font-size:.9rem">John Davidson → E-Commerce Redesign</div>
-                <div style="font-size:.76rem;color:var(--gray)">Converted 09 Jan 2026 · Status: Active</div>
-                <span class="badge active" style="margin-top:.5rem">Active</span>
-              </div>
-              <div style="padding:1rem 1.2rem">
-                <div style="font-weight:600;color:var(--white);font-size:.9rem">Luke Brennan → Healthcare Portal</div>
-                <div style="font-size:.76rem;color:var(--gray)">Converted 14 Jan 2026 · Status: Completed</div>
-                <span class="badge complete" style="margin-top:.5rem">Completed</span>
-              </div>
+            <div class="panel-head"><h3>Recently Converted</h3><span class="badge active">Live Data</span></div>
+            <div class="panel-body no-pad" id="convert-recent-list">
+               <div style="padding: 1.5rem; text-align:center; color:var(--gray);"><i class="fa-solid fa-spinner fa-spin"></i> Loading converted leads...</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ═══════════════════════════════════════
-           SECTION: PROJECTS — FR-13
-      ═══════════════════════════════════════ -->
       <div id="sec-projects" style="display:none">
-        <h3 style="font-family:var(--font-h);color:var(--white);margin-bottom:.4rem">📋 Project Management</h3>
-        <p style="font-size:.82rem;color:var(--gray);margin-bottom:1.4rem">FR-13 — Update project progress and status. Status flow: New → Active → Completed / Delayed. (BRD §7.4)</p>
+        <h3 style="font-family:var(--font-h);color:var(--white);margin-bottom:.4rem"><i class="fa-solid fa-clipboard-list"></i> Project Management</h3>
+        
         <div class="panel">
-          <div class="panel-head"><h3>All Projects</h3><button class="btn btn-primary btn-sm" onclick="openModal('modal-new-project')">+ New Project</button></div>
+          <div class="panel-head"><h3>All Projects</h3><button class="btn btn-primary btn-sm" onclick="openModal('modal-new-project')"><i class="fa-solid fa-plus"></i> New Project</button></div>
           <div class="panel-body no-pad">
             <table class="data-table">
-              <thead><tr><th>Client</th><th>Project</th><th>Country</th><th>Value</th><th>Start</th><th>Deadline</th><th>Technology</th><th>Team</th><th>Progress</th><th>Status</th><th>Actions</th></tr></thead>
-              <tbody>
-                <tr>
-                  <td class="td-bold">RetailMax Ltd</td><td>E-Commerce Redesign</td><td>🇬🇧 UK</td><td>£42,500</td><td>10 Jan</td><td>15 Mar</td><td>React / Shopify</td><td>5</td>
-                  <td style="min-width:120px"><div class="progress-bar"><div class="progress-fill" data-w="68" style="width:68%"></div></div><div style="font-size:.7rem;color:var(--cyan);margin-top:3px">68%</div></td>
-                  <td><span class="badge inprogress">Active</span></td>
-                  <td><button class="btn btn-ghost btn-sm" onclick="openModal('modal-edit-proj1')">Edit</button></td>
-                </tr>
-                <tr>
-                  <td class="td-bold">RetailMax Ltd</td><td>Salesforce CRM</td><td>🇬🇧 UK</td><td>£28,000</td><td>01 Dec</td><td>28 Feb</td><td>Salesforce / Apex</td><td>3</td>
-                  <td style="min-width:120px"><div class="progress-bar"><div class="progress-fill green" data-w="92" style="width:92%"></div></div><div style="font-size:.7rem;color:var(--green);margin-top:3px">92%</div></td>
-                  <td><span class="badge review">Review</span></td>
-                  <td><button class="btn btn-ghost btn-sm" onclick="openModal('modal-edit-proj2')">Edit</button></td>
-                </tr>
-                <tr>
-                  <td class="td-bold">HealthCore UK</td><td>Healthcare Portal</td><td>🇦🇺 AUS</td><td>£95,000</td><td>14 Jan</td><td>30 Jan</td><td>.NET / Azure</td><td>6</td>
-                  <td style="min-width:120px"><div class="progress-bar"><div class="progress-fill green" data-w="100" style="width:100%"></div></div><div style="font-size:.7rem;color:var(--green);margin-top:3px">100%</div></td>
-                  <td><span class="badge complete">Completed</span></td>
-                  <td><button class="btn btn-ghost btn-sm" onclick="showToast('Project completed — read-only','info')">View</button></td>
-                </tr>
-                <tr>
-                  <td class="td-bold">RetailMax Ltd</td><td>Mobile App Phase 2</td><td>🇬🇧 UK</td><td>£55,000</td><td>03 Feb</td><td>30 Apr</td><td>React Native</td><td>6</td>
-                  <td style="min-width:120px"><div class="progress-bar"><div class="progress-fill yellow" data-w="12" style="width:12%"></div></div><div style="font-size:.7rem;color:var(--yellow);margin-top:3px">12%</div></td>
-                  <td><span class="badge inprogress">Active</span></td>
-                  <td><button class="btn btn-ghost btn-sm" onclick="openModal('modal-edit-proj3')">Edit</button></td>
-                </tr>
+              <thead><tr><th>Client</th><th>Project ID</th><th>Country</th><th>Value</th><th>Start</th><th>Deadline</th><th>Technology</th><th>Team</th><th>Progress</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="projects-tbody">
               </tbody>
             </table>
           </div>
         </div>
       </div>
 
-      <!-- ═══════════════════════════════════════
-           SECTION: RESOURCES — FR-12
-      ═══════════════════════════════════════ -->
       <div id="sec-resources" style="display:none">
-        <h3 style="font-family:var(--font-h);color:var(--white);margin-bottom:.4rem">👥 Resource Assignment</h3>
+        <h3 style="font-family:var(--font-h);color:var(--white);margin-bottom:.4rem"><i class="fa-solid fa-users"></i> Resource Assignment</h3>
         <p style="font-size:.82rem;color:var(--gray);margin-bottom:1.4rem">FR-12 — Assign team members to projects. Minimum 1 resource per project. Resource utilisation = Total Hours Logged ÷ Team Size. (BRD §7.8)</p>
         <div class="resource-grid" style="margin-bottom:1.5rem">
           <div class="resource-card">
@@ -335,7 +232,7 @@
             <div class="res-avatar" style="background:rgba(167,139,250,.15);color:var(--purple)">TR</div>
             <div class="res-name">Tom Richards</div><div class="res-role">Senior Developer</div>
             <div class="res-util"><div class="progress-meta"><span style="font-size:.7rem;color:var(--gray)">Utilisation</span><strong class="res-util-val" style="color:var(--yellow)">94%</strong></div><div class="progress-bar" style="height:5px"><div class="progress-fill yellow" data-w="94" style="width:94%"></div></div></div>
-            <div style="margin-top:.75rem;font-size:.73rem;color:var(--yellow)">⚠ Over-allocated</div>
+            <div style="margin-top:.75rem;font-size:.73rem;color:var(--yellow)"><i class="fa-solid fa-triangle-exclamation"></i> Over-allocated</div>
             <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:.75rem" onclick="showToast('Assignment updated','success')">Reassign</button>
           </div>
           <div class="resource-card">
@@ -360,58 +257,50 @@
             <button class="btn btn-ghost btn-sm" style="width:100%;margin-top:.75rem" onclick="showToast('Assignment updated','success')">Reassign</button>
           </div>
           <div class="resource-card" style="border-style:dashed;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:180px;cursor:pointer" onclick="openModal('modal-add-resource')">
-            <div style="font-size:2rem;opacity:.4;margin-bottom:.5rem">+</div>
+            <div style="font-size:2rem;opacity:.4;margin-bottom:.5rem"><i class="fa-solid fa-plus"></i></div>
             <div style="font-size:.85rem;color:var(--gray)">Add Team Member</div>
           </div>
         </div>
       </div>
 
-      <!-- ═══════════════════════════════════════
-           SECTION: ANALYTICS — FR-14
-      ═══════════════════════════════════════ -->
       <div id="sec-analytics" style="display:none">
-        <h3 style="font-family:var(--font-h);color:var(--white);margin-bottom:.4rem">📊 Analytics Dashboard</h3>
+        <h3 style="font-family:var(--font-h);color:var(--white);margin-bottom:.4rem"><i class="fa-solid fa-chart-simple"></i> Analytics Dashboard</h3>
         <p style="font-size:.82rem;color:var(--gray);margin-bottom:1.4rem">FR-14 — Leads by country, lead conversion rate, project status overview, revenue by country, resource utilisation. (BRD §7.8)</p>
 
-        <!-- Stat summary -->
         <div class="stat-grid" style="margin-bottom:1.5rem">
-          <div class="stat-card"><div class="stat-top"><div class="stat-icon cyan">📥</div></div><div class="stat-value">47</div><div class="stat-label">Total Leads (DA-1)</div></div>
-          <div class="stat-card green"><div class="stat-top"><div class="stat-icon green">🔄</div><span class="stat-change up">↑ 50%</span></div><div class="stat-value">50<em style="font-size:1rem">%</em></div><div class="stat-label">Lead Conversion Rate</div></div>
-          <div class="stat-card yellow"><div class="stat-top"><div class="stat-icon yellow">💷</div></div><div class="stat-value">£<em style="font-size:1.2rem">1.2M</em></div><div class="stat-label">Total Revenue (DA-2)</div></div>
-          <div class="stat-card"><div class="stat-top"><div class="stat-icon cyan">📋</div></div><div class="stat-value">24</div><div class="stat-label">Total Projects</div></div>
+          <div class="stat-card"><div class="stat-top"><div class="stat-icon cyan"><i class="fa-solid fa-inbox"></i></div></div><div class="stat-value">47</div><div class="stat-label">Total Leads (DA-1)</div></div>
+          <div class="stat-card green"><div class="stat-top"><div class="stat-icon green"><i class="fa-solid fa-rotate"></i></div><span class="stat-change up"><i class="fa-solid fa-arrow-up"></i> 50%</span></div><div class="stat-value">50<em style="font-size:1rem">%</em></div><div class="stat-label">Lead Conversion Rate</div></div>
+          <div class="stat-card yellow"><div class="stat-top"><div class="stat-icon yellow"><i class="fa-solid fa-sterling-sign"></i></div></div><div class="stat-value">£<em style="font-size:1.2rem">1.2M</em></div><div class="stat-label">Total Revenue (DA-2)</div></div>
+          <div class="stat-card"><div class="stat-top"><div class="stat-icon cyan"><i class="fa-solid fa-clipboard-list"></i></div></div><div class="stat-value">24</div><div class="stat-label">Total Projects</div></div>
         </div>
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem">
-          <!-- Leads by country -->
           <div class="panel">
-            <div class="panel-head"><h3>🌍 Leads by Country</h3><span style="font-size:.76rem;color:var(--gray)">DA-1 dataset</span></div>
+            <div class="panel-head"><h3><i class="fa-solid fa-earth-americas"></i> Leads by Country</h3><span style="font-size:.76rem;color:var(--gray)">DA-1 dataset</span></div>
             <div class="panel-body">
               <div class="chart-bar-horiz">
-                <div class="chart-row"><span class="chart-label">🇬🇧 United Kingdom</span><div class="chart-fill-wrap"><div class="chart-fill" style="width:62%;background:linear-gradient(90deg,var(--cyan2),var(--cyan))">62%</div></div><span class="chart-val">29 leads</span></div>
-                <div class="chart-row"><span class="chart-label">🇺🇸 United States</span><div class="chart-fill-wrap"><div class="chart-fill" style="width:21%;background:linear-gradient(90deg,#7c3aed,var(--purple))">21%</div></div><span class="chart-val">10 leads</span></div>
-                <div class="chart-row"><span class="chart-label">🇦🇺 Australia</span><div class="chart-fill-wrap"><div class="chart-fill" style="width:13%;background:linear-gradient(90deg,#d97706,var(--yellow))">13%</div></div><span class="chart-val">6 leads</span></div>
-                <div class="chart-row"><span class="chart-label">🌐 Other</span><div class="chart-fill-wrap"><div class="chart-fill" style="width:4%;background:linear-gradient(90deg,#4b5563,#6b7280)">4%</div></div><span class="chart-val">2 leads</span></div>
+                <div class="chart-row"><span class="chart-label">United Kingdom</span><div class="chart-fill-wrap"><div class="chart-fill" style="width:62%;background:linear-gradient(90deg,var(--cyan2),var(--cyan))">62%</div></div><span class="chart-val">29 leads</span></div>
+                <div class="chart-row"><span class="chart-label">United States</span><div class="chart-fill-wrap"><div class="chart-fill" style="width:21%;background:linear-gradient(90deg,#7c3aed,var(--purple))">21%</div></div><span class="chart-val">10 leads</span></div>
+                <div class="chart-row"><span class="chart-label">Australia</span><div class="chart-fill-wrap"><div class="chart-fill" style="width:13%;background:linear-gradient(90deg,#d97706,var(--yellow))">13%</div></div><span class="chart-val">6 leads</span></div>
+                <div class="chart-row"><span class="chart-label">Other</span><div class="chart-fill-wrap"><div class="chart-fill" style="width:4%;background:linear-gradient(90deg,#4b5563,#6b7280)">4%</div></div><span class="chart-val">2 leads</span></div>
               </div>
             </div>
           </div>
-
-          <!-- Revenue by country -->
           <div class="panel">
-            <div class="panel-head"><h3>💷 Revenue by Country</h3><span style="font-size:.76rem;color:var(--gray)">DA-2 dataset · SUM(Project_Value)</span></div>
+            <div class="panel-head"><h3><i class="fa-solid fa-sterling-sign"></i> Revenue by Country</h3><span style="font-size:.76rem;color:var(--gray)">DA-2 dataset</span></div>
             <div class="panel-body">
               <div class="chart-bar-horiz">
-                <div class="chart-row"><span class="chart-label">🇬🇧 United Kingdom</span><div class="chart-fill-wrap"><div class="chart-fill" style="width:71%;background:linear-gradient(90deg,var(--cyan2),var(--cyan))">£854K</div></div><span class="chart-val">71%</span></div>
-                <div class="chart-row"><span class="chart-label">🇺🇸 United States</span><div class="chart-fill-wrap"><div class="chart-fill" style="width:18%;background:linear-gradient(90deg,#7c3aed,var(--purple))">£216K</div></div><span class="chart-val">18%</span></div>
-                <div class="chart-row"><span class="chart-label">🇦🇺 Australia</span><div class="chart-fill-wrap"><div class="chart-fill" style="width:11%;background:linear-gradient(90deg,#d97706,var(--yellow))">£130K</div></div><span class="chart-val">11%</span></div>
+                <div class="chart-row"><span class="chart-label">United Kingdom</span><div class="chart-fill-wrap"><div class="chart-fill" style="width:71%;background:linear-gradient(90deg,var(--cyan2),var(--cyan))">£854K</div></div><span class="chart-val">71%</span></div>
+                <div class="chart-row"><span class="chart-label">United States</span><div class="chart-fill-wrap"><div class="chart-fill" style="width:18%;background:linear-gradient(90deg,#7c3aed,var(--purple))">£216K</div></div><span class="chart-val">18%</span></div>
+                <div class="chart-row"><span class="chart-label">Australia</span><div class="chart-fill-wrap"><div class="chart-fill" style="width:11%;background:linear-gradient(90deg,#d97706,var(--yellow))">£130K</div></div><span class="chart-val">11%</span></div>
               </div>
             </div>
           </div>
         </div>
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
-          <!-- Project status overview -->
           <div class="panel">
-            <div class="panel-head"><h3>📋 Project Status Overview</h3><span style="font-size:.76rem;color:var(--gray)">DA-2 dataset</span></div>
+            <div class="panel-head"><h3><i class="fa-solid fa-clipboard-list"></i> Project Status Overview</h3><span style="font-size:.76rem;color:var(--gray)">DA-2 dataset</span></div>
             <div class="panel-body">
               <div class="chart-bar-horiz">
                 <div class="chart-row"><span class="chart-label">Active</span><div class="chart-fill-wrap"><div class="chart-fill" style="width:50%;background:linear-gradient(90deg,var(--cyan2),var(--cyan))">12</div></div><span class="chart-val">50%</span></div>
@@ -421,14 +310,12 @@
               </div>
             </div>
           </div>
-
-          <!-- Resource utilisation -->
           <div class="panel">
-            <div class="panel-head"><h3>👥 Resource Utilisation</h3><span style="font-size:.76rem;color:var(--gray)">Hrs Logged ÷ Team Size</span></div>
+            <div class="panel-head"><h3><i class="fa-solid fa-users"></i> Resource Utilisation</h3><span style="font-size:.76rem;color:var(--gray)">Hrs Logged ÷ Team Size</span></div>
             <div class="panel-body">
               <div class="chart-bar-horiz">
                 <div class="chart-row"><span class="chart-label">Sarah M.</span><div class="chart-fill-wrap"><div class="chart-fill" style="width:87%;background:linear-gradient(90deg,var(--cyan2),var(--cyan))">87%</div></div><span class="chart-val">348h</span></div>
-                <div class="chart-row"><span class="chart-label">Tom R.</span><div class="chart-fill-wrap"><div class="chart-fill" style="width:94%;background:linear-gradient(90deg,#d97706,var(--yellow))">94%</div></div><span class="chart-val" style="color:var(--yellow)">⚠ 376h</span></div>
+                <div class="chart-row"><span class="chart-label">Tom R.</span><div class="chart-fill-wrap"><div class="chart-fill" style="width:94%;background:linear-gradient(90deg,#d97706,var(--yellow))">94%</div></div><span class="chart-val" style="color:var(--yellow)"><i class="fa-solid fa-triangle-exclamation"></i> 376h</span></div>
                 <div class="chart-row"><span class="chart-label">Sunita K.</span><div class="chart-fill-wrap"><div class="chart-fill" style="width:72%;background:linear-gradient(90deg,#22c55e,var(--green))">72%</div></div><span class="chart-val">288h</span></div>
                 <div class="chart-row"><span class="chart-label">Amy L.</span><div class="chart-fill-wrap"><div class="chart-fill" style="width:60%;background:linear-gradient(90deg,#22c55e,var(--green))">60%</div></div><span class="chart-val">240h</span></div>
                 <div class="chart-row"><span class="chart-label">Raj K.</span><div class="chart-fill-wrap"><div class="chart-fill" style="width:45%;background:linear-gradient(90deg,#22c55e,var(--green))">45%</div></div><span class="chart-val">180h</span></div>
@@ -438,43 +325,37 @@
         </div>
       </div>
 
-      <!-- ═══════════════════════════════════════
-           SECTION: CONTENT MANAGEMENT — FR-09
-      ═══════════════════════════════════════ -->
       <div id="sec-content" style="display:none">
-        <h3 style="font-family:var(--font-h);color:var(--white);margin-bottom:.4rem">🌐 Website Content Management</h3>
+        <h3 style="font-family:var(--font-h);color:var(--white);margin-bottom:.4rem"><i class="fa-solid fa-globe"></i> Website Content Management</h3>
         <p style="font-size:.82rem;color:var(--gray);margin-bottom:1.4rem">FR-09 — Manage public website content: services, case studies, careers listings.</p>
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem">
           <div class="panel" style="cursor:pointer" onclick="openModal('modal-edit-services')">
-            <div class="panel-head"><h3>⚙️ Services</h3><span class="badge inprogress">10 active</span></div>
-            <div class="panel-body"><p style="font-size:.84rem;color:var(--gray)">Edit service titles, descriptions, and icons shown on the public Services page.</p><button class="btn btn-primary btn-sm" style="margin-top:1rem" onclick="event.stopPropagation();openModal('modal-edit-services')">Edit Services →</button></div>
+            <div class="panel-head"><h3><i class="fa-solid fa-gear"></i> Services</h3><span class="badge inprogress">10 active</span></div>
+            <div class="panel-body"><p style="font-size:.84rem;color:var(--gray)">Edit service titles, descriptions, and icons shown on the public Services page.</p><button class="btn btn-primary btn-sm" style="margin-top:1rem" onclick="event.stopPropagation();openModal('modal-edit-services')">Edit Services <i class="fa-solid fa-arrow-right"></i></button></div>
           </div>
           <div class="panel" style="cursor:pointer" onclick="openModal('modal-edit-casestudies')">
-            <div class="panel-head"><h3>📂 Case Studies</h3><span class="badge inprogress">20 active</span></div>
-            <div class="panel-body"><p style="font-size:.84rem;color:var(--gray)">Add, edit, or archive case studies. Each maps to a dynamic detail page.</p><button class="btn btn-primary btn-sm" style="margin-top:1rem" onclick="event.stopPropagation();openModal('modal-edit-casestudies')">Edit Case Studies →</button></div>
+            <div class="panel-head"><h3><i class="fa-solid fa-folder-open"></i> Case Studies</h3><span class="badge inprogress">20 active</span></div>
+            <div class="panel-body"><p style="font-size:.84rem;color:var(--gray)">Add, edit, or archive case studies. Each maps to a dynamic detail page.</p><button class="btn btn-primary btn-sm" style="margin-top:1rem" onclick="event.stopPropagation();openModal('modal-edit-casestudies')">Edit Case Studies <i class="fa-solid fa-arrow-right"></i></button></div>
           </div>
           <div class="panel" style="cursor:pointer" onclick="openModal('modal-edit-careers')">
-            <div class="panel-head"><h3>💼 Careers</h3><span class="badge active">10 open</span></div>
-            <div class="panel-body"><p style="font-size:.84rem;color:var(--gray)">Manage live job listings shown on the Careers page.</p><button class="btn btn-primary btn-sm" style="margin-top:1rem" onclick="event.stopPropagation();openModal('modal-edit-careers')">Edit Listings →</button></div>
+            <div class="panel-head"><h3><i class="fa-solid fa-briefcase"></i> Careers</h3><span class="badge active">10 open</span></div>
+            <div class="panel-body"><p style="font-size:.84rem;color:var(--gray)">Manage live job listings shown on the Careers page.</p><button class="btn btn-primary btn-sm" style="margin-top:1rem" onclick="event.stopPropagation();openModal('modal-edit-careers')">Edit Listings <i class="fa-solid fa-arrow-right"></i></button></div>
           </div>
         </div>
       </div>
 
-      <!-- ═══════════════════════════════════════
-           SECTION: AUDIT LOG — BRD §7.10
-      ═══════════════════════════════════════ -->
       <div id="sec-audit" style="display:none">
-        <h3 style="font-family:var(--font-h);color:var(--white);margin-bottom:.4rem">📜 Audit Log</h3>
+        <h3 style="font-family:var(--font-h);color:var(--white);margin-bottom:.4rem"><i class="fa-solid fa-file-contract"></i> Audit Log</h3>
         <p style="font-size:.82rem;color:var(--gray);margin-bottom:1.4rem">BRD §7.10 — All admin actions (lead conversion, project updates, resource assignment) are logged here for compliance.</p>
         <div class="panel">
-          <div class="panel-head"><h3>Recent Actions</h3><button class="btn btn-ghost btn-sm" onclick="showToast('Exporting audit log…','info')">⬇ Export</button></div>
+          <div class="panel-head"><h3>Recent Actions</h3><button class="btn btn-ghost btn-sm" onclick="showToast('Exporting audit log…','info')"><i class="fa-solid fa-download"></i> Export</button></div>
           <div class="panel-body" id="audit-log">
-            <div class="audit-item"><span class="audit-icon">🔄</span><div class="audit-body"><div class="audit-action"><strong>James Walker</strong> converted lead "John Davidson" → Project "E-Commerce Redesign"</div><div class="audit-meta">09 Jan 2026, 10:14 AM · Super Admin</div></div></div>
-            <div class="audit-item"><span class="audit-icon">📋</span><div class="audit-body"><div class="audit-action"><strong>James Walker</strong> updated project "Salesforce CRM Integration" status → In Review</div><div class="audit-meta">26 Feb 2026, 03:30 PM · Super Admin</div></div></div>
-            <div class="audit-item"><span class="audit-icon">👥</span><div class="audit-body"><div class="audit-action"><strong>James Walker</strong> assigned Tom Richards to "Mobile App Phase 2"</div><div class="audit-meta">03 Feb 2026, 09:00 AM · Super Admin</div></div></div>
-            <div class="audit-item"><span class="audit-icon">🔄</span><div class="audit-body"><div class="audit-action"><strong>James Walker</strong> converted lead "Luke Brennan" → Project "Healthcare Portal"</div><div class="audit-meta">14 Jan 2026, 11:20 AM · Super Admin</div></div></div>
-            <div class="audit-item"><span class="audit-icon">📥</span><div class="audit-body"><div class="audit-action"><strong>System</strong> auto-assigned lead "Amanda Pierce" status → Qualified</div><div class="audit-meta">22 Feb 2026, 08:45 AM · System</div></div></div>
-            <div class="audit-item"><span class="audit-icon">⚙️</span><div class="audit-body"><div class="audit-action"><strong>James Walker</strong> updated Services page content — added "API Development" section</div><div class="audit-meta">20 Feb 2026, 02:15 PM · Super Admin</div></div></div>
+            <div class="audit-item"><span class="audit-icon"><i class="fa-solid fa-rotate" style="color:var(--cyan)"></i></span><div class="audit-body"><div class="audit-action"><strong>James Walker</strong> converted lead "John Davidson" → Project "E-Commerce Redesign"</div><div class="audit-meta">09 Jan 2026, 10:14 AM · Super Admin</div></div></div>
+            <div class="audit-item"><span class="audit-icon"><i class="fa-solid fa-clipboard-list" style="color:var(--cyan)"></i></span><div class="audit-body"><div class="audit-action"><strong>James Walker</strong> updated project "Salesforce CRM Integration" status → In Review</div><div class="audit-meta">26 Feb 2026, 03:30 PM · Super Admin</div></div></div>
+            <div class="audit-item"><span class="audit-icon"><i class="fa-solid fa-users" style="color:var(--cyan)"></i></span><div class="audit-body"><div class="audit-action"><strong>James Walker</strong> assigned Tom Richards to "Mobile App Phase 2"</div><div class="audit-meta">03 Feb 2026, 09:00 AM · Super Admin</div></div></div>
+            <div class="audit-item"><span class="audit-icon"><i class="fa-solid fa-rotate" style="color:var(--cyan)"></i></span><div class="audit-body"><div class="audit-action"><strong>James Walker</strong> converted lead "Luke Brennan" → Project "Healthcare Portal"</div><div class="audit-meta">14 Jan 2026, 11:20 AM · Super Admin</div></div></div>
+            <div class="audit-item"><span class="audit-icon"><i class="fa-solid fa-inbox" style="color:var(--cyan)"></i></span><div class="audit-body"><div class="audit-action"><strong>System</strong> auto-assigned lead "Amanda Pierce" status → Qualified</div><div class="audit-meta">22 Feb 2026, 08:45 AM · System</div></div></div>
+            <div class="audit-item"><span class="audit-icon"><i class="fa-solid fa-gear" style="color:var(--cyan)"></i></span><div class="audit-body"><div class="audit-action"><strong>James Walker</strong> updated Services page content — added "API Development" section</div><div class="audit-meta">20 Feb 2026, 02:15 PM · Super Admin</div></div></div>
           </div>
         </div>
       </div>
@@ -483,23 +364,29 @@
   </div>
 </div>
 
-<!-- ═══════ MODALS ═══════ -->
-
-<!-- Convert Lead to Project -->
 <div class="modal-overlay" id="modal-convert">
   <div class="modal">
-    <div class="modal-head"><h3>🔄 Convert Lead to Project</h3><button class="modal-close" onclick="closeModal('modal-convert')">✕</button></div>
+    <div class="modal-head"><h3><i class="fa-solid fa-rotate"></i> Convert Lead to Project</h3><button class="modal-close" onclick="closeModal('modal-convert')"><i class="fa-solid fa-xmark"></i></button></div>
     <div class="modal-body">
       <div class="convert-highlight" id="convert-lead-info">
         <div style="font-size:.73rem;color:var(--gray);margin-bottom:4px">Lead being converted</div>
         <div style="font-weight:700;color:var(--white);font-size:.95rem" id="convert-name">—</div>
         <div style="font-size:.78rem;color:var(--cyan);margin-top:2px" id="convert-detail">—</div>
       </div>
-      <form onsubmit="completeConversion(event)">
+
+     <form id="form-convert" onsubmit="completeConversion(event)">
+        <input type="hidden" id="conv-lead-id"> 
+        
         <div class="form-group"><label class="form-label">Project Name <span class="req">*</span></label><input type="text" class="form-input" id="conv-proj-name" required></div>
-        <div class="form-row">
+       <div class="form-row">
           <div class="form-group"><label class="form-label">Project Value (£) <span class="req">*</span></label><input type="number" class="form-input" id="conv-value" placeholder="0" required></div>
-          <div class="form-group"><label class="form-label">Initial Status</label><select class="form-select" id="conv-status"><option value="New">New</option></select><div class="form-hint">BRD §7.4: Status always starts as "New"</div></div>
+          <div class="form-group">
+              <label class="form-label">Initial Status</label>
+              <select class="form-select" id="conv-status">
+                  <option value="Not Started">Not Started</option> 
+              </select>
+              <div class="form-hint">BRD Status always starts as "Not Started"</div>
+          </div>
         </div>
         <div class="form-row">
           <div class="form-group"><label class="form-label">Start Date <span class="req">*</span></label><input type="date" class="form-input" id="conv-start" required></div>
@@ -507,47 +394,123 @@
         </div>
         <div class="form-group"><label class="form-label">Technology Stack <span class="req">*</span></label><input type="text" class="form-input" id="conv-tech" placeholder="e.g. React, Node.js, Salesforce" required></div>
         <div class="form-group"><label class="form-label">Assign Lead Team Member <span class="req">*</span></label><select class="form-select" id="conv-pm" required><option value="">Select…</option><option>Sarah Mitchell</option><option>Sunita Kapoor</option><option>Tom Richards</option><option>Raj Kumar</option></select><div class="form-hint">BRD §7.4: Minimum 1 resource required</div></div>
-        <div class="modal-foot" style="padding:0;border:none;margin-top:.5rem"><button type="button" class="btn btn-ghost" onclick="closeModal('modal-convert')">Cancel</button><button type="submit" class="btn btn-primary">Create Project →</button></div>
+        <div class="modal-foot" style="padding:0;border:none;margin-top:.5rem"><button type="button" class="btn btn-ghost" onclick="closeModal('modal-convert')">Cancel</button><button type="submit" id="btn-convert-submit" class="btn btn-primary">Create Project <i class="fa-solid fa-arrow-right"></i></button></div>
       </form>
     </div>
   </div>
 </div>
 
-<!-- Add Lead -->
 <div class="modal-overlay" id="modal-add-lead">
-  <div class="modal">
-    <div class="modal-head"><h3>+ Add Lead Manually</h3><button class="modal-close" onclick="closeModal('modal-add-lead')">✕</button></div>
+  <div class="modal" style="max-width: 600px;">
+    <div class="modal-head"><h3><i class="fa-solid fa-plus"></i> Add Lead Manually</h3><button class="modal-close" onclick="closeModal('modal-add-lead')"><i class="fa-solid fa-xmark"></i></button></div>
     <div class="modal-body">
-      <form onsubmit="addLead(event)">
-        <div class="form-row"><div class="form-group"><label class="form-label">Full Name <span class="req">*</span></label><input type="text" class="form-input" required></div><div class="form-group"><label class="form-label">Email <span class="req">*</span></label><input type="email" class="form-input" required></div></div>
-        <div class="form-row"><div class="form-group"><label class="form-label">Country</label><select class="form-select"><option>United Kingdom</option><option>United States</option><option>Australia</option></select></div><div class="form-group"><label class="form-label">Industry</label><input type="text" class="form-input" placeholder="e.g. Retail, FinTech"></div></div>
-        <div class="form-row"><div class="form-group"><label class="form-label">Service Interested</label><select class="form-select"><option>Web Development</option><option>Salesforce CRM</option><option>Mobile App</option><option>Cloud &amp; DevOps</option></select></div><div class="form-group"><label class="form-label">Budget (USD)</label><input type="number" class="form-input" placeholder="0"></div></div>
-        <div class="form-group"><label class="form-label">Source</label><select class="form-select"><option>Contact Form</option><option>LinkedIn</option><option>Referral</option><option>Google Ads</option></select></div>
-        <div class="modal-foot" style="padding:0;border:none;margin-top:.5rem"><button type="button" class="btn btn-ghost" onclick="closeModal('modal-add-lead')">Cancel</button><button type="submit" class="btn btn-primary">Add Lead →</button></div>
+      <form id="form-add-lead" onsubmit="submitAddLead(event)">
+        <div class="form-row">
+            <div class="form-group"><label class="form-label">Full Name <span class="req">*</span></label><input type="text" class="form-input" id="add-lead-name" required></div>
+            <div class="form-group"><label class="form-label">Email <span class="req">*</span></label><input type="email" class="form-input" id="add-lead-email" required></div>
+        </div>
+        <div class="form-row">
+            <div class="form-group"><label class="form-label">Contact Number</label><input type="text" class="form-input" id="add-lead-phone" placeholder="+1 234 567 8900"></div>
+            <div class="form-group"><label class="form-label">Country</label>
+                <select class="form-select" id="add-lead-country">
+                    <option value="">Select Country</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="United States">United States</option>
+                    <option value="Australia">Australia</option>
+                    <option value="India">India</option>
+                    <option value="Canada">Canada</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group"><label class="form-label">Service Interested</label>
+                <select class="form-select" id="add-lead-service">
+                    <option value="">Select Service</option>
+                    <option value="Web Development">Web Development</option>
+                    <option value="Salesforce CRM">Salesforce CRM</option>
+                    <option value="Mobile App">Mobile App</option>
+                    <option value="Cloud & DevOps">Cloud & DevOps</option>
+                    <option value="UI/UX Design">UI/UX Design</option>
+                </select>
+            </div>
+            <div class="form-group"><label class="form-label">Industry</label><input type="text" class="form-input" id="add-lead-industry" placeholder="e.g. Retail, FinTech"></div>
+        </div>
+        <div class="form-row">
+            <div class="form-group"><label class="form-label">Budget (USD)</label><input type="number" class="form-input" id="add-lead-budget" placeholder="0"></div>
+            <div class="form-group"><label class="form-label">Source</label>
+                <select class="form-select" id="add-lead-source">
+                    <option value="Direct">Direct</option>
+                    <option value="Contact Form">Contact Form</option>
+                    <option value="LinkedIn">LinkedIn</option>
+                    <option value="Referral">Referral</option>
+                    <option value="Google Ads">Google Ads</option>
+                </select>
+            </div>
+        </div>
+        <div class="modal-foot" style="padding:0;border:none;margin-top:.5rem">
+            <button type="button" class="btn btn-ghost" onclick="closeModal('modal-add-lead')">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="btn-add-lead">Save Lead <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
       </form>
     </div>
   </div>
 </div>
 
-<!-- Edit project modal (proj1 example) -->
-<div class="modal-overlay" id="modal-edit-proj1">
+<div class="modal-overlay" id="modal-edit-project">
   <div class="modal">
-    <div class="modal-head"><h3>✏️ Edit Project — E-Commerce Redesign</h3><button class="modal-close" onclick="closeModal('modal-edit-proj1')">✕</button></div>
+    <div class="modal-head">
+        <h3><i class="fa-solid fa-pen"></i> Edit Project — <span id="edit-proj-title">Project Name</span></h3>
+        <button class="modal-close" onclick="closeModal('modal-edit-project')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
     <div class="modal-body">
-      <form onsubmit="saveProject(event,'modal-edit-proj1','E-Commerce Redesign')">
-        <div class="form-group"><label class="form-label">Project Status</label><select class="form-select" id="p1-status"><option value="Active" selected>Active</option><option>New</option><option>Completed</option><option>Delayed</option></select></div>
-        <div class="form-group"><label class="form-label">Progress (%)</label><input type="range" min="0" max="100" value="68" class="form-input" style="padding:4px" id="p1-progress" oninput="document.getElementById('p1-prog-val').textContent=this.value+'%'"><div id="p1-prog-val" style="font-size:.8rem;color:var(--cyan);margin-top:4px">68%</div></div>
-        <div class="form-row"><div class="form-group"><label class="form-label">Actual Hours Logged</label><input type="number" class="form-input" value="682"></div><div class="form-group"><label class="form-label">Overtime Hours</label><input type="number" class="form-input" value="24"></div></div>
-        <div class="form-group"><label class="form-label">Client Satisfaction (1–5)</label><select class="form-select"><option>5 — Excellent</option><option>4 — Good</option><option>3 — Fair</option><option>2 — Poor</option></select></div>
-        <div class="modal-foot" style="padding:0;border:none;margin-top:.5rem"><button type="button" class="btn btn-ghost" onclick="closeModal('modal-edit-proj1')">Cancel</button><button type="submit" class="btn btn-primary">Save Changes</button></div>
+      <form id="form-edit-project" onsubmit="submitEditProject(event)">
+        <input type="hidden" id="edit-proj-id">
+
+        <div class="form-group">
+            <label class="form-label">Project Status</label>
+            <select class="form-select" id="edit-proj-status">
+                <option value="Not Started">Not Started</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Active">Active</option>
+                <option value="Delayed">Delayed</option>
+                <option value="Completed">Completed</option>
+            </select>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label class="form-label">Actual Hours Logged</label>
+                <input type="number" step="0.5" class="form-input" id="edit-proj-hours">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Overtime Hours</label>
+                <input type="number" step="0.5" class="form-input" id="edit-proj-overtime">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Client Satisfaction (1–5)</label>
+            <select class="form-select" id="edit-proj-csat">
+                <option value="">Not rated yet</option>
+                <option value="5">5 — Excellent</option>
+                <option value="4">4 — Good</option>
+                <option value="3">3 — Fair</option>
+                <option value="2">2 — Poor</option>
+                <option value="1">1 — Terrible</option>
+            </select>
+        </div>
+
+        <div class="modal-foot" style="padding:0;border:none;margin-top:.5rem">
+            <button type="button" class="btn btn-ghost" onclick="closeModal('modal-edit-project')">Cancel</button>
+            <button type="submit" id="btn-save-project" class="btn btn-primary">Save Changes</button>
+        </div>
       </form>
     </div>
   </div>
 </div>
 
-<!-- Content management modals (brief) -->
 <div class="modal-overlay" id="modal-edit-services">
-  <div class="modal"><div class="modal-head"><h3>⚙️ Edit Services</h3><button class="modal-close" onclick="closeModal('modal-edit-services')">✕</button></div><div class="modal-body"><p style="font-size:.85rem;color:var(--gray);margin-bottom:1rem">10 services currently listed. Click a service to edit its title, description, or visibility.</p>
+  <div class="modal"><div class="modal-head"><h3><i class="fa-solid fa-gear"></i> Edit Services</h3><button class="modal-close" onclick="closeModal('modal-edit-services')"><i class="fa-solid fa-xmark"></i></button></div><div class="modal-body"><p style="font-size:.85rem;color:var(--gray);margin-bottom:1rem">10 services currently listed. Click a service to edit its title, description, or visibility.</p>
   <div style="display:flex;flex-direction:column;gap:.5rem">
   <div style="display:flex;align-items:center;justify-content:space-between;padding:.75rem 1rem;background:var(--navy2);border-radius:var(--r2)"><span style="font-size:.87rem;color:var(--white)">Custom Web Development</span><button class="btn btn-ghost btn-sm" onclick="showToast('Editing service…','info')">Edit</button></div>
   <div style="display:flex;align-items:center;justify-content:space-between;padding:.75rem 1rem;background:var(--navy2);border-radius:var(--r2)"><span style="font-size:.87rem;color:var(--white)">Enterprise Software Development</span><button class="btn btn-ghost btn-sm" onclick="showToast('Editing service…','info')">Edit</button></div>
@@ -557,15 +520,15 @@
 </div>
 
 <div class="modal-overlay" id="modal-edit-casestudies">
-  <div class="modal"><div class="modal-head"><h3>📂 Edit Case Studies</h3><button class="modal-close" onclick="closeModal('modal-edit-casestudies')">✕</button></div><div class="modal-body"><p style="font-size:.85rem;color:var(--gray)">20 case studies listed. Connect to DA-2 dataset for live data. <button class="btn btn-primary btn-sm" onclick="showToast('Dataset refreshed','success')">Refresh DA-2</button></p></div><div class="modal-foot"><button class="btn btn-ghost" onclick="closeModal('modal-edit-casestudies')">Close</button></div></div>
+  <div class="modal"><div class="modal-head"><h3><i class="fa-solid fa-folder-open"></i> Edit Case Studies</h3><button class="modal-close" onclick="closeModal('modal-edit-casestudies')"><i class="fa-solid fa-xmark"></i></button></div><div class="modal-body"><p style="font-size:.85rem;color:var(--gray)">20 case studies listed. Connect to DA-2 dataset for live data. <button class="btn btn-primary btn-sm" onclick="showToast('Dataset refreshed','success')">Refresh DA-2</button></p></div><div class="modal-foot"><button class="btn btn-ghost" onclick="closeModal('modal-edit-casestudies')">Close</button></div></div>
 </div>
 
 <div class="modal-overlay" id="modal-edit-careers">
-  <div class="modal"><div class="modal-head"><h3>💼 Edit Career Listings</h3><button class="modal-close" onclick="closeModal('modal-edit-careers')">✕</button></div><div class="modal-body"><p style="font-size:.85rem;color:var(--gray)">10 open positions. Add or archive listings as needed.</p></div><div class="modal-foot"><button class="btn btn-ghost" onclick="closeModal('modal-edit-careers')">Close</button><button class="btn btn-primary" onclick="showToast('Listings saved','success');closeModal('modal-edit-careers')">Save</button></div></div>
+  <div class="modal"><div class="modal-head"><h3><i class="fa-solid fa-briefcase"></i> Edit Career Listings</h3><button class="modal-close" onclick="closeModal('modal-edit-careers')"><i class="fa-solid fa-xmark"></i></button></div><div class="modal-body"><p style="font-size:.85rem;color:var(--gray)">10 open positions. Add or archive listings as needed.</p></div><div class="modal-foot"><button class="btn btn-ghost" onclick="closeModal('modal-edit-careers')">Close</button><button class="btn btn-primary" onclick="showToast('Listings saved','success');closeModal('modal-edit-careers')">Save</button></div></div>
 </div>
 
 <div class="modal-overlay" id="modal-add-resource">
-  <div class="modal"><div class="modal-head"><h3>+ Add Team Member</h3><button class="modal-close" onclick="closeModal('modal-add-resource')">✕</button></div>
+  <div class="modal"><div class="modal-head"><h3><i class="fa-solid fa-plus"></i> Add Team Member</h3><button class="modal-close" onclick="closeModal('modal-add-resource')"><i class="fa-solid fa-xmark"></i></button></div>
   <div class="modal-body"><form onsubmit="addResource(event)">
     <div class="form-row"><div class="form-group"><label class="form-label">Full Name</label><input type="text" class="form-input" required></div><div class="form-group"><label class="form-label">Role / Title</label><input type="text" class="form-input" required></div></div>
     <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" required></div>
@@ -574,16 +537,17 @@
 </div>
 
 <div class="modal-overlay" id="modal-new-project">
-  <div class="modal"><div class="modal-head"><h3>+ New Project</h3><button class="modal-close" onclick="closeModal('modal-new-project')">✕</button></div>
+  <div class="modal"><div class="modal-head"><h3><i class="fa-solid fa-plus"></i> New Project</h3><button class="modal-close" onclick="closeModal('modal-new-project')"><i class="fa-solid fa-xmark"></i></button></div>
   <div class="modal-body"><p style="font-size:.84rem;color:var(--gray)">Projects should be created by converting a qualified lead (FR-11). Use the Lead → Project tab to convert an existing qualified lead, or add one manually below.</p>
-  <button class="btn btn-primary" style="margin-top:1rem" onclick="closeModal('modal-new-project');showSection('convert',document.querySelector('[onclick*=convert]'))">Go to Lead Conversion →</button></div></div>
+  <button class="btn btn-primary" style="margin-top:1rem" onclick="closeModal('modal-new-project');showSection('convert',document.querySelector('[onclick*=convert]'))">Go to Lead Conversion <i class="fa-solid fa-arrow-right"></i></button></div></div>
 </div>
 
 <div class="modal-overlay" id="modal-edit-proj2">
-  <div class="modal"><div class="modal-head"><h3>✏️ Edit — Salesforce CRM</h3><button class="modal-close" onclick="closeModal('modal-edit-proj2')">✕</button></div><div class="modal-body"><form onsubmit="saveProject(event,'modal-edit-proj2','Salesforce CRM Integration')"><div class="form-group"><label class="form-label">Status</label><select class="form-select"><option>In Review</option><option>Active</option><option>Completed</option></select></div><div class="form-group"><label class="form-label">Progress (%)</label><input type="range" min="0" max="100" value="92" class="form-input" style="padding:4px" oninput="this.nextElementSibling.textContent=this.value+'%'"><div style="font-size:.8rem;color:var(--cyan)">92%</div></div><div class="modal-foot" style="padding:0;border:none;margin-top:.5rem"><button type="button" class="btn btn-ghost" onclick="closeModal('modal-edit-proj2')">Cancel</button><button type="submit" class="btn btn-primary">Save</button></div></form></div></div>
+  <div class="modal"><div class="modal-head"><h3><i class="fa-solid fa-pen"></i> Edit — Salesforce CRM</h3><button class="modal-close" onclick="closeModal('modal-edit-proj2')"><i class="fa-solid fa-xmark"></i></button></div><div class="modal-body"><form onsubmit="saveProject(event,'modal-edit-proj2','Salesforce CRM Integration')"><div class="form-group"><label class="form-label">Status</label><select class="form-select"><option>In Review</option><option>Active</option><option>Completed</option></select></div><div class="form-group"><label class="form-label">Progress (%)</label><input type="range" min="0" max="100" value="92" class="form-input" style="padding:4px" oninput="this.nextElementSibling.textContent=this.value+'%'"><div style="font-size:.8rem;color:var(--cyan)">92%</div></div><div class="modal-foot" style="padding:0;border:none;margin-top:.5rem"><button type="button" class="btn btn-ghost" onclick="closeModal('modal-edit-proj2')">Cancel</button><button type="submit" class="btn btn-primary">Save</button></div></form></div></div>
 </div>
+
 <div class="modal-overlay" id="modal-edit-proj3">
-  <div class="modal"><div class="modal-head"><h3>✏️ Edit — Mobile App Phase 2</h3><button class="modal-close" onclick="closeModal('modal-edit-proj3')">✕</button></div><div class="modal-body"><form onsubmit="saveProject(event,'modal-edit-proj3','Mobile App Phase 2')"><div class="form-group"><label class="form-label">Status</label><select class="form-select"><option>Active</option><option>Completed</option><option>Delayed</option></select></div><div class="form-group"><label class="form-label">Progress (%)</label><input type="range" min="0" max="100" value="12" class="form-input" style="padding:4px" oninput="this.nextElementSibling.textContent=this.value+'%'"><div style="font-size:.8rem;color:var(--cyan)">12%</div></div><div class="modal-foot" style="padding:0;border:none;margin-top:.5rem"><button type="button" class="btn btn-ghost" onclick="closeModal('modal-edit-proj3')">Cancel</button><button type="submit" class="btn btn-primary">Save</button></div></form></div></div>
+  <div class="modal"><div class="modal-head"><h3><i class="fa-solid fa-pen"></i> Edit — Mobile App Phase 2</h3><button class="modal-close" onclick="closeModal('modal-edit-proj3')"><i class="fa-solid fa-xmark"></i></button></div><div class="modal-body"><form onsubmit="saveProject(event,'modal-edit-proj3','Mobile App Phase 2')"><div class="form-group"><label class="form-label">Status</label><select class="form-select"><option>Active</option><option>Completed</option><option>Delayed</option></select></div><div class="form-group"><label class="form-label">Progress (%)</label><input type="range" min="0" max="100" value="12" class="form-input" style="padding:4px" oninput="this.nextElementSibling.textContent=this.value+'%'"><div style="font-size:.8rem;color:var(--cyan)">12%</div></div><div class="modal-foot" style="padding:0;border:none;margin-top:.5rem"><button type="button" class="btn btn-ghost" onclick="closeModal('modal-edit-proj3')">Cancel</button><button type="submit" class="btn btn-primary">Save</button></div></form></div></div>
 </div>
 
 <script src="../js/portal.js"></script>
@@ -595,6 +559,256 @@ function showSection(id, btn) {
   document.querySelectorAll('.admin-nav-btn').forEach(b=>b.classList.remove('active'));
   if(btn) btn.classList.add('active');
 }
+
+/* ── FETCH LIVE LEADS FROM MYSQL ── */
+async function loadLiveLeads() {
+    const tbody = document.getElementById('leads-tbody');
+    const countBadge = document.getElementById('lead-count');
+    const token = localStorage.getItem('tn_token');
+
+    // Show a loading state
+    tbody.innerHTML = '<tr><td colspan="10" style="text-align:center; padding:2rem;"><i class="fa-solid fa-spinner fa-spin"></i> Loading live leads...</td></tr>';
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/leads`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            let leads = [];
+            if (Array.isArray(data)) leads = data;
+            else if (Array.isArray(data.data)) leads = data.data;
+            else if (Array.isArray(data.leads)) leads = data.leads;
+            else if (data.data && Array.isArray(data.data.leads)) leads = data.data.leads;
+            
+            if (!Array.isArray(leads)) {
+                console.error("Could not find an array of leads in the response:", data);
+                tbody.innerHTML = `<tr><td colspan="10" style="text-align:center; color:var(--red);"><i class="fa-solid fa-circle-xmark"></i> API returned unexpected format. Check console.</td></tr>`;
+                return;
+            }
+
+            // Clear the loading message
+            tbody.innerHTML = '';
+            
+            // Update the count badge
+            countBadge.textContent = `${leads.length} leads`;
+
+            // NEW FR-11 LOGIC: Setup the Conversion Tab targets
+            const qualList = document.getElementById('convert-qualified-list');
+            const recList = document.getElementById('convert-recent-list');
+            qualList.innerHTML = '';
+            recList.innerHTML = '';
+            let qualifiedCount = 0;
+            let convertedCount = 0;
+
+            // Loop through the leads and create HTML rows!
+            leads.forEach(lead => {
+                let statusHtml = '';
+                let actionsHtml = '';
+                
+                const deleteBtn = `<button class="btn btn-sm btn-ghost" style="color:var(--red); padding:4px 8px; margin-left:4px;" onclick="deleteLead('${lead.Lead_ID}')" title="Delete Lead"><i class="fa-solid fa-trash"></i></button>`;
+
+              if (lead.Status === 'Qualified') {
+                    qualifiedCount++;
+                    qualList.innerHTML += `
+                        <div style="padding:1rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+                            <div>
+                                <div style="font-weight:600;color:var(--white);font-size:.9rem">${lead.Client_Name}</div>
+                                <div style="font-size:.76rem;color:var(--gray)">${lead.Industry || 'Various'} · ${lead.Service_Interested || 'Service'} · $${(lead.Budget || 0).toLocaleString()}</div>
+                            </div>
+                            <button class="btn btn-primary btn-sm" onclick="openConvertModal('${lead.Lead_ID}', '${lead.Client_Name}','${lead.Country || 'Unknown'}','${lead.Service_Interested || 'Various'}')">Convert <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    `;
+                } else if (lead.Status === 'Converted') {
+                    convertedCount++;
+                    const convDate = new Date(lead.updatedAt).toLocaleDateString('en-GB');
+                    recList.innerHTML += `
+                        <div style="padding:1rem 1.2rem;border-bottom:1px solid var(--border)">
+                            <div style="font-weight:600;color:var(--white);font-size:.9rem">${lead.Client_Name}</div>
+                            <div style="font-size:.76rem;color:var(--gray)">Converted on ${convDate}</div>
+                            <span class="badge complete" style="margin-top:.5rem"><i class="fa-solid fa-check"></i> Converted</span>
+                        </div>
+                    `;
+                }
+
+                if (lead.Status === 'New') {
+                    statusHtml = `<span class="badge inprogress status-new" style="border:none;background:rgba(0,212,255,.1);color:var(--cyan)">New</span>`;
+                    actionsHtml = `
+                        <button class="btn btn-sm btn-ghost" onclick="qualifyLead(this,'${lead.Client_Name}')">Qualify</button>
+                        <button class="btn btn-sm btn-primary" onclick="openConvertModal('${lead.Lead_ID}', '${lead.Client_Name}','${lead.Country || 'Unknown'}','${lead.Service_Interested || 'Various'}')">Convert <i class="fa-solid fa-arrow-right"></i></button>
+                        ${deleteBtn}
+                    `;
+                } else if (lead.Status === 'Qualified') {
+                    statusHtml = `<span class="badge review" style="background:rgba(167,139,250,.1);color:var(--purple);border-color:rgba(167,139,250,.25)">Qualified</span>`;
+                    actionsHtml = `<button class="btn btn-sm btn-primary" onclick="openConvertModal('${lead.Lead_ID}', '${lead.Client_Name}','${lead.Country || 'Unknown'}','${lead.Service_Interested || 'Various'}')">Convert <i class="fa-solid fa-arrow-right"></i></button> ${deleteBtn}`;
+                } else if (lead.Status === 'Converted') {
+                    statusHtml = `<span class="badge paid">Converted</span>`;
+                    actionsHtml = `<span style="font-size:.75rem;color:var(--green)"><i class="fa-solid fa-check"></i> Converted</span> ${deleteBtn}`;
+                } else {
+                    statusHtml = `<span class="badge overdue">Invalid</span>`;
+                    actionsHtml = `<span style="font-size:.75rem;color:var(--red)"><i class="fa-solid fa-triangle-exclamation"></i> Review</span> ${deleteBtn}`;
+                }
+
+                const dateObj = new Date(lead.createdAt);
+                const formattedDate = isNaN(dateObj) ? 'N/A' : dateObj.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+
+                const tr = document.createElement('tr');
+                tr.dataset.country = lead.Country || 'Unknown';
+                tr.dataset.status = lead.Status;
+                tr.dataset.source = lead.Lead_Source || 'Direct';
+
+                tr.innerHTML = `
+                    <td class="td-bold">${lead.Client_Name || 'Unknown Client'}</td>
+                    <td class="td-gray">${lead.Email || 'Not Provided'}</td>
+                    <td>${lead.Country || 'Unknown'}</td>
+                    <td>${lead.Industry || 'Unknown'}</td>
+                    <td>${lead.Service_Interested || 'Unknown'}</td>
+                    <td>$${(lead.Budget || 0).toLocaleString()}</td>
+                    <td>${lead.Lead_Source || 'Direct'}</td>
+                    <td>${formattedDate}</td>
+                    <td>${statusHtml}</td>
+                    <td><div style="display:flex;gap:4px;align-items:center;">${actionsHtml}</div></td>
+                `;
+                
+                tbody.appendChild(tr);
+            });
+            if (qualifiedCount === 0) qualList.innerHTML = '<div style="padding:1.5rem;text-align:center;color:var(--gray)">No qualified leads pending conversion.</div>';
+            if (convertedCount === 0) recList.innerHTML = '<div style="padding:1.5rem;text-align:center;color:var(--gray)">No recently converted leads.</div>';
+
+        } else {
+            tbody.innerHTML = `<tr><td colspan="10" style="text-align:center; color:var(--red);"><i class="fa-solid fa-circle-xmark"></i> Failed to load leads: ${data.message}</td></tr>`;
+        }
+    } catch (error) {
+        console.error('Error fetching leads:', error);
+        tbody.innerHTML = `<tr><td colspan="10" style="text-align:center; color:var(--red);"><i class="fa-solid fa-circle-xmark"></i> Server offline or network error.</td></tr>`;
+    }
+}
+
+
+/* ── FETCH LIVE PROJECTS FROM MYSQL ── */
+async function loadLiveProjects() {
+    const tbody = document.getElementById('projects-tbody');
+    if (!tbody) return;
+    
+    const token = localStorage.getItem('tn_token');
+    tbody.innerHTML = '<tr><td colspan="11" style="text-align:center; padding:2rem;"><i class="fa-solid fa-spinner fa-spin"></i> Loading live projects...</td></tr>';
+
+    try {
+        // Make sure you have a GET /api/v1/projects route in your backend!
+        const response = await fetch(`${API_BASE_URL}/projects`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            let projects = [];
+            // Safely locate the array regardless of how the backend wrapped it
+            if (Array.isArray(data)) projects = data;
+            else if (Array.isArray(data.data)) projects = data.data;
+            else if (Array.isArray(data.projects)) projects = data.projects;
+            else if (data.data && Array.isArray(data.data.projects)) projects = data.data.projects;
+            
+            if (!Array.isArray(projects)) {
+                tbody.innerHTML = `<tr><td colspan="11" style="text-align:center; color:var(--red);"><i class="fa-solid fa-circle-xmark"></i> API returned unexpected format.</td></tr>`;
+                return;
+            }
+          //  leads.sort((a, b) => {
+          //       if (!a || !b) return 0; 
+                
+          //       const timeA = new Date(a.createdAt || 0).getTime();
+          //       const timeB = new Date(b.createdAt || 0).getTime();
+                
+          //       return (timeB || 0) - (timeA || 0); 
+          //   });
+
+            tbody.innerHTML = '';
+            
+            if (projects.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="11" style="text-align:center; color:var(--gray); padding:2rem;">No active projects found. Convert a lead to create one!</td></tr>`;
+                return;
+            }
+
+            projects.forEach(proj => {
+                let statusHtml = '';
+                
+                // Match the MySQL ENUMs
+                const stat = proj.Project_Status || 'New';
+                if (stat === 'Completed') {
+                    statusHtml = `<span class="badge complete"><i class="fa-solid fa-check"></i> Completed</span>`;
+                } else if (stat === 'Delayed') {
+                    statusHtml = `<span class="badge overdue"><i class="fa-solid fa-triangle-exclamation"></i> Delayed</span>`;
+                } else if (stat === 'Active' || stat === 'In Progress') {
+                    statusHtml = `<span class="badge inprogress">Active</span>`;
+                } else {
+                    statusHtml = `<span class="badge review">${stat}</span>`;
+                }
+
+                // Format dates safely
+                const formatDt = (dateString) => {
+                    if (!dateString) return 'N/A';
+                    const d = new Date(dateString);
+                    return isNaN(d) ? 'N/A' : d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
+                };
+
+                // Simulate a progress percentage (Since you don't have a Progress column in the DB yet)
+                let progress = stat === 'Completed' ? 100 : (stat === 'New' || stat === 'Not Started' ? 0 : 65);
+                let progClass = progress === 100 ? 'green' : (progress < 30 ? 'yellow' : '');
+                let progColor = progress === 100 ? 'var(--green)' : (progress < 30 ? 'var(--yellow)' : 'var(--cyan)');
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="td-bold">${proj.Client_Name || 'Unknown'}</td>
+                    <td>${proj.Project_ID || 'Project'}</td>
+                    <td>${proj.Country || 'Unknown'}</td>
+                    <td>$${(proj.Project_Value || 0).toLocaleString()}</td>
+                    <td>${formatDt(proj.Start_Date)}</td>
+                    <td>${formatDt(proj.Deadline)}</td>
+                    <td>${proj.Service_Interested || proj.Technology || 'Various'}</td>
+                    <td>${proj.Assigned_Team_Size || 1}</td>
+                    <td style="min-width:120px">
+                        <div class="progress-bar"><div class="progress-fill ${progClass}" style="width:${progress}%"></div></div>
+                        <div style="font-size:.7rem;color:${progColor};margin-top:3px">${progress}%</div>
+                    </td>
+                    <td>${statusHtml}</td>
+                    <td>
+                        <button class="btn btn-ghost btn-sm" onclick="openEditProjectModal('${proj.Project_ID}', '${proj.Client_Name || 'Project'}', '${stat}', '${proj.Total_Hours_Logged || 0}', '${proj.Overtime_Hours || 0}', '${proj.Client_Satisfaction || ''}')" title="Edit Project">
+                            <i class="fa-solid fa-pen"></i> Edit
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        } else {
+            tbody.innerHTML = `<tr><td colspan="11" style="text-align:center; color:var(--red);">Failed to load projects.</td></tr>`;
+        }
+    } catch (error) {
+        tbody.innerHTML = `<tr><td colspan="11" style="text-align:center; color:var(--red);"><i class="fa-solid fa-circle-xmark"></i> Server offline or network error.</td></tr>`;
+    }
+}
+
+/* ── On load ── */
+document.addEventListener('DOMContentLoaded', () => {
+  /* Verify admin role */
+  const session = getSession();
+  if(session && session.role !== 'super_admin') {
+    window.location.href = 'dashboard.html';
+  } else {
+    // 🚀 FIRE THE ENGINE!
+    loadLiveLeads();
+    loadLiveProjects();
+  }
+});
 
 /* ── Lead qualify ── */
 function qualifyLead(btn, name) {
@@ -608,35 +822,135 @@ function qualifyLead(btn, name) {
 }
 
 /* ── Open convert modal ── */
-function openConvertModal(name, country, service) {
+function openConvertModal(leadId, name, country, service) {
+  // Save the ID in the hidden input!
+  document.getElementById('conv-lead-id').value = leadId; 
   document.getElementById('convert-name').textContent = name;
   document.getElementById('convert-detail').textContent = `${country} · ${service}`;
   document.getElementById('conv-proj-name').value = `${name.split(' ')[1]||name} — ${service}`;
   openModal('modal-convert');
 }
 
-/* ── Complete conversion (FR-11) ── */
-function completeConversion(e) {
+/* ── 🟢 REAL Complete conversion (FR-11) ── */
+async function completeConversion(e) {
   e.preventDefault();
-  const name   = document.getElementById('convert-name').textContent;
-  const proj   = document.getElementById('conv-proj-name').value;
-  const pm     = document.getElementById('conv-pm').value;
+  
+  const btn = document.getElementById('btn-convert-submit');
+  const pm = document.getElementById('conv-pm').value;
 
   if(!pm) { showToast('Assign at least 1 team member (BRD §7.4)', 'error'); return; }
 
-  closeModal('modal-convert'); e.target.reset();
-  showToast(`✅ Lead converted! Project "${proj}" created with status New.`, 'success', 5000);
-  addAuditEntry(`Lead "${name}" converted → Project "${proj}" (PM: ${pm})`);
-  simulateEmail({ to:'admin@technova-uk.com', subject:`Project Created — ${proj}`, body:`Lead "${name}" has been converted to project "${proj}".\nProject Manager: ${pm}\nStatus: New` });
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Converting...';
+  btn.disabled = true;
+
+  // Gather data to send to backend Project table
+  const conversionData = {
+      Project_Value: parseFloat(document.getElementById('conv-value').value) || 0,
+      Start_Date: document.getElementById('conv-start').value,
+      Deadline: document.getElementById('conv-deadline').value,
+      Technology: document.getElementById('conv-tech').value,
+      Assigned_Team: pm,
+      Project_Name: document.getElementById('conv-proj-name').value,
+      Project_Status: document.getElementById('conv-status').value 
+  };
+
+  const leadId = document.getElementById('conv-lead-id').value;
+  const leadName = document.getElementById('convert-name').textContent;
+
+  try {
+      const token = localStorage.getItem('tn_token');
+      // Hits your existing POST /api/v1/leads/:id/convert route
+      const response = await fetch(`${API_BASE_URL}/leads/${leadId}/convert`, {
+          method: 'POST',
+          headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(conversionData)
+      });
+
+      if (response.ok) {
+          closeModal('modal-convert');
+          document.getElementById('form-convert').reset();
+          showToast(`✅ Lead converted! Project created with status New.`, 'success', 5000);
+          addAuditEntry(`Lead "${leadName}" converted to Project (PM: ${pm})`);
+          
+          // 🔄 INSTANTLY REFRESH! This moves the lead from "Ready" to "Recently Converted"
+          loadLiveLeads(); 
+      } else {
+          const err = await response.json();
+          showToast(err.message || 'Failed to convert lead.', 'error');
+      }
+  } catch (error) {
+      console.error(error);
+      showToast('Server error during conversion.', 'error');
+  } finally {
+      btn.innerHTML = 'Create Project <i class="fa-solid fa-arrow-right"></i>';
+      btn.disabled = false;
+  }
 }
 
 /* ── Save project update ── */
-function saveProject(e, modalId, projName) {
-  e.preventDefault();
-  closeModal(modalId);
-  showToast(`Project "${projName}" updated successfully.`, 'success');
-  addAuditEntry(`Project "${projName}" status/progress updated by James Walker`);
-  simulateEmail({ to:'john.davidson@retailmax.co.uk', subject:`TechNova Portal — Project Update: ${projName}`, body:`Hi John,\n\nYour project "${projName}" has been updated by the TechNova team.\n\nPlease log in to the portal to view the latest progress.` });
+/* ── Open Master Project Edit Modal ── */
+function openEditProjectModal(projId, title, status, hours, overtime, csat) {
+    document.getElementById('edit-proj-id').value = projId;
+    document.getElementById('edit-proj-title').textContent = title;
+    
+    document.getElementById('edit-proj-status').value = status;
+    document.getElementById('edit-proj-hours').value = hours;
+    document.getElementById('edit-proj-overtime').value = overtime;
+    document.getElementById('edit-proj-csat').value = csat;
+    
+    openModal('modal-edit-project');
+}
+
+/* ── 🟢 REAL Save Project Edit to Database ── */
+async function submitEditProject(e) {
+    e.preventDefault();
+    
+    const btn = document.getElementById('btn-save-project');
+    const projId = document.getElementById('edit-proj-id').value;
+    
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+    btn.disabled = true;
+
+    const updateData = {
+        Project_Status: document.getElementById('edit-proj-status').value,
+        Total_Hours_Logged: parseFloat(document.getElementById('edit-proj-hours').value) || 0,
+        Overtime_Hours: parseFloat(document.getElementById('edit-proj-overtime').value) || 0,
+        Client_Satisfaction: parseInt(document.getElementById('edit-proj-csat').value) || null
+    };
+
+    try {
+        const token = localStorage.getItem('tn_token');
+        // Make sure your backend has a PUT /api/v1/projects/:id route!
+        const response = await fetch(`${API_BASE_URL}/projects/${projId}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updateData)
+        });
+
+        if (response.ok) {
+            closeModal('modal-edit-project');
+            showToast('Project updated successfully.', 'success');
+            addAuditEntry(`Project ID ${projId} updated by Admin.`);
+            
+            // 🔄 INSTANTLY REFRESH THE PROJECTS TABLE!
+            loadLiveProjects();
+        } else {
+            const err = await response.json();
+            showToast(err.message || 'Failed to update project.', 'error');
+        }
+    } catch (error) {
+        console.error(error);
+        showToast('Server error while updating project.', 'error');
+    } finally {
+        btn.innerHTML = 'Save Changes';
+        btn.disabled = false;
+    }
 }
 
 /* ── Export leads ── */
@@ -645,11 +959,91 @@ function exportLeads() {
   addAuditEntry('Lead list exported as CSV by James Walker');
 }
 
-/* ── Add lead ── */
-function addLead(e) {
-  e.preventDefault(); closeModal('modal-add-lead'); e.target.reset();
-  showToast('Lead added successfully with status "New".', 'success');
-  addAuditEntry('New lead added manually by James Walker');
+/* ── 🟢 REAL Add Lead to Database ── */
+async function submitAddLead(e) {
+    e.preventDefault();
+    const btn = document.getElementById('btn-add-lead');
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+    btn.disabled = true;
+
+    // Fixed mapping logic with explicit fallbacks preventing 'Unknown' overrides if left empty
+    const countryVal = document.getElementById('add-lead-country').value;
+    const industryVal = document.getElementById('add-lead-industry').value.trim();
+    const serviceVal = document.getElementById('add-lead-service').value;
+
+    const newLeadData = {
+        Client_Name: document.getElementById('add-lead-name').value.trim(),
+        Email: document.getElementById('add-lead-email').value.trim(),
+        Contact_Number: document.getElementById('add-lead-phone').value.trim() || null,
+        Country: countryVal ? countryVal : 'Unknown',
+        Industry: industryVal ? industryVal : 'Unknown',
+        Service_Interested: serviceVal ? serviceVal : 'Unknown',
+        Budget: parseFloat(document.getElementById('add-lead-budget').value) || 0,
+        Lead_Source: document.getElementById('add-lead-source').value || 'Direct',
+        Status: 'New'
+    };
+
+    try {
+        const token = localStorage.getItem('tn_token');
+        const response = await fetch(`${API_BASE_URL}/leads`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newLeadData)
+        });
+
+        if (response.ok) {
+            showToast('Lead successfully added to database!', 'success');
+            closeModal('modal-add-lead');
+            document.getElementById('form-add-lead').reset();
+            addAuditEntry(`New lead "${newLeadData.Client_Name}" added manually.`);
+            
+            // 🔄 INSTANTLY REFRESH THE TABLE TO SHOW THE NEW LEAD!
+            loadLiveLeads();
+        } else {
+            const err = await response.json();
+            showToast(err.message || 'Failed to add lead.', 'error');
+        }
+    } catch (error) {
+        console.error(error);
+        showToast('Server error while adding lead.', 'error');
+    } finally {
+        btn.innerHTML = 'Save Lead <i class="fa-solid fa-arrow-right"></i>';
+        btn.disabled = false;
+    }
+}
+
+/* ── 🔴 REAL Delete Lead from Database ── */
+async function deleteLead(leadId) {
+    // Show a safety warning before deleting
+    if (!window.confirm("Are you sure you want to permanently delete this lead from the database?")) return;
+
+    try {
+        const token = localStorage.getItem('tn_token');
+        const response = await fetch(`${API_BASE_URL}/leads/${leadId}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            showToast('Lead permanently deleted.', 'success');
+            addAuditEntry(`Lead ID ${leadId} deleted by Admin.`);
+            
+            // 🔄 INSTANTLY REFRESH THE TABLE TO REMOVE THE DELETED ROW!
+            loadLiveLeads();
+        } else {
+            const err = await response.json();
+            showToast(err.message || 'Failed to delete lead.', 'error');
+        }
+    } catch (error) {
+        console.error(error);
+        showToast('Server error while deleting lead.', 'error');
+    }
 }
 
 /* ── Add resource ── */
@@ -665,7 +1059,7 @@ function addAuditEntry(text) {
   const now = new Date().toLocaleString('en-GB');
   const item = document.createElement('div');
   item.className = 'audit-item';
-  item.innerHTML = `<span class="audit-icon">🔵</span><div class="audit-body"><div class="audit-action"><strong>${text}</strong></div><div class="audit-meta">${now} · Super Admin (just now)</div></div>`;
+  item.innerHTML = `<span class="audit-icon"><i class="fa-solid fa-circle-info" style="color:var(--cyan)"></i></span><div class="audit-body"><div class="audit-action"><strong>${text}</strong></div><div class="audit-meta">${now} · Super Admin (just now)</div></div>`;
   log.prepend(item);
 }
 
@@ -699,15 +1093,6 @@ function clearAllNotifs() {
   const badge = document.getElementById('notif-count');
   if(badge) badge.style.display = 'none';
 }
-
-/* ── On load ── */
-document.addEventListener('DOMContentLoaded', () => {
-  /* Verify admin role */
-  const session = getSession();
-  if(session && session.role !== 'super_admin') {
-    window.location.href = 'dashboard.html';
-  }
-});
 </script>
 </body>
 </html>

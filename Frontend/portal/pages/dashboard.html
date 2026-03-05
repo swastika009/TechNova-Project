@@ -1,387 +1,1146 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Dashboard – TechNova Client Portal</title>
-<link rel="stylesheet" href="../css/portal.css">
-<style>
-.welcome-banner{background:linear-gradient(135deg,var(--navy2) 0%,var(--card) 100%);border:1px solid var(--border);border-radius:var(--r);padding:1.8rem 2rem;margin-bottom:2rem;position:relative;overflow:hidden;}
-.welcome-banner::before{content:"";position:absolute;top:-60px;right:-40px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,255,0.08) 0%,transparent 70%);pointer-events:none;}
-.wb-title{font-family:var(--font-h);font-size:1.45rem;font-weight:800;color:var(--white);margin-bottom:4px;}
-.wb-sub{font-size:0.87rem;color:var(--gray);}
-.wb-actions{display:flex;gap:.75rem;margin-top:1.1rem;}
-.grid-2-1{display:grid;grid-template-columns:2fr 1fr;gap:1.4rem;margin-bottom:1.4rem;}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin-bottom:1.4rem;}
-.proj-row{display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid rgba(26,52,96,0.4);}
-.proj-row:last-child{border-bottom:none;}.proj-row:hover{background:rgba(255,255,255,0.02);}
-.proj-ic{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
-.proj-info{flex:1;min-width:0;}.proj-name{font-weight:600;color:var(--white);font-size:.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}.proj-meta{font-size:.75rem;color:var(--gray);margin-top:2px;}
-.proj-pct{width:100px;flex-shrink:0;}
-.tl-s{display:flex;flex-direction:column;gap:0;}
-.tl-si{display:flex;gap:12px;padding-bottom:1rem;position:relative;}
-.tl-si::before{content:"";position:absolute;left:11px;top:26px;bottom:0;width:2px;background:var(--border);}
-.tl-si:last-child::before{display:none;}
-.tl-dot{width:24px;height:24px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.7rem;z-index:1;}
-.tl-dot.done{background:rgba(74,222,128,0.15);border:2px solid var(--green);color:var(--green);}
-.tl-dot.now{background:rgba(0,212,255,0.1);border:2px solid var(--cyan);color:var(--cyan);}
-.tl-dot.next{background:var(--navy3);border:2px solid var(--border);color:var(--gray);}
-.tl-title{font-size:.86rem;font-weight:600;color:var(--white);padding-top:2px;}
-.tl-date{font-size:.74rem;color:var(--gray);margin-top:1px;}
-.doc-row{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid rgba(26,52,96,0.4);}
-.doc-row:last-child{border-bottom:none;}.doc-row:hover{background:rgba(255,255,255,0.02);}
-.doc-icon{font-size:1.3rem;flex-shrink:0;}.doc-info{flex:1;min-width:0;}
-.doc-name{font-size:.86rem;font-weight:600;color:var(--white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.doc-meta{font-size:.73rem;color:var(--gray);}
-.act-item{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid rgba(26,52,96,0.3);}
-.act-item:last-child{border-bottom:none;}
-.act-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:7px;}
-.act-text{font-size:.85rem;color:var(--text);line-height:1.5;}
-.act-text strong{color:var(--white);}
-.act-time{font-size:.72rem;color:var(--gray);margin-top:2px;}
-/* Review */
-.review-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.2rem;}
-.rc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem 1rem;text-align:center;transition:var(--trans);}
-.rc:hover{border-color:rgba(0,212,255,0.28);transform:translateY(-2px);}
-.rc-icon{font-size:1.7rem;margin-bottom:6px;}.rc-value{font-family:var(--font-h);font-size:1.7rem;font-weight:800;color:var(--white);line-height:1;}
-.rc-label{font-size:.73rem;color:var(--gray);margin-top:4px;}
-.star-row{display:flex;justify-content:center;gap:2px;margin-top:5px;}
-.star{color:var(--yellow);font-size:.9rem;}
-.rating-stars{display:flex;gap:8px;margin-bottom:1rem;}
-.rstar{font-size:1.7rem;cursor:pointer;transition:transform .15s;opacity:.4;}
-.rstar.on{opacity:1;transform:scale(1.15);}
-.email-banner{position:fixed;top:5rem;right:1.5rem;z-index:500;background:var(--card);border:1px solid var(--border);border-left:4px solid var(--cyan);border-radius:var(--r);padding:.9rem 1.1rem;max-width:320px;box-shadow:var(--sh2);transform:translateX(120%);transition:transform .4s ease;}
-.email-banner.show{transform:translateX(0);}
-.eb-title{font-family:var(--font-h);font-size:.8rem;font-weight:700;color:var(--white);margin-bottom:3px;}
-.eb-body{font-size:.75rem;color:var(--gray);line-height:1.5;}
-.frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
-@media(max-width:1000px){.grid-2-1{grid-template-columns:1fr;}.grid-2{grid-template-columns:1fr;}.review-grid{grid-template-columns:1fr 1fr;}}
-@media(max-width:600px){.review-grid{grid-template-columns:1fr 1fr;}}
-</style>
-</head>
-<body>
-<div class="email-banner" id="email-banner">
-  <div style="font-size:1rem;margin-bottom:4px">📧</div>
-  <div class="eb-title">Email Notification Sent</div>
-  <div class="eb-body" id="email-banner-body">Confirmation sent to your email.</div>
-</div>
-
-<div class="portal-shell">
-<div class="sidebar-overlay" onclick="closeSidebar()"></div>
-<aside class="sidebar">
-  <a href="../index.html" class="sb-logo"><img src="../assets/logo-transparent.png" alt="TechNova Ltd"></a>
-  <div class="sb-client-badge"><div class="sb-avatar" id="sb-av">JD</div><div><div class="sb-client-name" id="sb-name">John Davidson</div><div class="sb-client-role">RetailMax Ltd · Client</div></div></div>
-  <nav class="sb-group">
-    <div class="sb-group-label">Main</div>
-    <a href="dashboard.html" class="sb-link active"><span class="sb-icon">🏠</span>Dashboard</a>
-    <a href="projects.html" class="sb-link"><span class="sb-icon">📋</span>Projects<span class="sb-badge">3</span></a>
-    <a href="messages.html" class="sb-link"><span class="sb-icon">💬</span>Messages<span class="sb-badge red">4</span></a>
-    <div class="sb-group-label" style="margin-top:1.2rem">Finance</div>
-    <a href="invoices.html" class="sb-link"><span class="sb-icon">🧾</span>Invoices &amp; Payments</a>
-    <div class="sb-group-label" style="margin-top:1.2rem">Support</div>
-    <a href="tickets.html" class="sb-link"><span class="sb-icon">🎫</span>Support Tickets<span class="sb-badge yellow">2</span></a>
-    <a href="documents.html" class="sb-link"><span class="sb-icon">📁</span>Documents</a>
-    <div class="sb-group-label" style="margin-top:1.2rem">Account</div>
-    <a href="settings.html" class="sb-link"><span class="sb-icon">⚙️</span>Settings &amp; Profile</a>
-  </nav>
-  <div class="sb-bottom"><button class="sb-logout" onclick="logout()"><span>🚪</span> Sign Out</button></div>
-</aside>
-
-<div class="portal-main">
-<header class="portal-header">
-  <div class="ph-left">
-    <button class="hamburger-portal" onclick="toggleSidebar()"><span></span><span></span><span></span></button>
-    <div><div class="ph-title">Client Dashboard</div><div class="ph-crumb"><a href="../index.html">TechNova</a> › Portal › Dashboard</div></div>
-  </div>
-  <div class="ph-right">
-    <div class="ph-search"><span class="ph-search-icon">🔍</span><input type="text" placeholder="Search…"></div>
-    <div class="ph-iconbtn" onclick="showEB('You have 2 unread notifications. Digest emailed to you.')">🔔<div class="notif-dot"></div></div>
-    <a href="settings.html" class="ph-user"><div class="ph-user-avatar" id="hdr-av">JD</div><div class="ph-user-name" id="hdr-name">John D.</div></a>
-  </div>
-</header>
-
-<main class="portal-body">
-  <div class="welcome-banner">
-    <div class="wb-title">Welcome back, <span id="w-name">John</span> 👋</div>
-    <div class="wb-sub">You have <strong style="color:var(--red)">2 open tickets</strong> and <strong style="color:var(--yellow)">1 invoice awaiting payment</strong>.</div>
-    <div class="wb-actions">
-      <a href="tickets.html" class="btn btn-primary btn-sm">View Open Tickets</a>
-      <a href="invoices.html" class="btn btn-ghost btn-sm">Pay Invoice</a>
-    </div>
-  </div>
-
-  <div class="stat-grid" style="margin-bottom:1.5rem">
-    <div class="stat-card"><div class="stat-top"><div class="stat-icon cyan">📋</div><span class="stat-change up">Active</span></div><div class="stat-value">3</div><div class="stat-label">Active Projects</div></div>
-    <div class="stat-card green"><div class="stat-top"><div class="stat-icon green">✅</div><span class="stat-change up">↑ 2 this month</span></div><div class="stat-value">12</div><div class="stat-label">Milestones Completed</div></div>
-    <div class="stat-card yellow"><div class="stat-top"><div class="stat-icon yellow">🧾</div><span class="stat-change down">1 overdue</span></div><div class="stat-value">£<em style="font-size:1.3rem">4,200</em></div><div class="stat-label">Outstanding Balance</div></div>
-    <div class="stat-card red"><div class="stat-top"><div class="stat-icon red">🎫</div><span class="stat-change neutral">2 open</span></div><div class="stat-value">2</div><div class="stat-label">Open Support Tickets</div></div>
-  </div>
-
-  <!-- Projects + Timeline (FR-07) -->
-  <div class="grid-2-1">
-    <div class="panel">
-      <div class="panel-head"><h3>📋 My Projects (Status &amp; Progress)</h3><a href="projects.html" class="btn btn-ghost btn-sm">View All →</a></div>
-      <div class="panel-body no-pad">
-        <div class="proj-row"><div class="proj-ic" style="background:rgba(0,212,255,0.1)">🌐</div><div class="proj-info"><div class="proj-name">E-Commerce Platform Redesign</div><div class="proj-meta">Due 15 Mar 2026 · Sprint 4/6</div></div><span class="badge inprogress">Active</span><div class="proj-pct"><div class="progress-meta"><span>68%</span></div><div class="progress-bar"><div class="progress-fill" data-w="68" style="width:68%"></div></div></div></div>
-        <div class="proj-row"><div class="proj-ic" style="background:rgba(74,222,128,0.1)">☁️</div><div class="proj-info"><div class="proj-name">Salesforce CRM Integration</div><div class="proj-meta">Due 28 Feb 2026 · Sprint 5/5</div></div><span class="badge review">In Review</span><div class="proj-pct"><div class="progress-meta"><span>92%</span></div><div class="progress-bar"><div class="progress-fill green" data-w="92" style="width:92%"></div></div></div></div>
-        <div class="proj-row"><div class="proj-ic" style="background:rgba(167,139,250,0.1)">📱</div><div class="proj-info"><div class="proj-name">Mobile App — Phase 2</div><div class="proj-meta">Due 30 Apr 2026 · Sprint 1/8</div></div><span class="badge inprogress">Active</span><div class="proj-pct"><div class="progress-meta"><span>12%</span></div><div class="progress-bar"><div class="progress-fill yellow" data-w="12" style="width:12%"></div></div></div></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Dashboard – TechNova Client Portal</title>
+    <link rel="stylesheet" href="../css/portal.css" />
+    <style>
+      .welcome-banner {
+        background: linear-gradient(135deg, var(--navy2) 0%, var(--card) 100%);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        padding: 1.8rem 2rem;
+        margin-bottom: 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .welcome-banner::before {
+        content: "";
+        position: absolute;
+        top: -60px;
+        right: -40px;
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(0, 212, 255, 0.08) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .wb-title {
+        font-family: var(--font-h);
+        font-size: 1.45rem;
+        font-weight: 800;
+        color: var(--white);
+        margin-bottom: 4px;
+      }
+      .wb-sub {
+        font-size: 0.87rem;
+        color: var(--gray);
+      }
+      .wb-actions {
+        display: flex;
+        gap: 0.75rem;
+        margin-top: 1.1rem;
+      }
+      .grid-2-1 {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 1.4rem;
+        margin-bottom: 1.4rem;
+      }
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.4rem;
+        margin-bottom: 1.4rem;
+      }
+      .proj-row {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 16px;
+        border-bottom: 1px solid rgba(26, 52, 96, 0.4);
+      }
+      .proj-row:last-child {
+        border-bottom: none;
+      }
+      .proj-row:hover {
+        background: rgba(255, 255, 255, 0.02);
+      }
+      .proj-ic {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+      }
+      .proj-info {
+        flex: 1;
+        min-width: 0;
+      }
+      .proj-name {
+        font-weight: 600;
+        color: var(--white);
+        font-size: 0.88rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .proj-meta {
+        font-size: 0.75rem;
+        color: var(--gray);
+        margin-top: 2px;
+      }
+      .proj-pct {
+        width: 100px;
+        flex-shrink: 0;
+      }
+      .tl-s {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+      .tl-si {
+        display: flex;
+        gap: 12px;
+        padding-bottom: 1rem;
+        position: relative;
+      }
+      .tl-si::before {
+        content: "";
+        position: absolute;
+        left: 11px;
+        top: 26px;
+        bottom: 0;
+        width: 2px;
+        background: var(--border);
+      }
+      .tl-si:last-child::before {
+        display: none;
+      }
+      .tl-dot {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
+        z-index: 1;
+      }
+      .tl-dot.done {
+        background: rgba(74, 222, 128, 0.15);
+        border: 2px solid var(--green);
+        color: var(--green);
+      }
+      .tl-dot.now {
+        background: rgba(0, 212, 255, 0.1);
+        border: 2px solid var(--cyan);
+        color: var(--cyan);
+      }
+      .tl-dot.next {
+        background: var(--navy3);
+        border: 2px solid var(--border);
+        color: var(--gray);
+      }
+      .tl-title {
+        font-size: 0.86rem;
+        font-weight: 600;
+        color: var(--white);
+        padding-top: 2px;
+      }
+      .tl-date {
+        font-size: 0.74rem;
+        color: var(--gray);
+        margin-top: 1px;
+      }
+      .doc-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 16px;
+        border-bottom: 1px solid rgba(26, 52, 96, 0.4);
+      }
+      .doc-row:last-child {
+        border-bottom: none;
+      }
+      .doc-row:hover {
+        background: rgba(255, 255, 255, 0.02);
+      }
+      .doc-icon {
+        font-size: 1.3rem;
+        flex-shrink: 0;
+      }
+      .doc-info {
+        flex: 1;
+        min-width: 0;
+      }
+      .doc-name {
+        font-size: 0.86rem;
+        font-weight: 600;
+        color: var(--white);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .doc-meta {
+        font-size: 0.73rem;
+        color: var(--gray);
+      }
+      .act-item {
+        display: flex;
+        gap: 12px;
+        padding: 11px 0;
+        border-bottom: 1px solid rgba(26, 52, 96, 0.3);
+      }
+      .act-item:last-child {
+        border-bottom: none;
+      }
+      .act-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        margin-top: 7px;
+      }
+      .act-text {
+        font-size: 0.85rem;
+        color: var(--text);
+        line-height: 1.5;
+      }
+      .act-text strong {
+        color: var(--white);
+      }
+      .act-time {
+        font-size: 0.72rem;
+        color: var(--gray);
+        margin-top: 2px;
+      }
+      /* Review */
+      .review-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+        margin-bottom: 1.2rem;
+      }
+      .rc {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        padding: 1.1rem 1rem;
+        text-align: center;
+        transition: var(--trans);
+      }
+      .rc:hover {
+        border-color: rgba(0, 212, 255, 0.28);
+        transform: translateY(-2px);
+      }
+      .rc-icon {
+        font-size: 1.7rem;
+        margin-bottom: 6px;
+      }
+      .rc-value {
+        font-family: var(--font-h);
+        font-size: 1.7rem;
+        font-weight: 800;
+        color: var(--white);
+        line-height: 1;
+      }
+      .rc-label {
+        font-size: 0.73rem;
+        color: var(--gray);
+        margin-top: 4px;
+      }
+      .star-row {
+        display: flex;
+        justify-content: center;
+        gap: 2px;
+        margin-top: 5px;
+      }
+      .star {
+        color: var(--yellow);
+        font-size: 0.9rem;
+      }
+      .rating-stars {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 1rem;
+      }
+      .rstar {
+        font-size: 1.7rem;
+        cursor: pointer;
+        transition: transform 0.15s;
+        opacity: 0.4;
+      }
+      .rstar.on {
+        opacity: 1;
+        transform: scale(1.15);
+      }
+      .email-banner {
+        position: fixed;
+        top: 5rem;
+        right: 1.5rem;
+        z-index: 500;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-left: 4px solid var(--cyan);
+        border-radius: var(--r);
+        padding: 0.9rem 1.1rem;
+        max-width: 320px;
+        box-shadow: var(--sh2);
+        transform: translateX(120%);
+        transition: transform 0.4s ease;
+      }
+      .email-banner.show {
+        transform: translateX(0);
+      }
+      .eb-title {
+        font-family: var(--font-h);
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 3px;
+      }
+      .eb-body {
+        font-size: 0.75rem;
+        color: var(--gray);
+        line-height: 1.5;
+      }
+      .frow {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+      @media (max-width: 1000px) {
+        .grid-2-1 {
+          grid-template-columns: 1fr;
+        }
+        .grid-2 {
+          grid-template-columns: 1fr;
+        }
+        .review-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 600px) {
+        .review-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="email-banner" id="email-banner">
+      <div style="font-size: 1rem; margin-bottom: 4px">📧</div>
+      <div class="eb-title">Email Notification Sent</div>
+      <div class="eb-body" id="email-banner-body">
+        Confirmation sent to your email.
       </div>
     </div>
-    <div class="panel">
-      <div class="panel-head"><h3>📅 Progress Timeline</h3></div>
-      <div class="panel-body">
-        <div class="tl-s">
-          <div class="tl-si"><div class="tl-dot done">✓</div><div><div class="tl-title">Wireframes approved</div><div class="tl-date">24 Jan · E-Commerce</div></div></div>
-          <div class="tl-si"><div class="tl-dot done">✓</div><div><div class="tl-title">Design system delivered</div><div class="tl-date">7 Feb · E-Commerce</div></div></div>
-          <div class="tl-si"><div class="tl-dot done">✓</div><div><div class="tl-title">Data migration validated</div><div class="tl-date">10 Feb · Salesforce</div></div></div>
-          <div class="tl-si"><div class="tl-dot done">✓</div><div><div class="tl-title">Checkout redesign approved</div><div class="tl-date">21 Feb · E-Commerce</div></div></div>
-          <div class="tl-si"><div class="tl-dot now">→</div><div><div class="tl-title">CRM UAT sign-off</div><div class="tl-date">27 Feb · In Progress</div></div></div>
-          <div class="tl-si"><div class="tl-dot next">○</div><div><div class="tl-title">CRM Go-Live</div><div class="tl-date">28 Feb · Upcoming</div></div></div>
-          <div class="tl-si"><div class="tl-dot next">○</div><div><div class="tl-title">E-Commerce Go-Live</div><div class="tl-date">15 Mar · Upcoming</div></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Shared Documents + Support Ticket (FR-07, FR-08) -->
-  <div class="grid-2">
-    <div class="panel">
-      <div class="panel-head"><h3>📁 Shared Documents</h3><a href="documents.html" class="btn btn-ghost btn-sm">View All →</a></div>
-      <div class="panel-body no-pad">
-        <div class="doc-row"><div class="doc-icon">📄</div><div class="doc-info"><div class="doc-name">RetailMax-Design-System-v2.figma</div><div class="doc-meta">Amy Liu · 24 Feb · 12.4 MB</div></div><button class="btn btn-ghost btn-sm" onclick="dlDoc('RetailMax-Design-System-v2.figma')">⬇</button></div>
-        <div class="doc-row"><div class="doc-icon">📋</div><div class="doc-info"><div class="doc-name">Sprint-4-Review-Presentation.pptx</div><div class="doc-meta">Sarah Mitchell · 21 Feb · 3.2 MB</div></div><button class="btn btn-ghost btn-sm" onclick="dlDoc('Sprint-4-Review-Presentation.pptx')">⬇</button></div>
-        <div class="doc-row"><div class="doc-icon">📊</div><div class="doc-info"><div class="doc-name">Data-Migration-Validation.xlsx</div><div class="doc-meta">Sunita Kapoor · 10 Feb · 1.8 MB</div></div><button class="btn btn-ghost btn-sm" onclick="dlDoc('Data-Migration-Validation.xlsx')">⬇</button></div>
-        <div class="doc-row"><div class="doc-icon">📄</div><div class="doc-info"><div class="doc-name">Salesforce-Admin-Guide.pdf</div><div class="doc-meta">Sunita Kapoor · 5 Feb · 2.4 MB</div></div><button class="btn btn-ghost btn-sm" onclick="dlDoc('Salesforce-Admin-Guide.pdf')">⬇</button></div>
-      </div>
-    </div>
-
-    <!-- FR-08: Support Ticket -->
-    <div class="panel">
-      <div class="panel-head"><h3>🎫 Raise Support Ticket</h3><a href="tickets.html" class="btn btn-ghost btn-sm">My Tickets →</a></div>
-      <div class="panel-body">
-        <form onsubmit="raiseTicket(event)">
-          <div class="form-group"><label class="form-label">Subject <span class="req">*</span></label><input type="text" class="form-input" id="tk-subject" placeholder="Brief description of the issue" required></div>
-          <div class="form-group"><label class="form-label">Description <span class="req">*</span></label><textarea class="form-textarea" id="tk-desc" placeholder="Detailed description, steps to reproduce, expected vs actual behaviour…" style="min-height:80px" required></textarea></div>
-          <div class="frow" style="margin-bottom:1.2rem">
-            <div class="form-group"><label class="form-label">Priority <span class="req">*</span></label><select class="form-select" id="tk-prio" required><option value="">Select…</option><option value="Low">🟢 Low</option><option value="Medium">🟡 Medium</option><option value="High">🔴 High</option></select></div>
-            <div class="form-group"><label class="form-label">Project</label><select class="form-select" id="tk-proj"><option>E-Commerce Redesign</option><option>Salesforce CRM</option><option>Mobile App</option><option>General</option></select></div>
+    <div class="portal-shell">
+      <div class="sidebar-overlay" onclick="closeSidebar()"></div>
+      <aside class="sidebar">
+        <a href="../index.html" class="sb-logo"
+          ><img src="../assets/logo-transparent.png" alt="TechNova Ltd"
+        /></a>
+        <div class="sb-client-badge">
+          <div class="sb-avatar" id="sb-av">JD</div>
+          <div>
+            <div class="sb-client-name" id="sb-name">John Davidson</div>
+            <div class="sb-client-role">RetailMax Ltd · Client</div>
           </div>
-          <button type="submit" class="btn btn-primary" style="width:100%">Submit Ticket →</button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <!-- OVERALL REVIEW SECTION -->
-  <div style="margin-bottom:1.4rem">
-    <div class="panel">
-      <div class="panel-head"><h3>⭐ Overall Project Review</h3><span style="font-size:.78rem;color:var(--gray)">RetailMax Ltd · All Projects</span></div>
-      <div class="panel-body">
-        <div class="review-grid">
-          <div class="rc"><div class="rc-icon">🚀</div><div class="rc-value">98<span style="font-size:.9rem;color:var(--cyan)">%</span></div><div class="rc-label">On-Time Delivery</div><div class="star-row"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div></div>
-          <div class="rc"><div class="rc-icon">💬</div><div class="rc-value">4.9<span style="font-size:.9rem;color:var(--cyan)">/5</span></div><div class="rc-label">Communication</div><div class="star-row"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div></div>
-          <div class="rc"><div class="rc-icon">🛡️</div><div class="rc-value">4.8<span style="font-size:.9rem;color:var(--cyan)">/5</span></div><div class="rc-label">Technical Quality</div><div class="star-row"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star" style="color:var(--border)">★</span></div></div>
-          <div class="rc"><div class="rc-icon">🤝</div><div class="rc-value">5.0<span style="font-size:.9rem;color:var(--cyan)">/5</span></div><div class="rc-label">Overall Satisfaction</div><div class="star-row"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div></div>
         </div>
+        <nav class="sb-group">
+          <div class="sb-group-label">Main</div>
+          <a href="dashboard.html" class="sb-link active"
+            ><span class="sb-icon">🏠</span>Dashboard</a
+          >
+          <a href="projects.html" class="sb-link"
+            ><span class="sb-icon">📋</span>Projects<span class="sb-badge"
+              >3</span
+            ></a
+          >
+          <a href="messages.html" class="sb-link"
+            ><span class="sb-icon">💬</span>Messages<span class="sb-badge red"
+              >4</span
+            ></a
+          >
+          <div class="sb-group-label" style="margin-top: 1.2rem">Finance</div>
+          <a href="invoices.html" class="sb-link"
+            ><span class="sb-icon">🧾</span>Invoices &amp; Payments</a
+          >
+          <div class="sb-group-label" style="margin-top: 1.2rem">Support</div>
+          <a href="tickets.html" class="sb-link"
+            ><span class="sb-icon">🎫</span>Support Tickets<span
+              class="sb-badge yellow"
+              >2</span
+            ></a
+          >
+          <a href="documents.html" class="sb-link"
+            ><span class="sb-icon">📁</span>Documents</a
+          >
+          <div class="sb-group-label" style="margin-top: 1.2rem">Account</div>
+          <a href="settings.html" class="sb-link"
+            ><span class="sb-icon">⚙️</span>Settings &amp; Profile</a
+          >
+        </nav>
+        <div class="sb-bottom">
+          <button class="sb-logout" onclick="logout()">
+            <span>🚪</span> Sign Out
+          </button>
+        </div>
+      </aside>
 
-        <!-- Review form -->
-        <div class="panel" style="margin-bottom:1.2rem">
-          <div class="panel-head" style="background:rgba(0,0,0,0.1)"><h3>✍️ Submit Your Review</h3></div>
-          <div class="panel-body">
-            <form onsubmit="submitReview(event)">
-              <div class="form-group">
-                <label class="form-label">Overall Rating <span class="req">*</span></label>
-                <div class="rating-stars">
-                  <span class="rstar" onclick="setRating(1)">⭐</span><span class="rstar" onclick="setRating(2)">⭐</span><span class="rstar" onclick="setRating(3)">⭐</span><span class="rstar" onclick="setRating(4)">⭐</span><span class="rstar" onclick="setRating(5)">⭐</span>
+      <div class="portal-main">
+        <header class="portal-header">
+          <div class="ph-left">
+            <button class="hamburger-portal" onclick="toggleSidebar()">
+              <span></span><span></span><span></span>
+            </button>
+            <div>
+              <div class="ph-title">Client Dashboard</div>
+              <div class="ph-crumb">
+                <a href="../index.html">TechNova</a> › Portal › Dashboard
+              </div>
+            </div>
+          </div>
+          <div class="ph-right">
+            <div class="ph-search">
+              <span class="ph-search-icon">🔍</span
+              ><input type="text" placeholder="Search…" />
+            </div>
+            <div
+              class="ph-iconbtn"
+              onclick="
+                showEB(
+                  'You have 2 unread notifications. Digest emailed to you.',
+                )
+              "
+            >
+              🔔
+              <div class="notif-dot"></div>
+            </div>
+            <a href="settings.html" class="ph-user"
+              ><div class="ph-user-avatar" id="hdr-av">JD</div>
+              <div class="ph-user-name" id="hdr-name">John D.</div></a
+            >
+          </div>
+        </header>
+
+        <main class="portal-body">
+          <div class="welcome-banner">
+            <div class="wb-title">
+              Welcome back, <span id="w-name">John</span> 👋
+            </div>
+            <div class="wb-sub">
+              You have
+              <strong style="color: var(--red)">2 open tickets</strong> and
+              <strong style="color: var(--yellow)"
+                >1 invoice awaiting payment</strong
+              >.
+            </div>
+            <div class="wb-actions">
+              <a href="tickets.html" class="btn btn-primary btn-sm"
+                >View Open Tickets</a
+              >
+              <a href="invoices.html" class="btn btn-ghost btn-sm"
+                >Pay Invoice</a
+              >
+            </div>
+          </div>
+
+          <div class="stat-grid" style="margin-bottom: 1.5rem">
+            <div class="stat-card">
+              <div class="stat-top">
+                <div class="stat-icon cyan">📋</div>
+                <span class="stat-change up">Active</span>
+              </div>
+              <div class="stat-value">3</div>
+              <div class="stat-label">Active Projects</div>
+            </div>
+            <div class="stat-card green">
+              <div class="stat-top">
+                <div class="stat-icon green">✅</div>
+                <span class="stat-change up">↑ 2 this month</span>
+              </div>
+              <div class="stat-value">12</div>
+              <div class="stat-label">Milestones Completed</div>
+            </div>
+            <div class="stat-card yellow">
+              <div class="stat-top">
+                <div class="stat-icon yellow">🧾</div>
+                <span class="stat-change down">1 overdue</span>
+              </div>
+              <div class="stat-value">
+                £<em style="font-size: 1.3rem">4,200</em>
+              </div>
+              <div class="stat-label">Outstanding Balance</div>
+            </div>
+            <div class="stat-card red">
+              <div class="stat-top">
+                <div class="stat-icon red">🎫</div>
+                <span class="stat-change neutral">2 open</span>
+              </div>
+              <div class="stat-value">2</div>
+              <div class="stat-label">Open Support Tickets</div>
+            </div>
+          </div>
+
+          <!-- Projects + Timeline (FR-07) -->
+          <div class="grid-2-1">
+            <div class="panel">
+              <div class="panel-head">
+                <h3>📋 My Projects (Status &amp; Progress)</h3>
+                <a href="projects.html" class="btn btn-ghost btn-sm"
+                  >View All →</a
+                >
+              </div>
+              <div class="panel-body no-pad">
+                <div class="proj-row">
+                  <div
+                    class="proj-ic"
+                    style="background: rgba(0, 212, 255, 0.1)"
+                  >
+                    🌐
+                  </div>
+                  <div class="proj-info">
+                    <div class="proj-name">E-Commerce Platform Redesign</div>
+                    <div class="proj-meta">Due 15 Mar 2026 · Sprint 4/6</div>
+                  </div>
+                  <span class="badge inprogress">Active</span>
+                  <div class="proj-pct">
+                    <div class="progress-meta"><span>68%</span></div>
+                    <div class="progress-bar">
+                      <div
+                        class="progress-fill"
+                        data-w="68"
+                        style="width: 68%"
+                      ></div>
+                    </div>
+                  </div>
                 </div>
-                <input type="hidden" id="r-rating">
+                <div class="proj-row">
+                  <div
+                    class="proj-ic"
+                    style="background: rgba(74, 222, 128, 0.1)"
+                  >
+                    ☁️
+                  </div>
+                  <div class="proj-info">
+                    <div class="proj-name">Salesforce CRM Integration</div>
+                    <div class="proj-meta">Due 28 Feb 2026 · Sprint 5/5</div>
+                  </div>
+                  <span class="badge review">In Review</span>
+                  <div class="proj-pct">
+                    <div class="progress-meta"><span>92%</span></div>
+                    <div class="progress-bar">
+                      <div
+                        class="progress-fill green"
+                        data-w="92"
+                        style="width: 92%"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="proj-row">
+                  <div
+                    class="proj-ic"
+                    style="background: rgba(167, 139, 250, 0.1)"
+                  >
+                    📱
+                  </div>
+                  <div class="proj-info">
+                    <div class="proj-name">Mobile App — Phase 2</div>
+                    <div class="proj-meta">Due 30 Apr 2026 · Sprint 1/8</div>
+                  </div>
+                  <span class="badge inprogress">Active</span>
+                  <div class="proj-pct">
+                    <div class="progress-meta"><span>12%</span></div>
+                    <div class="progress-bar">
+                      <div
+                        class="progress-fill yellow"
+                        data-w="12"
+                        style="width: 12%"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="frow">
-                <div class="form-group"><label class="form-label">Category</label><select class="form-select" id="r-cat"><option>Overall Engagement</option><option>E-Commerce Redesign</option><option>Salesforce CRM</option><option>Mobile App</option></select></div>
-                <div class="form-group"><label class="form-label">Would Recommend?</label><select class="form-select" id="r-rec"><option value="yes">Yes, definitely</option><option value="likely">Very likely</option><option value="neutral">Neutral</option><option value="no">Not at this time</option></select></div>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><h3>📅 Progress Timeline</h3></div>
+              <div class="panel-body">
+                <div class="tl-s">
+                  <div class="tl-si">
+                    <div class="tl-dot done">✓</div>
+                    <div>
+                      <div class="tl-title">Wireframes approved</div>
+                      <div class="tl-date">24 Jan · E-Commerce</div>
+                    </div>
+                  </div>
+                  <div class="tl-si">
+                    <div class="tl-dot done">✓</div>
+                    <div>
+                      <div class="tl-title">Design system delivered</div>
+                      <div class="tl-date">7 Feb · E-Commerce</div>
+                    </div>
+                  </div>
+                  <div class="tl-si">
+                    <div class="tl-dot done">✓</div>
+                    <div>
+                      <div class="tl-title">Data migration validated</div>
+                      <div class="tl-date">10 Feb · Salesforce</div>
+                    </div>
+                  </div>
+                  <div class="tl-si">
+                    <div class="tl-dot done">✓</div>
+                    <div>
+                      <div class="tl-title">Checkout redesign approved</div>
+                      <div class="tl-date">21 Feb · E-Commerce</div>
+                    </div>
+                  </div>
+                  <div class="tl-si">
+                    <div class="tl-dot now">→</div>
+                    <div>
+                      <div class="tl-title">CRM UAT sign-off</div>
+                      <div class="tl-date">27 Feb · In Progress</div>
+                    </div>
+                  </div>
+                  <div class="tl-si">
+                    <div class="tl-dot next">○</div>
+                    <div>
+                      <div class="tl-title">CRM Go-Live</div>
+                      <div class="tl-date">28 Feb · Upcoming</div>
+                    </div>
+                  </div>
+                  <div class="tl-si">
+                    <div class="tl-dot next">○</div>
+                    <div>
+                      <div class="tl-title">E-Commerce Go-Live</div>
+                      <div class="tl-date">15 Mar · Upcoming</div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="form-group"><label class="form-label">Written Review <span class="req">*</span></label><textarea class="form-textarea" id="r-text" placeholder="Share your experience with TechNova…" style="min-height:90px" required></textarea></div>
-              <div style="display:flex;justify-content:flex-end;gap:.75rem">
-                <button type="button" class="btn btn-ghost" onclick="clearReview()">Clear</button>
-                <button type="submit" id="r-btn" class="btn btn-primary">Submit Review →</button>
-              </div>
-            </form>
+            </div>
           </div>
-        </div>
 
-        <!-- Existing review -->
-        <div style="padding:1.2rem;background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.15);border-radius:var(--r2)">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:.6rem">
-            <div class="sb-avatar" style="width:34px;height:34px;font-size:.75rem">JD</div>
-            <div><div style="font-weight:600;color:var(--white);font-size:.87rem">John Davidson · RetailMax Ltd</div><div style="font-size:.72rem;color:var(--gray)">15 Feb 2026 · Salesforce CRM · ★★★★★</div></div>
+          <!-- Shared Documents + Support Ticket (FR-07, FR-08) -->
+          <div class="grid-2">
+            <div class="panel">
+              <div class="panel-head">
+                <h3>📁 Shared Documents</h3>
+                <a href="documents.html" class="btn btn-ghost btn-sm"
+                  >View All →</a
+                >
+              </div>
+              <div class="panel-body no-pad">
+                <div class="doc-row">
+                  <div class="doc-icon">📄</div>
+                  <div class="doc-info">
+                    <div class="doc-name">RetailMax-Design-System-v2.figma</div>
+                    <div class="doc-meta">Amy Liu · 24 Feb · 12.4 MB</div>
+                  </div>
+                  <button
+                    class="btn btn-ghost btn-sm"
+                    onclick="dlDoc('RetailMax-Design-System-v2.figma')"
+                  >
+                    ⬇
+                  </button>
+                </div>
+                <div class="doc-row">
+                  <div class="doc-icon">📋</div>
+                  <div class="doc-info">
+                    <div class="doc-name">
+                      Sprint-4-Review-Presentation.pptx
+                    </div>
+                    <div class="doc-meta">Sarah Mitchell · 21 Feb · 3.2 MB</div>
+                  </div>
+                  <button
+                    class="btn btn-ghost btn-sm"
+                    onclick="dlDoc('Sprint-4-Review-Presentation.pptx')"
+                  >
+                    ⬇
+                  </button>
+                </div>
+                <div class="doc-row">
+                  <div class="doc-icon">📊</div>
+                  <div class="doc-info">
+                    <div class="doc-name">Data-Migration-Validation.xlsx</div>
+                    <div class="doc-meta">Sunita Kapoor · 10 Feb · 1.8 MB</div>
+                  </div>
+                  <button
+                    class="btn btn-ghost btn-sm"
+                    onclick="dlDoc('Data-Migration-Validation.xlsx')"
+                  >
+                    ⬇
+                  </button>
+                </div>
+                <div class="doc-row">
+                  <div class="doc-icon">📄</div>
+                  <div class="doc-info">
+                    <div class="doc-name">Salesforce-Admin-Guide.pdf</div>
+                    <div class="doc-meta">Sunita Kapoor · 5 Feb · 2.4 MB</div>
+                  </div>
+                  <button
+                    class="btn btn-ghost btn-sm"
+                    onclick="dlDoc('Salesforce-Admin-Guide.pdf')"
+                  >
+                    ⬇
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- FR-08: Support Ticket -->
+            <div class="panel">
+              <div class="panel-head">
+                <h3>🎫 Raise Support Ticket</h3>
+                <a href="tickets.html" class="btn btn-ghost btn-sm"
+                  >My Tickets →</a
+                >
+              </div>
+              <div class="panel-body">
+                <form onsubmit="raiseTicket(event)">
+                  <div class="form-group">
+                    <label class="form-label"
+                      >Subject <span class="req">*</span></label
+                    ><input
+                      type="text"
+                      class="form-input"
+                      id="tk-subject"
+                      placeholder="Brief description of the issue"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label"
+                      >Description <span class="req">*</span></label
+                    ><textarea
+                      class="form-textarea"
+                      id="tk-desc"
+                      placeholder="Detailed description, steps to reproduce, expected vs actual behaviour…"
+                      style="min-height: 80px"
+                      required
+                    ></textarea>
+                  </div>
+                  <div class="frow" style="margin-bottom: 1.2rem">
+                    <div class="form-group">
+                      <label class="form-label"
+                        >Priority <span class="req">*</span></label
+                      ><select class="form-select" id="tk-prio" required>
+                        <option value="">Select…</option>
+                        <option value="Low">🟢 Low</option>
+                        <option value="Medium">🟡 Medium</option>
+                        <option value="High">🔴 High</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Project</label
+                      ><select class="form-select" id="tk-proj">
+                        <option>E-Commerce Redesign</option>
+                        <option>Salesforce CRM</option>
+                        <option>Mobile App</option>
+                        <option>General</option>
+                      </select>
+                    </div>
+                  </div>
+                  <button
+                    type="submit"
+                    class="btn btn-primary"
+                    style="width: 100%"
+                  >
+                    Submit Ticket →
+                  </button>
+                </form>
+              </div>
+            </div>
           </div>
-          <p style="font-size:.84rem;color:var(--text);line-height:1.65">"TechNova's Salesforce team was exceptional. Sunita and the team delivered the data migration ahead of schedule. The Apex automation has already saved our sales team hours per week. Highly recommended."</p>
-        </div>
+
+          <!-- OVERALL REVIEW SECTION -->
+          <div style="margin-bottom: 1.4rem">
+            <div class="panel">
+              <div class="panel-head">
+                <h3>⭐ Overall Project Review</h3>
+                <span style="font-size: 0.78rem; color: var(--gray)"
+                  >RetailMax Ltd · All Projects</span
+                >
+              </div>
+              <div class="panel-body">
+                <div class="review-grid">
+                  <div class="rc">
+                    <div class="rc-icon">🚀</div>
+                    <div class="rc-value">
+                      98<span style="font-size: 0.9rem; color: var(--cyan)"
+                        >%</span
+                      >
+                    </div>
+                    <div class="rc-label">On-Time Delivery</div>
+                    <div class="star-row">
+                      <span class="star">★</span><span class="star">★</span
+                      ><span class="star">★</span><span class="star">★</span
+                      ><span class="star">★</span>
+                    </div>
+                  </div>
+                  <div class="rc">
+                    <div class="rc-icon">💬</div>
+                    <div class="rc-value">
+                      4.9<span style="font-size: 0.9rem; color: var(--cyan)"
+                        >/5</span
+                      >
+                    </div>
+                    <div class="rc-label">Communication</div>
+                    <div class="star-row">
+                      <span class="star">★</span><span class="star">★</span
+                      ><span class="star">★</span><span class="star">★</span
+                      ><span class="star">★</span>
+                    </div>
+                  </div>
+                  <div class="rc">
+                    <div class="rc-icon">🛡️</div>
+                    <div class="rc-value">
+                      4.8<span style="font-size: 0.9rem; color: var(--cyan)"
+                        >/5</span
+                      >
+                    </div>
+                    <div class="rc-label">Technical Quality</div>
+                    <div class="star-row">
+                      <span class="star">★</span><span class="star">★</span
+                      ><span class="star">★</span><span class="star">★</span
+                      ><span class="star" style="color: var(--border)">★</span>
+                    </div>
+                  </div>
+                  <div class="rc">
+                    <div class="rc-icon">🤝</div>
+                    <div class="rc-value">
+                      5.0<span style="font-size: 0.9rem; color: var(--cyan)"
+                        >/5</span
+                      >
+                    </div>
+                    <div class="rc-label">Overall Satisfaction</div>
+                    <div class="star-row">
+                      <span class="star">★</span><span class="star">★</span
+                      ><span class="star">★</span><span class="star">★</span
+                      ><span class="star">★</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Review form -->
+                <div class="panel" style="margin-bottom: 1.2rem">
+                  <div
+                    class="panel-head"
+                    style="background: rgba(0, 0, 0, 0.1)"
+                  >
+                    <h3>✍️ Submit Your Review</h3>
+                  </div>
+                  <div class="panel-body">
+                    <form onsubmit="submitReview(event)">
+                      <div class="form-group">
+                        <label class="form-label"
+                          >Overall Rating <span class="req">*</span></label
+                        >
+                        <div class="rating-stars">
+                          <span class="rstar" onclick="setRating(1)">⭐</span
+                          ><span class="rstar" onclick="setRating(2)">⭐</span
+                          ><span class="rstar" onclick="setRating(3)">⭐</span
+                          ><span class="rstar" onclick="setRating(4)">⭐</span
+                          ><span class="rstar" onclick="setRating(5)">⭐</span>
+                        </div>
+                        <input type="hidden" id="r-rating" />
+                      </div>
+                      <div class="frow">
+                        <div class="form-group">
+                          <label class="form-label">Category</label
+                          ><select class="form-select" id="r-cat">
+                            <option>Overall Engagement</option>
+                            <option>E-Commerce Redesign</option>
+                            <option>Salesforce CRM</option>
+                            <option>Mobile App</option>
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label class="form-label">Would Recommend?</label
+                          ><select class="form-select" id="r-rec">
+                            <option value="yes">Yes, definitely</option>
+                            <option value="likely">Very likely</option>
+                            <option value="neutral">Neutral</option>
+                            <option value="no">Not at this time</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="form-label"
+                          >Written Review <span class="req">*</span></label
+                        ><textarea
+                          class="form-textarea"
+                          id="r-text"
+                          placeholder="Share your experience with TechNova…"
+                          style="min-height: 90px"
+                          required
+                        ></textarea>
+                      </div>
+                      <div
+                        style="
+                          display: flex;
+                          justify-content: flex-end;
+                          gap: 0.75rem;
+                        "
+                      >
+                        <button
+                          type="button"
+                          class="btn btn-ghost"
+                          onclick="clearReview()"
+                        >
+                          Clear
+                        </button>
+                        <button
+                          type="submit"
+                          id="r-btn"
+                          class="btn btn-primary"
+                        >
+                          Submit Review →
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+
+                <!-- Existing review -->
+                <div
+                  style="
+                    padding: 1.2rem;
+                    background: rgba(0, 212, 255, 0.04);
+                    border: 1px solid rgba(0, 212, 255, 0.15);
+                    border-radius: var(--r2);
+                  "
+                >
+                  <div
+                    style="
+                      display: flex;
+                      align-items: center;
+                      gap: 10px;
+                      margin-bottom: 0.6rem;
+                    "
+                  >
+                    <div
+                      class="sb-avatar"
+                      style="width: 34px; height: 34px; font-size: 0.75rem"
+                    >
+                      JD
+                    </div>
+                    <div>
+                      <div
+                        style="
+                          font-weight: 600;
+                          color: var(--white);
+                          font-size: 0.87rem;
+                        "
+                      >
+                        John Davidson · RetailMax Ltd
+                      </div>
+                      <div style="font-size: 0.72rem; color: var(--gray)">
+                        15 Feb 2026 · Salesforce CRM · ★★★★★
+                      </div>
+                    </div>
+                  </div>
+                  <p
+                    style="
+                      font-size: 0.84rem;
+                      color: var(--text);
+                      line-height: 1.65;
+                    "
+                  >
+                    "TechNova's Salesforce team was exceptional. Sunita and the
+                    team delivered the data migration ahead of schedule. The
+                    Apex automation has already saved our sales team hours per
+                    week. Highly recommended."
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Activity -->
+          <div class="panel">
+            <div class="panel-head"><h3>🕐 Recent Activity</h3></div>
+            <div class="panel-body">
+              <div class="act-item">
+                <div class="act-dot" style="background: var(--green)"></div>
+                <div>
+                  <div class="act-text">
+                    <strong>Milestone completed</strong> — Checkout redesign
+                    approved
+                  </div>
+                  <div class="act-time">2 hours ago</div>
+                </div>
+              </div>
+              <div class="act-item">
+                <div class="act-dot" style="background: var(--cyan)"></div>
+                <div>
+                  <div class="act-text">
+                    New message from <strong>Sarah (PM)</strong>
+                  </div>
+                  <div class="act-time">4 hours ago</div>
+                </div>
+              </div>
+              <div class="act-item">
+                <div class="act-dot" style="background: var(--yellow)"></div>
+                <div>
+                  <div class="act-text">
+                    Invoice <strong>INV-2026-005</strong> issued — £4,200
+                  </div>
+                  <div class="act-time">Yesterday</div>
+                </div>
+              </div>
+              <div class="act-item">
+                <div class="act-dot" style="background: var(--red)"></div>
+                <div>
+                  <div class="act-text">
+                    Support ticket <strong>#TKT-089</strong> opened
+                  </div>
+                  <div class="act-time">Yesterday</div>
+                </div>
+              </div>
+              <div class="act-item">
+                <div class="act-dot" style="background: var(--purple)"></div>
+                <div>
+                  <div class="act-text">
+                    Document <strong>mobile-wireframes-v2.pdf</strong> shared by
+                    TechNova
+                  </div>
+                  <div class="act-time">2 days ago</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
       </div>
     </div>
-  </div>
 
-  <!-- Recent Activity -->
-  <div class="panel">
-    <div class="panel-head"><h3>🕐 Recent Activity</h3></div>
-    <div class="panel-body">
-      <div class="act-item"><div class="act-dot" style="background:var(--green)"></div><div><div class="act-text"><strong>Milestone completed</strong> — Checkout redesign approved</div><div class="act-time">2 hours ago</div></div></div>
-      <div class="act-item"><div class="act-dot" style="background:var(--cyan)"></div><div><div class="act-text">New message from <strong>Sarah (PM)</strong></div><div class="act-time">4 hours ago</div></div></div>
-      <div class="act-item"><div class="act-dot" style="background:var(--yellow)"></div><div><div class="act-text">Invoice <strong>INV-2026-005</strong> issued — £4,200</div><div class="act-time">Yesterday</div></div></div>
-      <div class="act-item"><div class="act-dot" style="background:var(--red)"></div><div><div class="act-text">Support ticket <strong>#TKT-089</strong> opened</div><div class="act-time">Yesterday</div></div></div>
-      <div class="act-item"><div class="act-dot" style="background:var(--purple)"></div><div><div class="act-text">Document <strong>mobile-wireframes-v2.pdf</strong> shared by TechNova</div><div class="act-time">2 days ago</div></div></div>
-    </div>
-  </div>
+    <script src="../js/portal.js"></script>
+    <script src="../js/portal.js"></script>
+    <script>
+      // 🟢 HYDRATE DASHBOARD SPECIFIC UI (Welcome Name)
+      document.addEventListener("DOMContentLoaded", () => {
+        const session = getSession(); // This comes from portal.js
+        if (session && session.name) {
+          const firstName = session.name.split(" ")[0];
+          const wName = document.getElementById("w-name");
+          if (wName) wName.textContent = firstName;
+        }
+      });
 
-</main>
-</div>
-</div>
+      // Logout (Legacy override)
+      function logout() {
+        signOut(); // Calls the central function in portal.js
+      }
 
-<script src="../js/portal.js"></script>
-<script>
-(function(){
-  const s = sessionStorage.getItem('tn_session');
+      // Email banner
+      function showEB(msg) {
+        document.getElementById("email-banner-body").textContent = msg;
+        const b = document.getElementById("email-banner");
+        b.classList.add("show");
+        setTimeout(() => b.classList.remove("show"), 5000);
+      }
 
-  // Redirect if session missing
-  if(!s){
-    window.location.href = 'login.html';
-    return;
-  }
+      // Download simulation
+      function dlDoc(name) {
+        showToast('Downloading "' + name + '"...', "info");
+        showEB('Download started for "' + name + '". Receipt emailed to you.');
+      }
 
-  let u;
+      // Raise ticket
+      function raiseTicket(e) {
+        e.preventDefault();
 
-  // Safe JSON parsing
-  try {
-    u = JSON.parse(s);
-  } catch(err){
-    sessionStorage.removeItem('tn_session');
-    window.location.href = 'login.html';
-    return;
-  }
+        const subj = document.getElementById("tk-subject").value.trim();
+        const desc = document.getElementById("tk-desc").value.trim();
+        const prio = document.getElementById("tk-prio").value;
+        const proj = document.getElementById("tk-proj").value;
 
-  // Role protection
-  if(u.role !== 'client'){
-    window.location.href = u.dest || 'login.html';
-    return;
-  }
+        if (!subj || !desc || !prio) {
+          showToast("Please fill in all required fields.", "error");
+          return;
+        }
 
-  // Extract name parts safely
-  const nameParts = u.name ? u.name.split(' ') : ['Client'];
-  const firstName = nameParts[0];
-  const lastInitial = nameParts[1] ? nameParts[1][0] + '.' : '';
-  const initials = nameParts.map(n => n[0]).join('').toUpperCase();
+        const btn = e.target.querySelector('button[type="submit"]');
+        btn.textContent = "Submitting...";
+        btn.disabled = true;
 
-  // Update UI
-  document.getElementById('w-name').textContent = firstName;
-  document.getElementById('hdr-name').textContent = firstName + ' ' + lastInitial;
-  document.getElementById('hdr-av').textContent = initials;
-  document.getElementById('sb-av').textContent = initials;
-  document.getElementById('sb-name').textContent = u.name;
-})();
+        setTimeout(() => {
+          const id = "#TKT-0" + (90 + Math.floor(Math.random() * 10));
 
-// Logout
-function logout(){
-  sessionStorage.removeItem('tn_session');
-  window.location.href = 'login.html';
-}
+          let msg = "Ticket " + id + ' created for "' + proj + '" — priority: ' + prio + ".";
+          if (prio === "High") {
+            msg += " Auto-assigned to Delivery Manager.";
+          }
 
-// Email banner
-function showEB(msg){
-  document.getElementById('email-banner-body').textContent = msg;
-  const b = document.getElementById('email-banner');
-  b.classList.add('show');
-  setTimeout(() => b.classList.remove('show'), 5000);
-}
+          showToast(msg, "success", 5000);
 
-// Download simulation
-function dlDoc(name){
-  showToast('Downloading "' + name + '"...', 'info');
-  showEB('Download started for "' + name + '". Receipt emailed to you.');
-}
+          const emsg =
+            prio === "High"
+              ? "High-priority ticket " + id + " submitted and auto-assigned to Delivery Manager. Confirmation emailed."
+              : "Ticket " + id + " submitted. You'll hear back within " + (prio === "Medium" ? "8" : "24") + " hours. Confirmation emailed.";
 
-// Raise ticket
-function raiseTicket(e){
-  e.preventDefault();
+          showEB(emsg);
 
-  const subj = document.getElementById('tk-subject').value.trim();
-  const desc = document.getElementById('tk-desc').value.trim();
-  const prio = document.getElementById('tk-prio').value;
-  const proj = document.getElementById('tk-proj').value;
+          e.target.reset();
+          btn.textContent = "Submit Ticket →";
+          btn.disabled = false;
+        }, 1000);
+      }
 
-  if(!subj || !desc || !prio){
-    showToast('Please fill in all required fields.', 'error');
-    return;
-  }
+      // Review system
+      let curRating = 0;
 
-  const btn = e.target.querySelector('button[type="submit"]');
-  btn.textContent = 'Submitting...';
-  btn.disabled = true;
+      function setRating(v) {
+        curRating = v;
+        document.getElementById("r-rating").value = v;
 
-  setTimeout(() => {
-    const id = '#TKT-0' + (90 + Math.floor(Math.random() * 10));
+        document.querySelectorAll(".rstar").forEach((s, i) => {
+          s.classList.toggle("on", i < v);
+        });
+      }
 
-    let msg = 'Ticket ' + id + ' created for "' + proj + '" — priority: ' + prio + '.';
-    if(prio === 'High'){
-      msg += ' Auto-assigned to Delivery Manager.';
-    }
+      function clearReview() {
+        curRating = 0;
+        document.getElementById("r-rating").value = "";
+        document.getElementById("r-text").value = "";
+        document.querySelectorAll(".rstar").forEach((s) => s.classList.remove("on"));
+      }
 
-    showToast(msg, 'success', 5000);
+      function submitReview(e) {
+        e.preventDefault();
 
-    const emsg = prio === 'High'
-      ? 'High-priority ticket ' + id + ' submitted and auto-assigned to Delivery Manager. Confirmation emailed.'
-      : 'Ticket ' + id + ' submitted. You\'ll hear back within ' + (prio === 'Medium' ? '8' : '24') + ' hours. Confirmation emailed.';
+        if (!curRating) {
+          showToast("Please select a star rating.", "error");
+          return;
+        }
 
-    showEB(emsg);
+        const btn = document.getElementById("r-btn");
+        btn.textContent = "Submitting...";
+        btn.disabled = true;
 
-    e.target.reset();
-    btn.textContent = 'Submit Ticket →';
-    btn.disabled = false;
+        setTimeout(() => {
+          showToast("Thank you! Your review has been submitted. TechNova has been notified.", "success", 5000);
+          showEB("Your review was submitted successfully. TechNova has been notified. Confirmation emailed.");
 
-  }, 1000);
-}
+          clearReview();
 
-// Review system
-let curRating = 0;
-
-function setRating(v){
-  curRating = v;
-  document.getElementById('r-rating').value = v;
-
-  document.querySelectorAll('.rstar').forEach((s,i)=>{
-    s.classList.toggle('on', i < v);
-  });
-}
-
-function clearReview(){
-  curRating = 0;
-  document.getElementById('r-rating').value = '';
-  document.getElementById('r-text').value = '';
-  document.querySelectorAll('.rstar').forEach(s => s.classList.remove('on'));
-}
-
-function submitReview(e){
-  e.preventDefault();
-
-  if(!curRating){
-    showToast('Please select a star rating.', 'error');
-    return;
-  }
-
-  const btn = document.getElementById('r-btn');
-  btn.textContent = 'Submitting...';
-  btn.disabled = true;
-
-  setTimeout(()=>{
-    showToast('Thank you! Your review has been submitted. TechNova has been notified.', 'success', 5000);
-    showEB('Your review was submitted successfully. TechNova has been notified. Confirmation emailed.');
-
-    clearReview();
-
-    btn.textContent = 'Submit Review →';
-    btn.disabled = false;
-
-  }, 1000);
-}
-</script>
-
-</body>
+          btn.textContent = "Submit Review →";
+          btn.disabled = false;
+        }, 1000);
+      }
+    </script>
+  </body>
 </html>

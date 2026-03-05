@@ -1,154 +1,567 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Login – TechNova Client Portal</title>
-<link rel="stylesheet" href="../css/portal.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Login – TechNova Client Portal</title>
+    <link rel="stylesheet" href="../css/portal.css" />
 
-<style>
-body { background:var(--navy3); display:flex; align-items:center; justify-content:center; min-height:100vh; padding:1.5rem; }
-.auth-wrap { width:100%; max-width:460px; }
-.auth-logo { text-align:center; margin-bottom:2rem; }
-.auth-logo img { height:52px; margin:0 auto 0.8rem; }
-.auth-logo p { font-size:0.78rem; color:var(--gray); letter-spacing:2px; text-transform:uppercase; }
-.auth-card { background:var(--card); border:1px solid var(--border); border-radius:var(--r); box-shadow:var(--sh2); overflow:hidden; }
-.auth-tabs { display:flex; border-bottom:1px solid var(--border); }
-.auth-tab { flex:1; padding:1.1rem; text-align:center; font-family:var(--font-h); font-weight:700; font-size:0.88rem; color:var(--gray); cursor:pointer; background:none; border:none; border-bottom:2px solid transparent; transition:var(--trans); }
-.auth-tab.active { color:var(--cyan); border-bottom-color:var(--cyan); background:rgba(0,212,255,0.04); }
-.auth-body { padding:2rem; }
-.demo-creds { background:rgba(0,212,255,0.05); border:1px solid rgba(0,212,255,0.2); border-radius:var(--r2); padding:1rem 1.1rem; margin-bottom:1.5rem; }
-.demo-creds-title { font-family:var(--font-h); font-size:0.72rem; font-weight:700; color:var(--cyan); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:0.6rem; }
-.demo-row { display:flex; align-items:center; justify-content:space-between; margin-bottom:0.3rem; }
-.demo-label { font-size:0.75rem; color:var(--gray); min-width:70px; }
-.demo-val { font-size:0.79rem; font-family:monospace; color:var(--white); background:var(--navy3); padding:2px 8px; border-radius:4px; cursor:pointer; border:none; transition:color 0.2s; }
-.demo-val:hover { color:var(--cyan); }
-.demo-sep { border:none; border-top:1px solid var(--border); margin:0.7rem 0; }
-.demo-role { font-size:0.7rem; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:0.4rem; display:block; }
-.demo-role.admin { color:var(--yellow); }
-.demo-role.client { color:var(--green); }
-.pw-wrap { position:relative; }
-.pw-wrap input { padding-right:44px; }
-.pw-toggle { position:absolute; right:12px; top:50%; transform:translateY(-50%); background:none; border:none; color:var(--gray); cursor:pointer; font-size:1rem; }
-.auth-alert { background:rgba(248,113,113,0.08); border:1px solid rgba(248,113,113,0.3); border-radius:var(--r2); padding:0.8rem 1rem; margin-bottom:1.2rem; font-size:0.83rem; color:var(--red); display:none; align-items:center; gap:8px; }
-.auth-alert.show { display:flex; }
-.lockout-banner { background:rgba(248,113,113,0.1); border:1px solid rgba(248,113,113,0.4); border-radius:var(--r2); padding:1.2rem; text-align:center; margin-bottom:1.2rem; display:none; }
-.lockout-banner.show { display:block; }
-.lockout-banner h4 { color:var(--red); font-family:var(--font-h); font-size:0.92rem; margin-bottom:4px; }
-.lockout-timer { font-size:1.6rem; font-family:var(--font-h); font-weight:800; color:var(--red); }
-.lockout-banner p { font-size:0.76rem; color:var(--gray); margin-top:4px; }
-.check-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.4rem; }
-.form-check { display:flex; align-items:center; gap:8px; font-size:0.84rem; color:var(--gray); cursor:pointer; }
-.form-check input { accent-color:var(--cyan); }
-.auth-link { color:var(--cyan); font-size:0.83rem; }
-.sec-badge { display:flex; align-items:center; gap:8px; margin-top:1.4rem; background:rgba(74,222,128,0.05); border:1px solid rgba(74,222,128,0.15); border-radius:var(--r2); padding:9px 12px; }
-.sec-badge span { font-size:0.76rem; color:var(--gray); }
-.sec-badge strong { color:var(--green); }
-.back-link { display:flex; align-items:center; gap:6px; color:var(--gray); font-size:0.8rem; margin-bottom:1.5rem; transition:color 0.2s; }
-.back-link:hover { color:var(--cyan); }
-.form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
-.email-notif { position:fixed; top:1.5rem; right:1.5rem; z-index:3000; background:var(--card); border:1px solid var(--border); border-left:4px solid var(--cyan); border-radius:var(--r); padding:1rem 1.2rem; box-shadow:var(--sh2); max-width:340px; transform:translateX(120%); transition:transform 0.4s ease; }
-.email-notif.show { transform:translateX(0); }
-.en-title { font-family:var(--font-h); font-size:0.82rem; font-weight:700; color:var(--white); margin-bottom:4px; }
-.en-body { font-size:0.77rem; color:var(--gray); line-height:1.55; }
-</style>
-</head>
-<body>
-
-<!-- Simulated Email Notification -->
-<div class="email-notif" id="email-notif">
-  <div style="font-size:1.1rem;margin-bottom:5px">📧</div>
-  <div class="en-title">Email Notification Sent</div>
-  <div class="en-body" id="email-notif-body">Login confirmation sent to your registered email.</div>
-</div>
-
-<div class="auth-wrap">
-  <a href="../../CustomerSite/index.html" class="back-link">← Back to TechNova.co.uk</a>
-
-  <div class="auth-logo">
-    <img src="../../CustomerSite/assets/logo-transparent.png" alt="TechNova Ltd">
-    <p>Client &amp; Admin Portal</p>
-  </div>
-
-  <div class="auth-card">
-    <div class="auth-tabs">
-      <button class="auth-tab active" onclick="switchTab('login',this)">Sign In</button>
-      <button class="auth-tab" onclick="switchTab('register',this)">Request Access</button>
+    <style>
+      body {
+        background: var(--navy3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 1.5rem;
+      }
+      .auth-wrap {
+        width: 100%;
+        max-width: 460px;
+      }
+      .auth-logo {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+      .auth-logo img {
+        height: 52px;
+        margin: 0 auto 0.8rem;
+      }
+      .auth-logo p {
+        font-size: 0.78rem;
+        color: var(--gray);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+      .auth-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        box-shadow: var(--sh2);
+        overflow: hidden;
+      }
+      .auth-tabs {
+        display: flex;
+        border-bottom: 1px solid var(--border);
+      }
+      .auth-tab {
+        flex: 1;
+        padding: 1.1rem;
+        text-align: center;
+        font-family: var(--font-h);
+        font-weight: 700;
+        font-size: 0.88rem;
+        color: var(--gray);
+        cursor: pointer;
+        background: none;
+        border: none;
+        border-bottom: 2px solid transparent;
+        transition: var(--trans);
+      }
+      .auth-tab.active {
+        color: var(--cyan);
+        border-bottom-color: var(--cyan);
+        background: rgba(0, 212, 255, 0.04);
+      }
+      .auth-body {
+        padding: 2rem;
+      }
+      .demo-creds {
+        background: rgba(0, 212, 255, 0.05);
+        border: 1px solid rgba(0, 212, 255, 0.2);
+        border-radius: var(--r2);
+        padding: 1rem 1.1rem;
+        margin-bottom: 1.5rem;
+      }
+      .demo-creds-title {
+        font-family: var(--font-h);
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--cyan);
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 0.6rem;
+      }
+      .demo-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.3rem;
+      }
+      .demo-label {
+        font-size: 0.75rem;
+        color: var(--gray);
+        min-width: 70px;
+      }
+      .demo-val {
+        font-size: 0.79rem;
+        font-family: monospace;
+        color: var(--white);
+        background: var(--navy3);
+        padding: 2px 8px;
+        border-radius: 4px;
+        cursor: pointer;
+        border: none;
+        transition: color 0.2s;
+      }
+      .demo-val:hover {
+        color: var(--cyan);
+      }
+      .demo-sep {
+        border: none;
+        border-top: 1px solid var(--border);
+        margin: 0.7rem 0;
+      }
+      .demo-role {
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 0.4rem;
+        display: block;
+      }
+      .demo-role.admin {
+        color: var(--yellow);
+      }
+      .demo-role.client {
+        color: var(--green);
+      }
+      .pw-wrap {
+        position: relative;
+      }
+      .pw-wrap input {
+        padding-right: 44px;
+      }
+      .pw-toggle {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: var(--gray);
+        cursor: pointer;
+        font-size: 1rem;
+      }
+      .auth-alert {
+        background: rgba(248, 113, 113, 0.08);
+        border: 1px solid rgba(248, 113, 113, 0.3);
+        border-radius: var(--r2);
+        padding: 0.8rem 1rem;
+        margin-bottom: 1.2rem;
+        font-size: 0.83rem;
+        color: var(--red);
+        display: none;
+        align-items: center;
+        gap: 8px;
+      }
+      .auth-alert.show {
+        display: flex;
+      }
+      .lockout-banner {
+        background: rgba(248, 113, 113, 0.1);
+        border: 1px solid rgba(248, 113, 113, 0.4);
+        border-radius: var(--r2);
+        padding: 1.2rem;
+        text-align: center;
+        margin-bottom: 1.2rem;
+        display: none;
+      }
+      .lockout-banner.show {
+        display: block;
+      }
+      .lockout-banner h4 {
+        color: var(--red);
+        font-family: var(--font-h);
+        font-size: 0.92rem;
+        margin-bottom: 4px;
+      }
+      .lockout-timer {
+        font-size: 1.6rem;
+        font-family: var(--font-h);
+        font-weight: 800;
+        color: var(--red);
+      }
+      .lockout-banner p {
+        font-size: 0.76rem;
+        color: var(--gray);
+        margin-top: 4px;
+      }
+      .check-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.4rem;
+      }
+      .form-check {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.84rem;
+        color: var(--gray);
+        cursor: pointer;
+      }
+      .form-check input {
+        accent-color: var(--cyan);
+      }
+      .auth-link {
+        color: var(--cyan);
+        font-size: 0.83rem;
+      }
+      .sec-badge {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 1.4rem;
+        background: rgba(74, 222, 128, 0.05);
+        border: 1px solid rgba(74, 222, 128, 0.15);
+        border-radius: var(--r2);
+        padding: 9px 12px;
+      }
+      .sec-badge span {
+        font-size: 0.76rem;
+        color: var(--gray);
+      }
+      .sec-badge strong {
+        color: var(--green);
+      }
+      .back-link {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--gray);
+        font-size: 0.8rem;
+        margin-bottom: 1.5rem;
+        transition: color 0.2s;
+      }
+      .back-link:hover {
+        color: var(--cyan);
+      }
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+      .email-notif {
+        position: fixed;
+        top: 1.5rem;
+        right: 1.5rem;
+        z-index: 3000;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-left: 4px solid var(--cyan);
+        border-radius: var(--r);
+        padding: 1rem 1.2rem;
+        box-shadow: var(--sh2);
+        max-width: 340px;
+        transform: translateX(120%);
+        transition: transform 0.4s ease;
+      }
+      .email-notif.show {
+        transform: translateX(0);
+      }
+      .en-title {
+        font-family: var(--font-h);
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 4px;
+      }
+      .en-body {
+        font-size: 0.77rem;
+        color: var(--gray);
+        line-height: 1.55;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Simulated Email Notification -->
+    <div class="email-notif" id="email-notif">
+      <div style="font-size: 1.1rem; margin-bottom: 5px">📧</div>
+      <div class="en-title">Email Notification Sent</div>
+      <div class="en-body" id="email-notif-body">
+        Login confirmation sent to your registered email.
+      </div>
     </div>
 
-    <!-- LOGIN TAB -->
-    <div id="tab-login" class="auth-body">
-      <!-- Demo credentials -->
-      <div class="demo-creds">
-        <div class="demo-creds-title">🔑 Demo Credentials (click to fill)</div>
-        <span class="demo-role admin">⚡ Super Admin</span>
-        <div class="demo-row"><span class="demo-label">Email</span><button class="demo-val" onclick="fillCreds('admin@technova-uk.com','Admin@TN2026!')">admin@technova-uk.com</button></div>
-        <div class="demo-row"><span class="demo-label">Password</span><button class="demo-val" onclick="fillCreds('admin@technova-uk.com','Admin@TN2026!')">Admin@TN2026!</button></div>
-        <hr class="demo-sep">
-        <span class="demo-role client">👤 Client User</span>
-        <div class="demo-row"><span class="demo-label">Email</span><button class="demo-val" onclick="fillCreds('john.davidson@retailmax.co.uk','Client@2026!')">john.davidson@retailmax.co.uk</button></div>
-        <div class="demo-row"><span class="demo-label">Password</span><button class="demo-val" onclick="fillCreds('john.davidson@retailmax.co.uk','Client@2026!')">Client@2026!</button></div>
-        <p style="font-size:0.7rem;color:var(--gray);margin-top:0.5rem">Admin settings restricted to Super Admin only.</p>
+    <div class="auth-wrap">
+      <a href="../../CustomerSite/index.html" class="back-link"
+        >← Back to TechNova.co.uk</a
+      >
+
+      <div class="auth-logo">
+        <img
+          src="../../CustomerSite/assets/logo-transparent.png"
+          alt="TechNova Ltd"
+        />
+        <p>Client &amp; Admin Portal</p>
       </div>
 
-      <!-- Lockout -->
-      <div class="lockout-banner" id="lockout-banner">
-        <h4>🔒 Account Temporarily Locked</h4>
-        <div class="lockout-timer" id="lockout-timer">15:00</div>
-        <p>5 failed attempts detected. Please wait before retrying.</p>
-      </div>
-
-      <!-- Error -->
-      <div class="auth-alert" id="auth-alert"><span>⚠</span><span id="auth-alert-msg">Invalid credentials.</span></div>
-
-      <form id="login-form" onsubmit="handleLogin(event)">
-        <div class="form-group">
-          <label class="form-label" for="email">Email Address <span class="req">*</span></label>
-          <input id="login-email" type="email" class="form-input" placeholder="your@email.com" required autocomplete="username">
+      <div class="auth-card">
+        <div class="auth-tabs">
+          <button class="auth-tab active" onclick="switchTab('login', this)">
+            Sign In
+          </button>
+          <button class="auth-tab" onclick="switchTab('register', this)">
+            Request Access
+          </button>
         </div>
-        <div class="form-group">
-          <label class="form-label" for="pw">Password <span class="req">*</span></label>
-          <div class="pw-wrap">
-            <input id="login-pw" type="password" class="form-input" placeholder="Minimum 8 characters" required autocomplete="current-password">
-            <button type="button" class="pw-toggle" onclick="togglePw()">👁</button>
+
+        <!-- LOGIN TAB -->
+        <div id="tab-login" class="auth-body">
+          <!-- Demo credentials -->
+          <div class="demo-creds">
+            <div class="demo-creds-title">
+              🔑 Demo Credentials (click to fill)
+            </div>
+            <span class="demo-role admin">⚡ Super Admin</span>
+            <div class="demo-row">
+              <span class="demo-label">Email</span
+              ><button
+                class="demo-val"
+                onclick="fillCreds('admin@technova.com', 'password123!')"
+              >
+                admin@technova.com
+              </button>
+            </div>
+            <div class="demo-row">
+              <span class="demo-label">Password</span
+              ><button
+                class="demo-val"
+                onclick="fillCreds('admin@technova.com', 'password123')"
+              >
+               password123
+              </button>
+            </div>
+            <hr class="demo-sep" />
+            <span class="demo-role client">👤 Client User</span>
+            <div class="demo-row">
+              <span class="demo-label">Email</span
+              ><button
+                class="demo-val"
+                onclick="
+                  fillCreds('john.davidson@retailmax.co.uk', 'Client@2026!')
+                "
+              >
+                john.davidson@retailmax.co.uk
+              </button>
+            </div>
+            <div class="demo-row">
+              <span class="demo-label">Password</span
+              ><button
+                class="demo-val"
+                onclick="
+                  fillCreds('john.davidson@retailmax.co.uk', 'Client@2026!')
+                "
+              >
+                Client@2026!
+              </button>
+            </div>
+            <p
+              style="font-size: 0.7rem; color: var(--gray); margin-top: 0.5rem"
+            >
+              Admin settings restricted to Super Admin only.
+            </p>
+          </div>
+
+          <!-- Lockout -->
+          <div class="lockout-banner" id="lockout-banner">
+            <h4>🔒 Account Temporarily Locked</h4>
+            <div class="lockout-timer" id="lockout-timer">15:00</div>
+            <p>5 failed attempts detected. Please wait before retrying.</p>
+          </div>
+
+          <!-- Error -->
+          <div class="auth-alert" id="auth-alert">
+            <span>⚠</span><span id="auth-alert-msg">Invalid credentials.</span>
+          </div>
+
+          <form
+            id="login-form"
+            class="auth-form"
+            onsubmit="submitRealLogin(event)"
+          >
+            <div class="form-group">
+              <label class="form-label" for="login-email"
+                >Email Address <span class="req">*</span></label
+              >
+              <input
+                type="email"
+                id="login-email"
+                class="form-input"
+                required
+                autocomplete="email"
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="login-pw"
+                >Password <span class="req">*</span></label
+              >
+              <div class="pw-wrapper">
+                <input
+                  type="password"
+                  id="login-pw"
+                  class="form-input"
+                  required
+                />
+                <button
+                  type="button"
+                  class="pw-toggle"
+                  onclick="togglePw()"
+                  aria-label="Toggle password visibility"
+                >
+                  👁
+                </button>
+              </div>
+              <div style="text-align: right; margin-top: 0.4rem">
+                <a href="#" class="auth-link" onclick="forgotPassword()"
+                  >Forgot password?</a
+                >
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              id="login-btn"
+              class="btn btn-primary btn-lg"
+              style="width: 100%; margin-top: 0.5rem"
+            >
+              Sign In →
+            </button>
+          </form>
+
+          <div class="sec-badge">
+            <span>🔒</span>
+            <span
+              >256-bit TLS · <strong>GDPR compliant</strong> · Session timeout:
+              30 min · Lockout after 5 failed attempts</span
+            >
           </div>
         </div>
-        <div class="check-row">
-          <label class="form-check"><input type="checkbox" checked> Remember me</label>
-          <a href="#" class="auth-link" onclick="forgotPassword();return false;">Forgot password?</a>
-        </div>
-        <button type="submit" class="btn btn-primary btn-lg" id="login-btn" style="width:100%">Sign In to Portal →</button>
-      </form>
 
-      <div class="sec-badge">
-        <span>🔒</span>
-        <span>256-bit TLS · <strong>GDPR compliant</strong> · Session timeout: 30 min · Lockout after 5 failed attempts</span>
+        <!-- REQUEST ACCESS TAB -->
+        <div id="tab-register" class="auth-body" style="display: none">
+          <p
+            style="
+              font-size: 0.85rem;
+              color: var(--gray);
+              margin-bottom: 1.5rem;
+              line-height: 1.65;
+            "
+          >
+            Portal access is provisioned by TechNova upon project engagement.
+            Submit your details and your Account Manager will issue credentials
+            within 1 business day.
+          </p>
+          <form onsubmit="handleRegister(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label"
+                  >First Name <span class="req">*</span></label
+                ><input
+                  type="text"
+                  class="form-input"
+                  placeholder="John"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label"
+                  >Last Name <span class="req">*</span></label
+                ><input
+                  type="text"
+                  class="form-input"
+                  placeholder="Smith"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label"
+                >Work Email <span class="req">*</span></label
+              ><input
+                type="email"
+                class="form-input"
+                placeholder="john@company.com"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label"
+                >Company Name <span class="req">*</span></label
+              ><input
+                type="text"
+                class="form-input"
+                placeholder="Your Company Ltd"
+                required
+              />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label"
+                  >Country <span class="req">*</span></label
+                ><select class="form-select" required>
+                  <option value="">Select…</option>
+                  <option>United Kingdom</option>
+                  <option>United States</option>
+                  <option>Australia</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label"
+                  >Industry <span class="req">*</span></label
+                ><select class="form-select" required>
+                  <option value="">Select…</option>
+                  <option>Retail &amp; E-Commerce</option>
+                  <option>Financial Services</option>
+                  <option>Healthcare</option>
+                  <option>Education</option>
+                  <option>Logistics</option>
+                  <option>SaaS &amp; Technology</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Project Brief</label
+              ><textarea
+                class="form-textarea"
+                placeholder="Brief description…"
+                style="min-height: 70px"
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-check"
+                ><input type="checkbox" required /> I agree to TechNova's
+                <a
+                  href="../../CustomerSite/pages/terms&conditions.html"
+                  target="_blank"
+                  style="color: var(--cyan)"
+                  >Terms &amp; Conditions</a
+                >
+                &amp;
+                <a
+                  href="../../CustomerSite/pages/privacy_policy.html"
+                  target="_blank"
+                  style="color: var(--cyan)"
+                  >Privacy Policy</a
+                ></label
+              >
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary btn-lg"
+              style="width: 100%; margin-top: 0.5rem"
+            >
+              Request Portal Access →
+            </button>
+          </form>
+        </div>
       </div>
     </div>
 
-    <!-- REQUEST ACCESS TAB -->
-    <div id="tab-register" class="auth-body" style="display:none">
-      <p style="font-size:0.85rem;color:var(--gray);margin-bottom:1.5rem;line-height:1.65">Portal access is provisioned by TechNova upon project engagement. Submit your details and your Account Manager will issue credentials within 1 business day.</p>
-      <form onsubmit="handleRegister(event)">
-        <div class="form-row">
-          <div class="form-group"><label class="form-label">First Name <span class="req">*</span></label><input type="text" class="form-input" placeholder="John" required></div>
-          <div class="form-group"><label class="form-label">Last Name <span class="req">*</span></label><input type="text" class="form-input" placeholder="Smith" required></div>
-        </div>
-        <div class="form-group"><label class="form-label">Work Email <span class="req">*</span></label><input type="email" class="form-input" placeholder="john@company.com" required></div>
-        <div class="form-group"><label class="form-label">Company Name <span class="req">*</span></label><input type="text" class="form-input" placeholder="Your Company Ltd" required></div>
-        <div class="form-row">
-          <div class="form-group"><label class="form-label">Country <span class="req">*</span></label><select class="form-select" required><option value="">Select…</option><option>United Kingdom</option><option>United States</option><option>Australia</option><option>Other</option></select></div>
-          <div class="form-group"><label class="form-label">Industry <span class="req">*</span></label><select class="form-select" required><option value="">Select…</option><option>Retail &amp; E-Commerce</option><option>Financial Services</option><option>Healthcare</option><option>Education</option><option>Logistics</option><option>SaaS &amp; Technology</option><option>Other</option></select></div>
-        </div>
-        <div class="form-group"><label class="form-label">Project Brief</label><textarea class="form-textarea" placeholder="Brief description…" style="min-height:70px"></textarea></div>
-        <div class="form-group"><label class="form-check"><input type="checkbox" required> I agree to TechNova's <a href="../../CustomerSite/pages/terms&conditions.html" target="_blank" style="color:var(--cyan)">Terms &amp; Conditions</a> &amp; <a href="../../CustomerSite/pages/privacy_policy.html" target="_blank" style="color:var(--cyan)">Privacy Policy</a></label></div>
-        <button type="submit" class="btn btn-primary btn-lg" style="width:100%;margin-top:0.5rem">Request Portal Access →</button>
-      </form>
-    </div>
-  </div>
-</div>
-
-<script src="../js/portal.js"></script>
-<script src="../js/portal.js"></script>
-</body>
+    <script src="../js/portal.js"></script>
+  </body>
 </html>

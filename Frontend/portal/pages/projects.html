@@ -4,6 +4,7 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Projects – TechNova Client Portal</title>
 <link rel="stylesheet" href="../css/portal.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 .project-cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(360px,1fr)); gap:1.4rem; }
 .proj-card { background:var(--card); border:1px solid var(--border); border-radius:var(--r); overflow:hidden; transition:var(--trans); }
@@ -49,22 +50,25 @@
   <div class="sidebar-overlay" onclick="closeSidebar()"></div>
   <aside class="sidebar">
     <a href="../index.html" class="sb-logo"><img src="../assets/logo-transparent.png" alt="TechNova Ltd"></a>
-    <div class="sb-client-badge"><div class="sb-avatar">JD</div><div><div class="sb-client-name">John Davidson</div><div class="sb-client-role">RetailMax Ltd</div></div></div>
+    <div class="sb-client-badge">
+        <div class="sb-avatar">JD</div>
+        <div><div class="sb-client-name">John Davidson</div><div class="sb-client-role">RetailMax Ltd</div></div>
+    </div>
     <nav class="sb-group">
       <div class="sb-group-label">Main</div>
-      <a href="dashboard.html" class="sb-link"><span class="sb-icon">🏠</span>Dashboard</a>
-      <a href="projects.html" class="sb-link active"><span class="sb-icon">📋</span>Projects<span class="sb-badge">3</span></a>
-      <a href="messages.html" class="sb-link"><span class="sb-icon">💬</span>Messages<span class="sb-badge red">4</span></a>
+      <a href="dashboard.html" class="sb-link"><span class="sb-icon"><i class="fa-solid fa-house"></i></span>Dashboard</a>
+      <a href="projects.html" class="sb-link active"><span class="sb-icon"><i class="fa-solid fa-clipboard-list"></i></span>Projects<span class="sb-badge">3</span></a>
+      <a href="messages.html" class="sb-link"><span class="sb-icon"><i class="fa-solid fa-comment-dots"></i></span>Messages<span class="sb-badge red">4</span></a>
       <div class="sb-group-label" style="margin-top:1.2rem">Finance</div>
-      <a href="invoices.html" class="sb-link"><span class="sb-icon">🧾</span>Invoices &amp; Payments</a>
+      <a href="invoices.html" class="sb-link"><span class="sb-icon"><i class="fa-solid fa-file-invoice-dollar"></i></span>Invoices &amp; Payments</a>
       <div class="sb-group-label" style="margin-top:1.2rem">Support</div>
-      <a href="tickets.html" class="sb-link"><span class="sb-icon">🎫</span>Support Tickets<span class="sb-badge yellow">2</span></a>
-      <a href="documents.html" class="sb-link"><span class="sb-icon">📁</span>Documents</a>
+      <a href="tickets.html" class="sb-link"><span class="sb-icon"><i class="fa-solid fa-ticket"></i></span>Support Tickets<span class="sb-badge yellow">2</span></a>
+      <a href="documents.html" class="sb-link"><span class="sb-icon"><i class="fa-solid fa-folder-open"></i></span>Documents</a>
       <div class="sb-group-label" style="margin-top:1.2rem">Account</div>
-      <a href="settings.html" class="sb-link"><span class="sb-icon">⚙️</span>Settings &amp; Profile</a>
-      <a href="admin-settings.html" class="sb-link" data-admin-only style="color:var(--yellow)"><span class="sb-icon">🛡</span>Admin Panel</a>
+      <a href="settings.html" class="sb-link"><span class="sb-icon"><i class="fa-solid fa-gear"></i></span>Settings &amp; Profile</a>
+      <a href="admin-settings.html" class="sb-link" data-admin-only style="color:var(--yellow)"><span class="sb-icon"><i class="fa-solid fa-shield-halved"></i></span>Admin Panel</a>
     </nav>
-    <div class="sb-bottom"><button class="sb-logout" onclick="signOut()"><span>🚪</span> Sign Out</button></div>
+    <div class="sb-bottom"><button class="sb-logout" onclick="signOut()"><span><i class="fa-solid fa-arrow-right-from-bracket"></i></span> Sign Out</button></div>
   </aside>
 
   <div class="portal-main">
@@ -74,8 +78,8 @@
         <div><div class="ph-title">Projects</div><div class="ph-crumb"><a href="dashboard.html">Dashboard</a> › Projects</div></div>
       </div>
       <div class="ph-right">
-        <div class="ph-search"><span class="ph-search-icon">🔍</span><input type="text" placeholder="Search projects…"></div>
-        <div class="notif-wrapper"><div class="notif-badge-btn" id="notif-btn" onclick="toggleNotifPanel()">🔔<span id="notif-count"></span></div><div id="notif-panel"><div class="notif-panel-head"><h4>📧 Email Notifications</h4><button class="notif-panel-clear" onclick="document.getElementById('notif-list').innerHTML='<p style=color:var(--gray);font-size:.84rem;padding:1rem>Cleared.</p>';document.getElementById('notif-count').style.display='none'">Clear</button></div><div id="notif-list"><p style="color:var(--gray);font-size:.84rem;padding:1rem 1.2rem">No notifications yet.</p></div></div></div>
+        <div class="ph-search"><span class="ph-search-icon"><i class="fa-solid fa-magnifying-glass"></i></span><input type="text" placeholder="Search projects…"></div>
+        <div class="notif-wrapper"><div class="notif-badge-btn" id="notif-btn" onclick="toggleNotifPanel()"><i class="fa-solid fa-bell"></i><span id="notif-count"></span></div><div id="notif-panel"><div class="notif-panel-head"><h4><i class="fa-solid fa-envelope"></i> Email Notifications</h4><button class="notif-panel-clear" onclick="document.getElementById('notif-list').innerHTML='<p style=color:var(--gray);font-size:.84rem;padding:1rem>Cleared.</p>';document.getElementById('notif-count').style.display='none'">Clear</button></div><div id="notif-list"><p style="color:var(--gray);font-size:.84rem;padding:1rem 1.2rem">No notifications yet.</p></div></div></div>
         <a href="settings.html" class="ph-user"><div class="ph-user-avatar">JD</div><div class="ph-user-name">John D.</div></a>
       </div>
     </header>
@@ -90,228 +94,273 @@
           <select class="filter-select" style="font-size:0.84rem">
             <option>All Projects</option><option>In Progress</option><option>In Review</option><option>Completed</option>
           </select>
-          <button class="btn btn-ghost btn-sm" onclick="showToast('Downloading project report…','info')">⬇ Export Report</button>
+          <button class="btn btn-ghost btn-sm" onclick="showToast('Downloading project report…','info')"><i class="fa-solid fa-download"></i> Export Report</button>
         </div>
       </div>
 
-      <!-- TABS -->
       <div class="tabs" data-tabs-parent>
         <button class="tab-btn active" data-tab="tab-cards">Project Cards</button>
-        <button class="tab-btn" data-tab="tab-milestones">Milestones</button>
-        <button class="tab-btn" data-tab="tab-timeline">Timeline</button>
+        <!-- <button class="tab-btn" data-tab="tab-milestones">Milestones</button>
+        <button class="tab-btn" data-tab="tab-timeline">Timeline</button> -->
       </div>
 
-      <!-- TAB: CARDS -->
       <div class="tab-pane active" id="tab-cards" data-tabs-parent>
-        <div class="project-cards">
-
-          <!-- Project 1 -->
-          <div class="proj-card">
-            <div class="proj-card-top cyan-bar">
-              <div class="proj-header">
-                <div class="proj-emoji" style="background:rgba(0,212,255,0.1)">🌐</div>
-                <div>
-                  <div class="proj-title">E-Commerce Platform Redesign</div>
-                  <div class="proj-client">TechNova Ref: TN-2025-082</div>
-                </div>
-                <span class="badge inprogress" style="margin-left:auto">In Progress</span>
-              </div>
-              <p class="proj-desc">Full redesign of RetailMax.co.uk including checkout optimisation, product catalogue rebuild, headless Shopify integration and performance tuning to achieve sub-2s load times.</p>
-              <div class="proj-stats-row">
-                <div class="proj-stat"><div class="proj-stat-val">68<span style="font-size:.8rem;color:var(--cyan)">%</span></div><div class="proj-stat-lbl">Complete</div></div>
-                <div class="proj-stat"><div class="proj-stat-val">4/6</div><div class="proj-stat-lbl">Sprints</div></div>
-                <div class="proj-stat"><div class="proj-stat-val">15 Mar</div><div class="proj-stat-lbl">Go-Live</div></div>
-              </div>
-              <div class="progress-meta"><span>Overall Progress</span><strong>68%</strong></div>
-              <div class="progress-bar"><div class="progress-fill" data-w="68" style="width:68%"></div></div>
+        <div class="project-cards" id="dynamic-project-cards">
+            <div style="grid-column: 1/-1; text-align:center; padding: 3rem; color:var(--gray);">
+                <i class="fa-solid fa-spinner fa-spin fa-2x"></i>
+                <p style="margin-top: 1rem;">Loading your active projects...</p>
             </div>
-            <div class="proj-card-bottom">
-              <div style="display:flex;justify-content:space-between;align-items:center">
-                <div class="proj-team">
-                  <div class="avatar-stack"><div class="av" title="Sarah M — PM">SM</div><div class="av" title="Tom R — Dev">TR</div><div class="av" title="Amy L — Design">AL</div><div class="av" title="+2 more" style="background:var(--border)">+2</div></div>
-                  <span class="proj-team-label">5 team members</span>
-                </div>
-                <div style="display:flex;gap:0.5rem">
-                  <button class="btn btn-ghost btn-sm" onclick="openModal('modal-proj1')">Details</button>
-                  <a href="messages.html" class="btn btn-primary btn-sm">Message PM</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 2 -->
-          <div class="proj-card">
-            <div class="proj-card-top green-bar">
-              <div class="proj-header">
-                <div class="proj-emoji" style="background:rgba(74,222,128,0.1)">☁️</div>
-                <div>
-                  <div class="proj-title">Salesforce CRM Integration</div>
-                  <div class="proj-client">TechNova Ref: TN-2025-079</div>
-                </div>
-                <span class="badge review" style="margin-left:auto">In Review</span>
-              </div>
-              <p class="proj-desc">Full Salesforce Sales Cloud implementation with custom Apex triggers, product catalogue sync, order management integration, and reporting dashboards for the RetailMax sales team.</p>
-              <div class="proj-stats-row">
-                <div class="proj-stat"><div class="proj-stat-val">92<span style="font-size:.8rem;color:var(--green)">%</span></div><div class="proj-stat-lbl">Complete</div></div>
-                <div class="proj-stat"><div class="proj-stat-val">5/5</div><div class="proj-stat-lbl">Sprints</div></div>
-                <div class="proj-stat"><div class="proj-stat-val">28 Feb</div><div class="proj-stat-lbl">Go-Live</div></div>
-              </div>
-              <div class="progress-meta"><span>Overall Progress</span><strong>92%</strong></div>
-              <div class="progress-bar"><div class="progress-fill green" data-w="92" style="width:92%"></div></div>
-            </div>
-            <div class="proj-card-bottom">
-              <div style="display:flex;justify-content:space-between;align-items:center">
-                <div class="proj-team">
-                  <div class="avatar-stack"><div class="av">SK</div><div class="av">LB</div><div class="av">+1</div></div>
-                  <span class="proj-team-label">3 team members</span>
-                </div>
-                <div style="display:flex;gap:0.5rem">
-                  <button class="btn btn-ghost btn-sm" onclick="openModal('modal-proj2')">Details</button>
-                  <a href="messages.html" class="btn btn-primary btn-sm">Message PM</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project 3 -->
-          <div class="proj-card">
-            <div class="proj-card-top purple-bar">
-              <div class="proj-header">
-                <div class="proj-emoji" style="background:rgba(167,139,250,0.1)">📱</div>
-                <div>
-                  <div class="proj-title">Mobile App — Phase 2</div>
-                  <div class="proj-client">TechNova Ref: TN-2026-001</div>
-                </div>
-                <span class="badge inprogress" style="margin-left:auto">In Progress</span>
-              </div>
-              <p class="proj-desc">Phase 2 of the RetailMax mobile app: loyalty programme, push notifications, AR product preview feature, Apple Pay/Google Pay integration, and React Native upgrade to v0.73.</p>
-              <div class="proj-stats-row">
-                <div class="proj-stat"><div class="proj-stat-val">12<span style="font-size:.8rem;color:var(--purple)">%</span></div><div class="proj-stat-lbl">Complete</div></div>
-                <div class="proj-stat"><div class="proj-stat-val">1/8</div><div class="proj-stat-lbl">Sprints</div></div>
-                <div class="proj-stat"><div class="proj-stat-val">30 Apr</div><div class="proj-stat-lbl">Go-Live</div></div>
-              </div>
-              <div class="progress-meta"><span>Overall Progress</span><strong>12%</strong></div>
-              <div class="progress-bar"><div class="progress-fill yellow" data-w="12" style="width:12%"></div></div>
-            </div>
-            <div class="proj-card-bottom">
-              <div style="display:flex;justify-content:space-between;align-items:center">
-                <div class="proj-team">
-                  <div class="avatar-stack"><div class="av">RK</div><div class="av">MP</div><div class="av">JC</div><div class="av">+3</div></div>
-                  <span class="proj-team-label">6 team members</span>
-                </div>
-                <div style="display:flex;gap:0.5rem">
-                  <button class="btn btn-ghost btn-sm" onclick="openModal('modal-proj3')">Details</button>
-                  <a href="messages.html" class="btn btn-primary btn-sm">Message PM</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
         </div>
       </div>
 
-      <!-- TAB: MILESTONES -->
-      <div class="tab-pane" id="tab-milestones">
+      <!-- <div class="tab-pane" id="tab-milestones">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.4rem">
           <div class="panel">
-            <div class="panel-head"><h3>🌐 E-Commerce Redesign</h3><span class="badge inprogress">68%</span></div>
+            <div class="panel-head"><h3><i class="fa-solid fa-globe" style="color:var(--cyan); margin-right:8px;"></i> E-Commerce Redesign</h3><span class="badge inprogress">68%</span></div>
             <div class="panel-body no-pad">
-              <div class="milestone-item"><div class="ms-check done">✓</div><div class="ms-label done-txt">Discovery & UX research</div><div class="ms-date">Jan 10</div></div>
-              <div class="milestone-item"><div class="ms-check done">✓</div><div class="ms-label done-txt">Wireframes approved</div><div class="ms-date">Jan 24</div></div>
-              <div class="milestone-item"><div class="ms-check done">✓</div><div class="ms-label done-txt">Design system delivered</div><div class="ms-date">Feb 7</div></div>
-              <div class="milestone-item"><div class="ms-check done">✓</div><div class="ms-label done-txt">Checkout redesign approved</div><div class="ms-date">Feb 21</div></div>
-              <div class="milestone-item"><div class="ms-check now">→</div><div class="ms-label">Product catalogue rebuild</div><div class="ms-date">Mar 7</div></div>
-              <div class="milestone-item"><div class="ms-check next">○</div><div class="ms-label">UAT & Go-live</div><div class="ms-date">Mar 15</div></div>
+              <div class="milestone-item"><div class="ms-check done"><i class="fa-solid fa-check"></i></div><div class="ms-label done-txt">Discovery & UX research</div><div class="ms-date">Jan 10</div></div>
+              <div class="milestone-item"><div class="ms-check done"><i class="fa-solid fa-check"></i></div><div class="ms-label done-txt">Wireframes approved</div><div class="ms-date">Jan 24</div></div>
+              <div class="milestone-item"><div class="ms-check done"><i class="fa-solid fa-check"></i></div><div class="ms-label done-txt">Design system delivered</div><div class="ms-date">Feb 7</div></div>
+              <div class="milestone-item"><div class="ms-check done"><i class="fa-solid fa-check"></i></div><div class="ms-label done-txt">Checkout redesign approved</div><div class="ms-date">Feb 21</div></div>
+              <div class="milestone-item"><div class="ms-check now"><i class="fa-solid fa-arrow-right"></i></div><div class="ms-label">Product catalogue rebuild</div><div class="ms-date">Mar 7</div></div>
+              <div class="milestone-item"><div class="ms-check next"><i class="fa-regular fa-circle"></i></div><div class="ms-label">UAT & Go-live</div><div class="ms-date">Mar 15</div></div>
             </div>
           </div>
           <div class="panel">
-            <div class="panel-head"><h3>☁️ Salesforce CRM</h3><span class="badge review">92%</span></div>
+            <div class="panel-head"><h3><i class="fa-solid fa-cloud" style="color:var(--purple); margin-right:8px;"></i> Salesforce CRM</h3><span class="badge review">92%</span></div>
             <div class="panel-body no-pad">
-              <div class="milestone-item"><div class="ms-check done">✓</div><div class="ms-label done-txt">CRM data mapping</div><div class="ms-date">Dec 5</div></div>
-              <div class="milestone-item"><div class="ms-check done">✓</div><div class="ms-label done-txt">Sales Cloud setup</div><div class="ms-date">Dec 19</div></div>
-              <div class="milestone-item"><div class="ms-check done">✓</div><div class="ms-label done-txt">Apex triggers & automation</div><div class="ms-date">Jan 16</div></div>
-              <div class="milestone-item"><div class="ms-check done">✓</div><div class="ms-label done-txt">Data migration & validation</div><div class="ms-date">Feb 10</div></div>
-              <div class="milestone-item"><div class="ms-check now">→</div><div class="ms-label">UAT sign-off</div><div class="ms-date">Feb 27</div></div>
-              <div class="milestone-item"><div class="ms-check next">○</div><div class="ms-label">Go-Live & handover</div><div class="ms-date">Feb 28</div></div>
+              <div class="milestone-item"><div class="ms-check done"><i class="fa-solid fa-check"></i></div><div class="ms-label done-txt">CRM data mapping</div><div class="ms-date">Dec 5</div></div>
+              <div class="milestone-item"><div class="ms-check done"><i class="fa-solid fa-check"></i></div><div class="ms-label done-txt">Sales Cloud setup</div><div class="ms-date">Dec 19</div></div>
+              <div class="milestone-item"><div class="ms-check done"><i class="fa-solid fa-check"></i></div><div class="ms-label done-txt">Apex triggers & automation</div><div class="ms-date">Jan 16</div></div>
+              <div class="milestone-item"><div class="ms-check done"><i class="fa-solid fa-check"></i></div><div class="ms-label done-txt">Data migration & validation</div><div class="ms-date">Feb 10</div></div>
+              <div class="milestone-item"><div class="ms-check now"><i class="fa-solid fa-arrow-right"></i></div><div class="ms-label">UAT sign-off</div><div class="ms-date">Feb 27</div></div>
+              <div class="milestone-item"><div class="ms-check next"><i class="fa-regular fa-circle"></i></div><div class="ms-label">Go-Live & handover</div><div class="ms-date">Feb 28</div></div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- TAB: TIMELINE -->
       <div class="tab-pane" id="tab-timeline">
         <div class="panel"><div class="panel-body">
           <div class="timeline">
-            <div class="tl-item"><div class="tl-dot done">✓</div><div class="tl-content"><div class="tl-title">E-Commerce — Checkout approved</div><div class="tl-meta">21 Feb 2026 · Milestone</div><div class="tl-body">Checkout redesign signed off by John Davidson. Positive feedback on the streamlined guest checkout and Apple Pay integration.</div></div></div>
-            <div class="tl-item"><div class="tl-dot done">✓</div><div class="tl-content"><div class="tl-title">CRM — Data migration validated</div><div class="tl-meta">10 Feb 2026 · Milestone</div><div class="tl-body">All 18,400 customer records migrated from legacy CRM to Salesforce Sales Cloud with 100% data integrity verified.</div></div></div>
-            <div class="tl-item"><div class="tl-dot done">✓</div><div class="tl-content"><div class="tl-title">Mobile App Phase 2 — Project kicked off</div><div class="tl-meta">3 Feb 2026 · Project Start</div><div class="tl-body">Discovery workshop completed. Technical specification agreed. Sprint 1 in progress covering loyalty programme architecture.</div></div></div>
-            <div class="tl-item"><div class="tl-dot now">→</div><div class="tl-content"><div class="tl-title">CRM — UAT in progress</div><div class="tl-meta">27 Feb 2026 · Now</div><div class="tl-body">User Acceptance Testing underway. 3 of 12 test scenarios remaining. Go-live planned for 28 February.</div></div></div>
-            <div class="tl-item"><div class="tl-dot next">○</div><div class="tl-content"><div class="tl-title">CRM — Go-Live</div><div class="tl-meta">28 Feb 2026 · Upcoming</div></div></div>
-            <div class="tl-item"><div class="tl-dot next">○</div><div class="tl-content"><div class="tl-title">E-Commerce — Product catalogue rebuild</div><div class="tl-meta">7 Mar 2026 · Upcoming</div></div></div>
-            <div class="tl-item"><div class="tl-dot next">○</div><div class="tl-content"><div class="tl-title">E-Commerce — UAT & Go-Live</div><div class="tl-meta">15 Mar 2026 · Upcoming</div></div></div>
+            <div class="tl-item"><div class="tl-dot done"><i class="fa-solid fa-check"></i></div><div class="tl-content"><div class="tl-title">E-Commerce — Checkout approved</div><div class="tl-meta">21 Feb 2026 · Milestone</div><div class="tl-body">Checkout redesign signed off by John Davidson. Positive feedback on the streamlined guest checkout and Apple Pay integration.</div></div></div>
+            <div class="tl-item"><div class="tl-dot done"><i class="fa-solid fa-check"></i></div><div class="tl-content"><div class="tl-title">CRM — Data migration validated</div><div class="tl-meta">10 Feb 2026 · Milestone</div><div class="tl-body">All 18,400 customer records migrated from legacy CRM to Salesforce Sales Cloud with 100% data integrity verified.</div></div></div>
+            <div class="tl-item"><div class="tl-dot done"><i class="fa-solid fa-check"></i></div><div class="tl-content"><div class="tl-title">Mobile App Phase 2 — Project kicked off</div><div class="tl-meta">3 Feb 2026 · Project Start</div><div class="tl-body">Discovery workshop completed. Technical specification agreed. Sprint 1 in progress covering loyalty programme architecture.</div></div></div>
+            <div class="tl-item"><div class="tl-dot now"><i class="fa-solid fa-arrow-right"></i></div><div class="tl-content"><div class="tl-title">CRM — UAT in progress</div><div class="tl-meta">27 Feb 2026 · Now</div><div class="tl-body">User Acceptance Testing underway. 3 of 12 test scenarios remaining. Go-live planned for 28 February.</div></div></div>
+            <div class="tl-item"><div class="tl-dot next"><i class="fa-regular fa-circle"></i></div><div class="tl-content"><div class="tl-title">CRM — Go-Live</div><div class="tl-meta">28 Feb 2026 · Upcoming</div></div></div>
+            <div class="tl-item"><div class="tl-dot next"><i class="fa-regular fa-circle"></i></div><div class="tl-content"><div class="tl-title">E-Commerce — Product catalogue rebuild</div><div class="tl-meta">7 Mar 2026 · Upcoming</div></div></div>
+            <div class="tl-item"><div class="tl-dot next"><i class="fa-regular fa-circle"></i></div><div class="tl-content"><div class="tl-title">E-Commerce — UAT & Go-Live</div><div class="tl-meta">15 Mar 2026 · Upcoming</div></div></div>
           </div>
         </div></div>
-      </div>
+      </div> -->
 
     </main>
   </div>
 </div>
 
-<!-- MODAL: Project Detail -->
-<div class="modal-overlay" id="modal-proj1">
+<div class="modal-overlay" id="modal-project-details">
   <div class="modal">
-    <div class="modal-head"><h3>🌐 E-Commerce Platform Redesign</h3><button class="modal-close" onclick="closeModal('modal-proj1')">✕</button></div>
+    <div class="modal-head">
+        <h3><i class="fa-solid fa-laptop-code"></i> <span id="detail-modal-title">Project Name</span></h3>
+        <button class="modal-close" onclick="closeModal('modal-project-details')"><i class="fa-solid fa-xmark"></i></button>
+    </div>
     <div class="modal-body">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.2rem">
-        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Project Ref</label><div style="color:var(--white);font-weight:600;margin-top:3px">TN-2025-082</div></div>
-        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Status</label><div style="margin-top:3px"><span class="badge inprogress">In Progress</span></div></div>
-        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Start Date</label><div style="color:var(--white);font-weight:600;margin-top:3px">10 Jan 2026</div></div>
-        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Go-Live</label><div style="color:var(--white);font-weight:600;margin-top:3px">15 Mar 2026</div></div>
-        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Budget</label><div style="color:var(--white);font-weight:600;margin-top:3px">£42,500</div></div>
-        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Project Manager</label><div style="color:var(--white);font-weight:600;margin-top:3px">Sarah Mitchell</div></div>
+        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Project Ref</label><div id="detail-modal-ref" style="color:var(--white);font-weight:600;margin-top:3px">—</div></div>
+        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Status</label><div style="margin-top:3px" id="detail-modal-status"><span class="badge inprogress">Loading...</span></div></div>
+        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Start Date</label><div id="detail-modal-start" style="color:var(--white);font-weight:600;margin-top:3px">—</div></div>
+        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Deadline</label><div id="detail-modal-deadline" style="color:var(--white);font-weight:600;margin-top:3px">—</div></div>
+        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Budget</label><div id="detail-modal-value" style="color:var(--white);font-weight:600;margin-top:3px">—</div></div>
+        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Tech Stack</label><div id="detail-modal-tech" style="color:var(--white);font-weight:600;margin-top:3px">—</div></div>
       </div>
-      <div class="progress-meta"><span>Overall Progress</span><strong>68%</strong></div>
-      <div class="progress-bar" style="margin-bottom:1.2rem"><div class="progress-fill" style="width:68%"></div></div>
-      <p style="font-size:.86rem;color:var(--gray);line-height:1.7">Full redesign of RetailMax.co.uk including headless Shopify integration, checkout optimisation, Apple Pay/Google Pay, product catalogue rebuild, and Core Web Vitals performance improvements targeting sub-1.5s LCP.</p>
+      <div class="progress-meta"><span>Estimated Progress</span><strong id="detail-modal-prog-txt">0%</strong></div>
+      <div class="progress-bar" style="margin-bottom:1.2rem"><div id="detail-modal-prog-bar" class="progress-fill cyan" style="width:0%"></div></div>
+      <p style="font-size:.86rem;color:var(--gray);line-height:1.7" id="detail-modal-desc">Project details and scope information will appear here once loaded.</p>
     </div>
-    <div class="modal-foot"><button class="btn btn-ghost" onclick="closeModal('modal-proj1')">Close</button><a href="messages.html" class="btn btn-primary">Message Project Team</a></div>
-  </div>
-</div>
-<div class="modal-overlay" id="modal-proj2">
-  <div class="modal">
-    <div class="modal-head"><h3>☁️ Salesforce CRM Integration</h3><button class="modal-close" onclick="closeModal('modal-proj2')">✕</button></div>
-    <div class="modal-body">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.2rem">
-        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Project Ref</label><div style="color:var(--white);font-weight:600;margin-top:3px">TN-2025-079</div></div>
-        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Status</label><div style="margin-top:3px"><span class="badge review">In Review</span></div></div>
-        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Go-Live</label><div style="color:var(--white);font-weight:600;margin-top:3px">28 Feb 2026</div></div>
-        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Budget</label><div style="color:var(--white);font-weight:600;margin-top:3px">£28,000</div></div>
-      </div>
-      <div class="progress-meta"><span>Overall Progress</span><strong>92%</strong></div>
-      <div class="progress-bar" style="margin-bottom:1.2rem"><div class="progress-fill green" style="width:92%"></div></div>
-      <p style="font-size:.86rem;color:var(--gray);line-height:1.7">Full Salesforce Sales Cloud implementation with custom Apex triggers, product catalogue sync, order management integration, and executive reporting dashboards. UAT sign-off expected today.</p>
+    <div class="modal-foot">
+        <button class="btn btn-ghost" onclick="closeModal('modal-project-details')">Close</button>
+        <a href="messages.html" class="btn btn-primary"><i class="fa-solid fa-comment-dots"></i> Message Team</a>
     </div>
-    <div class="modal-foot"><button class="btn btn-ghost" onclick="closeModal('modal-proj2')">Close</button><a href="messages.html" class="btn btn-primary">Message Project Team</a></div>
-  </div>
-</div>
-<div class="modal-overlay" id="modal-proj3">
-  <div class="modal">
-    <div class="modal-head"><h3>📱 Mobile App — Phase 2</h3><button class="modal-close" onclick="closeModal('modal-proj3')">✕</button></div>
-    <div class="modal-body">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.2rem">
-        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Project Ref</label><div style="color:var(--white);font-weight:600;margin-top:3px">TN-2026-001</div></div>
-        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Status</label><div style="margin-top:3px"><span class="badge inprogress">In Progress</span></div></div>
-        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Go-Live</label><div style="color:var(--white);font-weight:600;margin-top:3px">30 Apr 2026</div></div>
-        <div><label style="font-size:.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:1px">Budget</label><div style="color:var(--white);font-weight:600;margin-top:3px">£55,000</div></div>
-      </div>
-      <div class="progress-meta"><span>Overall Progress</span><strong>12%</strong></div>
-      <div class="progress-bar" style="margin-bottom:1.2rem"><div class="progress-fill yellow" style="width:12%"></div></div>
-      <p style="font-size:.86rem;color:var(--gray);line-height:1.7">Phase 2 of the RetailMax mobile app covering loyalty programme, push notifications, AR product preview, Apple Pay/Google Pay, and React Native 0.73 upgrade. Sprint 1 currently in progress.</p>
-    </div>
-    <div class="modal-foot"><button class="btn btn-ghost" onclick="closeModal('modal-proj3')">Close</button><a href="messages.html" class="btn btn-primary">Message Project Team</a></div>
   </div>
 </div>
 
 <script src="../js/portal.js"></script>
+<script>
+/* ── FETCH LIVE PROJECTS LOGIC ── */
+async function loadClientProjects() {
+    const container = document.getElementById('dynamic-project-cards');
+    if (!container) return;
+
+    try {
+        const token = localStorage.getItem('tn_token');
+        
+        // Fetching all projects via API
+        const response = await fetch(`${API_BASE_URL}/projects`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            let projects = [];
+            // Handle various backend wrapper structures safely
+            if (Array.isArray(data)) projects = data;
+            else if (Array.isArray(data.data)) projects = data.data;
+            else if (Array.isArray(data.projects)) projects = data.projects;
+            else if (data.data && Array.isArray(data.data.projects)) projects = data.data.projects;
+            
+            if (!Array.isArray(projects)) {
+                container.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:var(--red); padding:2rem;"><i class="fa-solid fa-circle-xmark"></i> API returned unexpected format.</div>`;
+                return;
+            }
+
+            // Sort newest first
+            projects.sort((a, b) => {
+                if (!a || !b) return 0; 
+                const timeA = new Date(a.createdAt || a.Start_Date || 0).getTime();
+                const timeB = new Date(b.createdAt || b.Start_Date || 0).getTime();
+                return (timeB || 0) - (timeA || 0); 
+            });
+
+            if (projects.length === 0) {
+                container.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:var(--gray); padding:3rem;"><i class="fa-solid fa-folder-open fa-2x" style="margin-bottom:1rem; opacity:0.5;"></i><br>No active projects found on your account.</div>`;
+                return;
+            }
+
+            // Generate dynamic HTML for each project card
+            container.innerHTML = projects.map(proj => {
+                // Determine styling based on status
+                const stat = proj.Project_Status || 'New';
+                let statusHtml = '';
+                let barColor = 'cyan-bar';
+                let progClass = 'cyan';
+                let progress = 65; 
+
+                if (stat === 'Completed') {
+                    statusHtml = `<span class="badge complete"><i class="fa-solid fa-check"></i> Completed</span>`;
+                    barColor = 'green-bar';
+                    progClass = 'green';
+                    progress = 100;
+                } else if (stat === 'Delayed') {
+                    statusHtml = `<span class="badge overdue"><i class="fa-solid fa-triangle-exclamation"></i> Delayed</span>`;
+                    barColor = 'purple-bar';
+                    progClass = 'yellow';
+                    progress = 30;
+                } else if (stat === 'Active' || stat === 'In Progress') {
+                    statusHtml = `<span class="badge inprogress">Active</span>`;
+                } else {
+                    statusHtml = `<span class="badge review">${stat}</span>`;
+                    barColor = 'purple-bar';
+                    progress = 15;
+                }
+
+                const formatDt = (dateString) => {
+                    if (!dateString) return 'N/A';
+                    const d = new Date(dateString);
+                    return isNaN(d) ? 'N/A' : d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
+                };
+
+                // Save data in dataset for the modal to use
+                const encodedData = encodeURIComponent(JSON.stringify({
+                    title: proj.Project_Name || proj.Client_Name || 'TechNova Project',
+                    id: proj.Project_ID,
+                    statusHtml: statusHtml,
+                    start: formatDt(proj.Start_Date),
+                    deadline: formatDt(proj.Deadline),
+                    val: proj.Project_Value || 0,
+                    tech: proj.Service_Interested || proj.Technology || 'Various',
+                    prog: progress,
+                    pclass: progClass
+                }));
+
+                return `
+                <div class="proj-card">
+                    <div class="proj-card-top ${barColor}">
+                        <div class="proj-header">
+                            <div class="proj-emoji" style="background:rgba(0,212,255,0.1)"><i class="fa-solid fa-laptop-code" style="color:var(--cyan)"></i></div>
+                            <div>
+                                <div class="proj-title">${proj.Project_Name || proj.Client_Name || 'Project'}</div>
+                                <div class="proj-client">Ref: ${proj.Project_ID}</div>
+                            </div>
+                            <div style="margin-left:auto">${statusHtml}</div>
+                        </div>
+                        <p class="proj-desc">Delivering ${proj.Service_Interested || proj.Technology || 'Software Services'} for ${proj.Country || 'Client'}.</p>
+                        <div class="proj-stats-row">
+                            <div class="proj-stat"><div class="proj-stat-val">£${(proj.Project_Value || 0).toLocaleString()}</div><div class="proj-stat-lbl">Value</div></div>
+                            <div class="proj-stat"><div class="proj-stat-val">${proj.Assigned_Team_Size || 1}</div><div class="proj-stat-lbl">Team</div></div>
+                            <div class="proj-stat"><div class="proj-stat-val">${formatDt(proj.Deadline)}</div><div class="proj-stat-lbl">Due</div></div>
+                        </div>
+                        <div class="progress-meta"><span>Current Progress</span><strong>${progress}%</strong></div>
+                        <div class="progress-bar"><div class="progress-fill ${progClass}" data-w="${progress}" style="width:0%"></div></div>
+                    </div>
+                    <div class="proj-card-bottom">
+                        <div style="display:flex;justify-content:space-between;align-items:center">
+                            <div class="proj-team">
+                                <div class="avatar-stack"><div class="av" style="background:var(--navy2)"><i class="fa-solid fa-user"></i></div></div>
+                                <span class="proj-team-label">Assigned</span>
+                            </div>
+                            <div style="display:flex;gap:0.5rem">
+                                <button class="btn btn-ghost btn-sm" onclick="openClientProjectModal('${encodedData}')"><i class="fa-solid fa-circle-info"></i> Details</button>
+                                <a href="messages.html" class="btn btn-primary btn-sm"><i class="fa-solid fa-comment-dots"></i> Message</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            }).join('');
+
+            // Trigger the bar fill animation
+            setTimeout(animateBars, 100);
+
+        } else {
+            container.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:var(--red); padding:2rem;"><i class="fa-solid fa-circle-xmark"></i> Failed to load projects: ${data.message}</div>`;
+        }
+    } catch (error) {
+        console.error('Project Fetch Error:', error);
+        container.innerHTML = `<div style="grid-column: 1/-1; text-align:center; color:var(--red); padding:2rem;"><i class="fa-solid fa-circle-xmark"></i> Server offline or network error.</div>`;
+    }
+}
+
+// View Details Modal Logic
+function openClientProjectModal(encodedData) {
+    try {
+        const p = JSON.parse(decodeURIComponent(encodedData));
+        
+        document.getElementById('detail-modal-title').textContent = p.title;
+        document.getElementById('detail-modal-ref').textContent = p.id;
+        document.getElementById('detail-modal-status').innerHTML = p.statusHtml;
+        document.getElementById('detail-modal-start').textContent = p.start;
+        document.getElementById('detail-modal-deadline').textContent = p.deadline;
+        document.getElementById('detail-modal-value').textContent = `£${p.val.toLocaleString()}`;
+        document.getElementById('detail-modal-tech').textContent = p.tech;
+        
+        document.getElementById('detail-modal-prog-txt').textContent = `${p.prog}%`;
+        const bar = document.getElementById('detail-modal-prog-bar');
+        bar.className = `progress-fill ${p.pclass}`;
+        bar.style.width = `${p.prog}%`;
+
+        document.getElementById('detail-modal-desc').textContent = `Currently managing delivery for ${p.title} (${p.tech}). Our team is actively tracking milestones. Check your timeline for specific delivery dates.`;
+        
+        openModal('modal-project-details');
+    } catch (e) {
+        console.error("Error parsing project data", e);
+    }
+}
+
+// Ensure execution on page load
+document.addEventListener('DOMContentLoaded', () => {
+    // Check if portal.js loaded enforceAuth properly
+    if (typeof enforceAuth === 'function') {
+        // Enforce auth might redirect, but if it stays, fetch projects.
+        loadClientProjects();
+    } else {
+        console.warn("portal.js scripts missing, running fetch directly.");
+        loadClientProjects();
+    }
+});
+</script>
 </body>
 </html>
