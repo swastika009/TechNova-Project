@@ -15,7 +15,7 @@ const createSuperAdmin = async () => {
             role: 'Super Admin'      // <-- Ensure this matches your ENUM exactly
         });
 
-        console.log('✅ Super Admin successfully created!');
+        console.log(' Super Admin successfully created!');
         console.log(`Name: ${adminUser.name}`);
         console.log(`Email: ${adminUser.email}`);
         console.log(`Role: ${adminUser.role}`);
@@ -24,9 +24,9 @@ const createSuperAdmin = async () => {
     } catch (error) {
         // If the email already exists, it will throw a validation error
         if (error.name === 'SequelizeUniqueConstraintError') {
-            console.error('⚠️ Error: A user with admin@technova.com already exists in the database.');
+            console.error(' Error: A user with admin@technova.com already exists in the database.');
         } else {
-            console.error('❌ Error creating Admin:', error);
+            console.error('Error creating Admin:', error);
         }
         process.exit(1);
     }

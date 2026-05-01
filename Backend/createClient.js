@@ -7,7 +7,7 @@ const createJohn = async () => {
         await sequelize.authenticate();
         console.log('Database connected...');
 
-        // 🚨 Just pass the raw password! Your User model's "beforeCreate" hook will hash it automatically!
+        //  Just pass the raw password! Your User model's "beforeCreate" hook will hash it automatically!
         const clientUser = await User.create({
             name: 'John Davidson',
             email: 'john.davidson@retailmax.co.uk',
